@@ -3,7 +3,17 @@ title: "02 - Working On Iris Dataset"
 draft: false
 ---
 
-Used modules:
+# Intro
+
+Are you interested in learning how to use Python to analyze and visualize data? In this blog post, we'll go through the process of loading and manipulating the iris dataset, calculating mean, maximum and minimum values, and splitting the data into training and test sets. We'll also show you how to display unique data and use visualizations, such as pie charts and graphs, to better understand the data. All of the code in this post is written in Python, using modules like `sklearn` and `matplotlib`. If you're ready to dive in and learn how to work with data in Python, keep reading!
+
+## Important Code Snippets
+- Mounting Google Drive in your VM
+- Downloading files to your local file system
+- Open files from your local file system
+- Showing CV2 Images
+
+## Used modules
 ```Python
 from sklearn.datasets import load_iris # dataset
 import statistics # calculation of mean values
@@ -12,7 +22,7 @@ import numpy as np # searching for unique values and their number
 from matplotlib import pyplot as plt # data display
 ```
 
-Loading the dataset into a variable:
+## Loading the dataset into a variable
 ```Python
 iris = load_iris() # load dataset into variable
 print(iris.keys()) # display all dataset keys
@@ -21,7 +31,7 @@ target = iris.target
 data = iris.data # u var pohranjujemo podatke za svaki cvijet
 ```
 
-Calculation of mean, maximum and minimum values:
+## Calculation of mean, maximum and minimum values
 ```Python
 # calculation of mean value, maximum value and minimum value:
 print(f"Mean value of the first column: {statistics.mean(data[:, 0])}")
@@ -29,7 +39,7 @@ print(f"Maximum value in second column: {max(data[:, 1])}")
 print(f"Minimum value in the fourth column: {min(data[:, 3])}")
 ```
 
-Data retrieval:
+## Data retrieval
 ```Python
 # retrieve data:  
 print(f"Display data about the first flower and its type:\n {data[0], target[0], iris.target_names[0]}")  
@@ -47,7 +57,7 @@ test_x2 = data[9::4, ]  # every third, starting from the ninth
 test_y2 = target[9::3]
 ```
 
-Displaying the dimensionality of the data in the list using the `shape` function:
+## Displaying the dimensionality of the data in the list using the `shape` function
 ```Python
 # Display the data prepared in the variable and the test set and the training set:  
 print(f"Number of data in training set for x2: {train_x2.shape[0]}")  
@@ -71,6 +81,7 @@ values, counts = np.unique(Y_train, return_counts=True)
 print(values, counts)```
 
 ## Display of data on a graph
+
 Pie chart:
 ```Python
 # display pie chart:
