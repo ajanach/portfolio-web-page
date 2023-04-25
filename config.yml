@@ -2,3 +2,38 @@ baseURL: "http://mltuts.online/"
 languageCode: en-us
 title: ML Tuts
 theme: PaperMod
+
+menu:
+  main:
+    - name: "Home"
+      url: "/"
+      weight: 1
+    - name: "Blog"
+      url: "/ml/"
+      identifier: "blog"
+      weight: 2
+    - name: "About"
+      url: "/menu/about/"
+      weight: 3
+    - name: "Contact"
+      url: "/menu/contact/"
+      weight: 4
+
+
+
+# Home page setup:
+params:
+    profileMode:
+        enabled: true
+        title: "ML Tuts" # optional default will be site title
+        subtitle: "Learn the Fundamentals of Machine Learning with ML Tuts"
+        imageUrl: /images/learning.png # optional
+        imageWidth: 256 # custom size
+        imageHeight: 256 # custom size
+
+    ShowToc: true
+    TocOpen: true
+    TocSide: "left"
+    ShowBreadCrumbs: true
+    ShowReadingTime: true
+    ShowShareButtons: true
