@@ -21,7 +21,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://mltuts.online/ml/02-working-on-iris-dataset/</guid>
-      <description>Intro Are you interested in learning how to use Python to analyze and visualize data? In this blog post, we&amp;rsquo;ll go through the process of loading and manipulating the iris dataset, calculating mean, maximum and minimum values, and splitting the data into training and test sets. We&amp;rsquo;ll also show you how to display unique data and use visualizations, such as pie charts and graphs, to better understand the data. All of the code in this post is written in Python, using modules like sklearn and matplotlib.</description>
+      <description>Intro Are you interested in learning how to use Python to analyze and visualize data? In this blog post, we&amp;rsquo;ll go through the process of loading and manipulating the iris dataset, calculating mean, maximum and minimum values, and splitting the data into training and test sets. We&amp;rsquo;ll also show you how to display unique data and use visualizations, such as pie charts and graphs, to better understand the data. All the code in this post is written in Python, using modules like sklearn and matplotlib.</description>
     </item>
     
   </channel>
