@@ -1,3 +1,8 @@
+---
+title: "01 - Intro To Google Colab & Working With Images"
+draft: false
+---
+
 # Intro
 - The default programming in Google Colab is Python
 - System command for Python are written: `!pip`
