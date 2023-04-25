@@ -6,7 +6,16 @@
     <description>Recent content on ML Tuts</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Apr 2023 09:19:54 +0200</lastBuildDate><atom:link href="http://ajanach.github.io/mltuts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Apr 2023 09:38:20 +0200</lastBuildDate><atom:link href="http://ajanach.github.io/mltuts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Anothertest</title>
+      <link>http://ajanach.github.io/mltuts/ml/anothertest/</link>
+      <pubDate>Tue, 25 Apr 2023 09:38:20 +0200</pubDate>
+      
+      <guid>http://ajanach.github.io/mltuts/ml/anothertest/</guid>
+      <description>testing new page func main() { fmt.Println(&amp;#34;Hello world!&amp;#34;) } </description>
+    </item>
+    
     <item>
       <title>Test</title>
       <link>http://ajanach.github.io/mltuts/ml/test/</link>

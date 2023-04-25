@@ -2,11 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://ajanach.github.io/mltuts/ml/anothertest/</loc>
+    <lastmod>2023-04-25T09:38:20+02:00</lastmod>
+  </url><url>
     <loc>http://ajanach.github.io/mltuts/</loc>
-    <lastmod>2023-04-25T09:19:54+02:00</lastmod>
+    <lastmod>2023-04-25T09:38:20+02:00</lastmod>
   </url><url>
     <loc>http://ajanach.github.io/mltuts/ml/</loc>
-    <lastmod>2023-04-25T09:19:54+02:00</lastmod>
+    <lastmod>2023-04-25T09:38:20+02:00</lastmod>
   </url><url>
     <loc>http://ajanach.github.io/mltuts/ml/test/</loc>
     <lastmod>2023-04-25T09:19:54+02:00</lastmod>
