@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>ML Tuts</title>
-    <link>http://mltuts.online/</link>
-    <description>Recent content on ML Tuts</description>
+    <title>Menus on ML Tuts</title>
+    <link>http://mltuts.online/menu/</link>
+    <description>Recent content in Menus on ML Tuts</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Apr 2023 15:37:09 +0200</lastBuildDate><atom:link href="http://mltuts.online/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Apr 2023 15:37:09 +0200</lastBuildDate><atom:link href="http://mltuts.online/menu/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Contact Us 📞</title>
       <link>http://mltuts.online/menu/contact/</link>
@@ -24,24 +24,6 @@ Jake: E-mail: jake@mltuts.online</description>
       
       <guid>http://mltuts.online/menu/about/</guid>
       <description>Welcome to ML Tuts! Our site is dedicated to providing high-quality tutorials and resources on machine learning, one of the most exciting and rapidly growing fields in technology today. Whether you&amp;rsquo;re a beginner looking to learn the basics of machine learning or an experienced data scientist looking to stay up-to-date on the latest developments, our team of experts has got you covered. Our tutorials cover a wide range of topics, including deep learning, natural language processing, computer vision, and more.</description>
-    </item>
-    
-    <item>
-      <title>Anothertest</title>
-      <link>http://mltuts.online/ml/anothertest/</link>
-      <pubDate>Tue, 25 Apr 2023 09:38:20 +0200</pubDate>
-      
-      <guid>http://mltuts.online/ml/anothertest/</guid>
-      <description>testing new page func main() { fmt.Println(&amp;#34;Hello world!&amp;#34;) } </description>
-    </item>
-    
-    <item>
-      <title>Test</title>
-      <link>http://mltuts.online/ml/test/</link>
-      <pubDate>Tue, 25 Apr 2023 09:19:54 +0200</pubDate>
-      
-      <guid>http://mltuts.online/ml/test/</guid>
-      <description>This is a test page test.</description>
     </item>
     
   </channel>
