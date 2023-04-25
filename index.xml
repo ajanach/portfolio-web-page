@@ -35,5 +35,16 @@ Jake: E-mail: jake@mltuts.online</description>
       <description>Intro The default programming in Google Colab is Python System command for Python are written: !pip CTRP + ALT + P for opening code snippets Important Code Snippets Mounting Google Drive in your VM Downloading files to your local file system Open files from your local file system Showing CV2 Images Mounting gDrive And Opening Image From It # keep this modules in your notebook: from google.colab import drive from PIL import Image from matplotlib import pyplot as plt import cv2 # mount on google drive drive.</description>
     </item>
     
+    <item>
+      <title>02 - Working On Iris Dataset</title>
+      <link>http://mltuts.online/ml/02-working-on-iris-dataset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://mltuts.online/ml/02-working-on-iris-dataset/</guid>
+      <description>Used modules:
+from sklearn.datasets import load_iris # dataset import statistics # calculation of mean values from sklearn.model_selection import train_test_split # split sets import numpy as np # searching for unique values and their number from matplotlib import pyplot as plt # data display Loading the dataset into a variable:
+iris = load_iris() # load dataset into variable print(iris.keys()) # display all dataset keys target = iris.target data = iris.data # u var pohranjujemo podatke za svaki cvijet Calculation of mean, maximum and minimum values:</description>
+    </item>
+    
   </channel>
 </rss>
