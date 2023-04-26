@@ -62,5 +62,14 @@ Important Code Snippets Mounting Google Drive in your VM Downloading files to yo
       <description>Intro In this blog post titled &amp;ldquo;06 - Linear Regression,&amp;rdquo; the author explores the concept of linear regression and how it can be applied to real-world data. The post begins by fetching a dataset and converting it from pandas to numpy. The author then selects the independent and dependent variables and converts them from imperial to metric units. Next, a scatter plot of the data is displayed, followed by the training of a linear regression model.</description>
     </item>
     
+    <item>
+      <title>07 - K-Nearest Neighbours</title>
+      <link>http://mltuts.online/ml/07-k-nearest-neighbours/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://mltuts.online/ml/07-k-nearest-neighbours/</guid>
+      <description>Intro Are you interested in machine learning and classification? The K-Nearest Neighbours algorithm, or KNN for short, is a simple yet effective algorithm used for classification tasks. In this blog post, we&amp;rsquo;ll dive into KNN&amp;rsquo;s implementation in Python, specifically in the scikit-learn library. We&amp;rsquo;ll cover the necessary modules used, mounting Google Drive in our virtual machine, training and testing the model, calculating its accuracy, making predictions, interpreting confusion matrix values, and using other metrics such as precision and recall.</description>
+    </item>
+    
   </channel>
 </rss>
