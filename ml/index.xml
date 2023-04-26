@@ -80,5 +80,15 @@ Important Code Snippets Mounting Google Drive in your VM Downloading files to yo
       <description>Intro Modules Used import numpy as np import matplotlib.pyplot as plt from sklearn.datasets import fetch_openml from sklearn.model_selection import train_test_split from sklearn.linear_model import LogisticRegression from sklearn.metrics import classification_report from sklearn.metrics import confusion_matrix # za matricu konfuzije Load Mnist Dataset Version 1 And Displaying First Image With Number # load dataset dataset = fetch_openml(&amp;#39;mnist_784&amp;#39;, version = 1) # watchout to fetch correct version # dataset specs dataset.keys() # all what dataset holds dataset.</description>
     </item>
     
+    <item>
+      <title>09 - Extras</title>
+      <link>http://mltuts.online/ml/09-extras/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://mltuts.online/ml/09-extras/</guid>
+      <description>Examples of Clustering in Real Life Market Segmentation: Companies can use clustering techniques to group customers based on their purchasing behavior or preferences. By segmenting customers into different groups, companies can tailor their marketing strategies to target each group more effectively.
+Image Segmentation: Clustering can be used in image processing to segment images into different regions based on similarities in color, texture, or other features. This can be useful in various applications, such as object recognition, medical imaging, and remote sensing.</description>
+    </item>
+    
   </channel>
 </rss>
