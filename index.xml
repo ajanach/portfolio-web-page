@@ -91,5 +91,14 @@ Important Code Snippets Mounting Google Drive in your VM Downloading files to yo
       <description>Intro Are you interested in machine learning and classification? The K-Nearest Neighbours algorithm, or KNN for short, is a simple yet effective algorithm used for classification tasks. In this blog post, we&amp;rsquo;ll dive into KNN&amp;rsquo;s implementation in Python, specifically in the scikit-learn library. We&amp;rsquo;ll cover the necessary modules used, mounting Google Drive in our virtual machine, training and testing the model, calculating its accuracy, making predictions, interpreting confusion matrix values, and using other metrics such as precision and recall.</description>
     </item>
     
+    <item>
+      <title>08 - Logisitcal Regression</title>
+      <link>http://mltuts.online/ml/08-logisitcal-regression/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://mltuts.online/ml/08-logisitcal-regression/</guid>
+      <description>Intro Modules Used import numpy as np import matplotlib.pyplot as plt from sklearn.datasets import fetch_openml from sklearn.model_selection import train_test_split from sklearn.linear_model import LogisticRegression from sklearn.metrics import classification_report from sklearn.metrics import confusion_matrix # za matricu konfuzije Load Mnist Dataset Version 1 And Displaying First Image With Number # load dataset dataset = fetch_openml(&amp;#39;mnist_784&amp;#39;, version = 1) # watchout to fetch correct version # dataset specs dataset.keys() # all what dataset holds dataset.</description>
+    </item>
+    
   </channel>
 </rss>
