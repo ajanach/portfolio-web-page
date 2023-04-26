@@ -1,5 +1,5 @@
 ---
-title: "03 - olivetti_faces And Number Generating"
+title: "Exploring Olivetti Faces and Generating Numbers: A Data Analysis Journey"
 draft: false
 ---
 
