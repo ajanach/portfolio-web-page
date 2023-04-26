@@ -43,5 +43,15 @@ Olivetti Faces: Firstly, we will start by loading the Olivetti Faces dataset usi
       <description>Intro In unsupervised machine learning, clustering is a popular technique used to group similar data points. One of the most widely used clustering algorithms is K-means. K-means is a centroid-based clustering algorithm that partitions data points into k distinct clusters. In this blog post, we will explore the K-means algorithm and its implementation in Python using the scikit-learn and yellowbrick libraries. We will cover how to train the model, predict clusters, find centroids, and visualize the results using scatter plots, silhouette visualizations, and K-elbow methods.</description>
     </item>
     
+    <item>
+      <title>05 - K-means Clustering Pixels &amp; Hierarchy Clustering</title>
+      <link>http://mltuts.online/ml/05-k-means-clustering-pixels-hierarchy-clustering/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://mltuts.online/ml/05-k-means-clustering-pixels-hierarchy-clustering/</guid>
+      <description>Intro In machine learning, clustering is a technique that involves grouping similar data points into groups or clusters. There are several clustering algorithms available, but in this blog post, we will explore two popular techniques: K-means Clustering and Hierarchical Clustering.
+Important Code Snippets Mounting Google Drive in your VM Downloading files to your local file system Open files from your local file system Showing CV2 Images Used Modules import numpy as np from matplotlib import pyplot as plt from matplotlib.</description>
+    </item>
+    
   </channel>
 </rss>
