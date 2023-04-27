@@ -101,8 +101,8 @@ Image Segmentation: Clustering can be used in image processing to segment images
   "keywords": [
     
   ],
-  "articleBody": "Examples of Clustering in Real Life Market Segmentation: Companies can use clustering techniques to group customers based on their purchasing behavior or preferences. By segmenting customers into different groups, companies can tailor their marketing strategies to target each group more effectively.\nImage Segmentation: Clustering can be used in image processing to segment images into different regions based on similarities in color, texture, or other features. This can be useful in various applications, such as object recognition, medical imaging, and remote sensing.\nRecommendation Systems: Clustering can be used to group similar items or products based on customer preferences, ratings, or purchase history. This information can then be used to recommend products or services to customers who are likely to be interested in them.\nGenomic Analysis: Clustering techniques are widely used in bioinformatics to group genes or proteins based on their expression patterns or other characteristics. This can help researchers identify genes or proteins that are involved in specific biological processes or diseases, and develop targeted therapies or treatments.\nExamples Of Linear Regression in Real Life Sales Forecasting: Linear Regression is widely used in business to predict future sales based on historical data. It helps companies to plan inventory and resources, make informed decisions, and avoid overstocking or understocking.\nMedical Research: Linear Regression is used to study the relationship between two or more variables in medical research. For example, it can be used to analyze the effect of a particular drug on a disease or the impact of lifestyle changes on health outcomes.\nReal Estate: Linear Regression is used to predict the price of a property based on its characteristics, such as location, size, number of rooms, and other amenities. This information can be used by buyers and sellers to make informed decisions about buying and selling properties.\nWeather Forecasting: Linear Regression is used in weather forecasting to predict temperature, humidity, precipitation, and other weather variables. It helps weather forecasters to provide accurate and timely information to the public and help them make informed decisions.\n",
-  "wordCount" : "333",
+  "articleBody": "Examples of Clustering in Real Life Market Segmentation: Companies can use clustering techniques to group customers based on their purchasing behavior or preferences. By segmenting customers into different groups, companies can tailor their marketing strategies to target each group more effectively.\nImage Segmentation: Clustering can be used in image processing to segment images into different regions based on similarities in color, texture, or other features. This can be useful in various applications, such as object recognition, medical imaging, and remote sensing.\nRecommendation Systems: Clustering can be used to group similar items or products based on customer preferences, ratings, or purchase history. This information can then be used to recommend products or services to customers who are likely to be interested in them.\nGenomic Analysis: Clustering techniques are widely used in bioinformatics to group genes or proteins based on their expression patterns or other characteristics. This can help researchers identify genes or proteins that are involved in specific biological processes or diseases, and develop targeted therapies or treatments.\nExamples Of Linear Regression in Real Life Sales Forecasting: Linear Regression is widely used in business to predict future sales based on historical data. It helps companies to plan inventory and resources, make informed decisions, and avoid overstocking or understocking.\nMedical Research: Linear Regression is used to study the relationship between two or more variables in medical research. For example, it can be used to analyze the effect of a particular drug on a disease or the impact of lifestyle changes on health outcomes.\nReal Estate: Linear Regression is used to predict the price of a property based on its characteristics, such as location, size, number of rooms, and other amenities. This information can be used by buyers and sellers to make informed decisions about buying and selling properties.\nWeather Forecasting: Linear Regression is used in weather forecasting to predict temperature, humidity, precipitation, and other weather variables. It helps weather forecasters to provide accurate and timely information to the public and help them make informed decisions.\nWorking With Images import cv2 from google.colab.patches import cv2_imshow from google.colab import drive # mount gDrive in VM drive.mount('/gdrive') # downloading the image to the desired path in gDrive !curl -o /gdrive/MyDrive/SDU/test/flower-2.jpg https://threejsfundamentals.org/threejs/resources/images/flower-2.jpg # load and display the image: image = cv2.imread(\"/gdrive/MyDrive/SDU/test/flower-2.jpg\") cv2_imshow(image) # image height, width and depth: v, s, d = image.shape print(f\"Image height, width and depth: {image.shape}\") # get pixels: px = image[150, 130] print(f\"Retrieved pixels: {px}\") # blue, green and red - RGB mode image[150, 130] = image[0, 0, 0] image[100:115, 100:110] = [0, 255, 255] # cv2_imshow(image) # resizing the image and converting the image to grayscale image_new = image image_new = cv2.resize(image_new, (int(s*2), int(v/3))) image_new = cv2.cvtColor(image_new, cv2.COLOR_BGR2GRAY) print(f\"Height, width and depth of new image: {image_new.shape}\") cv2_imshow(image_new) K-means And Images Displaying picture segmented into 3 images by 3 clusters:\n# K-means for original image # defining model: (we want to show picture in 3 colors and that's why we use 3 clusters): kmeans = KMeans(n_clusters=3, random_state=42, n_init=\"auto\") # model training: data = image.reshape(-1, 3) kmeans.fit(data) print(f\"Coordinates of centroids: \\n{kmeans.cluster_centers_}\") # show coordinates of centroids segmentedImage = kmeans.cluster_centers_[ kmeans.labels_] # for display, picture need to be in int or float from 0 to 1 segmentedImage = segmentedImage / 255 # converting to float (first way) # segmentedImage = segmentedImage.astype(int) # converting to int (seconde-way) imageInColor = segmentedImage.reshape(image.shape) # reeshape image to image.shape like we are previous do plt.imshow(imageInColor) Multivariat Linear Regression Reidual and using 150 of data, and predicting for 11th house and calculating residual.\nfrom sklearn import datasets import numpy as np import matplotlib.pyplot as plt from sklearn.linear_model import LinearRegression # for linear regression from sklearn.metrics import mean_squared_error # for mean squared error # save dataset into variable dataset = datasets.fetch_openml('house_sales', version = 3) print(dataset.keys()) print(dataset.feature_names) print(dataset.target_names) # we are using dataset from fetch_openml so we need to convert it from pandas to numpy data = np.array(dataset.data) price = np.array(dataset.target[:150]) # dependend number_bedrooms = data[:150, 0] # independend number_bathrooms = data[:150, 1] # independend number_sqft_living = data[:150, 2] # independend number_sqft_lot = data[:150, 3] # independend X = np.array([number_bedrooms, number_bathrooms, number_sqft_living, number_sqft_lot]).T y = price lin_reg = LinearRegression().fit(X, y) # train model of linear regression # make predictions using the testing set y_pred = lin_reg.predict(X) print(f\"Score for linear regression: {lin_reg.score(X, y)}\") # predicting for data on index 20 price_11 = (y[11]) # 20 is presenting 21 person got_price = round(y_pred[11], 2) #round to 2 decimals residual_11 = round(abs(price_11 - got_price), 2) print(f\"Residual is: {residual_11}.\") Linear Regression coefficient, predicting for 11th house price and calculating residual, but here is used whole dataset. Coefficient of determination is: 0.50 (given with lin_reg.score(X, y)) Residual for 11th house is: 139140 which is higher than using 150 samples of data. Model is not better.\nAnd here is an example of custom predicting, using custom data.\nfrom sklearn import datasets import numpy as np import matplotlib.pyplot as plt from sklearn.linear_model import LinearRegression # for linear regression from sklearn.metrics import mean_squared_error # for mean squared error # save dataset into variable dataset = datasets.fetch_openml('house_sales', version = 3) print(dataset.keys()) print(dataset.feature_names) print(dataset.target_names) # we are using dataset from fetch_openml so we need to convert it from pandas to numpy data = np.array(dataset.data) price = np.array(dataset.target) # dependend number_bedrooms = data[:, 0] # independend number_bathrooms = data[:, 1] # independend number_sqft_living = data[:, 2] # independend number_sqft_lot = data[:, 3] # independend X = np.array([number_bedrooms, number_bathrooms, number_sqft_living, number_sqft_lot]).T y = price lin_reg = LinearRegression().fit(X, y) # train model of linear regression # make predictions using the testing set y_pred = lin_reg.predict(X) print(f\"Score for linear regression: {lin_reg.score(X, y)}\") print(f\"Coefficient of linear regression: {lin_reg.coef_}\") # print coefficient of linear regression, and this is slope of the line # predicting for 11th house price_11 = (y[11]) got_price = round(y_pred[11], 2) residual_11 = round(abs(price_11 - got_price), 2) print(f\"Residual is: {residual_11}.\") # custom prediction: custom_data = np.array([4, 3, 4500, 6500]).reshape(1, -1) custom_prediction = lin_reg.predict(custom_data) # predicting for x print(f\"Cusom prediction: {custom_prediction}\") ",
+  "wordCount" : "985",
   "inLanguage": "en",
   "datePublished": "0001-01-01T00:00:00Z",
   "dateModified": "0001-01-01T00:00:00Z",
@@ -193,7 +193,7 @@ Image Segmentation: Clustering can be used in image processing to segment images
     <h1 class="post-title">
       09 - Extras
     </h1>
-    <div class="post-meta">2 min
+    <div class="post-meta">5 min
 
 </div>
   </header> <div class="toc">
@@ -206,7 +206,15 @@ Image Segmentation: Clustering can be used in image processing to segment images
                 <li>
                     <a href="#examples-of-clustering-in-real-life" aria-label="Examples of Clustering in Real Life">Examples of Clustering in Real Life</a></li>
                 <li>
-                    <a href="#examples-of-linear-regression-in-real-life" aria-label="Examples Of Linear Regression in Real Life">Examples Of Linear Regression in Real Life</a>
+                    <a href="#examples-of-linear-regression-in-real-life" aria-label="Examples Of Linear Regression in Real Life">Examples Of Linear Regression in Real Life</a></li>
+                <li>
+                    <a href="#working-with-images" aria-label="Working With Images">Working With Images</a><ul>
+                        
+                <li>
+                    <a href="#k-means-and-images" aria-label="K-means And Images">K-means And Images</a></li></ul>
+                </li>
+                <li>
+                    <a href="#multivariat-linear-regression" aria-label="Multivariat Linear Regression">Multivariat Linear Regression</a>
                 </li>
             </ul>
         </div>
@@ -243,7 +251,134 @@ Image Segmentation: Clustering can be used in image processing to segment images
 <p>Weather Forecasting: Linear Regression is used in weather forecasting to predict temperature, humidity, precipitation, and other weather variables. It helps weather forecasters to provide accurate and timely information to the public and help them make informed decisions.</p>
 </li>
 </ol>
-
+<h1 id="working-with-images">Working With Images<a hidden class="anchor" aria-hidden="true" href="#working-with-images">#</a></h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">import</span> cv2  
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> google.colab.patches <span style="color:#f92672">import</span> cv2_imshow  
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> google.colab <span style="color:#f92672">import</span> drive  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># mount gDrive in VM  </span>
+</span></span><span style="display:flex;"><span>drive<span style="color:#f92672">.</span>mount(<span style="color:#e6db74">&#39;/gdrive&#39;</span>)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># downloading the image to the desired path in gDrive  </span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>curl <span style="color:#f92672">-</span>o <span style="color:#f92672">/</span>gdrive<span style="color:#f92672">/</span>MyDrive<span style="color:#f92672">/</span>SDU<span style="color:#f92672">/</span>test<span style="color:#f92672">/</span>flower<span style="color:#f92672">-</span><span style="color:#ae81ff">2.</span>jpg https:<span style="color:#f92672">//</span>threejsfundamentals<span style="color:#f92672">.</span>org<span style="color:#f92672">/</span>threejs<span style="color:#f92672">/</span>resources<span style="color:#f92672">/</span>images<span style="color:#f92672">/</span>flower<span style="color:#f92672">-</span><span style="color:#ae81ff">2.</span>jpg  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># load and display the image:  </span>
+</span></span><span style="display:flex;"><span>image <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>imread(<span style="color:#e6db74">&#34;/gdrive/MyDrive/SDU/test/flower-2.jpg&#34;</span>)  
+</span></span><span style="display:flex;"><span>cv2_imshow(image)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># image height, width and depth:  </span>
+</span></span><span style="display:flex;"><span>v, s, d <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>shape  
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Image height, width and depth: </span><span style="color:#e6db74">{</span>image<span style="color:#f92672">.</span>shape<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># get pixels:  </span>
+</span></span><span style="display:flex;"><span>px <span style="color:#f92672">=</span> image[<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">130</span>]  
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Retrieved pixels: </span><span style="color:#e6db74">{</span>px<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># blue, green and red - RGB mode  </span>
+</span></span><span style="display:flex;"><span>image[<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">130</span>] <span style="color:#f92672">=</span> image[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]  
+</span></span><span style="display:flex;"><span>image[<span style="color:#ae81ff">100</span>:<span style="color:#ae81ff">115</span>, <span style="color:#ae81ff">100</span>:<span style="color:#ae81ff">110</span>] <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>]  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># cv2_imshow(image)  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># resizing the image and converting the image to grayscale  </span>
+</span></span><span style="display:flex;"><span>image_new <span style="color:#f92672">=</span> image  
+</span></span><span style="display:flex;"><span>image_new <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>resize(image_new, (int(s<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>), int(v<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>)))  
+</span></span><span style="display:flex;"><span>image_new <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(image_new, cv2<span style="color:#f92672">.</span>COLOR_BGR2GRAY)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Height, width and depth of new image: </span><span style="color:#e6db74">{</span>image_new<span style="color:#f92672">.</span>shape<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)  
+</span></span><span style="display:flex;"><span>cv2_imshow(image_new)
+</span></span></code></pre></div><h2 id="k-means-and-images">K-means And Images<a hidden class="anchor" aria-hidden="true" href="#k-means-and-images">#</a></h2>
+<p>Displaying picture segmented into 3 images by 3 clusters:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#75715e"># K-means for original image  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># defining model: (we want to show picture in 3 colors and that&#39;s why we use 3 clusters):  </span>
+</span></span><span style="display:flex;"><span>kmeans <span style="color:#f92672">=</span> KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>, n_init<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;auto&#34;</span>)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># model training:  </span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> image<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)  
+</span></span><span style="display:flex;"><span>kmeans<span style="color:#f92672">.</span>fit(data)  
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Coordinates of centroids: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>kmeans<span style="color:#f92672">.</span>cluster_centers_<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)  <span style="color:#75715e"># show coordinates of centroids  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>segmentedImage <span style="color:#f92672">=</span> kmeans<span style="color:#f92672">.</span>cluster_centers_[  
+</span></span><span style="display:flex;"><span>    kmeans<span style="color:#f92672">.</span>labels_]  <span style="color:#75715e"># for display, picture need to be in int or float from 0 to 1  </span>
+</span></span><span style="display:flex;"><span>segmentedImage <span style="color:#f92672">=</span> segmentedImage <span style="color:#f92672">/</span> <span style="color:#ae81ff">255</span>  <span style="color:#75715e"># converting to float (first way)  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># segmentedImage = segmentedImage.astype(int) # converting to int (seconde-way)  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>imageInColor <span style="color:#f92672">=</span> segmentedImage<span style="color:#f92672">.</span>reshape(image<span style="color:#f92672">.</span>shape)  <span style="color:#75715e"># reeshape image to image.shape like we are previous do  </span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>imshow(imageInColor)
+</span></span></code></pre></div><h1 id="multivariat-linear-regression">Multivariat Linear Regression<a hidden class="anchor" aria-hidden="true" href="#multivariat-linear-regression">#</a></h1>
+<p>Reidual and using 150 of data, and predicting for 11th house and calculating residual.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn <span style="color:#f92672">import</span> datasets    
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np    
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt    
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> LinearRegression <span style="color:#75715e"># for linear regression  from sklearn.metrics import mean_squared_error # for mean squared error  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># save dataset into variable  dataset = datasets.fetch_openml(&#39;house_sales&#39;, version = 3)  </span>
+</span></span><span style="display:flex;"><span>print(dataset<span style="color:#f92672">.</span>keys())  
+</span></span><span style="display:flex;"><span>print(dataset<span style="color:#f92672">.</span>feature_names)  
+</span></span><span style="display:flex;"><span>print(dataset<span style="color:#f92672">.</span>target_names)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># we are using dataset from fetch_openml so we need to convert it from pandas to numpy  data = np.array(dataset.data)    </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>price <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(dataset<span style="color:#f92672">.</span>target[:<span style="color:#ae81ff">150</span>]) <span style="color:#75715e"># dependend  </span>
+</span></span><span style="display:flex;"><span>number_bedrooms <span style="color:#f92672">=</span> data[:<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">0</span>] <span style="color:#75715e"># independend  </span>
+</span></span><span style="display:flex;"><span>number_bathrooms <span style="color:#f92672">=</span> data[:<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">1</span>] <span style="color:#75715e"># independend  </span>
+</span></span><span style="display:flex;"><span>number_sqft_living <span style="color:#f92672">=</span> data[:<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">2</span>] <span style="color:#75715e"># independend  </span>
+</span></span><span style="display:flex;"><span>number_sqft_lot <span style="color:#f92672">=</span> data[:<span style="color:#ae81ff">150</span>, <span style="color:#ae81ff">3</span>] <span style="color:#75715e"># independend  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([number_bedrooms, number_bathrooms, number_sqft_living, number_sqft_lot])<span style="color:#f92672">.</span>T  
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> price  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>lin_reg <span style="color:#f92672">=</span> LinearRegression()<span style="color:#f92672">.</span>fit(X, y) <span style="color:#75715e"># train model of linear regression  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># make predictions using the testing set  </span>
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> lin_reg<span style="color:#f92672">.</span>predict(X)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Score for linear regression: </span><span style="color:#e6db74">{</span>lin_reg<span style="color:#f92672">.</span>score(X, y)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># predicting for data on index 20  price_11 = (y[11]) # 20 is presenting 21 person    got_price = round(y_pred[11], 2) #round to 2 decimals  residual_11 = round(abs(price_11 - got_price), 2)    </span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Residual is: </span><span style="color:#e6db74">{</span>residual_11<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#34;</span>)
+</span></span></code></pre></div><p>Linear Regression coefficient, predicting for 11th house price and calculating residual, but here is used whole dataset.
+Coefficient of determination is: 0.50 (given with lin_reg.score(X, y))
+Residual for 11th house is: 139140 which is higher than using 150 samples of data.
+Model is not better.</p>
+<p>And here is an example of custom predicting, using custom data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn <span style="color:#f92672">import</span> datasets    
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np    
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt    
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> LinearRegression <span style="color:#75715e"># for linear regression  from sklearn.metrics import mean_squared_error # for mean squared error  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># save dataset into variable  dataset = datasets.fetch_openml(&#39;house_sales&#39;, version = 3)  </span>
+</span></span><span style="display:flex;"><span>print(dataset<span style="color:#f92672">.</span>keys())  
+</span></span><span style="display:flex;"><span>print(dataset<span style="color:#f92672">.</span>feature_names)  
+</span></span><span style="display:flex;"><span>print(dataset<span style="color:#f92672">.</span>target_names)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># we are using dataset from fetch_openml so we need to convert it from pandas to numpy  data = np.array(dataset.data)    </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>price <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(dataset<span style="color:#f92672">.</span>target) <span style="color:#75715e"># dependend  </span>
+</span></span><span style="display:flex;"><span>number_bedrooms <span style="color:#f92672">=</span> data[:, <span style="color:#ae81ff">0</span>] <span style="color:#75715e"># independend  </span>
+</span></span><span style="display:flex;"><span>number_bathrooms <span style="color:#f92672">=</span> data[:, <span style="color:#ae81ff">1</span>] <span style="color:#75715e"># independend  </span>
+</span></span><span style="display:flex;"><span>number_sqft_living <span style="color:#f92672">=</span> data[:, <span style="color:#ae81ff">2</span>] <span style="color:#75715e"># independend  </span>
+</span></span><span style="display:flex;"><span>number_sqft_lot <span style="color:#f92672">=</span> data[:, <span style="color:#ae81ff">3</span>] <span style="color:#75715e"># independend  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>X <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([number_bedrooms, number_bathrooms, number_sqft_living, number_sqft_lot])<span style="color:#f92672">.</span>T  
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> price  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>lin_reg <span style="color:#f92672">=</span> LinearRegression()<span style="color:#f92672">.</span>fit(X, y) <span style="color:#75715e"># train model of linear regression  </span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># make predictions using the testing set  </span>
+</span></span><span style="display:flex;"><span>y_pred <span style="color:#f92672">=</span> lin_reg<span style="color:#f92672">.</span>predict(X)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Score for linear regression: </span><span style="color:#e6db74">{</span>lin_reg<span style="color:#f92672">.</span>score(X, y)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)  
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Coefficient of linear regression: </span><span style="color:#e6db74">{</span>lin_reg<span style="color:#f92672">.</span>coef_<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>) <span style="color:#75715e"># print coefficient of linear regression, and this is slope of the line    </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># predicting for 11th house  </span>
+</span></span><span style="display:flex;"><span>price_11 <span style="color:#f92672">=</span> (y[<span style="color:#ae81ff">11</span>])  
+</span></span><span style="display:flex;"><span>got_price <span style="color:#f92672">=</span> round(y_pred[<span style="color:#ae81ff">11</span>], <span style="color:#ae81ff">2</span>)  
+</span></span><span style="display:flex;"><span>residual_11 <span style="color:#f92672">=</span> round(abs(price_11 <span style="color:#f92672">-</span> got_price), <span style="color:#ae81ff">2</span>)    
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Residual is: </span><span style="color:#e6db74">{</span>residual_11<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#34;</span>)  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># custom prediction:  </span>
+</span></span><span style="display:flex;"><span>custom_data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4500</span>, <span style="color:#ae81ff">6500</span>])<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)  
+</span></span><span style="display:flex;"><span>custom_prediction <span style="color:#f92672">=</span> lin_reg<span style="color:#f92672">.</span>predict(custom_data) <span style="color:#75715e"># predicting for x  print(f&#34;Cusom prediction: {custom_prediction}&#34;)</span>
+</span></span></code></pre></div>
 
   </div>
 
