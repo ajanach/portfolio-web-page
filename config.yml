@@ -1,6 +1,6 @@
 baseURL: "http://mltuts.online/"
 languageCode: en-us
-title: ML Tuts
+title: Antonio Janach
 theme: PaperMod
 
 menu:
@@ -8,32 +8,43 @@ menu:
     - name: "Home"
       url: "/"
       weight: 1
-    - name: "Blog"
-      url: "/ml/"
-      identifier: "blog"
-      weight: 2
-    - name: "About"
+    - name: "About Me"
       url: "/menu/about/"
+      weight: 2
+    - name: "Projects"
+      url: "/Project/"
+      identifier: "blog"
       weight: 3
-    - name: "Contact"
-      url: "/menu/contact/"
-      weight: 4
-
 
 
 # Home page setup:
 params:
     profileMode:
         enabled: true
-        title: "ML Tuts" # optional default will be site title
-        subtitle: "Learn the Fundamentals of Machine Learning with ML Tuts"
-        imageUrl: /images/learning.png # optional
+        title: "Antonio Janach" # optional default will be site title
+        subtitle: " Master student at Faculty of Informatics and Digital Technologies, University of Rijeka " # optional
+        imageUrl: /images/profil_cool_resized.jpg # optional
         imageWidth: 256 # custom size
         imageHeight: 256 # custom size
+    
+    socialIcons:
+    - name: "linkedin"
+      title: "Linkedin profile"
+      url: "https://www.linkedin.com/in/antonio-janach-26bb1a14b/"
+    - name: "github"
+      title: "GitHub profile"
+      url: "https://github.com/ajanach"
+    - name: "other"
+      title: "Issued Certificates"
+      url: "https://www.credly.com/users/antonio-janach/badges"
+    - name: "email"
+      title: "Contact me"
+      url: "mailto: janach.antonio@gmail.com"
 
     ShowToc: true
     TocOpen: true
     TocSide: "left"
     ShowBreadCrumbs: true
-    ShowReadingTime: true
-    ShowShareButtons: true
+    ShowReadingTime: false
+    ShowShareButtons: false
+    defaultTheme: dark # to switch between dark or light according to browser theme
