@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Menus on ML Tuts</title>
+    <title>Menus on Antonio Janach</title>
     <link>http://mltuts.online/menu/</link>
-    <description>Recent content in Menus on ML Tuts</description>
+    <description>Recent content in Menus on Antonio Janach</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 25 Apr 2023 15:37:09 +0200</lastBuildDate><atom:link href="http://mltuts.online/menu/index.xml" rel="self" type="application/rss+xml" />
@@ -18,12 +18,12 @@ Jake: E-mail: jake@mltuts.online</description>
     </item>
     
     <item>
-      <title>About Us 👋</title>
+      <title>About me</title>
       <link>http://mltuts.online/menu/about/</link>
-      <pubDate>Tue, 25 Apr 2023 15:28:53 +0200</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://mltuts.online/menu/about/</guid>
-      <description>Welcome to ML Tuts! Our site is dedicated to providing high-quality tutorials and resources on machine learning, one of the most exciting and rapidly growing fields in technology today. Whether you&amp;rsquo;re a beginner looking to learn the basics of machine learning or an experienced data scientist looking to stay up-to-date on the latest developments, our team of experts has got you covered. Our tutorials cover a wide range of topics, including deep learning, natural language processing, computer vision, and more.</description>
+      <description>Hey there! I’m a student who loves tinkering with open-source technology, especially when it comes to making things run smoother and faster. I’m into DevOps practices, Linux administration, Cloud, Bash scripting, Python scripting, Golang programming, virtualization, containers, Git/GitHub, Windows administration, PowerShell, and networking – all the cool stuff that keeps the internet humming along. Basically, I like figuring out how to make things work better, and I’m always learning new tricks to get the job done.</description>
     </item>
     
   </channel>

@@ -2,40 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://mltuts.online/</loc>
+    <lastmod>2023-04-25T15:37:09+02:00</lastmod>
+  </url><url>
     <loc>http://mltuts.online/menu/contact/</loc>
     <lastmod>2023-04-25T15:37:09+02:00</lastmod>
   </url><url>
     <loc>http://mltuts.online/menu/</loc>
     <lastmod>2023-04-25T15:37:09+02:00</lastmod>
   </url><url>
-    <loc>http://mltuts.online/</loc>
-    <lastmod>2023-04-25T15:37:09+02:00</lastmod>
-  </url><url>
     <loc>http://mltuts.online/menu/about/</loc>
-    <lastmod>2023-04-25T15:28:53+02:00</lastmod>
   </url><url>
-    <loc>http://mltuts.online/ml/01-intro-to-google-colab-working-with-images/</loc>
+    <loc>http://mltuts.online/project/advanced-administration-of-open-source-operating-systems-naoos/</loc>
   </url><url>
-    <loc>http://mltuts.online/ml/02-working-on-iris-dataset/</loc>
-  </url><url>
-    <loc>http://mltuts.online/ml/03-olivetti_faces-and-number-generating/</loc>
-  </url><url>
-    <loc>http://mltuts.online/ml/04-k-means-clustering/</loc>
-  </url><url>
-    <loc>http://mltuts.online/ml/05-k-means-clustering-pixels-hierarchy-clustering/</loc>
-  </url><url>
-    <loc>http://mltuts.online/ml/06-linear-regression/</loc>
-  </url><url>
-    <loc>http://mltuts.online/ml/07-k-nearest-neighbours/</loc>
-  </url><url>
-    <loc>http://mltuts.online/ml/08-logisitcal-regression/</loc>
-  </url><url>
-    <loc>http://mltuts.online/ml/09-extras/</loc>
+    <loc>http://mltuts.online/project/backup-and-recovery-of-it-systems-spoi/</loc>
   </url><url>
     <loc>http://mltuts.online/categories/</loc>
   </url><url>
-    <loc>http://mltuts.online/ml/</loc>
+    <loc>http://mltuts.online/project/collaboration-systems-ks/</loc>
+  </url><url>
+    <loc>http://mltuts.online/project/developed-my-portfolio-web-page-using-hugo-and-papermod-theme/</loc>
+  </url><url>
+    <loc>http://mltuts.online/project/developed-algorithm-for-words-splitting-on-syllables-/</loc>
+  </url><url>
+    <loc>http://mltuts.online/project/developed-notepad-replica/</loc>
+  </url><url>
+    <loc>http://mltuts.online/project/implementing-cloud-computing-in-azure-and-openstack-iruo/</loc>
+  </url><url>
+    <loc>http://mltuts.online/project/implementing-local-wireless-computer-networks-brm/</loc>
+  </url><url>
+    <loc>http://mltuts.online/project/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</loc>
+  </url><url>
+    <loc>http://mltuts.online/project/operating-systems-network-infrastructure-and-services-osmis/</loc>
+  </url><url>
+    <loc>http://mltuts.online/project/planning-of-advanced-infrastructure-pni/</loc>
+  </url><url>
+    <loc>http://mltuts.online/project/</loc>
+  </url><url>
+    <loc>http://mltuts.online/project/system-engineering-final-project-sip/</loc>
   </url><url>
     <loc>http://mltuts.online/tags/</loc>
+  </url><url>
+    <loc>http://mltuts.online/project/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud-final-thesis/</loc>
   </url>
 </urlset>

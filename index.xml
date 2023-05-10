@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>ML Tuts</title>
+    <title>Antonio Janach</title>
     <link>http://mltuts.online/</link>
-    <description>Recent content on ML Tuts</description>
+    <description>Recent content on Antonio Janach</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 25 Apr 2023 15:37:09 +0200</lastBuildDate><atom:link href="http://mltuts.online/index.xml" rel="self" type="application/rss+xml" />
@@ -18,96 +18,129 @@ Jake: E-mail: jake@mltuts.online</description>
     </item>
     
     <item>
-      <title>About Us 👋</title>
+      <title>About me</title>
       <link>http://mltuts.online/menu/about/</link>
-      <pubDate>Tue, 25 Apr 2023 15:28:53 +0200</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://mltuts.online/menu/about/</guid>
-      <description>Welcome to ML Tuts! Our site is dedicated to providing high-quality tutorials and resources on machine learning, one of the most exciting and rapidly growing fields in technology today. Whether you&amp;rsquo;re a beginner looking to learn the basics of machine learning or an experienced data scientist looking to stay up-to-date on the latest developments, our team of experts has got you covered. Our tutorials cover a wide range of topics, including deep learning, natural language processing, computer vision, and more.</description>
+      <description>Hey there! I’m a student who loves tinkering with open-source technology, especially when it comes to making things run smoother and faster. I’m into DevOps practices, Linux administration, Cloud, Bash scripting, Python scripting, Golang programming, virtualization, containers, Git/GitHub, Windows administration, PowerShell, and networking – all the cool stuff that keeps the internet humming along. Basically, I like figuring out how to make things work better, and I’m always learning new tricks to get the job done.</description>
     </item>
     
     <item>
-      <title>01 - Intro To Google Colab &amp; Working With Images</title>
-      <link>http://mltuts.online/ml/01-intro-to-google-colab-working-with-images/</link>
+      <title>Advanced Administration of Open Source Operating Systems (NAOOS)</title>
+      <link>http://mltuts.online/project/advanced-administration-of-open-source-operating-systems-naoos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://mltuts.online/ml/01-intro-to-google-colab-working-with-images/</guid>
-      <description>Intro The default programming in Google Colab is Python System command for Python are written: !pip CTRP + ALT + P for opening code snippets Important Code Snippets Mounting Google Drive in your VM Downloading files to your local file system Open files from your local file system Showing CV2 Images Mounting gDrive And Opening Image From It # keep this modules in your notebook: from google.colab import drive from PIL import Image from matplotlib import pyplot as plt import cv2 # mount on google drive drive.</description>
+      <guid>http://mltuts.online/project/advanced-administration-of-open-source-operating-systems-naoos/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL February 2020 June 2020 Algebra Project PDF Description This project is focused on improving the business and growth of a small business. The project is divided into two milestones. The first milestone involves designing and structuring solution requirements for the business, with an emphasis on optimizing project role requirements to ensure that services can be distributed across two Linux servers.</description>
     </item>
     
     <item>
-      <title>02 - Working On Iris Dataset</title>
-      <link>http://mltuts.online/ml/02-working-on-iris-dataset/</link>
+      <title>Backup and recovery of IT systems (SPOI)</title>
+      <link>http://mltuts.online/project/backup-and-recovery-of-it-systems-spoi/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://mltuts.online/ml/02-working-on-iris-dataset/</guid>
-      <description>Intro Are you interested in learning how to use Python to analyze and visualize data? In this blog post, we&amp;rsquo;ll go through the process of loading and manipulating the iris dataset, calculating mean, maximum and minimum values, and splitting the data into training and test sets. We&amp;rsquo;ll also show you how to display unique data and use visualizations, such as pie charts and graphs, to better understand the data. All the code in this post is written in Python, using modules like sklearn and matplotlib.</description>
+      <guid>http://mltuts.online/project/backup-and-recovery-of-it-systems-spoi/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL January 2021 February 2021 Algebra Project PDF Description This project aims to implement a system for secure storage and recovery for a company that utilizes a hybrid environment (Windows-Linux) across various servers. The servers that need to be backed up include a Linux file server, a Linux server with KVM virtualization, a Windows server with AD DC and DHCP roles, a Windows server with SQL and File Server roles, a Windows server with Exchange, a Windows server with Veeam manager Enterprise Plus Edition license and an empty virtual machine with a bootable Veeam RE environment.</description>
     </item>
     
     <item>
-      <title>03 - Exploring Olivetti Faces and Generating Numbers: A Data Analysis Journey</title>
-      <link>http://mltuts.online/ml/03-olivetti_faces-and-number-generating/</link>
+      <title>Collaboration Systems (KS)</title>
+      <link>http://mltuts.online/project/collaboration-systems-ks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://mltuts.online/ml/03-olivetti_faces-and-number-generating/</guid>
-      <description>Intro In the world of data analysis, exploring diverse datasets and understanding their patterns and visual representations is crucial. In this blog post, we will embark on an exciting journey of analyzing the Olivetti Faces dataset, a collection of facial images, and delve into generating random numbers for further analysis. We will utilize Python and several powerful modules, such as sklearn, numpy, and matplotlib, to accomplish these tasks.
-Olivetti Faces: Firstly, we will start by loading the Olivetti Faces dataset using the fetch_openml function.</description>
+      <guid>http://mltuts.online/project/collaboration-systems-ks/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL January 2021 February 2021 Algebra Project PDF Description This project involves exploring the capabilities of the Microsoft Office 365 platform. It demonstrates how to utilize the functionalities of the platform to meet the needs of companies that do not have access to on-premise infrastructure. The solution for such companies lies in Microsoft Office 365, which offers modern tools and collaboration.</description>
     </item>
     
     <item>
-      <title>04 - K-means Clustering</title>
-      <link>http://mltuts.online/ml/04-k-means-clustering/</link>
+      <title>Deploying a Portfolio Web Page Powered by Hugo to Github Pages w/ Custom Domain via Github Actions</title>
+      <link>http://mltuts.online/project/developed-my-portfolio-web-page-using-hugo-and-papermod-theme/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://mltuts.online/ml/04-k-means-clustering/</guid>
-      <description>Intro In unsupervised machine learning, clustering is a popular technique used to group similar data points. One of the most widely used clustering algorithms is K-means. K-means is a centroid-based clustering algorithm that partitions data points into k distinct clusters. In this blog post, we will explore the K-means algorithm and its implementation in Python using the scikit-learn and yellowbrick libraries. We will cover how to train the model, predict clusters, find centroids, and visualize the results using scatter plots, silhouette visualizations, and K-elbow methods.</description>
+      <guid>http://mltuts.online/project/developed-my-portfolio-web-page-using-hugo-and-papermod-theme/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL March 2023 Ongoing Personal GitHub Repo Descrition This project deploys a portfolio web page powered by Hugo to Github Pages with a custom domain via Github Actions. It enables to host Hugo blog on Github Pages and connect it to a personalized domain.</description>
     </item>
     
     <item>
-      <title>05 - K-means Clustering Pixels &amp; Hierarchy Clustering</title>
-      <link>http://mltuts.online/ml/05-k-means-clustering-pixels-hierarchy-clustering/</link>
+      <title>Developed algorithm for words splitting on syllables - Flask and Python</title>
+      <link>http://mltuts.online/project/developed-algorithm-for-words-splitting-on-syllables-/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://mltuts.online/ml/05-k-means-clustering-pixels-hierarchy-clustering/</guid>
-      <description>Intro In machine learning, clustering is a technique that involves grouping similar data points into groups or clusters. There are several clustering algorithms available, but in this blog post, we will explore two popular techniques: K-means Clustering and Hierarchical Clustering.
-Important Code Snippets Mounting Google Drive in your VM Downloading files to your local file system Open files from your local file system Showing CV2 Images Used Modules import numpy as np from matplotlib import pyplot as plt from matplotlib.</description>
+      <guid>http://mltuts.online/project/developed-algorithm-for-words-splitting-on-syllables-/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL November 2022 January 2023 FIDIT GitHub Repo Descrition The final goal of the project is to create an algorithm and application that can split any German word into syllables by adding a space between adjacent syllables for any input text. The project uses the Python programming language to formally write the rules based on the explicit and implicit knowledge collected by linguists for the German language.</description>
     </item>
     
     <item>
-      <title>06 - Linear Regression</title>
-      <link>http://mltuts.online/ml/06-linear-regression/</link>
+      <title>Developed Notepad Replica - wxWidgets and C&#43;&#43;</title>
+      <link>http://mltuts.online/project/developed-notepad-replica/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://mltuts.online/ml/06-linear-regression/</guid>
-      <description>Intro In this blog post titled &amp;ldquo;06 - Linear Regression,&amp;rdquo; the author explores the concept of linear regression and how it can be applied to real-world data. The post begins by fetching a dataset and converting it from pandas to numpy. The author then selects the independent and dependent variables and converts them from imperial to metric units. Next, a scatter plot of the data is displayed, followed by the training of a linear regression model.</description>
+      <guid>http://mltuts.online/project/developed-notepad-replica/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL January 2022 February 2022 FIDIT GitHub Repo Descrition This is a project based on wxWidgets using C++. Project was done for Object Oriented Programming college on my faculty.</description>
     </item>
     
     <item>
-      <title>07 - K-Nearest Neighbours</title>
-      <link>http://mltuts.online/ml/07-k-nearest-neighbours/</link>
+      <title>Implementing cloud computing in Azure and OpenStack (IRUO)</title>
+      <link>http://mltuts.online/project/implementing-cloud-computing-in-azure-and-openstack-iruo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://mltuts.online/ml/07-k-nearest-neighbours/</guid>
-      <description>Intro Are you interested in machine learning and classification? The K-Nearest Neighbours algorithm, or KNN for short, is a simple yet effective algorithm used for classification tasks. In this blog post, we&amp;rsquo;ll dive into KNN&amp;rsquo;s implementation in Python, specifically in the scikit-learn library. We&amp;rsquo;ll cover the necessary modules used, mounting Google Drive in our virtual machine, training and testing the model, calculating its accuracy, making predictions, interpreting confusion matrix values, and using other metrics such as precision and recall.</description>
+      <guid>http://mltuts.online/project/implementing-cloud-computing-in-azure-and-openstack-iruo/</guid>
+      <description>Timeline and Details Azure part: Start date End date Associated with Project URL April 2021 July 2021 Algebra Project PDF OpenStack part: Start date End date Associated with Project URL April 2021 July 2021 Algebra Project PDF Description Azure part: The project involves creating a resource group in Azure and within that resource group, installing three objects (virtual machines, app services, or other Azure services of your choice) in separate Azure regions, and configuring one Azure virtual network for each region.</description>
     </item>
     
     <item>
-      <title>08 - Logisitcal Regression</title>
-      <link>http://mltuts.online/ml/08-logisitcal-regression/</link>
+      <title>Implementing local wireless computer networks (BRM)</title>
+      <link>http://mltuts.online/project/implementing-local-wireless-computer-networks-brm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://mltuts.online/ml/08-logisitcal-regression/</guid>
-      <description>Intro Modules Used import numpy as np import matplotlib.pyplot as plt from sklearn.datasets import fetch_openml from sklearn.model_selection import train_test_split from sklearn.linear_model import LogisticRegression from sklearn.metrics import classification_report from sklearn.metrics import confusion_matrix # za matricu konfuzije Load Mnist Dataset Version 1 And Displaying First Image With Number # load dataset dataset = fetch_openml(&amp;#39;mnist_784&amp;#39;, version = 1) # watchout to fetch correct version # dataset specs dataset.keys() # all what dataset holds dataset.</description>
+      <guid>http://mltuts.online/project/implementing-local-wireless-computer-networks-brm/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL April 2021 July 2021 Algebra Project PDF Description The project aims to familiarize individuals with the fundamental concepts of wireless communication and to provide hands-on experience in implementing wireless technologies to enhance wired local area networks. The objectives of the project include conducting a site survey, determining signal strength, selecting appropriate antennas, implementing standalone wireless access points, implementing wireless access points controlled by wireless LAN controllers, and integrating wireless and wired networks effectively.</description>
     </item>
     
     <item>
-      <title>09 - Extras</title>
-      <link>http://mltuts.online/ml/09-extras/</link>
+      <title>IT Infrastructure Virtualization using oVirt and ESXI/vSphere (VIRT2)</title>
+      <link>http://mltuts.online/project/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://mltuts.online/ml/09-extras/</guid>
-      <description>Examples of Clustering in Real Life Market Segmentation: Companies can use clustering techniques to group customers based on their purchasing behavior or preferences. By segmenting customers into different groups, companies can tailor their marketing strategies to target each group more effectively.
-Image Segmentation: Clustering can be used in image processing to segment images into different regions based on similarities in color, texture, or other features. This can be useful in various applications, such as object recognition, medical imaging, and remote sensing.</description>
+      <guid>http://mltuts.online/project/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</guid>
+      <description>Timeline and Details oVirt part: Start date End date Associated with Project URL November 2020 December 2020 Algebra Project PDF ESXI/vSphere part: Start date End date Associated with Project URL February 2021 March 2021 Algebra Project PDF Description oVirt part: This project involves the installation and configuration of a Linux infrastructure using CentOS and KVM on a Windows host computer. It includes configuring network virtual adapters in KVM, installing four virtual machines, writing a script for manipulating virtual machines, setting up oVirt engine, adding nodes to the oVirt environment and configuring storage by creating NFS and iSCSI shares.</description>
+    </item>
+    
+    <item>
+      <title>Operating Systems - Network Infrastructure and Services (OSMIS)</title>
+      <link>http://mltuts.online/project/operating-systems-network-infrastructure-and-services-osmis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://mltuts.online/project/operating-systems-network-infrastructure-and-services-osmis/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL May 2020 Jun 2020 Algebra Project PDF Description This project focuses on the configuration and monitoring of server computer networks. Key tasks include setting up and maintaining a DHCP server, configuring and managing DNS and WINS servers, and monitoring network traffic. The project also covers the resolution of names in a network environment and the types of computer names. Additionally, routing in network infrastructure and managing the RRAS server are also important aspects of the project.</description>
+    </item>
+    
+    <item>
+      <title>Planning of Advanced Infrastructure (PNI)</title>
+      <link>http://mltuts.online/project/planning-of-advanced-infrastructure-pni/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://mltuts.online/project/planning-of-advanced-infrastructure-pni/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL December 2020 January 2021 Algebra Project PDF Description This project involves setting up a domain, creating 50 users, and implementing a secondary DNS, DC and Storage Spaces with Dynamic Access Control file system. Additionally, a functional Distributed File System with replication is established, a CA and DHCP cluster is installed, IIS is set up with a test page using SSL/TLS encryption.</description>
+    </item>
+    
+    <item>
+      <title>System Engineering - Final Project (SIP)</title>
+      <link>http://mltuts.online/project/system-engineering-final-project-sip/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://mltuts.online/project/system-engineering-final-project-sip/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL February 2021 August 2021 Algebra Project PDF Description This project aims to design and implement a complex IT infrastructure for a company, including deploying virtual machines at two locations and configuring services such as OpenVPN, iSCSI, FreeIPA, SMB, Web server, Mail server, ADDS, DNS, DHCP, NTP, RODC, storage spaces, Root CA and subordinate CA, failover cluster, DFS and IIS, and setting up network connections.</description>
+    </item>
+    
+    <item>
+      <title>Windows computer administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure cloud - Final Thesis</title>
+      <link>http://mltuts.online/project/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud-final-thesis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://mltuts.online/project/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud-final-thesis/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL February 2021 September 2021 Algebra Project PDF Description The System Center Configuration Manager is a service designed for IT administrators that enables them to easily manage computers in a network where Windows operating systems are installed. This service allows for central distribution and updating of antivirus clients and pre-defined antivirus rules, installation and upgrading of business software applications, upgrading of operating systems, configuring user and server computers, installation of operating systems using images, central storage of information about hardware and software resources and implementation of general or group policies.</description>
     </item>
     
   </channel>
