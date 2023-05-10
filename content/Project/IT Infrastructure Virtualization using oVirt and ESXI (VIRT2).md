@@ -8,12 +8,12 @@ draft: false
 ## oVirt part:
 | Start date    | End date      | Associated with | Project URL                                                                        |
 | ------------- | ------------- | --------------- | ---------------------------------------------------------------------------------- |
-| November 2020 | December 2020 | Algebra           | [Project PDF](/projects/antonio_janach_-_projektni_zadatak_VIRT2_oVirt.pdf) |
+| November 2020 | December 2020 | Algebra           | [Project PDF](/projects/VIRT2/antonio_janach_-_projektni_zadatak_VIRT2_oVirt.pdf) |
 
 ## ESXI/vSphere part:
 | Start date    | End date      | Associated with | Project URL                                                                        |
 | ------------- | ------------- | --------------- | ---------------------------------------------------------------------------------- |
-| February 2021 | March 2021 | Algebra           | [Project PDF](/projects/antonio_janach_-_projektni_zadatak_VIRT2_vSphere.pdf) |
+| February 2021 | March 2021 | Algebra           | [Project PDF](/projects/VIRT2/antonio_janach_-_projektni_zadatak_VIRT2_vSphere.pdf) |
 
 # Description
 

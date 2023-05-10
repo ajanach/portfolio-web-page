@@ -8,12 +8,12 @@ draft: false
 ## Azure part:
 | Start date    | End date      | Associated with | Project URL                                                                        |
 | ------------- | ------------- | --------------- | ---------------------------------------------------------------------------------- |
-| April 2021 | July 2021 | Algebra           | [Project PDF](/projects/IRUO/antonio_janach_-_projektni_zadatak_IRUO_Azure.pdf) |
+| April 2021 | July 2021 | Algebra           | [Project PDF](/project/IRUO/antonio_janach_-_projektni_zadatak_IRUO_Azure.pdf) |
 
 ## OpenStack part:
 | Start date    | End date      | Associated with | Project URL                                                                        |
 | ------------- | ------------- | --------------- | ---------------------------------------------------------------------------------- |
-| April 2021 | July 2021 | Algebra           | [Project PDF](/projects/IRUO/antonio_janach_-_projektni_zadatak_IRUO_OpenStack.pdf) |
+| April 2021 | July 2021 | Algebra           | [Project PDF](/project/IRUO/antonio_janach_-_projektni_zadatak_IRUO_OpenStack.pdf) |
 
 ## Description
 
