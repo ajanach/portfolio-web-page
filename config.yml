@@ -48,4 +48,3 @@ params:
     ShowReadingTime: false
     ShowShareButtons: false
     defaultTheme: dark # to switch between dark or light according to browser theme
-
