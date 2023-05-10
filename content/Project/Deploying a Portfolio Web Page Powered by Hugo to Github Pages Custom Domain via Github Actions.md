@@ -1,5 +1,5 @@
 ---
-title: "Deploying a Portfolio Web Page Powered by Hugo to Github Pages w/ Custom Domain via Github Actions"
+title: "Deploying a Portfolio Web Page Powered by Hugo to Github Pages Custom Domain via Github Actions"
 draft: false
 ---
 
