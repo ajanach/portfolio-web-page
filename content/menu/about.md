@@ -4,6 +4,7 @@ date:
 draft: false
 ---
 
+# Profile
 ---
 Hey there! I’m a student who loves tinkering with open-source technology, especially when it comes to making things run smoother and faster. I’m into DevOps practices, Linux administration, Cloud, Bash scripting, Python scripting, Golang programming, virtualization, containers, Git/GitHub, Windows administration, PowerShell, and networking – all the cool stuff that keeps the internet humming along. Basically, I like figuring out how to make things work better, and I’m always learning new tricks to get the job done. So if you need someone to help with your open-source projects or just want to geek out about tech stuff, hit me up!
 
