@@ -16,6 +16,15 @@
     </item>
     
     <item>
+      <title>Backend server in Go with Bash testing script for CRUD operations on Firebase</title>
+      <link>https://janach.cloud/project/backend-server-in-go-with-bash-testing-script-for-crud-operations-on-firebase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/project/backend-server-in-go-with-bash-testing-script-for-crud-operations-on-firebase/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL February 2023 May 2023 FIDIT Project URL Description In this project, I&amp;rsquo;ve created a backend server using Golang, Firebase Admin, Gorilla, and Gocron. Also, I created a convenient bash script. Also, I created a bash script to enhance collaboration between frontend and backend developers. The script simplifies testing and demonstrates CRUD operations on the Firebase database, enabling frontend developers to interact with the backend effectively.</description>
+    </item>
+    
+    <item>
       <title>Backup and recovery of IT systems (SPOI)</title>
       <link>https://janach.cloud/project/backup-and-recovery-of-it-systems-spoi/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
