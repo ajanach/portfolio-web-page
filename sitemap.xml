@@ -2,18 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://janach.cloud/</loc>
-    <lastmod>2023-04-25T15:37:09+02:00</lastmod>
-  </url><url>
-    <loc>https://janach.cloud/menu/contact/</loc>
-    <lastmod>2023-04-25T15:37:09+02:00</lastmod>
-  </url><url>
-    <loc>https://janach.cloud/menu/</loc>
-    <lastmod>2023-04-25T15:37:09+02:00</lastmod>
-  </url><url>
     <loc>https://janach.cloud/menu/about/</loc>
   </url><url>
     <loc>https://janach.cloud/project/advanced-administration-of-open-source-operating-systems-naoos/</loc>
+  </url><url>
+    <loc>https://janach.cloud/</loc>
   </url><url>
     <loc>https://janach.cloud/project/backend-server-in-go-with-bash-testing-script-for-crud-operations-on-firebase/</loc>
   </url><url>
@@ -38,6 +31,8 @@
     <loc>https://janach.cloud/project/intelligent-predictive-modeling-with-logistic-regression-web-application-integration-and-containerized-deployment/</loc>
   </url><url>
     <loc>https://janach.cloud/project/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</loc>
+  </url><url>
+    <loc>https://janach.cloud/menu/</loc>
   </url><url>
     <loc>https://janach.cloud/project/operating-systems-network-infrastructure-and-services-osmis/</loc>
   </url><url>
