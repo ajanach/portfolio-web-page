@@ -24,6 +24,7 @@ params:
         title: "Antonio Janach" # optional default will be site title
         subtitle: " Master student at Faculty of Informatics and Digital Technologies, University of Rijeka " # optional
         imageUrl: /images/profil_cool_resized.jpg # optional
+        favicon: /images/devops_logo.png # adding favicon to browser's tab
         imageWidth: 256 # custom size
         imageHeight: 256 # custom size
     
