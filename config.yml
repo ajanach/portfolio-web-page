@@ -23,8 +23,7 @@ params:
         enabled: true
         title: "Antonio Janach" # optional default will be site title
         subtitle: " Master student at Faculty of Informatics and Digital Technologies, University of Rijeka " # optional
-        imageUrl: /images/profil_cool_resized.jpg # optional
-        favicon: /images/devops_logo.png # adding favicon to browser's tab
+        imageUrl: "/images/profil_cool_resized.jpg" # optional
         imageWidth: 256 # custom size
         imageHeight: 256 # custom size
     
@@ -41,6 +40,9 @@ params:
     - name: "email"
       title: "Contact me"
       url: "mailto: janach.antonio@gmail.com"
+
+    assets:
+      favicon16x16: "/images/cloud-computing.png" # adding favicon to browser's tab
 
     ShowToc: true
     TocOpen: true
