@@ -14,7 +14,7 @@ In addition to my skills, I have a keen interest in Kubernetes, GitHub actions, 
 ---
 
 ## Junior System Engineer – Combis d.o.o.
-*12/2021 to 4/2023*
+*12/2021 to 6/2023*
 - Checking application/service logs, resource usage, monitoring backup execution
 - Remote diagnostics of problems
 - Remote user support for problem resolution
