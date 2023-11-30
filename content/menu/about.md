@@ -14,7 +14,7 @@ In addition to my skills, I have a keen interest in Kubernetes, GitHub actions, 
 ---
 
 ## Junior DevOps Engineer – SICK MOBILISIS d.o.o.
-*7/2021 to present*
+*7/2023 to present*
 - Plan, develop, deploy, and maintain various software solutions, incorporating security best practices.
 - Monitor performance and manage infrastructure to meet specified requirements (Prometheus, Grafana, Loki).
 - Design and implement CI/CD pipelines based on project requirements.
