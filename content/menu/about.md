@@ -13,6 +13,18 @@ In addition to my skills, I have a keen interest in Kubernetes, GitHub actions, 
 # Experience
 ---
 
+## Junior DevOps Engineer – SICK MOBILISIS d.o.o.
+*7/2021 to present*
+- Plan, develop, deploy, and maintain various software solutions, incorporating security best practices.
+- Monitor performance and manage infrastructure to meet specified requirements (Prometheus, Grafana, Loki).
+- Design and implement CI/CD pipelines based on project requirements.
+- Design and deploy highly available infrastructure using cloud services, primarily Azure.
+- Write Infrastructure as Code (IaC) using Terraform to streamline setup replication across multiple development environments.
+- Ensure solutions are designed with a focus on performance, scalability, and operability.
+- Collaborate on projects involving Kubernetes, Terraform, Ansible, Azure Cloud, ArgoCD, GitLab, Linux, Bash scripting, etc.
+- Create Terraform files for infrastructure provisioning and YAML manifest files for Kubernetes service deployment, maintaining Kubernetes in the desired state.
+- Execute projects that are highly available and span technologies like Kubernetes, Terraform, Ansible, Azure Cloud, ArgoCD, GitLab, Linux, Bash scripting, etc.
+
 ## Junior System Engineer – Combis d.o.o.
 *12/2021 to 6/2023*
 - Checking application/service logs, resource usage, monitoring backup execution
