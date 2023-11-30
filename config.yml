@@ -22,7 +22,7 @@ params:
     profileMode:
         enabled: true
         title: "Antonio Janach" # optional default will be site title
-        subtitle: " Master student at Faculty of Informatics and Digital Technologies, University of Rijeka " # optional
+        subtitle: "Junior DevOps Engineer | Master's Student | Driving DevOps Excellence" # optional
         imageUrl: "/images/profil_cool_resized.jpg" # optional
         imageWidth: 256 # custom size
         imageHeight: 256 # custom size
