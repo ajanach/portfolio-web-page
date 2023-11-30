@@ -30,7 +30,7 @@ params:
     socialIcons:
     - name: "linkedin"
       title: "Linkedin profile"
-      url: "https://www.linkedin.com/in/antonio-janach-26bb1a14b/"
+      url: "https://www.linkedin.com/in/ajanach/"
     - name: "github"
       title: "GitHub profile"
       url: "https://github.com/ajanach"
