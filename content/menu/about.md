@@ -14,7 +14,7 @@ In addition to my skills, I have a keen interest in Kubernetes, GitHub actions, 
 ---
 
 ## DevOps Engineer – SICK MOBILISIS d.o.o.
-**Full Time**
+**Full Time**  
 *3/2024 to Present*
 - Plan, develop, deploy, and maintain various software solutions, incorporating security best practices.
 - Monitor performance and manage infrastructure to meet specified requirements (Prometheus, Grafana, Loki).
@@ -27,7 +27,7 @@ In addition to my skills, I have a keen interest in Kubernetes, GitHub actions, 
 - Execute projects that are highly available and span technologies like Kubernetes, Terraform, Ansible, Azure Cloud, ArgoCD, GitLab, Linux, Bash scripting, etc.
 
 ## DevOps Engineer – SICK MOBILISIS d.o.o.
-**Intership**
+**Intership**  
 *7/2023 to 2/2024*
 - Plan, develop, deploy, and maintain various software solutions, incorporating security best practices.
 - Monitor performance and manage infrastructure to meet specified requirements (Prometheus, Grafana, Loki).
