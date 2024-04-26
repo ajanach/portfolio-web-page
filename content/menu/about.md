@@ -6,9 +6,7 @@ draft: false
 
 # Profile
 ---
-Hey there! I’m a student who loves tinkering with open-source technology, especially when it comes to making things run smoother and faster. I’m into DevOps practices, Linux administration, Cloud, Bash scripting, Python scripting, Golang programming, virtualization, containers, Git/GitHub, Windows administration, PowerShell, and networking – all the cool stuff that keeps the internet humming along. Basically, I like figuring out how to make things work better, and I’m always learning new tricks to get the job done. So if you need someone to help with your open-source projects or just want to geek out about tech stuff, hit me up!
-
-In addition to my skills, I have a keen interest in Kubernetes, GitHub actions, Argo CD, Ansible, and Terraform. These technologies enable efficient container orchestration, automation, and infrastructure management. I enjoy exploring their capabilities and applying them to streamline software development and deployment processes.
+I am a dedicated student and DevOps Engineer driven by a fervent passion for open-source technology and a keen interest in crafting highly available systems. My expertise spans a spectrum of technologies, including DevOps practices, Linux administration, Cloud computing, Bash scripting, programming, virtualization, Git version control, and networking. My primary focus lies in the realm of building and maintaining resilient and highly available systems. I derive satisfaction from exploring innovative solutions and continually mastering new techniques. Specifically, I am deeply engrossed in technologies such as Kubernetes, GitHub Actions, Argo CD, Ansible, and Terraform. These tools play a pivotal role in my pursuit of efficient container orchestration, automation, and adept infrastructure management. In essence, I am driven by the excitement of leveraging cutting-edge technology to elevate operational efficiency and contribute to impactful open-source projects.
 
 # Experience
 ---
