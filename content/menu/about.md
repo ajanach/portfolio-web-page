@@ -45,7 +45,7 @@ I am a dedicated student and DevOps Engineer driven by a fervent passion for ope
 *10/2018 to Present*
 - Design, develop, and administer cloud-based WordPress websites (using Apache/httpd) to enhance the online presence of local businesses
 - Leveraging cloud infrastructure, I create scalable and customizable websites that optimize performance and user experience
-- Tech stac: Wordpress, PHP, MariaDB, Apache/httpd, Google Analytics, SEO, E-mail service
+- Tech stack: Wordpress, PHP, MariaDB, Apache/httpd, Google Analytics, SEO, E-mail service
 
 
 ## Information Technology Instructor – Enter Koprivnica d.o.o.
