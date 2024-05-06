@@ -7,12 +7,182 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://janach.cloud/menu/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>About me</title>
-      <link>https://janach.cloud/menu/about/</link>
+      <title></title>
+      <link>https://janach.cloud/menu/docs/ha-k3s-cluster/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://janach.cloud/menu/about/</guid>
+      <guid>https://janach.cloud/menu/docs/ha-k3s-cluster/</guid>
+      <description>K3s - Kubernetes Cluster title: &amp;ldquo;HA K3s Cluster with External Database&amp;rdquo; draft: false Guide Vmware workstation:
+NAT: 192.168.1.0/24
+GW: 192.168.1.1
+Cluster Datastore Installation: https://ubuntu.com/server/docs/install-and-configure-a-mysql-server
+sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf change bind-address to 0.0.0.0 sudo systemctl restart mysql.service sudo ufw enable sudo ufw allow 22/tcp sudo ufw allow 3306/tcp Create db and new user:
+mysql -u root -p
+CREATE DATABASE k3s_db;
+CREATE USER &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo; IDENTIFIED BY &amp;lsquo;wasd&amp;rsquo;;
+GRANT ALL PRIVILEGES ON *.* TO &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo; WITH GRANT OPTION;</description>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>https://janach.cloud/menu/about/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/about/about/</guid>
       <description>Profile I am a dedicated student and DevOps Engineer driven by a fervent passion for open-source technology and a keen interest in crafting highly available systems. My expertise spans a spectrum of technologies, including DevOps practices, Linux administration, Cloud computing, Bash scripting, programming, virtualization, Git version control, and networking. My primary focus lies in the realm of building and maintaining resilient and highly available systems. I derive satisfaction from exploring innovative solutions and continually mastering new techniques.</description>
+    </item>
+    
+    <item>
+      <title>Advanced Administration of Open Source Operating Systems (NAOOS)</title>
+      <link>https://janach.cloud/menu/projects/advanced-administration-of-open-source-operating-systems-naoos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/advanced-administration-of-open-source-operating-systems-naoos/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL February 2020 June 2020 Algebra Project PDF Description This project is focused on improving the business and growth of a small business. The project is divided into two milestones. The first milestone involves designing and structuring solution requirements for the business, with an emphasis on optimizing project role requirements to ensure that services can be distributed across two Linux servers.</description>
+    </item>
+    
+    <item>
+      <title>Backend server in Go with Bash testing script for CRUD operations on Firebase</title>
+      <link>https://janach.cloud/menu/projects/backend-server-in-go-with-bash-testing-script-for-crud-operations-on-firebase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/backend-server-in-go-with-bash-testing-script-for-crud-operations-on-firebase/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL February 2023 May 2023 FIDIT Project URL Description In this project, I&amp;rsquo;ve created a backend server using Golang, Firebase Admin, Gorilla, and Gocron. Also, I created a convenient bash script. Also, I created a bash script to enhance collaboration between frontend and backend developers. The script simplifies testing and demonstrates CRUD operations on the Firebase database, enabling frontend developers to interact with the backend effectively.</description>
+    </item>
+    
+    <item>
+      <title>Backup and recovery of IT systems (SPOI)</title>
+      <link>https://janach.cloud/menu/projects/backup-and-recovery-of-it-systems-spoi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/backup-and-recovery-of-it-systems-spoi/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL January 2021 February 2021 Algebra Project PDF Description This project aims to implement a system for secure storage and recovery for a company that utilizes a hybrid environment (Windows-Linux) across various servers. The servers that need to be backed up include a Linux file server, a Linux server with KVM virtualization, a Windows server with AD DC and DHCP roles, a Windows server with SQL and File Server roles, a Windows server with Exchange, a Windows server with Veeam manager Enterprise Plus Edition license and an empty virtual machine with a bootable Veeam RE environment.</description>
+    </item>
+    
+    <item>
+      <title>Coin Piggy: A Smart Piggy Bank Promoting Financial Literacy and Saving Habits in Children</title>
+      <link>https://janach.cloud/menu/projects/coin-piggy-a-smart-piggy-bank-promoting-financial-literacy-and-saving-habits-in-children/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/coin-piggy-a-smart-piggy-bank-promoting-financial-literacy-and-saving-habits-in-children/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL September 2017 December 2017 Enter Koprivnica Project URL Description The Coin Piggy is a smart piggy bank designed as a project to motivate children to save money smartly from an early age in a simple way. This project utilizes MicroBit and Arduino technologies, incorporating the principles of electronics, programming, and creative design. The main objective of the project is to create an interactive and educational tool that encourages financial literacy and responsible saving habits among children.</description>
+    </item>
+    
+    <item>
+      <title>Collaboration Systems (KS)</title>
+      <link>https://janach.cloud/menu/projects/collaboration-systems-ks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/collaboration-systems-ks/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL January 2021 February 2021 Algebra Project PDF Description This project involves exploring the capabilities of the Microsoft Office 365 platform. It demonstrates how to utilize the functionalities of the platform to meet the needs of companies that do not have access to on-premise infrastructure. The solution for such companies lies in Microsoft Office 365, which offers modern tools and collaboration.</description>
+    </item>
+    
+    <item>
+      <title>Deploying a Portfolio Web Page Powered by Hugo to Github Pages Custom Domain via Github Actions</title>
+      <link>https://janach.cloud/menu/projects/deploying-a-portfolio-web-page-powered-by-hugo-to-github-pages-custom-domain-via-github-actions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/deploying-a-portfolio-web-page-powered-by-hugo-to-github-pages-custom-domain-via-github-actions/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL March 2023 Ongoing Personal GitHub Repo Descrition This project deploys a portfolio web page powered by Hugo to Github Pages with a custom domain via Github Actions. It enables to host Hugo blog on Github Pages and connect it to a personalized domain.</description>
+    </item>
+    
+    <item>
+      <title>Developed algorithm for words splitting on syllables - Flask and Python</title>
+      <link>https://janach.cloud/menu/projects/developed-algorithm-for-words-splitting-on-syllables-/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/developed-algorithm-for-words-splitting-on-syllables-/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL November 2022 January 2023 FIDIT GitHub Repo Descrition The final goal of the project is to create an algorithm and application that can split any German word into syllables by adding a space between adjacent syllables for any input text. The project uses the Python programming language to formally write the rules based on the explicit and implicit knowledge collected by linguists for the German language.</description>
+    </item>
+    
+    <item>
+      <title>Developed Notepad Replica - wxWidgets and C&#43;&#43;</title>
+      <link>https://janach.cloud/menu/projects/developed-notepad-replica/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/developed-notepad-replica/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL January 2022 February 2022 FIDIT GitHub Repo Descrition This is a project based on wxWidgets using C++. Project was done for Object Oriented Programming college on my faculty.</description>
+    </item>
+    
+    <item>
+      <title>Implementing cloud computing in Azure and OpenStack (IRUO)</title>
+      <link>https://janach.cloud/menu/projects/implementing-cloud-computing-in-azure-and-openstack-iruo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/implementing-cloud-computing-in-azure-and-openstack-iruo/</guid>
+      <description>Timeline and Details Azure part: Start date End date Associated with Project URL April 2021 July 2021 Algebra Project PDF OpenStack part: Start date End date Associated with Project URL April 2021 July 2021 Algebra Project PDF Description Azure part: The project involves creating a resource group in Azure and within that resource group, installing three objects (virtual machines, app services, or other Azure services of your choice) in separate Azure regions, and configuring one Azure virtual network for each region.</description>
+    </item>
+    
+    <item>
+      <title>Implementing local wireless computer networks (BRM)</title>
+      <link>https://janach.cloud/menu/projects/implementing-local-wireless-computer-networks-brm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/implementing-local-wireless-computer-networks-brm/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL April 2021 July 2021 Algebra Project PDF Description The project aims to familiarize individuals with the fundamental concepts of wireless communication and to provide hands-on experience in implementing wireless technologies to enhance wired local area networks. The objectives of the project include conducting a site survey, determining signal strength, selecting appropriate antennas, implementing standalone wireless access points, implementing wireless access points controlled by wireless LAN controllers, and integrating wireless and wired networks effectively.</description>
+    </item>
+    
+    <item>
+      <title>Intelligent Predictive Modeling with Logistic Regression: Web Application Integration and Containerized Deployment</title>
+      <link>https://janach.cloud/menu/projects/intelligent-predictive-modeling-with-logistic-regression-web-application-integration-and-containerized-deployment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/intelligent-predictive-modeling-with-logistic-regression-web-application-integration-and-containerized-deployment/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL November 2022 February 2023 FIDIT Project PDF Description The project aims to familiarize individuals with the fundamental concepts of wireless communication and to provide hands-on experience in implementing wireless technologies to enhance wired local area networks. The objectives of the project include conducting a site survey, determining signal strength, selecting appropriate antennas, implementing standalone wireless access points, implementing wireless access points controlled by wireless LAN controllers, and integrating wireless and wired networks effectively.</description>
+    </item>
+    
+    <item>
+      <title>IT Infrastructure Virtualization using oVirt and ESXI/vSphere (VIRT2)</title>
+      <link>https://janach.cloud/menu/projects/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</guid>
+      <description>Timeline and Details oVirt part: Start date End date Associated with Project URL November 2020 December 2020 Algebra Project PDF ESXI/vSphere part: Start date End date Associated with Project URL February 2021 March 2021 Algebra Project PDF Description oVirt part: This project involves the installation and configuration of a Linux infrastructure using CentOS and KVM on a Windows host computer. It includes configuring network virtual adapters in KVM, installing four virtual machines, writing a script for manipulating virtual machines, setting up oVirt engine, adding nodes to the oVirt environment and configuring storage by creating NFS and iSCSI shares.</description>
+    </item>
+    
+    <item>
+      <title>Operating Systems - Network Infrastructure and Services (OSMIS)</title>
+      <link>https://janach.cloud/menu/projects/operating-systems---network-infrastructure-and-services-osmis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/operating-systems---network-infrastructure-and-services-osmis/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL May 2020 Jun 2020 Algebra Project PDF Description This project focuses on the configuration and monitoring of server computer networks. Key tasks include setting up and maintaining a DHCP server, configuring and managing DNS and WINS servers, and monitoring network traffic. The project also covers the resolution of names in a network environment and the types of computer names. Additionally, routing in network infrastructure and managing the RRAS server are also important aspects of the project.</description>
+    </item>
+    
+    <item>
+      <title>Planning of Advanced Infrastructure (PNI)</title>
+      <link>https://janach.cloud/menu/projects/planning-of-advanced-infrastructure-pni/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/planning-of-advanced-infrastructure-pni/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL December 2020 January 2021 Algebra Project PDF Description This project involves setting up a domain, creating 50 users, and implementing a secondary DNS, DC and Storage Spaces with Dynamic Access Control file system. Additionally, a functional Distributed File System with replication is established, a CA and DHCP cluster is installed, IIS is set up with a test page using SSL/TLS encryption.</description>
+    </item>
+    
+    <item>
+      <title>System Engineering - Final Project (SIP)</title>
+      <link>https://janach.cloud/menu/projects/system-engineering---final-project-sip/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/system-engineering---final-project-sip/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL February 2021 August 2021 Algebra Project PDF Description This project aims to design and implement a complex IT infrastructure for a company, including deploying virtual machines at two locations and configuring services such as OpenVPN, iSCSI, FreeIPA, SMB, Web server, Mail server, ADDS, DNS, DHCP, NTP, RODC, storage spaces, Root CA and subordinate CA, failover cluster, DFS and IIS, and setting up network connections.</description>
+    </item>
+    
+    <item>
+      <title>Web Development Portfolio: WordPress, PHP, MariaDB, and More</title>
+      <link>https://janach.cloud/menu/projects/web-development-portfolio-wordpress-php-mariadb-and-more/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/web-development-portfolio-wordpress-php-mariadb-and-more/</guid>
+      <description>Timeline and Details Presentational web pages fijaing.com snagasunca.hr Webshop avb-service.hr Description In this project, I have successfully developed both a webshop and a presentation web page. Leveraging a versatile tech stack including WordPress, PHP, MariaDB, Apache/httpd, Google Analytics, SEO, and E-mail service integration, I have created a dynamic and engaging online presence for business. The webshop provides seamless e-commerce functionality, allowing customers to browse and purchase products with ease. The presentation web page showcases your brand, products, and services, captivating visitors with visually appealing designs and compelling content.</description>
+    </item>
+    
+    <item>
+      <title>Windows computer administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure cloud - Final Thesis</title>
+      <link>https://janach.cloud/menu/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL February 2021 September 2021 Algebra Project PDF Description The System Center Configuration Manager is a service designed for IT administrators that enables them to easily manage computers in a network where Windows operating systems are installed. This service allows for central distribution and updating of antivirus clients and pre-defined antivirus rules, installation and upgrading of business software applications, upgrading of operating systems, configuring user and server computers, installation of operating systems using images, central storage of information about hardware and software resources and implementation of general or group policies.</description>
     </item>
     
   </channel>
