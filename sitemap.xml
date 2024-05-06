@@ -2,50 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://janach.cloud/menu/about/about/</loc>
+    <loc>https://janach.cloud/about/about/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/advanced-administration-of-open-source-operating-systems-naoos/</loc>
+    <loc>https://janach.cloud/about/</loc>
+  </url><url>
+    <loc>https://janach.cloud/projects/advanced-administration-of-open-source-operating-systems-naoos/</loc>
   </url><url>
     <loc>https://janach.cloud/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/backend-server-in-go-with-bash-testing-script-for-crud-operations-on-firebase/</loc>
+    <loc>https://janach.cloud/projects/backend-server-in-go-with-bash-testing-script-for-crud-operations-on-firebase/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/backup-and-recovery-of-it-systems-spoi/</loc>
+    <loc>https://janach.cloud/projects/backup-and-recovery-of-it-systems-spoi/</loc>
   </url><url>
     <loc>https://janach.cloud/categories/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/coin-piggy-a-smart-piggy-bank-promoting-financial-literacy-and-saving-habits-in-children/</loc>
+    <loc>https://janach.cloud/projects/coin-piggy-a-smart-piggy-bank-promoting-financial-literacy-and-saving-habits-in-children/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/collaboration-systems-ks/</loc>
+    <loc>https://janach.cloud/projects/collaboration-systems-ks/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/deploying-a-portfolio-web-page-powered-by-hugo-to-github-pages-custom-domain-via-github-actions/</loc>
+    <loc>https://janach.cloud/projects/deploying-a-portfolio-web-page-powered-by-hugo-to-github-pages-custom-domain-via-github-actions/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/developed-algorithm-for-words-splitting-on-syllables-/</loc>
+    <loc>https://janach.cloud/projects/developed-algorithm-for-words-splitting-on-syllables-/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/developed-notepad-replica/</loc>
+    <loc>https://janach.cloud/projects/developed-notepad-replica/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/docs/ha-k3s-cluster/</loc>
+    <loc>https://janach.cloud/docs/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/implementing-cloud-computing-in-azure-and-openstack-iruo/</loc>
+    <loc>https://janach.cloud/docs/ha-k3s-cluster/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/implementing-local-wireless-computer-networks-brm/</loc>
+    <loc>https://janach.cloud/projects/implementing-cloud-computing-in-azure-and-openstack-iruo/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/intelligent-predictive-modeling-with-logistic-regression-web-application-integration-and-containerized-deployment/</loc>
+    <loc>https://janach.cloud/projects/implementing-local-wireless-computer-networks-brm/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</loc>
+    <loc>https://janach.cloud/projects/intelligent-predictive-modeling-with-logistic-regression-web-application-integration-and-containerized-deployment/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/</loc>
+    <loc>https://janach.cloud/projects/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/operating-systems---network-infrastructure-and-services-osmis/</loc>
+    <loc>https://janach.cloud/projects/operating-systems---network-infrastructure-and-services-osmis/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/planning-of-advanced-infrastructure-pni/</loc>
+    <loc>https://janach.cloud/projects/planning-of-advanced-infrastructure-pni/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/system-engineering---final-project-sip/</loc>
+    <loc>https://janach.cloud/projects/</loc>
+  </url><url>
+    <loc>https://janach.cloud/projects/system-engineering---final-project-sip/</loc>
   </url><url>
     <loc>https://janach.cloud/tags/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/web-development-portfolio-wordpress-php-mariadb-and-more/</loc>
+    <loc>https://janach.cloud/projects/web-development-portfolio-wordpress-php-mariadb-and-more/</loc>
   </url><url>
-    <loc>https://janach.cloud/menu/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</loc>
+    <loc>https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</loc>
   </url>
 </urlset>
