@@ -142,10 +142,10 @@ GRANT ALL PRIVILEGES ON *.* TO &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo;
     
     <item>
       <title>Operating Systems - Network Infrastructure and Services (OSMIS)</title>
-      <link>https://janach.cloud/projects/operating-systems-network-infrastructure-and-services-osmis/</link>
+      <link>https://janach.cloud/projects/operating-systems---network-infrastructure-and-services-osmis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://janach.cloud/projects/operating-systems-network-infrastructure-and-services-osmis/</guid>
+      <guid>https://janach.cloud/projects/operating-systems---network-infrastructure-and-services-osmis/</guid>
       <description>Timeline and Details Start date End date Associated with Project URL May 2020 Jun 2020 Algebra Project PDF Description This project focuses on the configuration and monitoring of server computer networks. Key tasks include setting up and maintaining a DHCP server, configuring and managing DNS and WINS servers, and monitoring network traffic. The project also covers the resolution of names in a network environment and the types of computer names. Additionally, routing in network infrastructure and managing the RRAS server are also important aspects of the project.</description>
     </item>
     
@@ -160,10 +160,10 @@ GRANT ALL PRIVILEGES ON *.* TO &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo;
     
     <item>
       <title>System Engineering - Final Project (SIP)</title>
-      <link>https://janach.cloud/projects/system-engineering-final-project-sip/</link>
+      <link>https://janach.cloud/projects/system-engineering---final-project-sip/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://janach.cloud/projects/system-engineering-final-project-sip/</guid>
+      <guid>https://janach.cloud/projects/system-engineering---final-project-sip/</guid>
       <description>Timeline and Details Start date End date Associated with Project URL February 2021 August 2021 Algebra Project PDF Description This project aims to design and implement a complex IT infrastructure for a company, including deploying virtual machines at two locations and configuring services such as OpenVPN, iSCSI, FreeIPA, SMB, Web server, Mail server, ADDS, DNS, DHCP, NTP, RODC, storage spaces, Root CA and subordinate CA, failover cluster, DFS and IIS, and setting up network connections.</description>
     </item>
     
@@ -178,10 +178,10 @@ GRANT ALL PRIVILEGES ON *.* TO &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo;
     
     <item>
       <title>Windows computer administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure cloud - Final Thesis</title>
-      <link>https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud-final-thesis/</link>
+      <link>https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud-final-thesis/</guid>
+      <guid>https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</guid>
       <description>Timeline and Details Start date End date Associated with Project URL February 2021 September 2021 Algebra Project PDF Description The System Center Configuration Manager is a service designed for IT administrators that enables them to easily manage computers in a network where Windows operating systems are installed. This service allows for central distribution and updating of antivirus clients and pre-defined antivirus rules, installation and upgrading of business software applications, upgrading of operating systems, configuring user and server computers, installation of operating systems using images, central storage of information about hardware and software resources and implementation of general or group policies.</description>
     </item>
     
