@@ -70,7 +70,3 @@ params:
     analytics:
       google:
         SiteVerificationTag: "_49xE_51QqZ16iAvPNowWNH6Z5kQN2zdsoXKDJFjri4"
-      bing:
-        SiteVerificationTag: "XYZabc"
-      yandex:
-        SiteVerificationTag: "XYZabc"
