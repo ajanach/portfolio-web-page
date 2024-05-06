@@ -1,6 +1,6 @@
-# K3s - Kubernetes Cluster
 ---
 title: "HA K3s Cluster with External Database"
+date: 
 draft: false
 ---
 
