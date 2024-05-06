@@ -12,8 +12,8 @@ menu:
       url: "/menu/about/"
       weight: 2
     - name: "Projects"
-      url: "/Project/"
-      identifier: "projects"
+      url: "/projects/"
+      identifier: "blog"
       weight: 3
     - name: "Docs"
       url: "/docs/"
