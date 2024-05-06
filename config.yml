@@ -1,0 +1,61 @@
+baseURL: "https://janach.cloud/"
+languageCode: en-us
+title: Antonio Janach
+theme: PaperMod
+
+menu:
+  main:
+    - name: "Home"
+      url: "/"
+      weight: 1
+    - name: "About Me"
+      url: "/menu/about/"
+      weight: 2
+    - name: "Projects"
+      url: "/projects/"
+      identifier: "projects"
+      weight: 3
+    - name: "Docs"
+      url: "/docs/"
+      identifier: "blog"
+      weight: 4
+
+
+# Home page setup:
+params:
+    profileMode:
+        enabled: true
+        title: "Antonio Janach" # optional default will be site title
+        subtitle: "DevOps Engineer | Master's Student | Driving DevOps Excellence" # optional
+        imageUrl: "/images/profil_cool_resized.jpg" # optional
+        imageWidth: 256 # custom size
+        imageHeight: 256 # custom size
+    
+    socialIcons:
+    - name: "linkedin"
+      title: "Linkedin profile"
+      url: "https://www.linkedin.com/in/ajanach/"
+    - name: "github"
+      title: "GitHub profile"
+      url: "https://github.com/ajanach"
+    - name: "other"
+      title: "Issued Certificates"
+      url: "https://www.credly.com/users/antonio-janach/badges"
+    - name: "email"
+      title: "Contact me"
+      url: "mailto: janach.antonio@gmail.com"
+
+    assets:
+      favicon16x16: "/images/cloud-computing.png" # adding favicon to browser's tab
+
+    ShowToc: true
+    TocOpen: true
+    #TocSide: "left"
+    ShowBreadCrumbs: true
+    ShowReadingTime: false
+    ShowShareButtons: false
+    defaultTheme: dark # to switch between dark or light according to browser theme
+    paginate: 20 # articles per page
+    env: production # to enable google analytics, opengraph, twitter-cards and schema.
+    ShowCodeCopyButtons: true
+    VisitCount: true
