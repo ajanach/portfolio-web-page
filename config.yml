@@ -66,7 +66,3 @@ params:
     defaultTheme: dark # to switch between dark or light according to browser theme
     ShowCodeCopyButtons: true
     hideSummary: false
-    env: production # to enable google analytics, opengraph, twitter-cards and schema.
-    analytics:
-      google:
-        SiteVerificationTag: "_49xE_51QqZ16iAvPNowWNH6Z5kQN2zdsoXKDJFjri4"
