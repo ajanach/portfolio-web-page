@@ -69,7 +69,7 @@ params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
     analytics:
       google:
-        SiteVerificationTag: "google-site-verification=_49xE_51QqZ16iAvPNowWNH6Z5kQN2zdsoXKDJFjri4"
+        SiteVerificationTag: "_49xE_51QqZ16iAvPNowWNH6Z5kQN2zdsoXKDJFjri4"
       bing:
         SiteVerificationTag: "XYZabc"
       yandex:
