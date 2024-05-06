@@ -30,39 +30,38 @@ menu:
       identifier: "blog"
       weight: 4
 
-
 # Home page setup:
 params:
-    profileMode:
-        enabled: true
-        title: "Antonio Janach" # optional default will be site title
-        subtitle: "DevOps Engineer | Master's Student | Driving DevOps Excellence" # optional
-        imageUrl: "/images/profil_cool_resized.jpg" # optional
-        imageWidth: 256 # custom size
-        imageHeight: 256 # custom size
-    
-    socialIcons:
-    - name: "linkedin"
-      title: "Linkedin profile"
-      url: "https://www.linkedin.com/in/ajanach/"
-    - name: "github"
-      title: "GitHub profile"
-      url: "https://github.com/ajanach"
-    - name: "other"
-      title: "Issued Certificates"
-      url: "https://www.credly.com/users/antonio-janach/badges"
-    - name: "email"
-      title: "Contact me"
-      url: "mailto: janach.antonio@gmail.com"
+  profileMode:
+      enabled: true
+      title: "Antonio Janach" # optional default will be site title
+      subtitle: "DevOps Engineer | Master's Student | Driving DevOps Excellence" # optional
+      imageUrl: "/images/profil_cool_resized.jpg" # optional
+      imageWidth: 256 # custom size
+      imageHeight: 256 # custom size
+  
+  socialIcons:
+  - name: "linkedin"
+    title: "Linkedin profile"
+    url: "https://www.linkedin.com/in/ajanach/"
+  - name: "github"
+    title: "GitHub profile"
+    url: "https://github.com/ajanach"
+  - name: "other"
+    title: "Issued Certificates"
+    url: "https://www.credly.com/users/antonio-janach/badges"
+  - name: "email"
+    title: "Contact me"
+    url: "mailto: janach.antonio@gmail.com"
 
-    assets:
-      favicon16x16: "/images/cloud-computing.png" # adding favicon to browser's tab
+  assets:
+    favicon16x16: "/images/cloud-computing.png" # adding favicon to browser's tab
 
-    ShowToc: true
-    TocOpen: true
-    ShowBreadCrumbs: false
-    ShowReadingTime: false
-    ShowShareButtons: false
-    defaultTheme: dark # to switch between dark or light according to browser theme
-    ShowCodeCopyButtons: true
-    hideSummary: false
+  ShowToc: true
+  TocOpen: true
+  ShowBreadCrumbs: false
+  ShowReadingTime: false
+  ShowShareButtons: false
+  defaultTheme: dark # to switch between dark or light according to browser theme
+  ShowCodeCopyButtons: true
+  hideSummary: false
