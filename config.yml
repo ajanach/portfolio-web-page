@@ -50,8 +50,12 @@ params:
 
     ShowToc: true
     TocOpen: true
-    TocSide: "left"
+    #TocSide: "left"
     ShowBreadCrumbs: true
     ShowReadingTime: false
     ShowShareButtons: false
     defaultTheme: dark # to switch between dark or light according to browser theme
+    paginate: 20 # articles per page
+    env: production # to enable google analytics, opengraph, twitter-cards and schema.
+    ShowCodeCopyButtons: true
+    VisitCount: true
