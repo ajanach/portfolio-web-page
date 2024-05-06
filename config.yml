@@ -22,11 +22,11 @@ menu:
       url: "/menu/about/"
       weight: 2
     - name: "Projects"
-      url: "/projects/"
+      url: "/menu/projects/"
       identifier: "projects"
       weight: 3
     - name: "Docs"
-      url: "/docs/"
+      url: "/menu/docs/"
       identifier: "blog"
       weight: 4
 
@@ -59,7 +59,7 @@ params:
 
   ShowToc: true
   TocOpen: true
-  ShowBreadCrumbs: false
+  ShowBreadCrumbs: true
   ShowReadingTime: false
   ShowShareButtons: false
   defaultTheme: dark # to switch between dark or light according to browser theme
