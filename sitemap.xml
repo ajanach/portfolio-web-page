@@ -2,8 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://janach.cloud/menu/docs/ha-k3s-cluster/</loc>
-  </url><url>
     <loc>https://janach.cloud/menu/about/about/</loc>
   </url><url>
     <loc>https://janach.cloud/menu/projects/advanced-administration-of-open-source-operating-systems-naoos/</loc>
@@ -25,6 +23,8 @@
     <loc>https://janach.cloud/menu/projects/developed-algorithm-for-words-splitting-on-syllables-/</loc>
   </url><url>
     <loc>https://janach.cloud/menu/projects/developed-notepad-replica/</loc>
+  </url><url>
+    <loc>https://janach.cloud/menu/docs/ha-k3s-cluster/</loc>
   </url><url>
     <loc>https://janach.cloud/menu/projects/implementing-cloud-computing-in-azure-and-openstack-iruo/</loc>
   </url><url>

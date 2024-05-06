@@ -7,23 +7,6 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://janach.cloud/menu/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title></title>
-      <link>https://janach.cloud/menu/docs/ha-k3s-cluster/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://janach.cloud/menu/docs/ha-k3s-cluster/</guid>
-      <description>K3s - Kubernetes Cluster title: &amp;ldquo;HA K3s Cluster with External Database&amp;rdquo; draft: false Guide Vmware workstation:
-NAT: 192.168.1.0/24
-GW: 192.168.1.1
-Cluster Datastore Installation: https://ubuntu.com/server/docs/install-and-configure-a-mysql-server
-sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf change bind-address to 0.0.0.0 sudo systemctl restart mysql.service sudo ufw enable sudo ufw allow 22/tcp sudo ufw allow 3306/tcp Create db and new user:
-mysql -u root -p
-CREATE DATABASE k3s_db;
-CREATE USER &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo; IDENTIFIED BY &amp;lsquo;wasd&amp;rsquo;;
-GRANT ALL PRIVILEGES ON *.* TO &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo; WITH GRANT OPTION;</description>
-    </item>
-    
-    <item>
       <title>About me</title>
       <link>https://janach.cloud/menu/about/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -102,6 +85,26 @@ GRANT ALL PRIVILEGES ON *.* TO &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo;
       
       <guid>https://janach.cloud/menu/projects/developed-notepad-replica/</guid>
       <description>Timeline and Details Start date End date Associated with Project URL January 2022 February 2022 FIDIT GitHub Repo Descrition This is a project based on wxWidgets using C++. Project was done for Object Oriented Programming college on my faculty.</description>
+    </item>
+    
+    <item>
+      <title>HA K3s Cluster with External Database</title>
+      <link>https://janach.cloud/menu/docs/ha-k3s-cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/menu/docs/ha-k3s-cluster/</guid>
+      <description>Guide Vmware workstation:
+NAT: 192.168.1.0/24
+GW: 192.168.1.1
+Cluster Datastore Installation: https://ubuntu.com/server/docs/install-and-configure-a-mysql-server
+sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf change bind-address to 0.0.0.0 sudo systemctl restart mysql.service sudo ufw enable sudo ufw allow 22/tcp sudo ufw allow 3306/tcp Create db and new user:
+mysql -u root -p
+CREATE DATABASE k3s_db;
+CREATE USER &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo; IDENTIFIED BY &amp;lsquo;wasd&amp;rsquo;;
+GRANT ALL PRIVILEGES ON *.* TO &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo; WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+exit;
+Change character set and collate of DB:</description>
     </item>
     
     <item>
