@@ -19,7 +19,7 @@ menu:
       url: "/"
       weight: 1
     - name: "About Me"
-      url: "/about/"
+      url: "/menu/about/"
       weight: 2
     - name: "Projects"
       url: "projects/"
