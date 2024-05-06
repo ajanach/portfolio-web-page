@@ -61,9 +61,17 @@ params:
     UseHugoToc: true
     ShowToc: true
     TocOpen: false
-    ShowBreadCrumbs: true
+    ShowBreadCrumbs: false
     ShowReadingTime: false
     ShowShareButtons: false
     defaultTheme: dark # to switch between dark or light according to browser theme
     ShowCodeCopyButtons: true
     hideSummary: true
+    env: production # to enable google analytics, opengraph, twitter-cards and schema.
+    analytics:
+      google:
+        SiteVerificationTag: "XYZabc"
+      bing:
+        SiteVerificationTag: "XYZabc"
+      yandex:
+        SiteVerificationTag: "XYZabc"
