@@ -23,11 +23,11 @@ menu:
       weight: 2
     - name: "Projects"
       url: "/menu/projects/"
-      identifier: "projects"
+      #identifier: "projects"
       weight: 3
     - name: "Docs"
       url: "/menu/docs/"
-      identifier: "blog"
+      #identifier: "blog"
       weight: 4
 
 # Home page setup:
