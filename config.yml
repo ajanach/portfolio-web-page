@@ -1,7 +1,17 @@
 baseURL: "https://janach.cloud/"
 languageCode: en-us
 title: Antonio Janach
+paginate: 20 # articles per page
 theme: PaperMod
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+minify:
+  disableXML: true
+  minifyOutput: true
 
 menu:
   main:
@@ -48,14 +58,12 @@ params:
     assets:
       favicon16x16: "/images/cloud-computing.png" # adding favicon to browser's tab
 
+    UseHugoToc: true
     ShowToc: true
-    TocOpen: true
-    #TocSide: "left"
+    TocOpen: false
     ShowBreadCrumbs: true
     ShowReadingTime: false
     ShowShareButtons: false
     defaultTheme: dark # to switch between dark or light according to browser theme
-    paginate: 20 # articles per page
-    env: production # to enable google analytics, opengraph, twitter-cards and schema.
     ShowCodeCopyButtons: true
-    VisitCount: true
+    hideSummary: true
