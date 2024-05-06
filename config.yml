@@ -58,9 +58,9 @@ params:
     assets:
       favicon16x16: "/images/cloud-computing.png" # adding favicon to browser's tab
 
-    UseHugoToc: true
+    UseHugoToc: false
     ShowToc: true
-    TocOpen: false
+    TocOpen: true
     ShowBreadCrumbs: false
     ShowReadingTime: false
     ShowShareButtons: false
