@@ -13,8 +13,12 @@ menu:
       weight: 2
     - name: "Projects"
       url: "/Project/"
-      identifier: "blog"
+      identifier: "projects"
       weight: 3
+    - name: "Docs"
+      url: "/docs/"
+      identifier: "blog"
+      weight: 4
 
 
 # Home page setup:
