@@ -19,14 +19,14 @@ menu:
       url: "/"
       weight: 1
     - name: "About Me"
-      url: "/menu/about/"
+      url: "/about/"
       weight: 2
     - name: "Projects"
-      url: "/menu/projects/"
+      url: "projects/"
       identifier: "projects"
       weight: 3
     - name: "Docs"
-      url: "/menu/docs/"
+      url: "/docs/"
       identifier: "docs"
       weight: 4
 
