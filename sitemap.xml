@@ -2,7 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://janach.cloud/menu/about/about/</loc>
+    <loc>https://janach.cloud/about/about/</loc>
+  </url><url>
+    <loc>https://janach.cloud/about/</loc>
   </url><url>
     <loc>https://janach.cloud/projects/advanced-administration-of-open-source-operating-systems-naoos/</loc>
   </url><url>
@@ -35,8 +37,6 @@
     <loc>https://janach.cloud/projects/intelligent-predictive-modeling-with-logistic-regression-web-application-integration-and-containerized-deployment/</loc>
   </url><url>
     <loc>https://janach.cloud/projects/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</loc>
-  </url><url>
-    <loc>https://janach.cloud/menu/</loc>
   </url><url>
     <loc>https://janach.cloud/projects/operating-systems---network-infrastructure-and-services-osmis/</loc>
   </url><url>
