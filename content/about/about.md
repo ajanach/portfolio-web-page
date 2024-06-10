@@ -73,4 +73,4 @@ I am a dedicated student and DevOps Engineer driven by a fervent passion for ope
 
 ## Microsoft Certified: Azure Fundamentals
 - AZ - 900
-- Issued July 2022 - No Expiration Date -> [Reference on Credly](https://www.credly.com/badges/8982b5e9-72f2-4312-ad69-6b31375a60d6/public_url)  
+- Issued July 2022 - No Expiration Date -> [Reference on Credly](https://www.credly.com/badges/8982b5e9-72f2-4312-ad69-6b31375a60d6/public_url)
