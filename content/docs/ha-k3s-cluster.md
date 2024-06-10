@@ -86,7 +86,6 @@ export K3S_DATASTORE_ENDPOINT='mysql://k3s:wasd@tcp(192.168.1.40:3306)/k3s_db'
 ```bash
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--write-kubeconfig-mode 644" sh -s - server --token=SECRET --node-taint CriticalAddonsOnly=true:NoExecute --tls-san 192.168.1.30
 ```
-
 # On worker:
 
 ```bash
