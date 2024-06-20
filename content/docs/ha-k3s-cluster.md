@@ -40,6 +40,7 @@ This section encompasses all the detailed specifications of Kubernetes virtual m
 | --- | --- | --- | --- | --- | --- |
 | prod-external-lb | By Domain | 443 | On prod-external-lb | 192.168.1.21 | 192.168.1.10, 192.168.1.11, 192.168.1.12 , 192.168.1.13, 192.168.1.14, 192.168.1.15 |
 | prod-external-lb | By Domain | 6443 | On prod-external-lb | 192.168.1.21 | 192.168.1.10, 192.168.1.11, 192.168.1.12 , 192.168.1.13, 192.168.1.14, 192.168.1.15 |
+
 💡 Control plane nodes IP addresses don't need to be in LB pool.
 
 
@@ -54,6 +55,7 @@ Execute the following bash command:
 ```bash
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--write-kubeconfig-mode 644 --flannel-backend=none --disable-network-policy --disable traefik --cluster-init" sh -s - server --node-taint CriticalAddonsOnly=true:NoExecute --tls-san 192.168.1.20
 ```
+
 💡 When executing the command above, please check if the node taint is applied. If not, execute the following command:
 
 ```bash
@@ -67,6 +69,7 @@ For setting up the K3s cluster on the other nodes, execute the following bash co
 ```bash
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--write-kubeconfig-mode 644 --flannel-backend=none --disable-network-policy --disable traefik --server https://1192.168.1.10:6443 --token <TOKEN>" sh -s - server --node-taint CriticalAddonsOnly=true:NoExecute --tls-san 10.231.6.62
 ```
+
 💡 Retrieve the node token with:
 
 ```bash
@@ -90,6 +93,7 @@ Execute the following command to install the Calico operator and custom resource
 ```bash
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.3/manifests/tigera-operator.yaml
 ```
+
 💡 Due to the large size of the CRD bundle, `kubectl apply` might exceed request limits. Therefore, it is recommended to use `kubectl create` or `kubectl replace`.
 
 Create the necessary custom resource by executing the following command:
@@ -97,6 +101,7 @@ Create the necessary custom resource by executing the following command:
 ```bash
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.3/manifests/custom-resources.yaml
 ```
+
 💡 Before creating this manifest, read its contents and make sure its settings are correct for your environment. For example, you may need to change the default IP pool CIDR to match your pod network CIDR.
 
 # Cluster
