@@ -88,26 +88,6 @@
     </item>
     
     <item>
-      <title>HA K3s Cluster with External Database</title>
-      <link>https://janach.cloud/docs/ha-k3s-cluster/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://janach.cloud/docs/ha-k3s-cluster/</guid>
-      <description>Guide Vmware workstation:
-NAT: 192.168.1.0/24
-GW: 192.168.1.1
-Cluster Datastore Installation: https://ubuntu.com/server/docs/install-and-configure-a-mysql-server
-sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf change bind-address to 0.0.0.0 sudo systemctl restart mysql.service sudo ufw enable sudo ufw allow 22/tcp sudo ufw allow 3306/tcp Create db and new user:
-mysql -u root -p
-CREATE DATABASE k3s_db;
-CREATE USER &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo; IDENTIFIED BY &amp;lsquo;wasd&amp;rsquo;;
-GRANT ALL PRIVILEGES ON *.* TO &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo; WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-exit;
-Change character set and collate of DB:</description>
-    </item>
-    
-    <item>
       <title>Implementing cloud computing in Azure and OpenStack (IRUO)</title>
       <link>https://janach.cloud/projects/implementing-cloud-computing-in-azure-and-openstack-iruo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -141,6 +121,16 @@ Change character set and collate of DB:</description>
       
       <guid>https://janach.cloud/projects/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</guid>
       <description>Timeline and Details oVirt part: Start date End date Associated with Project URL November 2020 December 2020 Algebra Project PDF ESXI/vSphere part: Start date End date Associated with Project URL February 2021 March 2021 Algebra Project PDF Description oVirt part: This project involves the installation and configuration of a Linux infrastructure using CentOS and KVM on a Windows host computer. It includes configuring network virtual adapters in KVM, installing four virtual machines, writing a script for manipulating virtual machines, setting up oVirt engine, adding nodes to the oVirt environment and configuring storage by creating NFS and iSCSI shares.</description>
+    </item>
+    
+    <item>
+      <title>K3s Production Cluster with Calico Full Documentation</title>
+      <link>https://janach.cloud/docs/ha-k3s-cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/docs/ha-k3s-cluster/</guid>
+      <description>K3s Production Cluster with Calico Full Documentation K3s Production Cluster with Calico Full Documentation Infrastructure Specifications This section encompasses all the detailed specifications of Kubernetes virtual machines, load balancer virtual machines, and databases for services/applications. It provides a clear overview of the hardware configurations and networking details for each component in infrastructure setup.
+Kubernetes virtual machines specifications: VM CPUs Memory NICs Disks Primary IP Address Network #1 Disk [GB] Access NFS prod-cp-01 2 4096 1 1 192.</description>
     </item>
     
     <item>

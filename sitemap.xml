@@ -26,8 +26,6 @@
   </url><url>
     <loc>https://janach.cloud/docs/</loc>
   </url><url>
-    <loc>https://janach.cloud/docs/ha-k3s-cluster/</loc>
-  </url><url>
     <loc>https://janach.cloud/projects/implementing-cloud-computing-in-azure-and-openstack-iruo/</loc>
   </url><url>
     <loc>https://janach.cloud/projects/implementing-local-wireless-computer-networks-brm/</loc>
@@ -35,6 +33,8 @@
     <loc>https://janach.cloud/projects/intelligent-predictive-modeling-with-logistic-regression-web-application-integration-and-containerized-deployment/</loc>
   </url><url>
     <loc>https://janach.cloud/projects/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</loc>
+  </url><url>
+    <loc>https://janach.cloud/docs/ha-k3s-cluster/</loc>
   </url><url>
     <loc>https://janach.cloud/projects/operating-systems---network-infrastructure-and-services-osmis/</loc>
   </url><url>

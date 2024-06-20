@@ -7,23 +7,13 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://janach.cloud/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>HA K3s Cluster with External Database</title>
+      <title>K3s Production Cluster with Calico Full Documentation</title>
       <link>https://janach.cloud/docs/ha-k3s-cluster/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://janach.cloud/docs/ha-k3s-cluster/</guid>
-      <description>Guide Vmware workstation:
-NAT: 192.168.1.0/24
-GW: 192.168.1.1
-Cluster Datastore Installation: https://ubuntu.com/server/docs/install-and-configure-a-mysql-server
-sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf change bind-address to 0.0.0.0 sudo systemctl restart mysql.service sudo ufw enable sudo ufw allow 22/tcp sudo ufw allow 3306/tcp Create db and new user:
-mysql -u root -p
-CREATE DATABASE k3s_db;
-CREATE USER &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo; IDENTIFIED BY &amp;lsquo;wasd&amp;rsquo;;
-GRANT ALL PRIVILEGES ON *.* TO &amp;lsquo;k3s&amp;rsquo;@&amp;rsquo;%&amp;rsquo; WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-exit;
-Change character set and collate of DB:</description>
+      <description>K3s Production Cluster with Calico Full Documentation K3s Production Cluster with Calico Full Documentation Infrastructure Specifications This section encompasses all the detailed specifications of Kubernetes virtual machines, load balancer virtual machines, and databases for services/applications. It provides a clear overview of the hardware configurations and networking details for each component in infrastructure setup.
+Kubernetes virtual machines specifications: VM CPUs Memory NICs Disks Primary IP Address Network #1 Disk [GB] Access NFS prod-cp-01 2 4096 1 1 192.</description>
     </item>
     
   </channel>
