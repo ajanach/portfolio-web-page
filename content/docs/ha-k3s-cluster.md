@@ -3,9 +3,6 @@ title: "K3s Production Cluster with Calico Full Documentation"
 date: 
 draft: false
 ---
-
-# K3s Production Cluster with Calico Full Documentation
-
 # K3s Production Cluster with Calico Full Documentation
 
 ## Infrastructure Specifications
