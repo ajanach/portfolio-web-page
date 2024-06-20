@@ -12,8 +12,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://janach.cloud/docs/ha-k3s-cluster/</guid>
-      <description>K3s Production Cluster with Calico Full Documentation K3s Production Cluster with Calico Full Documentation Infrastructure Specifications This section encompasses all the detailed specifications of Kubernetes virtual machines, load balancer virtual machines, and databases for services/applications. It provides a clear overview of the hardware configurations and networking details for each component in infrastructure setup.
-Kubernetes virtual machines specifications: VM CPUs Memory NICs Disks Primary IP Address Network #1 Disk [GB] Access NFS prod-cp-01 2 4096 1 1 192.</description>
+      <description>K3s Production Cluster with Calico Full Documentation Infrastructure Specifications This section encompasses all the detailed specifications of Kubernetes virtual machines, load balancer virtual machines, and databases for services/applications. It provides a clear overview of the hardware configurations and networking details for each component in infrastructure setup.
+Kubernetes virtual machines specifications: VM CPUs Memory NICs Disks Primary IP Address Network #1 Disk [GB] Access NFS prod-cp-01 2 4096 1 1 192.168.1.10 Bridge 30 SSH key Mounted prod-cp-02 2 4096 1 1 192.</description>
     </item>
     
   </channel>
