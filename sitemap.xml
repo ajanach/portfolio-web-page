@@ -2,8 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/</loc>
-  </url><url>
     <loc>https://janach.cloud/about/</loc>
   </url><url>
     <loc>https://janach.cloud/projects/advanced-administration-of-open-source-operating-systems-naoos/</loc>
@@ -39,6 +37,8 @@
     <loc>https://janach.cloud/projects/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</loc>
   </url><url>
     <loc>https://janach.cloud/docs/ha-k3s-cluster/</loc>
+  </url><url>
+    <loc>https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/</loc>
   </url><url>
     <loc>https://janach.cloud/projects/operating-systems---network-infrastructure-and-services-osmis/</loc>
   </url><url>

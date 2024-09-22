@@ -7,15 +7,6 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://janach.cloud/projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title></title>
-      <link>https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Advanced Administration of Open Source Operating Systems (NAOOS)</title>
       <link>https://janach.cloud/projects/advanced-administration-of-open-source-operating-systems-naoos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -130,6 +121,15 @@
       
       <guid>https://janach.cloud/projects/it-infrastructure-virtualization-using-ovirt-and-esxi-virt2/</guid>
       <description>Timeline and Details oVirt part: Start date End date Associated with Project URL November 2020 December 2020 Algebra Project PDF ESXI/vSphere part: Start date End date Associated with Project URL February 2021 March 2021 Algebra Project PDF Description oVirt part: This project involves the installation and configuration of a Linux infrastructure using CentOS and KVM on a Windows host computer. It includes configuring network virtual adapters in KVM, installing four virtual machines, writing a script for manipulating virtual machines, setting up oVirt engine, adding nodes to the oVirt environment and configuring storage by creating NFS and iSCSI shares.</description>
+    </item>
+    
+    <item>
+      <title>Master&#39;s Thesis - Comparison of Orchestration Systems for Microservices Applications</title>
+      <link>https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL April 2024 September 2024 Faculty of Informatics and Digital Technologies GitHub Project Downloads Thesis PDF Presentation PDF Video Master&amp;rsquo;s Thesis Defense on YouTube Description This master’s thesis presents a detailed comparison of two prominent orchestration systems for microservices applications: Azure Kubernetes Service (AKS) and K3S. The objective is to evaluate the performance, cost-effectiveness, and ease of use of these tools by orchestrating a medium-complexity microservices application consisting of 15 microservices.</description>
     </item>
     
     <item>
