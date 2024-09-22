@@ -63,13 +63,12 @@ With extensive experience in networking, virtualization, and version control, I 
 ## Faculty of Informatics and Digital Technologies, University of Rijeka
 *2022 - 2024*
 - Master's degree
-- [Master's Thesis: Comparison of Orchestration Systems for Microservices Applications](https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/)
+- Master's Thesis: [Comparison of Orchestration Systems for Microservices Applications](https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/)
 
 ## Algebra University College
 *2018 - 2021*
 - Bachelor's degree
-- [Final Thesis: Windows Computer Administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure Cloud](https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/)
-
+- Final Thesis: [Windows Computer Administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure Cloud](https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/)
 
 # Certifications
 ---
