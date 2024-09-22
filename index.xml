@@ -7,6 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://janach.cloud/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title></title>
+      <link>https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>About me</title>
       <link>https://janach.cloud/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -89,6 +98,15 @@ Key technologies that define my approach include Kubernetes for container orches
     </item>
     
     <item>
+      <title>Final Thesis - Windows computer administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure cloud</title>
+      <link>https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</guid>
+      <description>Timeline and Details Start date End date Associated with Project URL February 2021 September 2021 Algebra Project PDF Description The System Center Configuration Manager is a service designed for IT administrators that enables them to easily manage computers in a network where Windows operating systems are installed. This service allows for central distribution and updating of antivirus clients and pre-defined antivirus rules, installation and upgrading of business software applications, upgrading of operating systems, configuring user and server computers, installation of operating systems using images, central storage of information about hardware and software resources and implementation of general or group policies.</description>
+    </item>
+    
+    <item>
       <title>Implementing cloud computing in Azure and OpenStack (IRUO)</title>
       <link>https://janach.cloud/projects/implementing-cloud-computing-in-azure-and-openstack-iruo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -168,15 +186,6 @@ Kubernetes virtual machines specifications: VM CPUs Memory NICs Disks Primary IP
       
       <guid>https://janach.cloud/projects/web-development-portfolio-wordpress-php-mariadb-and-more/</guid>
       <description>Timeline and Details Presentational web pages fijaing.com snagasunca.hr Webshop avb-service.hr Description In this project, I have successfully developed both a webshop and a presentation web page. Leveraging a versatile tech stack including WordPress, PHP, MariaDB, Apache/httpd, Google Analytics, SEO, and E-mail service integration, I have created a dynamic and engaging online presence for business. The webshop provides seamless e-commerce functionality, allowing customers to browse and purchase products with ease. The presentation web page showcases your brand, products, and services, captivating visitors with visually appealing designs and compelling content.</description>
-    </item>
-    
-    <item>
-      <title>Windows computer administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure cloud - Final Thesis</title>
-      <link>https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</guid>
-      <description>Timeline and Details Start date End date Associated with Project URL February 2021 September 2021 Algebra Project PDF Description The System Center Configuration Manager is a service designed for IT administrators that enables them to easily manage computers in a network where Windows operating systems are installed. This service allows for central distribution and updating of antivirus clients and pre-defined antivirus rules, installation and upgrading of business software applications, upgrading of operating systems, configuring user and server computers, installation of operating systems using images, central storage of information about hardware and software resources and implementation of general or group policies.</description>
     </item>
     
   </channel>

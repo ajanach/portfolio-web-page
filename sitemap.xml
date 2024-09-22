@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/</loc>
+  </url><url>
     <loc>https://janach.cloud/about/</loc>
   </url><url>
     <loc>https://janach.cloud/projects/advanced-administration-of-open-source-operating-systems-naoos/</loc>
@@ -26,6 +28,8 @@
   </url><url>
     <loc>https://janach.cloud/docs/</loc>
   </url><url>
+    <loc>https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</loc>
+  </url><url>
     <loc>https://janach.cloud/projects/implementing-cloud-computing-in-azure-and-openstack-iruo/</loc>
   </url><url>
     <loc>https://janach.cloud/projects/implementing-local-wireless-computer-networks-brm/</loc>
@@ -47,7 +51,5 @@
     <loc>https://janach.cloud/tags/</loc>
   </url><url>
     <loc>https://janach.cloud/projects/web-development-portfolio-wordpress-php-mariadb-and-more/</loc>
-  </url><url>
-    <loc>https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/</loc>
   </url>
 </urlset>
