@@ -29,16 +29,6 @@ menu:
       url: "/docs/"
       identifier: "docs"
       weight: 4
-    - name: "Test"
-      weight: 5
-      identifier: "test"
-      children:
-        - name: "Test1"
-          url: "/test/test1/"
-          weight: 1
-        - name: "Test2"
-          url: "/test/test2/"
-          weight: 2
 
 # Home page setup:
 params:

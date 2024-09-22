@@ -1,5 +1,5 @@
 ---
-title: "Windows computer administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure cloud - Final Thesis"
+title: "Final Thesis - Windows computer administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure cloud"
 draft: false
 ---
 
