@@ -30,7 +30,6 @@ menu:
       identifier: "docs"
       weight: 4
     - name: "Test"
-      url: "#"
       weight: 5
       identifier: "test"
       children:

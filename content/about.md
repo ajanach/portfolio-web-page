@@ -6,7 +6,11 @@ draft: false
 
 # Profile
 ---
-I am a dedicated student and DevOps Engineer driven by a fervent passion for open-source technology and a keen interest in crafting highly available systems. My expertise spans a spectrum of technologies, including DevOps practices, Linux administration, Cloud computing, Bash scripting, programming, virtualization, Git version control, and networking. My primary focus lies in the realm of building and maintaining resilient and highly available systems. I derive satisfaction from exploring innovative solutions and continually mastering new techniques. Specifically, I am deeply engrossed in technologies such as Kubernetes, GitHub Actions, Argo CD, Ansible, and Terraform. These tools play a pivotal role in my pursuit of efficient container orchestration, automation, and adept infrastructure management. In essence, I am driven by the excitement of leveraging cutting-edge technology to elevate operational efficiency and contribute to impactful open-source projects.
+I am a DevOps Engineer with a deep commitment to building scalable, resilient, and highly available infrastructure. My passion for open-source technology drives my expertise in automating, orchestrating, and managing complex environments. My core competencies include DevOps practices, Linux system administration, cloud infrastructure, and containerization, with a primary focus on creating and maintaining robust CI/CD pipelines and automating infrastructure deployment.
+
+Key technologies that define my approach include Kubernetes for container orchestration, GitLab pipelines for streamlined CI/CD processes, Argo CD for GitOps-based continuous deployment, and Ansible for configuration management and automation. I also have a strong foundation in Terraform, enabling me to deliver Infrastructure as Code (IaC) solutions that are both scalable and efficient.
+
+With extensive experience in networking, virtualization, and version control, I excel at ensuring system uptime, operational efficiency, and seamless software delivery. I thrive on exploring innovative tools and methodologies to solve complex challenges, and my work is driven by the goal of maximizing operational performance while minimizing manual intervention.
 
 # Experience
 ---
