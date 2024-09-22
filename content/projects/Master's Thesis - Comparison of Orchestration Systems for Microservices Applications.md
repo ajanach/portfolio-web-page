@@ -16,15 +16,11 @@ draft: false
 - [Master's Thesis Defense on YouTube](https://youtu.be/kA0KqmDsE-o?si=ueKHOJE_VROfPiWS)
 
 ## Description
-This master’s thesis presents a detailed comparison of two prominent orchestration systems for microservices applications: **Azure Kubernetes Service (AKS)** and **K3S**. The objective is to evaluate the performance, cost-effectiveness, and ease of use of these tools by orchestrating a medium-complexity microservices application consisting of 15 microservices.
+This thesis provides a comprehensive comparison of Kubernetes orchestration tools, specifically focusing on Azure Kubernetes Service (AKS) and K3S, to determine their suitability for orchestrating a medium-complexity microservices application, exemplified by the "Online Boutique" application, which consists of 15 containers. The analysis compares one tool supporting on-premises environments (K3S) with another designed for cloud environments (AKS), emphasizing performance, cost-effectiveness, management complexity, and scalability.
 
-The thesis covers:
-- Key factors to consider when selecting an orchestration system.
-- Guidelines on when to use AKS vs K3S.
-- Benchmarking the performance of orchestration systems.
-- Estimating the costs of running microservices applications in the cloud versus on-premise.
-- Basic knowledge about Kubernetes, AKS, and K3S.
-- Using Terraform to deploy infrastructure in Azure.
-- Automating the configuration and deployment of a K3S cluster with Ansible.
-- Using YAML manifests to configure Kubernetes resources.
-- Deploying Prometheus and Grafana for monitoring using Helm.
+The quantitative analysis was conducted on infrastructure with identical resources, including CPU, memory, and storage, to ensure a fair comparison. AKS demonstrated significant cost advantages over a five-year period, largely due to its integration with the Azure ecosystem, which optimizes resource allocation and reduces operational overhead. However, K3S consistently outperformed AKS in key performance metrics, including CPU speed, memory transfer rate, and request-handling capabilities. These performance differences are partly due to the additional load created by the hypervisor and the extra cloud-specific services running within the AKS cluster.
+
+The qualitative analysis identified differences in implementation, configuration, ease of deployment, integration, and management. AKS excels in cloud environments due to its automated management and seamless integration with Azure, making it suitable for organizations looking to minimize operational overhead. In contrast, K3S offers greater flexibility and customization, particularly for on-premises deployments or scenarios requiring specific configurations. Additionally, K3S is suitable for organizations with existing on-premises infrastructure.
+
+Keywords: Kubernetes, Azure Kubernetes Service, AKS, K3S, microservices, cloud 
+computing, on-premises, container orchestration, performance analysis, cost-effectiveness. 
