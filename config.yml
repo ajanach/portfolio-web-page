@@ -29,13 +29,24 @@ menu:
       url: "/docs/"
       identifier: "docs"
       weight: 4
+    - name: "Test"
+      url: "#"
+      weight: 5
+      identifier: "test"
+      children:
+        - name: "Test1"
+          url: "/test/test1/"
+          weight: 1
+        - name: "Test2"
+          url: "/test/test2/"
+          weight: 2
 
 # Home page setup:
 params:
   profileMode:
       enabled: true
       title: "Antonio Janach" # optional default will be site title
-      subtitle: "DevOps Engineer | Master's Student | Driving DevOps Excellence" # optional
+      subtitle: "DevOps Engineer | Driving DevOps Excellence" # optional
       imageUrl: "/images/profil_cool_resized.jpg" # optional
       imageWidth: 256 # custom size
       imageHeight: 256 # custom size
