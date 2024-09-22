@@ -18,8 +18,6 @@ draft: false
 ## Description
 This master’s thesis presents a detailed comparison of two prominent orchestration systems for microservices applications: **Azure Kubernetes Service (AKS)** and **K3S**. The objective is to evaluate the performance, cost-effectiveness, and ease of use of these tools by orchestrating a medium-complexity microservices application consisting of 15 microservices.
 
-The primary objective is to orchestrate a medium-complexity microservices application (consisting of 15 microservices) and evaluate the performance, cost-effectiveness, and ease of use of these orchestration tools.
-
 The thesis covers:
 - Key factors to consider when selecting an orchestration system.
 - Guidelines on when to use AKS vs K3S.
