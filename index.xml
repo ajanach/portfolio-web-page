@@ -12,7 +12,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://janach.cloud/about/</guid>
-      <description>Profile I am a dedicated student and DevOps Engineer driven by a fervent passion for open-source technology and a keen interest in crafting highly available systems. My expertise spans a spectrum of technologies, including DevOps practices, Linux administration, Cloud computing, Bash scripting, programming, virtualization, Git version control, and networking. My primary focus lies in the realm of building and maintaining resilient and highly available systems. I derive satisfaction from exploring innovative solutions and continually mastering new techniques.</description>
+      <description>Profile I am a DevOps Engineer with a deep commitment to building scalable, resilient, and highly available infrastructure. My passion for open-source technology drives my expertise in automating, orchestrating, and managing complex environments. My core competencies include DevOps practices, Linux system administration, cloud infrastructure, and containerization, with a primary focus on creating and maintaining robust CI/CD pipelines and automating infrastructure deployment.
+Key technologies that define my approach include Kubernetes for container orchestration, GitLab pipelines for streamlined CI/CD processes, Argo CD for GitOps-based continuous deployment, and Ansible for configuration management and automation.</description>
     </item>
     
     <item>
