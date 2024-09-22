@@ -9,8 +9,8 @@ draft: false
 | April 2024 | September 2024 | Faculty of Informatics and Digital Technologies | [GitHub Project](https://github.com/ajanach/comparison-of-orchestration-systems-for-microservices-applications.git) |
 
 ## Downloads
-- [Thesis PDF](/projects/masters_thesis/masters_thesis_-_comparison_of_orchestration_systems_for_microservices_applications.pdf)
-- [Presentation PDF](/projects/masters_thesis/presentation_-_comparison_of_orchestration_systems_for_microservices_applications.pdf)
+- [Thesis PDF](/projects/MASTER/masters_thesis_-_comparison_of_orchestration_systems_for_microservices_applications.pdf)
+- [Presentation PDF](/projects/MASTER/presentation_-_comparison_of_orchestration_systems_for_microservices_applications.pdf)
 
 ## Video
 - [Master's Thesis Defense on YouTube](https://youtu.be/kA0KqmDsE-o?si=ueKHOJE_VROfPiWS)
