@@ -129,7 +129,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/</guid>
-      <description>Timeline and Details Start date End date Associated with Project URL April 2024 September 2024 Faculty of Informatics and Digital Technologies GitHub Project Downloads Thesis PDF Presentation PDF Video Master&amp;rsquo;s Thesis Defense on YouTube Description This master’s thesis presents a detailed comparison of two prominent orchestration systems for microservices applications: Azure Kubernetes Service (AKS) and K3S. The objective is to evaluate the performance, cost-effectiveness, and ease of use of these tools by orchestrating a medium-complexity microservices application consisting of 15 microservices.</description>
+      <description>Timeline and Details Start date End date Associated with Project URL April 2024 September 2024 Faculty of Informatics and Digital Technologies GitHub Project Downloads Thesis PDF Presentation PDF Video Master&amp;rsquo;s Thesis Defense on YouTube Description This thesis provides a comprehensive comparison of Kubernetes orchestration tools, specifically focusing on Azure Kubernetes Service (AKS) and K3S, to determine their suitability for orchestrating a medium-complexity microservices application, exemplified by the &amp;ldquo;Online Boutique&amp;rdquo; application, which consists of 15 containers.</description>
     </item>
     
     <item>
