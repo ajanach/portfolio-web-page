@@ -36,7 +36,7 @@ params:
       enabled: true
       title: "Antonio Janach" # optional default will be site title
       subtitle: "DevOps Engineer | Driving DevOps Excellence" # optional
-      imageUrl: "/images/profil_cool_resized.jpg" # optional
+      imageUrl: "/images/profile.jpeg" # optional
       imageWidth: 256 # custom size
       imageHeight: 256 # custom size
   
