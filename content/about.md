@@ -73,10 +73,11 @@ With extensive experience in networking, virtualization, and version control, I 
 # Certifications
 ---
 
-## Red Hat Certified System Administrator
-- RHCSA
-- Issued April 2022 - Expires April 2025 -> [Reference on Credly](https://www.credly.com/badges/00733b40-0d36-48cc-94b0-363368f49a2d/public_url)  
+## Red Hat Certified Engineer (RHCE)
+- Issued April 2025 - Expires April 2028 -> [Reference on Credly](https://www.credly.com/badges/f51f0b15-782f-4302-955d-98b4b46a0d07/public_url)
 
-## Microsoft Certified: Azure Fundamentals
-- AZ - 900
+## Red Hat Certified System Administrator (RHCSA)
+- Issued April 2022 - Expires April 2028 -> [Reference on Credly](https://www.credly.com/badges/00733b40-0d36-48cc-94b0-363368f49a2d/public_url)  
+
+## Microsoft Certified: Azure Fundamentals (AZ-900)
 - Issued July 2022 - No Expiration Date -> [Reference on Credly](https://www.credly.com/badges/8982b5e9-72f2-4312-ad69-6b31375a60d6/public_url)
