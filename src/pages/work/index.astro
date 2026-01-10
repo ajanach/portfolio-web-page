@@ -1,0 +1,72 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import TopLayout from "@layouts/TopLayout.astro";
+import BottomLayout from "@layouts/BottomLayout.astro";
+import SearchCollection from "@components/SearchCollection";
+import { WORK } from "@consts";
+import type { CollectionEntry } from "astro:content";
+
+const workEntries = (await getCollection("work"))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Define custom tag order
+const TAG_ORDER = [
+  "Thesis", // 1. Najvažnije - MSc i BSc thesis
+  "Research", // 2. Published paper (MIPRO 2025)
+  "Master", // 3. Master studij projekti
+  "Bachelor", // 4. Bachelor studij projekti
+  "Side Projects", // 5. Freelance/portfolio
+  "Legacy", // 6. High school projects
+];
+
+// Get all unique tags
+const allTags = [...new Set(workEntries.flatMap((entry) => entry.data.tags))];
+
+// Sort tags by custom order
+const tags = allTags.sort((a, b) => {
+  const indexA = TAG_ORDER.indexOf(a);
+  const indexB = TAG_ORDER.indexOf(b);
+
+  // If both tags not in custom order, sort alphabetically
+  if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+  // If only A not in order, put it at the end
+  if (indexA === -1) return 1;
+  // If only B not in order, put it at the end
+  if (indexB === -1) return -1;
+
+  // Both in custom order, sort by index
+  return indexA - indexB;
+});
+
+const estimated_initial_size =
+  28 + workEntries.length * 158 + (workEntries.length - 1) * 12;
+---
+
+<PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
+  <TopLayout>
+    <div class="animate">
+      <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
+        {WORK.TITLE}
+      </h1>
+      <div class="mt-1">
+        {WORK.DESCRIPTION}
+      </div>
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <div
+      id="search-collection-wrapper"
+      class="animate"
+      style={{ minHeight: `${estimated_initial_size}px` }}
+    >
+      <SearchCollection
+        client:load
+        entry_name={"work"}
+        tags={tags}
+        data={workEntries}
+      />
+    </div>
+  </BottomLayout>
+</PageLayout>

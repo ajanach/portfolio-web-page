@@ -1,0 +1,292 @@
+---
+
+---
+
+<!-- Google reCAPTCHA v3 -->
+<script
+    src="https://www.google.com/recaptcha/api.js?render=6LeLGT8sAAAAAFHNSTzyDm0rOzC3jjMm8y_MOvlq"
+></script>
+
+<form
+    action="https://formspree.io/f/xeeolnqp"
+    method="POST"
+    id="contact-form"
+    class="space-y-6 max-w-xl mx-auto"
+>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Name -->
+        <div class="space-y-2 group">
+            <label
+                for="name"
+                class="text-sm font-medium text-neutral-600 dark:text-neutral-400 group-focus-within:text-black dark:group-focus-within:text-white transition-colors duration-300"
+            >
+                Name
+            </label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                required
+                placeholder="Your Name"
+                class="w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 text-black dark:text-white placeholder:text-neutral-500 focus:outline-none focus:border-black dark:focus:border-white focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 focus:shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:focus:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300"
+            />
+        </div>
+
+        <!-- Email -->
+        <div class="space-y-2 group">
+            <label
+                for="email"
+                class="text-sm font-medium text-neutral-600 dark:text-neutral-400 group-focus-within:text-black dark:group-focus-within:text-white transition-colors duration-300"
+            >
+                Email
+            </label>
+            <input
+                type="email"
+                name="email"
+                id="email"
+                required
+                placeholder="you@example.com"
+                class="w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 text-black dark:text-white placeholder:text-neutral-500 focus:outline-none focus:border-black dark:focus:border-white focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 focus:shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:focus:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300"
+            />
+        </div>
+    </div>
+
+    <!-- Subject -->
+    <div class="space-y-2 group">
+        <label
+            for="subject"
+            class="text-sm font-medium text-neutral-600 dark:text-neutral-400 group-focus-within:text-black dark:group-focus-within:text-white transition-colors duration-300"
+        >
+            Subject
+        </label>
+        <div class="relative">
+            <select
+                name="subject"
+                id="subject"
+                required
+                class="w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 text-black dark:text-white placeholder:text-neutral-500 focus:outline-none focus:border-black dark:focus:border-white focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 focus:shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:focus:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300 appearance-none cursor-pointer"
+            >
+                <option
+                    value=""
+                    disabled
+                    selected
+                    class="bg-neutral-100 dark:bg-neutral-900"
+                    >Select a topic...</option
+                >
+                <option
+                    value="General Inquiry"
+                    class="bg-neutral-100 dark:bg-neutral-900"
+                    >General Inquiry</option
+                >
+                <option
+                    value="Project Proposal"
+                    class="bg-neutral-100 dark:bg-neutral-900"
+                    >Project Proposal</option
+                >
+                <option
+                    value="Career / Job Opportunity"
+                    class="bg-neutral-100 dark:bg-neutral-900"
+                    >Career / Job Opportunity</option
+                >
+                <option value="Other" class="bg-neutral-100 dark:bg-neutral-900"
+                    >Other</option
+                >
+            </select>
+            <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-500 dark:text-neutral-400"
+            >
+                <svg
+                    class="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                    ></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message -->
+    <div class="space-y-2 group">
+        <label
+            for="message"
+            class="text-sm font-medium text-neutral-600 dark:text-neutral-400 group-focus-within:text-black dark:group-focus-within:text-white transition-colors duration-300"
+        >
+            Message
+        </label>
+        <textarea
+            name="message"
+            id="message"
+            rows="5"
+            required
+            placeholder="How can I help you?"
+            class="w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 text-black dark:text-white placeholder:text-neutral-500 focus:outline-none focus:border-black dark:focus:border-white focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 focus:shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:focus:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300 resize-y"
+        ></textarea>
+    </div>
+
+    <!-- Honeypot (Anti-Spam) -->
+    <input
+        type="text"
+        name="_gotcha"
+        style="display:none"
+        tabindex="-1"
+        autocomplete="off"
+    />
+
+    <!-- reCAPTCHA Response Token -->
+    <input
+        type="hidden"
+        name="g-recaptcha-response"
+        id="g-recaptcha-response"
+    />
+
+    <!-- Submit Button (Premium Style - "Pop") -->
+    <button
+        type="submit"
+        class="relative w-full py-3 rounded-md bg-black dark:bg-white text-white dark:text-black font-medium tracking-wide overflow-hidden group hover:scale-[1.01] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] transition-all duration-300 shadow-md ring-1 ring-white/10"
+    >
+        <span class="relative z-10 flex items-center justify-center gap-2">
+            Send Message
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5"
+            >
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        </span>
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"
+        >
+        </div>
+    </button>
+</form>
+
+<!-- Success Message (Replacing Form) -->
+<div id="success-message" class="hidden text-center py-10 space-y-4 animate">
+    <div
+        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mb-4 shadow-[0_0_20px_rgba(74,222,128,0.2)]"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline
+                points="22 4 12 14.01 9 11.01"></polyline></svg
+        >
+    </div>
+    <h3 class="text-3xl font-bold text-black dark:text-white">Message sent!</h3>
+    <p class="text-neutral-600 dark:text-neutral-400 text-lg">
+        The connection is established. I'll be in touch soon.
+    </p>
+    <button
+        onclick="window.location.reload()"
+        class="mt-8 px-6 py-2 rounded-full text-sm font-medium border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+        >Send another message</button
+    >
+</div>
+
+<!-- Status Message (Error) -->
+<div
+    id="form-error"
+    class="hidden rounded-lg p-3 text-sm text-center bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 transition-all duration-300 mt-4 max-w-xl mx-auto"
+>
+</div>
+
+<script is:inline>
+    const form = document.getElementById("contact-form");
+    const successMsg = document.getElementById("success-message");
+    const errorMsg = document.getElementById("form-error");
+    const recaptchaKey = "6LeLGT8sAAAAAFHNSTzyDm0rOzC3jjMm8y_MOvlq"; // Your Site Key
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerHTML;
+
+        // Loading State
+        submitBtn.disabled = true;
+        submitBtn.innerHTML =
+            '<span class="animate-pulse">Connecting...</span>';
+        submitBtn.classList.add("opacity-75", "cursor-not-allowed");
+        errorMsg.classList.add("hidden");
+
+        grecaptcha.ready(function () {
+            grecaptcha
+                .execute(recaptchaKey, { action: "submit" })
+                .then(function (token) {
+                    // Add token to form
+                    document.getElementById("g-recaptcha-response").value =
+                        token;
+
+                    // Prepare data
+                    const data = new FormData(form);
+
+                    // Submit via Fetch
+                    fetch(form.action, {
+                        method: form.method,
+                        body: data,
+                        headers: {
+                            Accept: "application/json",
+                        },
+                    })
+                        .then((response) => {
+                            if (response.ok) {
+                                // Success
+                                form.classList.add("hidden");
+                                successMsg.classList.remove("hidden");
+                                form.reset();
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                            } else {
+                                return response.json().then((errorData) => {
+                                    let errorMessage =
+                                        "Oops! Something went wrong.";
+                                    if (
+                                        Object.hasOwnProperty.call(
+                                            errorData,
+                                            "errors",
+                                        )
+                                    ) {
+                                        errorMessage = errorData["errors"]
+                                            .map((error) => error["message"])
+                                            .join(", ");
+                                    }
+                                    throw new Error(errorMessage);
+                                });
+                            }
+                        })
+                        .catch((error) => {
+                            errorMsg.innerHTML =
+                                error.message ||
+                                "Oops! Network error. Please try again later.";
+                            errorMsg.classList.remove("hidden");
+                        })
+                        .finally(() => {
+                            // Reset Button
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = originalBtnText;
+                            submitBtn.classList.remove(
+                                "opacity-75",
+                                "cursor-not-allowed",
+                            );
+                        });
+                });
+        });
+    });
+</script>

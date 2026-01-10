@@ -1,0 +1,195 @@
+---
+import { SITE, LINKS, SOCIALS } from "@consts";
+import { cn } from "@lib/utils";
+const { pathname } = Astro.url;
+const subpath = pathname.match(/[^/]+/g);
+import Container from "@components/Container.astro";
+// Removed Terminal import as it has been moved to PageLayout
+---
+
+<header id="header" class="fixed top-0 w-full h-16 z-50">
+  <Container size="md">
+    <div class="flex items-center justify-between h-full w-full">
+      <div class="flex-shrink-0 flex gap-1 font-semibold">
+        <a
+          href="/"
+          class="flex gap-1 text-current hover:text-black dark:hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.35)] hover:scale-105 transition-all duration-300 ease-in-out"
+        >
+          <svg class="size-6 fill-current">
+            <use href="/brand.svg#brand"></use>
+          </svg>
+          <div class="font-bold">
+            <span class="hidden sm:inline">Antonio Janach</span>
+            <span class="inline sm:hidden">Antonio Janach</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="flex-1 flex justify-center px-4">
+        <nav class="hidden md:flex items-center justify-center text-sm gap-1">
+          {
+            LINKS.map((LINK) => (
+              <a
+                href={LINK.HREF}
+                class={cn(
+                  "h-8 rounded-full px-3 text-current",
+                  "flex items-center justify-center",
+                  "transition-all duration-300 ease-in-out",
+                  pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF
+                    ? "bg-white text-black"
+                    : "text-white hover:bg-white/15",
+                )}
+              >
+                {LINK.TEXT}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+
+      <div class="flex-shrink-0 flex gap-2 items-center">
+        {
+          [
+            // Search Button
+            {
+              href: "/search",
+              ariaLabel: "Search",
+              icon: "search",
+              isLink: true,
+              id: undefined,
+              target: undefined,
+              extraClass:
+                pathname === "/search" || "/" + subpath?.[0] === "/search"
+                  ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black"
+                  : "",
+            },
+            // Socials (LinkedIn, Git - filtered if needed, or matched from SOCIALS)
+            ...SOCIALS.filter(
+              (s) => s.NAME === "LinkedIn" || s.NAME === "Credly",
+            ).map((s) => ({
+              href: s.HREF,
+              ariaLabel: s.NAME,
+              icon: s.ICON,
+              isLink: true,
+              target: "_blank",
+              id: undefined,
+              extraClass: undefined,
+            })),
+            // Terminal Toggle (Button)
+            {
+              id: "terminal-toggle",
+              ariaLabel: "Open Terminal",
+              icon: "terminal",
+              isLink: false,
+              href: undefined,
+              target: undefined,
+              extraClass: undefined,
+            },
+          ].map((btn) =>
+            btn.isLink ? (
+              <a
+                href={btn.href}
+                target={btn.target}
+                aria-label={btn.ariaLabel}
+                class={cn(
+                  "hidden md:flex",
+                  "size-10 rounded-full p-2 items-center justify-center", // Refactored to size-10
+                  "stroke-current",
+                  "border border-transparent",
+                  "hover:bg-black/5 dark:hover:bg-white/15 hover:scale-110",
+                  "transition-all duration-300 ease-in-out",
+                  btn.extraClass,
+                )}
+              >
+                <svg class="size-full fill-current">
+                  <use
+                    href={`/${btn.icon === "search" ? "ui" : "social"}.svg#${btn.icon}`}
+                  />
+                </svg>
+              </a>
+            ) : (
+              <button
+                id={btn.id}
+                aria-label={btn.ariaLabel}
+                class={cn(
+                  "hidden md:flex",
+                  "size-10 rounded-full p-2 items-center justify-center", // Refactored to size-10
+                  "stroke-current",
+                  "border border-transparent",
+                  "hover:bg-black/5 dark:hover:bg-white/15 hover:scale-110",
+                  "transition-all duration-300 ease-in-out",
+                )}
+              >
+                <svg class="size-full fill-current">
+                  <use href={`/social.svg#${btn.icon}`} />
+                </svg>
+              </button>
+            ),
+          )
+        }
+
+        <button
+          id="header-drawer-button"
+          aria-label={`Toggle drawer`}
+          class={cn(
+            "flex md:hidden",
+            "size-10 rounded-full p-2 items-center justify-center", // Refactored to size-10
+            "stroke-current",
+            "border border-transparent",
+            "hover:bg-black/5 dark:hover:bg-white/15 hover:scale-110",
+            "transition-all duration-300 ease-in-out",
+          )}
+        >
+          <svg id="drawer-open" class="size-full">
+            <use href="/ui.svg#menu"></use>
+          </svg>
+          <svg id="drawer-close" class="size-full">
+            <use href="/ui.svg#x"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </Container>
+  <!-- Terminal moved to PageLayout for global stacking context -->
+
+  <style>
+    #header-drawer-button > #drawer-open {
+      @apply block;
+    }
+    #header-drawer-button > #drawer-close {
+      @apply hidden;
+    }
+    #header-drawer-button.open > #drawer-open {
+      @apply hidden;
+    }
+    #header-drawer-button.open > #drawer-close {
+      @apply block;
+    }
+  </style>
+
+  <script is:inline>
+    function toggleDrawer() {
+      const drawer = document.getElementById("drawer");
+      const drawerButton = document.getElementById("header-drawer-button");
+      drawer?.classList.toggle("open");
+      drawerButton?.classList.toggle("open");
+    }
+
+    function initializeDrawerButton() {
+      const drawerButton = document.getElementById("header-drawer-button");
+      drawerButton?.addEventListener("click", toggleDrawer);
+    }
+
+    function initializeTerminalButton() {
+      const terminalButton = document.getElementById("terminal-toggle");
+      terminalButton?.addEventListener("click", () => {
+        document.dispatchEvent(new Event("terminal:toggle"));
+      });
+    }
+
+    document.addEventListener("astro:after-swap", initializeDrawerButton);
+    document.addEventListener("astro:after-swap", initializeTerminalButton);
+    initializeDrawerButton();
+    initializeTerminalButton();
+  </script>
+</header>

@@ -1,0 +1,48 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import ContactForm from "@components/ContactForm.astro";
+import { CONTACT } from "@consts";
+---
+
+<PageLayout title={CONTACT.TITLE} description={CONTACT.DESCRIPTION}>
+    <!-- tsParticles Background -->
+    <script
+        is:inline
+        src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"
+    ></script>
+    <script is:inline src="/js/bg.js"></script>
+    <div
+        id="tsparticles"
+        class="fixed inset-0 z-0 bg-[#050505] pointer-events-none"
+    >
+    </div>
+
+    <style>
+        #tsparticles {
+            /* opacity: 0.5; Optionally reduce opacity if needed */
+        }
+    </style>
+
+    <Container size="md">
+        <div class="relative z-10 py-24 space-y-12">
+            <div class="animate text-center space-y-4">
+                <h1
+                    class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-neutral-500 to-neutral-800 dark:from-neutral-100 dark:to-neutral-400"
+                >
+                    Get in Touch
+                </h1>
+                <p
+                    class="max-w-lg mx-auto text-neutral-600 dark:text-neutral-400"
+                >
+                    Have a project in mind, a question about my work, or just
+                    want to connect? Fill out the form below and I'll get back
+                    to you as soon as possible.
+                </p>
+            </div>
+            <div class="animate">
+                <ContactForm />
+            </div>
+        </div>
+    </Container>
+</PageLayout>

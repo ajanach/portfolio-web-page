@@ -1,0 +1,901 @@
+---
+
+---
+
+<div
+    id="terminal-overlay"
+    class="fixed inset-0 z-[9999] hidden bg-black/60 backdrop-blur-sm items-center justify-center p-4 opacity-0 transition-opacity duration-300 pointer-events-none"
+    style="isolation: isolate;"
+>
+    <div
+        id="terminal-window"
+        class="bg-[#050505] rounded-lg shadow-2xl overflow-hidden border border-white/10 flex flex-col font-mono text-xs sm:text-sm md:text-base relative transition-all duration-300 transform will-change-transform backface-hidden scale-95 opacity-0"
+        style="width: 95%; max-width: 48rem; height: 80vh; max-height: 600px; transform: translateZ(0);"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Terminal Emulator"
+    >
+        <!-- Header -->
+        <div
+            class="h-8 bg-[#1a1a1a] flex items-center px-4 justify-between border-b border-white/5 shrink-0"
+        >
+            <div class="flex gap-2">
+                <div
+                    class="w-3 h-3 rounded-full bg-[#ff5f56] hover:bg-[#ff5f56]/80 cursor-pointer"
+                    id="term-close-btn"
+                >
+                </div>
+                <div
+                    class="w-3 h-3 rounded-full bg-[#ffbd2e] hover:bg-[#ffbd2e]/80 cursor-pointer"
+                    id="term-minimize-btn"
+                >
+                </div>
+                <div
+                    class="w-3 h-3 rounded-full bg-green-400 hover:bg-green-400/80 cursor-pointer"
+                    id="term-maximize-btn"
+                >
+                </div>
+            </div>
+            <div
+                class="flex items-center justify-center w-full px-4 select-none"
+            >
+                <div class="flex items-center gap-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-5 h-5 text-white/80"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <polyline points="4 17 10 11 4 5"></polyline>
+                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                    <span
+                        class="text-[14px] font-semibold text-white/100 tracking-tight"
+                    >
+                        janach.cloud
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal Content -->
+        <div
+            id="terminal-content"
+            class="flex-1 p-4 overflow-y-auto text-white/90 selection:bg-white/20 cursor-text"
+            style="text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);"
+        >
+            <div id="output"></div>
+            <div class="flex flex-wrap items-center mt-2">
+                <span class="text-green-400 font-bold shrink-0 mr-2">➜</span>
+                <span class="text-blue-400 shrink-0 mr-2"
+                    >~ visitor@janach.cloud $</span
+                >
+                <input
+                    type="text"
+                    id="terminal-input"
+                    class="bg-transparent border-none outline-none flex-1 text-white placeholder-white/50 min-w-[10px]"
+                    spellcheck="false"
+                />
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Scrollbar Styling */
+        #terminal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        #terminal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #terminal-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+        #terminal-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Scanline effect (optional, subtle) */
+        #terminal-window::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%,
+                rgba(0, 0, 0, 0.1) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 10;
+        }
+        .will-change-transform {
+            will-change: transform, opacity;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+
+        #terminal-window {
+            transition:
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease,
+                width 0.3s ease,
+                height 0.3s ease;
+        }
+
+        /* Klasa koju ćemo toggle-ati */
+        .terminal-maximized {
+            width: 95vw !important; /* Širina na 95% ekrana */
+            height: 90vh !important; /* Visina na 90% ekrana */
+            max-width: none !important; /* Mičemo limit od 48rem */
+            max-height: none !important; /* Mičemo limit visine */
+            transform: scale(
+                1
+            ) !important; /* Vraćamo na originalni scale da ne muti tekst */
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+    </style>
+
+    <style is:global>
+        /* NUCLEAR OPTION: Global Event Silencing */
+        body.terminal-open * {
+            pointer-events: none !important;
+        }
+        /* Whitelist Terminal */
+        body.terminal-open #terminal-overlay,
+        body.terminal-open #terminal-window,
+        body.terminal-open #terminal-window * {
+            pointer-events: auto !important;
+        }
+    </style>
+
+    <script>
+        // Terminal Logic - Final Polish (Controls, Branding, Content, Latency)
+
+        let isBooted = false;
+        let isAnimating = false;
+        let isMaximized = false;
+        let history: string[] = [];
+        let historyIndex = -1;
+        let startTime = Date.now();
+
+        // -- Content Definitions (From about.astro) --
+        const EXPERIENCE_CONTENT = [
+            `<div class="grid gap-3 max-w-4xl mt-3">`,
+            ...[
+                {
+                    date: "Mar 2024 — Present",
+                    role: "DevOps Engineer",
+                    company: "SICK MOBILISIS",
+                },
+                {
+                    date: "Jul 2023 — Feb 2024",
+                    role: "DevOps Intern",
+                    company: "SICK MOBILISIS",
+                },
+                {
+                    date: "Dec 2021 — Jun 2023",
+                    role: "Junior System Engineer",
+                    company: "Combis",
+                },
+                {
+                    date: "Oct 2018 — Present",
+                    role: "Web Administrator",
+                    company: "Freelance",
+                },
+                {
+                    date: "Sep 2017 — Sep 2019",
+                    role: "IT Instructor",
+                    company: "Enter Koprivnica",
+                },
+            ].map(
+                (e) => `
+                <div class="flex flex-col gap-0.5 p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
+                    <div class="flex items-center gap-2">
+                         <span class="text-yellow-300 font-bold text-xs tracking-tight uppercase">${e.date}</span>
+                         <span class="text-white/30 text-xs">•</span>
+                         <span class="text-white font-bold text-sm tracking-tight">${e.role}</span>
+                    </div>
+                    <div class="text-[12px] text-white/50 font-medium uppercase tracking-wider ml-0.5">@ ${e.company}</div>
+                </div>
+            `,
+            ),
+            `</div>`,
+        ];
+
+        const EDUCATION_CONTENT = [
+            `<div class="grid gap-3 max-w-4xl mt-3">`,
+            ...[
+                {
+                    year: "2022 — 2024",
+                    school: "Faculty of Informatics and Digital Technologies, University of Rijeka",
+                    points: [
+                        {
+                            label: "Master's Thesis",
+                            text: "Comparison of Orchestration Systems for Microservices",
+                            link: "https://janach.cloud/projects/masters-thesis---comparison-of-orchestration-systems-for-microservices-applications/",
+                        },
+                        {
+                            label: "Published Research (MIPRO 2025 / IEEE)",
+                            text: "A Decision-Making Framework for Evaluating Orchestration Systems",
+                            link: "https://lnkd.in/dG6bABYb",
+                        },
+                    ],
+                    id: "Master's Degree",
+                },
+                {
+                    year: "2018 — 2021",
+                    school: "Algebra Bernays University",
+                    points: [
+                        {
+                            label: "Final Thesis",
+                            text: "Windows Computer Administration using MECM in Azure",
+                            link: "https://janach.cloud/projects/windows-computer-administration-using-microsoft-endpoint-configuration-manager-in-the-microsoft-azure-cloud---final-thesis/",
+                        },
+                    ],
+                    id: "Bachelor's Degree",
+                },
+            ].map(
+                (e) => `
+        <div class="flex flex-col gap-3 p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
+            <div class="flex flex-col gap-1 text-left">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-x-2">
+                    <span class="text-yellow-300 font-bold text-sm tracking-tight uppercase">${e.id}</span>
+                    <span class="hidden sm:inline text-white/30">•</span>
+                    <span class="text-white font-bold text-sm text-balance leading-tight">${e.school}</span>
+                </div>
+                <div class="text-[11px] font-bold text-white uppercase tracking-[0.2em] mb-1">
+                    ${e.year}
+                </div>
+                <div class="flex flex-col gap-3 text-left">
+                    ${e.points
+                        .map(
+                            (p) => `
+                        <div class="flex items-start gap-3 text-white/90 text-[13px] leading-relaxed group/point">
+                            <span class="text-yellow-300/80 text-[8px] mt-1.5 flex-shrink-0">◆</span>
+                            <div class="flex-1">
+                                <span class="font-bold text-white not-italic opacity-100">${p.label}:</span> 
+                                <span class="italic text-white/80">${p.text}</span>
+                            </div>
+                            <a href="${p.link}" target="_blank" class="flex items-center gap-2 px-3 py-1.5 bg-green-400/10 hover:bg-green-400 border border-green-400/30 text-green-400 hover:text-black text-xs font-black rounded transition-all no-underline shrink-0 active:scale-95">
+                                VIEW ↗
+                            </a>
+                        </div>
+                    `,
+                        )
+                        .join("")}
+                </div>
+            </div>
+        </div>
+    `,
+            ),
+            `</div>`,
+        ];
+
+        const CERTS_CONTENT = [
+            `<div class="grid gap-3 max-w-4xl mt-3">`,
+            ...[
+                {
+                    id: "RHCE",
+                    name: "Red Hat Certified Engineer",
+                    link: "https://www.credly.com/badges/f51f0b15-782f-4302-955d-98b4b46a0d07/public_url",
+                    date: "April 2025",
+                    exp: "April 2028",
+                },
+                {
+                    id: "RHCSA",
+                    name: "Red Hat Certified System Administrator",
+                    link: "https://www.credly.com/badges/00733b40-0d36-48cc-94b0-363368f49a2d/public_url",
+                    date: "April 2022",
+                    exp: "April 2028",
+                },
+                {
+                    id: "AZ-900",
+                    name: "Microsoft Certified: Azure Fundamentals",
+                    link: "https://www.credly.com/badges/8982b5e9-72f2-4312-ad69-6b31375a60d6/public_url",
+                    date: "July 2022",
+                    exp: "No Expiration",
+                },
+                {
+                    id: "MTA",
+                    name: "MTA: Networking Fundamentals",
+                    link: "https://www.credly.com/badges/7ed2a90b-7d34-4164-9784-999563f60a62",
+                    date: "June 2019",
+                    exp: "No Expiration",
+                },
+                {
+                    id: "MTA",
+                    name: "MTA: Windows Operating System Fundamentals",
+                    link: "https://www.credly.com/badges/b69bd791-da70-44c6-821c-f62750d30a9b",
+                    date: "June 2019",
+                    exp: "No Expiration",
+                },
+            ].map(
+                (c) => `
+        <div class="flex items-center justify-between p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
+            <div class="flex flex-col gap-0.5">
+                <div class="flex items-center gap-2">
+                    <span class="text-yellow-300/90 font-bold text-xs tracking-tight">[${c.id}]</span>
+                    <span class="text-white/80 font-semibold text-sm">${c.name}</span>
+                </div>
+                <div class="flex items-center gap-2 mt-0.5">
+                    <span class="text-white/100 uppercase text-xs tracking-wider font-medium">Issued: ${c.date}</span>
+                    <span class="text-green-400 uppercase text-xs tracking-widest font-bold">Expires: ${c.exp}</span>
+                </div>
+            </div>
+            <a href="${c.link}" target="_blank" class="flex items-center gap-2 px-3 py-1.5 bg-green-400/10 hover:bg-green-400 border border-green-400/30 text-green-400 hover:text-black text-xs font-black rounded transition-all no-underline shrink-0 active:scale-95">
+                VERIFY ↗
+            </a>
+        </div>
+    `,
+            ),
+            `</div>`,
+        ];
+
+        const FILES: Record<string, string> = {
+            "about.txt": "content",
+            "contact.sh": "content",
+        };
+
+        const COMMANDS: Record<string, string> = {
+            help: "Show available commands",
+            about: "Who is Antonio?",
+            experience: "Work history",
+            education: "Academic background",
+            certificates: "Professional certs",
+            skills: "Tech stack",
+            contact: "Get in touch",
+            ls: "List files",
+            cat: "Read file",
+            whoami: "Current session info",
+            status: "System uptime",
+            neofetch: "System info",
+            clear: "Clear terminal",
+            exit: "Close terminal",
+            sudo: "Execute as root",
+        };
+
+        function initTerminal() {
+            const overlay = document.getElementById("terminal-overlay");
+            const windowEl = document.getElementById("terminal-window");
+            const content = document.getElementById("terminal-content");
+            const output = document.getElementById("output");
+            const input = document.getElementById(
+                "terminal-input",
+            ) as HTMLInputElement;
+
+            // Buttons
+            const closeBtn = document.getElementById("term-close-btn");
+            const minimizeBtn = document.getElementById("term-minimize-btn");
+            const maximizeBtn = document.getElementById("term-maximize-btn");
+
+            if (!overlay || !windowEl || !input) return;
+
+            // Content click focus
+            content?.addEventListener("click", () => {
+                // Handle text selection check if needed, but simple focus is fine
+                if (window.getSelection()?.toString() === "") focusInput();
+            });
+
+            // --- Core Actions ---
+
+            function openTerminal() {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                document.body.style.overflow = "hidden";
+                document.body.classList.add("terminal-open");
+                overlay!.classList.remove("hidden");
+                overlay!.classList.add("flex");
+
+                requestAnimationFrame(() => {
+                    overlay!.style.pointerEvents = "all";
+                    overlay!.classList.remove("opacity-0");
+
+                    // Reset states for clean open
+                    windowEl!.classList.remove(
+                        "scale-95",
+                        "opacity-0",
+                        "translate-y-10",
+                    );
+                    windowEl!.classList.add("opacity-100", "scale-100");
+
+                    setTimeout(() => {
+                        isAnimating = false;
+                        if (!isBooted) bootSequence();
+                        else focusInput();
+                    }, 300);
+                });
+            }
+
+            function closeTerminal() {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                // Fade out overlay
+                overlay!.classList.add("opacity-0");
+                overlay!.style.pointerEvents = "none";
+
+                // Standard Close Animation
+                windowEl!.classList.remove("scale-100", "opacity-100");
+                windowEl!.classList.add("scale-95", "opacity-0");
+
+                input.blur();
+
+                setTimeout(() => {
+                    overlay!.classList.add("hidden");
+                    overlay!.classList.remove("flex");
+                    // Reset Maximize State on Close? Optional. Let's reset for clean slate.
+                    if (isMaximized) toggleMaximize(true); // create reset flag
+
+                    document.body.style.overflow = "";
+                    document.body.classList.remove("terminal-open");
+                    if (input) input.value = "";
+                    isAnimating = false;
+                }, 300);
+            }
+
+            function minimizeTerminal() {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                overlay!.classList.add("opacity-0");
+                overlay!.style.pointerEvents = "none";
+
+                // Dodajemo ovo da se resetira maximize ako je bio aktivan
+                windowEl!.classList.remove("terminal-maximized");
+                windowEl!.classList.remove("scale-100", "opacity-100");
+                windowEl!.classList.add("translate-y-10", "opacity-0");
+
+                input.blur();
+
+                setTimeout(() => {
+                    overlay!.classList.add("hidden");
+                    overlay!.classList.remove("flex");
+                    document.body.style.overflow = "";
+                    document.body.classList.remove("terminal-open");
+                    windowEl!.classList.remove("translate-y-10");
+                    isMaximized = false; // Resetiramo stanje
+                    if (input) input.value = "";
+                    isAnimating = false;
+                }, 300);
+            }
+
+            function toggleMaximize(forceReset = false) {
+                if (forceReset) {
+                    windowEl!.classList.remove("terminal-maximized");
+                    isMaximized = false;
+                    return;
+                }
+
+                isMaximized = !isMaximized;
+
+                if (isMaximized) {
+                    windowEl!.classList.add("terminal-maximized");
+                } else {
+                    windowEl!.classList.remove("terminal-maximized");
+                }
+
+                // Kratki delay da fokusiramo input nakon animacije
+                setTimeout(() => focusInput(), 50);
+            }
+
+            function focusInput() {
+                if (
+                    document.activeElement !== input &&
+                    !overlay!.classList.contains("hidden")
+                ) {
+                    input.focus({ preventScroll: true });
+                }
+            }
+
+            // --- Helpers ---
+
+            function scrollToBottom() {
+                if (content) {
+                    requestAnimationFrame(() => {
+                        content.scrollTop = content.scrollHeight;
+                    });
+                }
+            }
+
+            async function printLines(lines: string[], delayPerLine = 150) {
+                for (const line of lines) {
+                    // Check if terminal closed during print
+                    if (overlay!.classList.contains("hidden")) return;
+                    log(line);
+                    scrollToBottom();
+                    await new Promise((r) => setTimeout(r, delayPerLine));
+                }
+            }
+
+            // --- Boot Sequence ---
+
+            async function bootSequence() {
+                if (isBooted || !input) return;
+
+                input.disabled = true;
+                input.style.opacity = "0";
+                startTime = Date.now(); // Reset uptime
+
+                const lines = [
+                    {
+                        text: "[ <span class='text-green-400'>OK</span> ] Initializing Guest Session...",
+                        delay: 200,
+                    },
+                    {
+                        text: "[ <span class='text-green-400'>OK</span> ] Connecting to janach.cloud...",
+                        delay: 400,
+                    },
+                    {
+                        text: "[ <span class='text-green-400'>OK</span> ] Requesting read-only access...",
+                        delay: 300,
+                    },
+                    { text: "Access granted. Welcome, visitor.", delay: 200 },
+                    {
+                        text: "Type 'help' to see available commands.",
+                        delay: 0,
+                    },
+                ];
+
+                for (const line of lines) {
+                    if (overlay!.classList.contains("hidden")) return;
+                    await new Promise((r) => setTimeout(r, line.delay));
+                    log(line.text);
+                }
+
+                isBooted = true;
+                if (!overlay!.classList.contains("hidden")) {
+                    input.disabled = false;
+                    input.style.opacity = "1";
+                    focusInput();
+                }
+            }
+
+            // --- Execution ---
+
+            function execute(cmdLine: string) {
+                const parts = cmdLine.split(" ");
+                const cmd = parts[0].toLowerCase();
+                const args = parts.slice(1);
+
+                switch (cmd) {
+                    // --- Core Shell Commands ---
+                    case "clear":
+                        if (output) output.innerHTML = "";
+                        break;
+
+                    case "exit":
+                        log("Terminating session...");
+                        setTimeout(() => closeTerminal(), 500);
+                        break;
+
+                    case "sudo":
+                        log("Nice try, but no root for you.");
+                        break;
+
+                    case "help":
+                        let helpHTML =
+                            "<div class='grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-x-4 gap-y-2 sm:gap-y-1 opacity-90'>";
+                        for (const [key, desc] of Object.entries(COMMANDS)) {
+                            helpHTML += `<div class='flex flex-row sm:contents'><div class='text-yellow-300 font-bold min-w-[100px]'>${key}</div><div class='text-white/80'>${desc}</div></div>`;
+                        }
+                        helpHTML += "</div>";
+                        log(helpHTML);
+                        break;
+
+                    case "ls":
+                        const fileNames = Object.keys(FILES).map((f) => {
+                            return FILES[f] === "dir"
+                                ? `<span class="text-blue-400 font-bold">${f}/</span>`
+                                : f;
+                        });
+                        log(fileNames.join("&nbsp;&nbsp;"));
+                        break;
+
+                    case "cat":
+                        const file = args[0];
+                        if (!file) {
+                            log("Usage: cat [filename]");
+                            break;
+                        }
+
+                        // Special handlers for rich content files
+                        if (file === "contact.sh") {
+                            execute("contact");
+                            break;
+                        }
+                        if (file === "about.txt") {
+                            execute("about");
+                            break;
+                        }
+
+                        // Standard file handling
+                        if (FILES[file]) {
+                            if (FILES[file] === "dir")
+                                log(`cat: ${file}: Is a directory`);
+                            else log(FILES[file]);
+                        } else {
+                            log(`cat: ${file}: No such file or directory`);
+                        }
+                        break;
+
+                    // --- System Commands ---
+                    case "whoami":
+                        log("visitor");
+                        break;
+
+                    case "status":
+                        const uptime = Math.floor(
+                            (Date.now() - startTime) / 1000,
+                        );
+                        log(`
+<div class="border border-white/10 p-2 rounded bg-white/5 text-white/90">
+  <div class="grid grid-cols-[100px_1fr] gap-1">
+    <div class="font-bold text-green-400">System:</div><div>All systems normal</div>
+    <div class="font-bold text-green-400">SessionID:</div><div>${Math.random().toString(36).substr(2, 9)}</div>
+    <div class="font-bold text-green-400">Uptime:</div><div>${uptime}s</div>
+    <div class="font-bold text-green-400">Time:</div><div>${new Date().toLocaleTimeString()}</div>
+  </div>
+</div>`);
+                        break;
+
+                    case "neofetch":
+                        log(`
+<div class="flex gap-6 mt-2 mb-2">
+  <div class="text-white/80 font-bold select-none hidden sm:block leading-[1.1] text-xs whitespace-pre">
+_____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_        
+ ___/\\\\\\\\\\\\\\\\\\\\\\\\\\\______\\\\\\/////\\\\\\\\\///__       
+  __/\\\\\\/////////\\\\\\_________\\\\\\/\\\\\\_____      
+   _\\\\/\\\\\\_______\\\\/\\\\\\_________\\\\/\\\\\\_____     
+    _\\\\/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_________\\\\/\\\\\\_____    
+     _\\\\/\\\\\\/////////\\\\\\_________\\\\/\\\\\\_____   
+      _\\\\/\\\\\\_______\\\\/\\\\\\__/\\\\\\___\\\\/\\\\\\_____  
+       _\\\\/\\\\\\_______\\\\/\\\\\\_\\\\//\\\\\\\\\\\\\\\\\\______ 
+        _\\\\///________\\\\///___\\\\/////////_______  
+  </div>
+  <div class="flex flex-col justify-center">
+    <div>visitor@janach.cloud</div>
+    <div class="text-white/20 mb-2">-------------------</div>
+    <div>OS: Red Hat Enterprise Linux 9.4</div>
+    <div>Host: janach.cloud</div>
+    <div>Uptime: 99.999%</div>
+    <div>Shell: zsh 5.8</div>
+    <div>Theme: ant-dark</div>
+  </div>
+</div>`);
+                        break;
+
+                    // --- Content Commands ---
+                    case "about":
+                        log(`
+<div class="inline-flex items-center gap-4 mt-4 mb-4 p-4 border border-white/20 rounded-lg">
+    <img src="/profile.png" alt="Antonio Janach" class="w-16 h-16 rounded-full object-cover">
+    <div>
+        <div class="text-white font-bold text-base">Antonio Janach</div>
+        <div class="text-gray-400">DevOps & Cloud Engineer</div>
+    </div>
+</div>
+<div class="text-white leading-relaxed">
+    Specialized in high availability and hybrid cloud automation.
+    <br>
+    Focused on building reliable production platforms using IaC, GitOps, and Kubernetes.
+    <br><br>
+    Location: Croatia 🇭🇷
+</div>
+`);
+                        break;
+
+                    case "experience":
+                        log(
+                            "<span class='text-blue-400 leading-relaxed'>Fetching employment history...</span>",
+                        );
+                        printLines(EXPERIENCE_CONTENT, 400);
+                        break;
+
+                    case "education":
+                        log(
+                            "<span class='text-blue-400'>Retrieving academic records...</span>",
+                        );
+                        printLines(EDUCATION_CONTENT, 200);
+                        break;
+
+                    case "certificates":
+                        log(
+                            "<span class='text-blue-400'>Validating credentials...</span>",
+                        );
+                        printLines(CERTS_CONTENT, 200);
+                        break;
+
+                    case "skills":
+                        log(
+                            "<span class='text-blue-400 italic'>Analyzing skillset...</span>",
+                        );
+                        setTimeout(() => {
+                            const categories = [
+                                {
+                                    label: "Orchestration",
+                                    tech: "Kubernetes, Podman, Docker, ArgoCD",
+                                },
+                                {
+                                    label: "Automation",
+                                    tech: "Terraform, Ansible, GitLab CI, GitHub Actions",
+                                },
+                                {
+                                    label: "Infrastructure",
+                                    tech: "Azure, VMware, Hyper-V, Proxmox, Linux",
+                                },
+                                {
+                                    label: "Observability",
+                                    tech: "Prometheus, Grafana, Loki, Vault",
+                                },
+                            ];
+
+                            let skillsHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3 max-w-4xl">`;
+                            categories.forEach((cat) => {
+                                skillsHTML += `
+                <div class="p-2 bg-white/[0.03] border-l border-yellow-400 rounded-r">
+                    <div class="text-yellow-300 font-bold text-xs uppercase tracking-widest mb-1">
+                        ${cat.label}
+                    </div>
+                    <div class="text-white/70 text-sm leading-relaxed">
+                        ${cat.tech}
+                    </div>
+                </div>`;
+                            });
+                            skillsHTML += `</div>`;
+                            log(skillsHTML);
+                            scrollToBottom();
+                        }, 600);
+                        break;
+
+                    case "contact":
+                        log(
+                            "<span class='text-blue-400 italic'>Establishing secure connection...</span>",
+                        );
+                        setTimeout(() => {
+                            log(`
+<div class="flex flex-wrap gap-3 mt-3 max-w-2xl">
+    <a href="mailto:antonio@janach.cloud" 
+       class="flex items-center px-4 py-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 rounded text-white/80 no-underline transition-all active:scale-95">
+        <span class="text-sm font-bold tracking-wide">E-mail</span>
+    </a>
+    <a href="https://linkedin.com/in/ajanach" target="_blank" 
+       class="flex items-center px-4 py-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 rounded text-white/80 no-underline transition-all active:scale-95">
+        <span class="text-sm font-bold tracking-wide">LinkedIn</span>
+    </a>
+</div>
+<div class="mt-4 text-xs text-white italic tracking-tight">
+    * Connection established. Secure encrypted tunnel ready for messaging.
+</div>
+`);
+                            scrollToBottom();
+                        }, 500);
+                        break;
+
+                    default:
+                        log(`zsh: command not found: ${cmd}`);
+                        break;
+                }
+            }
+
+            function log(html: string) {
+                if (!output) return;
+                const div = document.createElement("div");
+                div.innerHTML = html;
+                div.className = "mb-1 leading-relaxed";
+                output.appendChild(div);
+            }
+
+            // --- Handlers ---
+
+            const toggleHandler = () => {
+                if (overlay!.classList.contains("hidden")) openTerminal();
+                else closeTerminal();
+            };
+            const overlayClickHandler = (e: MouseEvent) => {
+                if (e.target === overlay) closeTerminal();
+            };
+            const windowClickHandler = (e: MouseEvent) => {
+                // Stop prop so we don't close, but strict focus is handled by content listener
+                e.stopImmediatePropagation();
+            };
+            const closeBtnHandler = (e: MouseEvent) => {
+                e.stopPropagation();
+                closeTerminal();
+            };
+            const minimizeBtnHandler = (e: MouseEvent) => {
+                e.stopPropagation();
+                minimizeTerminal();
+            };
+            const maximizeBtnHandler = (e: MouseEvent) => {
+                e.stopPropagation();
+                toggleMaximize();
+            };
+            const keydownHandler = (e: KeyboardEvent) => {
+                if (
+                    e.key === "Escape" &&
+                    !overlay!.classList.contains("hidden")
+                ) {
+                    closeTerminal();
+                }
+            };
+            const inputHandler = (e: KeyboardEvent) => {
+                if (e.key === "Enter") {
+                    const cmdLine = input.value.trim();
+                    input.value = "";
+                    if (!cmdLine) return;
+
+                    log(
+                        `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${cmdLine}`,
+                    );
+                    history.push(cmdLine);
+                    historyIndex = history.length;
+                    execute(cmdLine);
+                    scrollToBottom();
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    if (historyIndex > 0) {
+                        historyIndex--;
+                        input.value = history[historyIndex];
+                    }
+                } else if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    if (historyIndex < history.length - 1) {
+                        historyIndex++;
+                        input.value = history[historyIndex];
+                    } else {
+                        historyIndex = history.length;
+                        input.value = "";
+                    }
+                } else if (e.ctrlKey && e.key.toLowerCase() === "c") {
+                    e.preventDefault();
+                    const cmdLine = input.value;
+                    log(
+                        `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${cmdLine}<span class="text-white">^C</span>`,
+                    );
+                    input.value = "";
+                    scrollToBottom();
+                }
+            };
+
+            // Attach
+            document.removeEventListener("terminal:toggle", toggleHandler);
+            document.addEventListener("terminal:toggle", toggleHandler);
+
+            overlay!.removeEventListener("click", overlayClickHandler);
+            overlay!.addEventListener("click", overlayClickHandler);
+
+            windowEl!.removeEventListener("click", windowClickHandler);
+            windowEl!.addEventListener("click", windowClickHandler);
+
+            closeBtn?.removeEventListener("click", closeBtnHandler);
+            closeBtn?.addEventListener("click", closeBtnHandler);
+
+            minimizeBtn?.removeEventListener("click", minimizeBtnHandler);
+            minimizeBtn?.addEventListener("click", minimizeBtnHandler);
+
+            maximizeBtn?.removeEventListener("click", maximizeBtnHandler);
+            maximizeBtn?.addEventListener("click", maximizeBtnHandler);
+
+            document.removeEventListener("keydown", keydownHandler);
+            document.addEventListener("keydown", keydownHandler);
+
+            input.removeEventListener("keydown", inputHandler as EventListener);
+            input.addEventListener("keydown", inputHandler as EventListener);
+        }
+
+        document.addEventListener("astro:page-load", initTerminal);
+        initTerminal();
+    </script>
+</div>

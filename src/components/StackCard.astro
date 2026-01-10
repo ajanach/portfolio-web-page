@@ -1,0 +1,35 @@
+---
+type Props = {
+  text: string;
+  icon: string;
+  href: string;
+};
+
+const { text, icon, href } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  class="reveal-card w-full flex items-center justify-start gap-3 px-4 py-3 border border-black/10 dark:border-white/20 rounded transition-all duration-300 group bg-white/5 hover:bg-white/10 min-h-[60px]"
+>
+  <div
+    class="w-8 h-8 p-1.5 bg-white rounded-md flex items-center justify-center shadow-sm flex-shrink-0"
+  >
+    {
+      icon.startsWith("http") ? (
+        <img src={icon} alt={text} class="w-full h-full object-contain" />
+      ) : (
+        <svg class="w-full h-full fill-current text-black">
+          <use xlink:href={`/stack.svg#${icon}`} />
+        </svg>
+      )
+    }
+  </div>
+
+  <span
+    class="text-sm font-medium text-black dark:text-white leading-tight break-words"
+  >
+    {text}
+  </span>
+</a>
