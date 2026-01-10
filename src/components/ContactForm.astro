@@ -2,10 +2,11 @@
 
 ---
 
-<!-- Google reCAPTCHA v3 -->
+<!-- Google reCAPTCHA v3 (async load with fallback) -->
 <script
     src="https://www.google.com/recaptcha/api.js?render=6LeLGT8sAAAAAFHNSTzyDm0rOzC3jjMm8y_MOvlq"
-></script>
+    async
+    defer></script>
 
 <form
     action="https://formspree.io/f/xeeolnqp"
@@ -135,7 +136,7 @@
         autocomplete="off"
     />
 
-    <!-- reCAPTCHA Response Token -->
+    <!-- reCAPTCHA Response Token (optional - fallback to honeypot if blocked) -->
     <input
         type="hidden"
         name="g-recaptcha-response"
@@ -213,7 +214,7 @@
     const form = document.getElementById("contact-form");
     const successMsg = document.getElementById("success-message");
     const errorMsg = document.getElementById("form-error");
-    const recaptchaKey = "6LeLGT8sAAAAAFHNSTzyDm0rOzC3jjMm8y_MOvlq"; // Your Site Key
+    const recaptchaKey = "6LeLGT8sAAAAAFHNSTzyDm0rOzC3jjMm8y_MOvlq";
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -227,61 +228,40 @@
         submitBtn.classList.add("opacity-75", "cursor-not-allowed");
         errorMsg.classList.add("hidden");
 
-        const submitForm = (token) => {
-            console.log("[Contact Form] Submitting form...");
-            console.log(
-                "[Contact Form] reCAPTCHA token:",
-                token ? "✓ Present" : "✗ Missing",
-            );
+        console.log("[Contact Form] Form submission initiated");
 
+        const submitFormWithToken = (token) => {
             if (token) {
+                console.log(
+                    "[Contact Form] ✓ reCAPTCHA token obtained, submitting...",
+                );
                 document.getElementById("g-recaptcha-response").value = token;
+            } else {
+                console.warn(
+                    "[Contact Form] ⚠ Submitting WITHOUT reCAPTCHA token (fallback to honeypot)",
+                );
             }
 
-            // Prepare data
             const data = new FormData(form);
 
-            // Log form data
-            console.log("[Contact Form] Form data:");
-            for (let [key, value] of data.entries()) {
-                if (key === "g-recaptcha-response") {
-                    console.log(
-                        "  -",
-                        key,
-                        ":",
-                        value ? "✓ Token present" : "✗ No token",
-                    );
-                } else {
-                    console.log("  -", key, ":", value);
-                }
-            }
-
-            // Submit via Fetch
             fetch(form.action, {
                 method: form.method,
                 body: data,
-                headers: {
-                    Accept: "application/json",
-                },
+                headers: { Accept: "application/json" },
             })
                 .then((response) => {
                     console.log(
-                        "[Contact Form] Server response status:",
+                        "[Contact Form] Server response:",
                         response.status,
                     );
 
                     if (response.ok) {
                         console.log("[Contact Form] ✓ Success!");
-                        // Success
                         form.classList.add("hidden");
                         successMsg.classList.remove("hidden");
                         form.reset();
                         window.scrollTo({ top: 0, behavior: "smooth" });
                     } else {
-                        console.error(
-                            "[Contact Form] ✗ Server returned error:",
-                            response.status,
-                        );
                         return response
                             .json()
                             .then((errorData) => {
@@ -292,31 +272,17 @@
                                 let errorMessage =
                                     "Oops! Something went wrong.";
 
-                                if (
-                                    Object.hasOwnProperty.call(
-                                        errorData,
-                                        "errors",
-                                    )
-                                ) {
-                                    errorMessage = errorData["errors"]
-                                        .map((error) => error["message"])
+                                if (errorData.errors) {
+                                    errorMessage = errorData.errors
+                                        .map((e) => e.message)
                                         .join(", ");
                                 } else if (errorData.error) {
                                     errorMessage = errorData.error;
                                 }
 
-                                console.error(
-                                    "[Contact Form] Displayed error:",
-                                    errorMessage,
-                                );
                                 throw new Error(errorMessage);
                             })
-                            .catch((parseError) => {
-                                // If JSON parsing fails, throw generic error
-                                console.error(
-                                    "[Contact Form] Failed to parse error response:",
-                                    parseError,
-                                );
+                            .catch(() => {
                                 throw new Error(
                                     "Server error (status " +
                                         response.status +
@@ -326,14 +292,12 @@
                     }
                 })
                 .catch((error) => {
-                    console.error("[Contact Form] ✗ Fetch error:", error);
+                    console.error("[Contact Form] ✗ Error:", error);
                     errorMsg.innerHTML =
-                        error.message ||
-                        "Oops! Network error. Please try again later.";
+                        error.message || "Network error. Please try again.";
                     errorMsg.classList.remove("hidden");
                 })
                 .finally(() => {
-                    // Reset Button
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnText;
                     submitBtn.classList.remove(
@@ -343,32 +307,51 @@
                 });
         };
 
-        // Check if reCAPTCHA is loaded
-        if (typeof window.grecaptcha !== "undefined") {
-            console.log(
-                "[Contact Form] reCAPTCHA library loaded, executing...",
-            );
-            window.grecaptcha.ready(function () {
+        // Try reCAPTCHA with 3-second timeout, then fallback
+        let recaptchaExecuted = false;
+        const recaptchaTimeout = setTimeout(() => {
+            if (!recaptchaExecuted) {
+                console.warn(
+                    "[Contact Form] ⚠ reCAPTCHA timeout (3s) - submitting without token",
+                );
+                submitFormWithToken(null);
+                recaptchaExecuted = true;
+            }
+        }, 3000);
+
+        if (
+            typeof window.grecaptcha !== "undefined" &&
+            window.grecaptcha.ready
+        ) {
+            console.log("[Contact Form] reCAPTCHA script loaded, executing...");
+            window.grecaptcha.ready(() => {
                 window.grecaptcha
                     .execute(recaptchaKey, { action: "submit" })
-                    .then(function (token) {
-                        console.log(
-                            "[Contact Form] ✓ reCAPTCHA token obtained",
-                        );
-                        submitForm(token);
+                    .then((token) => {
+                        if (!recaptchaExecuted) {
+                            clearTimeout(recaptchaTimeout);
+                            recaptchaExecuted = true;
+                            submitFormWithToken(token);
+                        }
                     })
                     .catch((err) => {
-                        console.warn("[Contact Form] ⚠ reCAPTCHA failed:", err);
                         console.warn(
-                            "[Contact Form] Submitting without token...",
+                            "[Contact Form] ⚠ reCAPTCHA execution failed:",
+                            err,
                         );
-                        submitForm(null);
+                        if (!recaptchaExecuted) {
+                            clearTimeout(recaptchaTimeout);
+                            recaptchaExecuted = true;
+                            submitFormWithToken(null);
+                        }
                     });
             });
         } else {
-            console.warn("[Contact Form] ⚠ reCAPTCHA not loaded");
-            console.warn("[Contact Form] Submitting without token...");
-            submitForm(null);
+            console.warn(
+                "[Contact Form] ⚠ reCAPTCHA script not loaded - submitting without token",
+            );
+            clearTimeout(recaptchaTimeout);
+            submitFormWithToken(null);
         }
     });
 </script>
