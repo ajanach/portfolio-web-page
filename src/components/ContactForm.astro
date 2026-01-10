@@ -228,12 +228,33 @@
         errorMsg.classList.add("hidden");
 
         const submitForm = (token) => {
+            console.log("[Contact Form] Submitting form...");
+            console.log(
+                "[Contact Form] reCAPTCHA token:",
+                token ? "✓ Present" : "✗ Missing",
+            );
+
             if (token) {
                 document.getElementById("g-recaptcha-response").value = token;
             }
 
             // Prepare data
             const data = new FormData(form);
+
+            // Log form data
+            console.log("[Contact Form] Form data:");
+            for (let [key, value] of data.entries()) {
+                if (key === "g-recaptcha-response") {
+                    console.log(
+                        "  -",
+                        key,
+                        ":",
+                        value ? "✓ Token present" : "✗ No token",
+                    );
+                } else {
+                    console.log("  -", key, ":", value);
+                }
+            }
 
             // Submit via Fetch
             fetch(form.action, {
@@ -244,27 +265,68 @@
                 },
             })
                 .then((response) => {
+                    console.log(
+                        "[Contact Form] Server response status:",
+                        response.status,
+                    );
+
                     if (response.ok) {
+                        console.log("[Contact Form] ✓ Success!");
                         // Success
                         form.classList.add("hidden");
                         successMsg.classList.remove("hidden");
                         form.reset();
                         window.scrollTo({ top: 0, behavior: "smooth" });
                     } else {
-                        return response.json().then((errorData) => {
-                            let errorMessage = "Oops! Something went wrong.";
-                            if (
-                                Object.hasOwnProperty.call(errorData, "errors")
-                            ) {
-                                errorMessage = errorData["errors"]
-                                    .map((error) => error["message"])
-                                    .join(", ");
-                            }
-                            throw new Error(errorMessage);
-                        });
+                        console.error(
+                            "[Contact Form] ✗ Server returned error:",
+                            response.status,
+                        );
+                        return response
+                            .json()
+                            .then((errorData) => {
+                                console.error(
+                                    "[Contact Form] Error details:",
+                                    errorData,
+                                );
+                                let errorMessage =
+                                    "Oops! Something went wrong.";
+
+                                if (
+                                    Object.hasOwnProperty.call(
+                                        errorData,
+                                        "errors",
+                                    )
+                                ) {
+                                    errorMessage = errorData["errors"]
+                                        .map((error) => error["message"])
+                                        .join(", ");
+                                } else if (errorData.error) {
+                                    errorMessage = errorData.error;
+                                }
+
+                                console.error(
+                                    "[Contact Form] Displayed error:",
+                                    errorMessage,
+                                );
+                                throw new Error(errorMessage);
+                            })
+                            .catch((parseError) => {
+                                // If JSON parsing fails, throw generic error
+                                console.error(
+                                    "[Contact Form] Failed to parse error response:",
+                                    parseError,
+                                );
+                                throw new Error(
+                                    "Server error (status " +
+                                        response.status +
+                                        ")",
+                                );
+                            });
                     }
                 })
                 .catch((error) => {
+                    console.error("[Contact Form] ✗ Fetch error:", error);
                     errorMsg.innerHTML =
                         error.message ||
                         "Oops! Network error. Please try again later.";
@@ -283,22 +345,29 @@
 
         // Check if reCAPTCHA is loaded
         if (typeof window.grecaptcha !== "undefined") {
+            console.log(
+                "[Contact Form] reCAPTCHA library loaded, executing...",
+            );
             window.grecaptcha.ready(function () {
                 window.grecaptcha
                     .execute(recaptchaKey, { action: "submit" })
                     .then(function (token) {
+                        console.log(
+                            "[Contact Form] ✓ reCAPTCHA token obtained",
+                        );
                         submitForm(token);
                     })
                     .catch((err) => {
+                        console.warn("[Contact Form] ⚠ reCAPTCHA failed:", err);
                         console.warn(
-                            "reCAPTCHA failed, submitting without token",
-                            err,
+                            "[Contact Form] Submitting without token...",
                         );
                         submitForm(null);
                     });
             });
         } else {
-            console.warn("reCAPTCHA not loaded, submitting without token");
+            console.warn("[Contact Form] ⚠ reCAPTCHA not loaded");
+            console.warn("[Contact Form] Submitting without token...");
             submitForm(null);
         }
     });
