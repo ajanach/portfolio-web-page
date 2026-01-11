@@ -2,11 +2,9 @@
 
 ---
 
-<!-- Google reCAPTCHA v3 (async load with fallback) -->
-<script
-    src="https://www.google.com/recaptcha/api.js?render=6LeLGT8sAAAAAFHNSTzyDm0rOzC3jjMm8y_MOvlq"
-    async
-    defer></script>
+<!-- Cloudflare Turnstile (Implicit Rendering) -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
+></script>
 
 <form
     action="https://formspree.io/f/xeeolnqp"
@@ -136,12 +134,16 @@
         autocomplete="off"
     />
 
-    <!-- reCAPTCHA Response Token (optional - fallback to honeypot if blocked) -->
-    <input
-        type="hidden"
-        name="g-recaptcha-response"
-        id="g-recaptcha-response"
-    />
+    <!-- Cloudflare Turnstile Widget -->
+    <div class="flex justify-center">
+        <div
+            class="cf-turnstile"
+            data-sitekey="0x4AAAAAACLzV1lbTaMYVkVf"
+            data-theme="dark"
+            data-size="normal"
+        >
+        </div>
+    </div>
 
     <!-- Submit Button (Premium Style - "Pop") -->
     <button
@@ -198,9 +200,14 @@
     </p>
     <button
         onclick="window.location.reload()"
-        class="mt-8 px-6 py-2 rounded-full text-sm font-medium border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-        >Send another message</button
+        class="relative mt-8 px-6 py-3 rounded-md bg-black dark:bg-white text-white dark:text-black font-medium tracking-wide overflow-hidden group hover:scale-[1.01] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] transition-all duration-300 shadow-md ring-1 ring-white/10"
     >
+        <span class="relative z-10">Send another message</span>
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"
+        >
+        </div>
+    </button>
 </div>
 
 <!-- Status Message (Error) -->
@@ -214,7 +221,6 @@
     const form = document.getElementById("contact-form");
     const successMsg = document.getElementById("success-message");
     const errorMsg = document.getElementById("form-error");
-    const recaptchaKey = "6LeLGT8sAAAAAFHNSTzyDm0rOzC3jjMm8y_MOvlq";
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -228,130 +234,70 @@
         submitBtn.classList.add("opacity-75", "cursor-not-allowed");
         errorMsg.classList.add("hidden");
 
-        console.log("[Contact Form] Form submission initiated");
+        console.log("[Contact Form] Submitting with Cloudflare Turnstile...");
 
-        const submitFormWithToken = (token) => {
-            if (token) {
-                console.log(
-                    "[Contact Form] ✓ reCAPTCHA token obtained, submitting...",
-                );
-                document.getElementById("g-recaptcha-response").value = token;
-            } else {
-                console.warn(
-                    "[Contact Form] ⚠ Submitting WITHOUT reCAPTCHA token (fallback to honeypot)",
-                );
-            }
+        // Turnstile automatically adds 'cf-turnstile-response' to FormData
+        const data = new FormData(form);
 
-            const data = new FormData(form);
+        fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: { Accept: "application/json" },
+        })
+            .then((response) => {
+                console.log("[Contact Form] Server response:", response.status);
 
-            fetch(form.action, {
-                method: form.method,
-                body: data,
-                headers: { Accept: "application/json" },
-            })
-                .then((response) => {
-                    console.log(
-                        "[Contact Form] Server response:",
-                        response.status,
-                    );
-
-                    if (response.ok) {
-                        console.log("[Contact Form] ✓ Success!");
-                        form.classList.add("hidden");
-                        successMsg.classList.remove("hidden");
-                        form.reset();
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                    } else {
-                        return response
-                            .json()
-                            .then((errorData) => {
-                                console.error(
-                                    "[Contact Form] Error details:",
-                                    errorData,
-                                );
-                                let errorMessage =
-                                    "Oops! Something went wrong.";
-
-                                if (errorData.errors) {
-                                    errorMessage = errorData.errors
-                                        .map((e) => e.message)
-                                        .join(", ");
-                                } else if (errorData.error) {
-                                    errorMessage = errorData.error;
-                                }
-
-                                throw new Error(errorMessage);
-                            })
-                            .catch(() => {
-                                throw new Error(
-                                    "Server error (status " +
-                                        response.status +
-                                        ")",
-                                );
-                            });
+                if (response.ok) {
+                    console.log("[Contact Form] ✓ Success!");
+                    form.classList.add("hidden");
+                    successMsg.classList.remove("hidden");
+                    form.reset();
+                    // Reset Turnstile widget
+                    if (window.turnstile) {
+                        window.turnstile.reset();
                     }
-                })
-                .catch((error) => {
-                    console.error("[Contact Form] ✗ Error:", error);
-                    errorMsg.innerHTML =
-                        error.message || "Network error. Please try again.";
-                    errorMsg.classList.remove("hidden");
-                })
-                .finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.classList.remove(
-                        "opacity-75",
-                        "cursor-not-allowed",
-                    );
-                });
-        };
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                } else {
+                    return response
+                        .json()
+                        .then((errorData) => {
+                            console.error(
+                                "[Contact Form] Error details:",
+                                errorData,
+                            );
+                            let errorMessage = "Oops! Something went wrong.";
 
-        // Try reCAPTCHA with 3-second timeout, then fallback
-        let recaptchaExecuted = false;
-        const recaptchaTimeout = setTimeout(() => {
-            if (!recaptchaExecuted) {
-                console.warn(
-                    "[Contact Form] ⚠ reCAPTCHA timeout (3s) - submitting without token",
-                );
-                submitFormWithToken(null);
-                recaptchaExecuted = true;
-            }
-        }, 3000);
+                            if (errorData.errors) {
+                                errorMessage = errorData.errors
+                                    .map((e) => e.message)
+                                    .join(", ");
+                            } else if (errorData.error) {
+                                errorMessage = errorData.error;
+                            }
 
-        if (
-            typeof window.grecaptcha !== "undefined" &&
-            window.grecaptcha.ready
-        ) {
-            console.log("[Contact Form] reCAPTCHA script loaded, executing...");
-            window.grecaptcha.ready(() => {
-                window.grecaptcha
-                    .execute(recaptchaKey, { action: "submit" })
-                    .then((token) => {
-                        if (!recaptchaExecuted) {
-                            clearTimeout(recaptchaTimeout);
-                            recaptchaExecuted = true;
-                            submitFormWithToken(token);
-                        }
-                    })
-                    .catch((err) => {
-                        console.warn(
-                            "[Contact Form] ⚠ reCAPTCHA execution failed:",
-                            err,
-                        );
-                        if (!recaptchaExecuted) {
-                            clearTimeout(recaptchaTimeout);
-                            recaptchaExecuted = true;
-                            submitFormWithToken(null);
-                        }
-                    });
+                            throw new Error(errorMessage);
+                        })
+                        .catch(() => {
+                            throw new Error(
+                                "Server error (status " + response.status + ")",
+                            );
+                        });
+                }
+            })
+            .catch((error) => {
+                console.error("[Contact Form] ✗ Error:", error);
+                errorMsg.innerHTML =
+                    error.message || "Network error. Please try again.";
+                errorMsg.classList.remove("hidden");
+                // Reset Turnstile on error
+                if (window.turnstile) {
+                    window.turnstile.reset();
+                }
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.classList.remove("opacity-75", "cursor-not-allowed");
             });
-        } else {
-            console.warn(
-                "[Contact Form] ⚠ reCAPTCHA script not loaded - submitting without token",
-            );
-            clearTimeout(recaptchaTimeout);
-            submitFormWithToken(null);
-        }
     });
 </script>
