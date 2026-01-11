@@ -13,7 +13,7 @@ repoUrl: ""
 
 | Start date | End date | Associated with | Resources |
 |------------|----------|-----------------|-----------|
-| October 2022 | December 2022 | Distributed Processing in Heterogeneous Systems, Faculty of Informatics and Digital Technologies, University of Rijeka | [MPI Implementation](https://github.com/ajanach/dijkstra-MPI) · [CUDA Implementation](https://github.com/ajanach/dijkstra-CUDA) |
+| October 2022 | December 2022 | Faculty of Informatics and Digital Technologies, University of Rijeka | [MPI Implementation](https://github.com/ajanach/dijkstra-MPI) · [CUDA Implementation](https://github.com/ajanach/dijkstra-CUDA) |
 
 ## Overview
 

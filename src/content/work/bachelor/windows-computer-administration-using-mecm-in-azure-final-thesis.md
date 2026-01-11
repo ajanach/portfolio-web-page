@@ -12,9 +12,9 @@ repoUrl: ""
 
 # Timeline and Details
 
-| Duration | Institution | Resources |
-|----------|-------------|-----------|
-| February - September 2021 | Algebra University College | [Thesis PDF](/projects/bachelor/antonio_janach_-_završni_rad.pdf) |
+| Start date    | End date       | Associated with              | Project PDF                                           |
+| ------------- | -------------- | ---------------------------- | ----------------------------------------------------- |
+| February 2021 | September 2021 | Algebra Bernays University   | [Thesis PDF](/projects/bachelor/antonio_janach_-_završni_rad.pdf) |
 
 ## Overview
 

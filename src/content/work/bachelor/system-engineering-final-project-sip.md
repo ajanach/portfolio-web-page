@@ -11,9 +11,9 @@ repoUrl: ""
 
 ## Timeline and Details
 
-| Start date    | End date      | Associated with           | Project PDF                                                                        |
-| ------------- | ------------- | ------------------------- | ---------------------------------------------------------------------------------- |
-| February 2021 | August 2021   | Algebra University        | [Project PDF](/projects/bachelor/antonio_janach_-_projektni_zadatak_SIP.pdf)      |
+| Start date    | End date      | Associated with            | Project PDF                                                                        |
+| ------------- | ------------- | -------------------------- | ----------------------------------------------------------------------------------- |
+| February 2021 | August 2021   | Algebra Bernays University | [Project PDF](/projects/bachelor/antonio_janach_-_projektni_zadatak_SIP.pdf)      |
 
 ## Overview
 

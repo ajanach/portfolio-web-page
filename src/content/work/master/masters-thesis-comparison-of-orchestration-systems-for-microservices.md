@@ -14,9 +14,9 @@ Research-driven comparison of Kubernetes orchestration platforms (AKS vs K3S) an
 
 ## Timeline & Info
 
-| Duration | Institution | Resources |
-|----------|-------------|-----------|
-| April - September 2024 | Faculty of Informatics and Digital Technologies, University of Rijeka | [Thesis PDF](/projects/MASTER/masters_thesis.pdf) · [GitHub](https://github.com/ajanach/comparison-of-orchestration-systems-for-microservices-applications.git) · [Defense Video](https://youtu.be/kA0KqmDsE-o) |
+| Start date | End date | Associated with | Resources |
+|------------|----------|-----------------|-----------|
+| April 2024 | September 2024 | Faculty of Informatics and Digital Technologies, University of Rijeka | [Thesis PDF](/projects/MASTER/masters_thesis.pdf) · [GitHub](https://github.com/ajanach/comparison-of-orchestration-systems-for-microservices-applications.git) · [Defense Video](https://youtu.be/kA0KqmDsE-o) |
 
 ## Overview
 

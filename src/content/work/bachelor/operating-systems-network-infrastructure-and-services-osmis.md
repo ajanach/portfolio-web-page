@@ -15,7 +15,7 @@ repoUrl: ""
 
 | Start date | End date | Associated with             | Project URL                                                                     |
 | ---------- | -------- | --------------------------- | ------------------------------------------------------------------------------- |
-| May 2020   | Jun 2020 | Algebra University College | [Project PDF](/projects/bachelor/antonio_janach_-_projektni_zadatak_OSMIS.pdf) |
+| May 2020   | Jun 2020 | Algebra Bernays University | [Project PDF](/projects/bachelor/antonio_janach_-_projektni_zadatak_OSMIS.pdf) |
 
 
 ## Overview

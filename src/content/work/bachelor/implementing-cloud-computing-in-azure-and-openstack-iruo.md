@@ -14,12 +14,12 @@ repoUrl: ""
 ## Azure Implementation
 | Start date  | End date    | Associated with              | Project URL                                                              |
 | ----------- | ----------- | ---------------------------- | ------------------------------------------------------------------------ |
-| April 2021  | July 2021   | Algebra University College   | [Azure PDF](/projects/bachelor/iruo/antonio_janach_-_projektni_zadatak_IRUO_Azure.pdf) |
+| April 2021  | July 2021   | Algebra Bernays University   | [Azure PDF](/projects/bachelor/iruo/antonio_janach_-_projektni_zadatak_IRUO_Azure.pdf) |
 
 ## OpenStack Implementation
 | Start date  | End date    | Associated with              | Project URL                                                              |
 | ----------- | ----------- | ---------------------------- | ------------------------------------------------------------------------ |
-| April 2021  | July 2021   | Algebra University College   | [OpenStack PDF](/projects/bachelor/iruo/antonio_janach_-_projektni_zadatak_IRUO_OpenStack.pdf) |
+| April 2021  | July 2021   | Algebra Bernays University   | [OpenStack PDF](/projects/bachelor/iruo/antonio_janach_-_projektni_zadatak_IRUO_OpenStack.pdf) |
 
 ## Overview
 

@@ -13,7 +13,7 @@ repoUrl: ""
 
 | Start date    | End date      | Associated with              | Project URL                                                              |
 | ------------- | ------------- | ---------------------------- | ------------------------------------------------------------------------ |
-| January 2021  | February 2021 | Algebra University College   | [Project PDF](/projects/bachelor/antonio_janach_-_projektni_zadatak_KS.pdf) |
+| January 2021  | February 2021 | Algebra Bernays University   | [Project PDF](/projects/bachelor/antonio_janach_-_projektni_zadatak_KS.pdf) |
 
 ## Overview
 

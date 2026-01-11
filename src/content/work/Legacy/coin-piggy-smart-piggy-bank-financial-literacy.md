@@ -11,7 +11,7 @@ draft: false
 
 | Start date | End date | Associated with | Project URL |
 |------------|----------|-----------------|-------------|
-| September 2017 | December 2017 | BBC Micro:bit - STEM Revolution | [ePodravina Article](https://epodravina.hr/kreativni-srednjoskolci-izradili-pametnu-kasicu-prasicu-koja-vas-motivira-stednju/) |
+| September 2017 | December 2017 | Enter Koprivnica | [ePodravina Article](https://epodravina.hr/kreativni-srednjoskolci-izradili-pametnu-kasicu-prasicu-koja-vas-motivira-stednju/) |
 
 **Recognition**: Featured at PBZ Novathon, Zagreb
 

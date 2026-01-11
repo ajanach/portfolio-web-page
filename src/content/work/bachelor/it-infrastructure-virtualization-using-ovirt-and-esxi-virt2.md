@@ -14,12 +14,12 @@ repoUrl: ""
 ## oVirt Implementation
 | Start date    | End date      | Associated with | Project URL                                                                        |
 | ------------- | ------------- | --------------- | ---------------------------------------------------------------------------------- |
-| November 2020 | December 2020 | Algebra University College | [Project PDF](/projects/bachelor/virt2/antonio_janach_-_projektni_zadatak_VIRT2_oVirt.pdf) |
+| November 2020 | December 2020 | Algebra Bernays University | [Project PDF](/projects/bachelor/virt2/antonio_janach_-_projektni_zadatak_VIRT2_oVirt.pdf) |
 
 ## vSphere Implementation
 | Start date    | End date      | Associated with | Project URL                                                                        |
 | ------------- | ------------- | --------------- | ---------------------------------------------------------------------------------- |
-| February 2021 | March 2021 | Algebra University College | [Project PDF](/projects/bachelor/virt2/antonio_janach_-_projektni_zadatak_VIRT2_vSphere.pdf) |
+| February 2021 | March 2021 | Algebra Bernays University | [Project PDF](/projects/bachelor/virt2/antonio_janach_-_projektni_zadatak_VIRT2_vSphere.pdf) |
 
 ## Overview
 

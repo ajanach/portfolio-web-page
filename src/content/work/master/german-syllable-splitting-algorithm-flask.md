@@ -13,7 +13,7 @@ repoUrl: ""
 
 | Start date | End date | Associated with | Resources |
 |------------|----------|-----------------|-----------|
-| November 2022 | January 2023 | Faculty of Informatics and Digital Technologies, University of Rijeka | [GitHub Repo](https://github.com/ajanach/word_syllables) • [Project PDF](/projects/master/antonio_janach_-_projektna_dokumentacija_PZRZ.pdf) |
+| November 2022 | January 2023 | Faculty of Informatics and Digital Technologies, University of Rijeka | [GitHub](https://github.com/ajanach/word_syllables) • [Project PDF](/projects/master/antonio_janach_-_projektna_dokumentacija_PZRZ.pdf) |
 
 ## Overview
 

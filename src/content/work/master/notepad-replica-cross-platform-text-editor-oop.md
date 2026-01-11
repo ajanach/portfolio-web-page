@@ -11,11 +11,11 @@ draft: false
 
 | Start date | End date | Associated with | Resources |
 |------------|----------|-----------------|-----------|
-| February 2021 | September 2021 | Algebra University College | [Thesis PDF](/projects/bachelor/antonio_janach_-_završni_rad.pdf) |
+| February 2021 | September 2021 | Faculty of Informatics and Digital Technologies, University of Rijeka | [Thesis PDF](/projects/master/antonio_janach_-_projektna_dokumentacija_OOP.pdf) |
 
 ## Overview
 
-Cross-platform text editor replicating Windows Notepad functionality using wxWidgets framework and C++. Demonstrates event-driven architecture, GUI development, and multi-platform deployment with single codebase [file:38].
+Cross-platform text editor replicating Windows Notepad functionality using wxWidgets framework and C++. Demonstrates event-driven architecture, GUI development, and multi-platform deployment with single codebase.
 
 ## Key Features
 
@@ -31,7 +31,7 @@ Cross-platform text editor replicating Windows Notepad functionality using wxWid
 - MainApp Class (wxApp): Application initialization
 - Event-driven design using wxWidgets event system
 
-**Libraries**: wxBase, wxCore, wxAdvanced, C++ Standard Library [file:38]
+**Libraries**: wxBase, wxCore, wxAdvanced, C++ Standard Library
 
 **Build**: CMake cross-platform build system with automatic wxWidgets dependency management
 
