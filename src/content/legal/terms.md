@@ -1,11 +1,11 @@
 ---
 title: "Terms of Use"
-date: "01/01/2026"
+date: "01/11/2026"
 ---
 
 # Terms of Use
 
-**Effective Date:** January 1, 2026
+**Effective Date:** January 11, 2026
 
 By accessing this portfolio ("Site"), you agree to the following terms. This Site serves as a professional showcase for **Antonio Janach** ("Author"), covering DevOps architecture, automation engineering, and cloud projects.
 

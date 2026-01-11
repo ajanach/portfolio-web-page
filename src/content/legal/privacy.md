@@ -1,11 +1,11 @@
 ---
 title: "Privacy Policy"
-date: "01/01/2026"
+date: "01/11/2026"
 ---
 
 # Privacy Policy
 
-**Effective Date:** January 1, 2026
+**Effective Date:** January 11, 2026
 
 **Antonio Janach** operates this portfolio website as a static site to showcase professional work. I prioritize data minimization and transparency. This policy details the limited technical data processed during your visit, ensuring compliance with the General Data Protection Regulation (GDPR).
 
@@ -21,7 +21,26 @@ This website uses **Umami Cloud** for anonymous usage statistics.
 *   **Purpose:** To understand site traffic trends (e.g., most visited pages) without tracking individual users across the web.
 *   **Legal Basis:** Legitimate Interest (GDPR Art. 6(1)(f)) for improving site performance and content.
 
-## 3. Server Logs & Hosting
+## 3. Contact Form (Formspree)
+The contact form on this website is processed by **Formspree, Inc.**
+*   **Data Collected:** Name, email address, subject, and message content you submit.
+*   **Processing:** Formspree receives and forwards your submission to my email. They may temporarily store submissions for delivery purposes.
+*   **Purpose:** To enable you to contact me for professional inquiries.
+*   **Legal Basis:** Consent (GDPR Art. 6(1)(a)) - by submitting the form, you consent to processing.
+*   **Retention:** Formspree retains submissions per their policy; I retain correspondence as needed for professional communication.
+
+For details, refer to the [Formspree Privacy Policy](https://formspree.io/legal/privacy-policy/).
+
+## 4. Spam Protection (Cloudflare Turnstile)
+The contact form uses **Cloudflare Turnstile** as a CAPTCHA alternative to distinguish humans from bots.
+*   **No Cookies:** Turnstile does not set tracking cookies.
+*   **Data Processed:** Turnstile may analyze browser behavior, device characteristics, and IP address to generate a challenge token.
+*   **Purpose:** To protect the contact form from spam and abuse without intrusive CAPTCHAs.
+*   **Legal Basis:** Legitimate Interest (GDPR Art. 6(1)(f)) for security and abuse prevention.
+
+For details, refer to the [Cloudflare Privacy Policy](https://www.cloudflare.com/privacypolicy/).
+
+## 5. Server Logs & Hosting
 This website is hosted on **GitHub Pages**. When you request pages, GitHub's servers automatically log standard technical request data.
 *   **Data Collected:** IP address, User-Agent (browser type/version), timestamp of access, and referring URL.
 *   **Purpose:** These logs are essential for server security (DDoS protection, abuse detection) and reliable delivery.
@@ -29,18 +48,19 @@ This website is hosted on **GitHub Pages**. When you request pages, GitHub's ser
 
 For details, refer to the [GitHub Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement).
 
-## 4. External Resources (CDNs)
+## 6. External Resources (CDNs)
 To optimize performance, this site loads specific assets (JavaScript libraries, fonts) from Content Delivery Networks (CDNs).
-*   **jsparticles (via JsDelivr):** Used for background visual effects. JsDelivr may log your IP address to deliver content but does not use this data for tracking or profiling. [JsDelivr Privacy Policy](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net).
+*   **tsParticles (via jsDelivr):** Used for background visual effects. jsDelivr may log your IP address to deliver content but does not use this data for tracking or profiling. [jsDelivr Privacy Policy](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net).
+*   **Cloudflare CDN:** Turnstile scripts are loaded from Cloudflare's global network.
 
-## 5. Direct Communication
+## 7. Direct Communication
 If you choose to contact me via email or LinkedIn:
 *   **Data Processed:** Name, email address, and message content.
 *   **Purpose:** Solely to respond to your professional inquiry.
 *   **Retention:** Correspondence is retained only for the duration necessary to resolve your query or maintain a professional relationship. I do not build marketing lists.
 
-## 6. Your Rights (GDPR)
-You have the right to request access to, correction of, or deletion of your personal data. Since this site does not store user data databases, this primarily applies to direct email correspondence. Contact **antonio@janach.cloud** to exercise these rights.
+## 8. Your Rights (GDPR)
+You have the right to request access to, correction of, or deletion of your personal data. Since this site does not store user data databases, this primarily applies to contact form submissions and direct email correspondence. Contact **antonio@janach.cloud** to exercise these rights.
 
-## 7. Changes to This Policy
+## 9. Changes to This Policy
 Updates to this policy (e.g., if a new feature is added) will be version-controlled and published here with a new Effective Date.
