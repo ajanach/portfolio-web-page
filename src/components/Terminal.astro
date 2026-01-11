@@ -132,26 +132,21 @@
                 height 0.3s ease;
         }
 
-        /* Klasa koju ćemo toggle-ati */
         .terminal-maximized {
-            width: 95vw !important; /* Širina na 95% ekrana */
-            height: 90vh !important; /* Visina na 90% ekrana */
-            max-width: none !important; /* Mičemo limit od 48rem */
-            max-height: none !important; /* Mičemo limit visine */
-            transform: scale(
-                1
-            ) !important; /* Vraćamo na originalni scale da ne muti tekst */
+            width: 95vw !important;
+            height: 90vh !important;
+            max-width: none !important;
+            max-height: none !important;
+            transform: scale(1) !important;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
             border-color: rgba(255, 255, 255, 0.2) !important;
         }
     </style>
 
     <style is:global>
-        /* NUCLEAR OPTION: Global Event Silencing */
         body.terminal-open * {
             pointer-events: none !important;
         }
-        /* Whitelist Terminal */
         body.terminal-open #terminal-overlay,
         body.terminal-open #terminal-window,
         body.terminal-open #terminal-window * {
@@ -465,7 +460,7 @@
                     document.body.style.overflow = "";
                     document.body.classList.remove("terminal-open");
                     windowEl!.classList.remove("translate-y-10");
-                    isMaximized = false; // Resetiramo stanje
+                    isMaximized = false;
                     if (input) input.value = "";
                     isAnimating = false;
                 }, 300);
@@ -486,7 +481,6 @@
                     windowEl!.classList.remove("terminal-maximized");
                 }
 
-                // Kratki delay da fokusiramo input nakon animacije
                 setTimeout(() => focusInput(), 50);
             }
 
@@ -807,7 +801,6 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                 if (e.target === overlay) closeTerminal();
             };
             const windowClickHandler = (e: MouseEvent) => {
-                // Stop prop so we don't close, but strict focus is handled by content listener
                 e.stopImmediatePropagation();
             };
             const closeBtnHandler = (e: MouseEvent) => {
