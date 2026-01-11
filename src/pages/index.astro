@@ -1,19 +1,8 @@
 ---
-import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 
 import StackCard from "@components/StackCard.astro";
-import { SITE, SOCIALS } from "@consts";
-
-const posts = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
-
-const work = (await getCollection("work"))
-  .filter((work) => !work.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
+const { SITE } = await import("@consts");
 
 const stack = {
   Orchestration: [

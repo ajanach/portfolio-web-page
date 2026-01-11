@@ -5,7 +5,6 @@ import TopLayout from "@layouts/TopLayout.astro";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import SearchCollection from "@components/SearchCollection";
 import { WORK } from "@consts";
-import type { CollectionEntry } from "astro:content";
 
 const workEntries = (await getCollection("work"))
   .filter((entry) => !entry.data.draft)
