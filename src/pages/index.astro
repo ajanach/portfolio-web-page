@@ -118,11 +118,8 @@ const stack = {
 ---
 
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
-  <!-- tsParticles Background -->
-  <script
-    is:inline
-    src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"
-  ></script>
+  <!-- tsParticles Background (self-hosted to avoid tracking prevention warnings) -->
+  <script is:inline src="/js/tsparticles.bundle.min.js"></script>
   <script is:inline src="/js/bg.js"></script>
   <div id="tsparticles" class="fixed inset-0 z-0 bg-[#050505]"></div>
 
