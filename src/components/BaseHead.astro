@@ -18,7 +18,7 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props;
 <!-- Content Security Policy (Single line to ensure consistent browser parsing) -->
 <meta
   http-equiv="Content-Security-Policy"
-  content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cloud.umami.is https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://challenges.cloudflare.com; font-src 'self'; connect-src 'self' https://cloud.umami.is https://*.umami.dev https://formspree.io https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; child-src https://challenges.cloudflare.com; base-uri 'self';"
+  content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cloud.umami.is https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://challenges.cloudflare.com; font-src 'self'; connect-src 'self' https://cloud.umami.is https://*.umami.dev https://formspree.io https://challenges.cloudflare.com https://*.challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com https://*.challenges.cloudflare.com; child-src 'self' https://challenges.cloudflare.com https://*.challenges.cloudflare.com; base-uri 'self';"
 />
 
 <meta name="viewport" content="width=device-width,initial-scale=1" />
