@@ -2,8 +2,9 @@ import type { Site, Page, Links, Socials } from "@types"
 
 // Global
 export const SITE: Site = {
-  TITLE: "Antonio Janach",
-  DESCRIPTION: "Welcome! I'm Antonio, a DevOps engineer focused on building highly available, automated systems across hybrid environments—from local bare-metal to the cloud.",
+  NAME: "Antonio Janach",
+  TITLE: "Antonio Janach | DevOps & Cloud Engineer",
+  DESCRIPTION: "Welcome! I'm Antonio, a DevOps & Cloud Engineer specialized in high availability and hybrid cloud automation.",
   AUTHOR: "Antonio Janach",
 }
 

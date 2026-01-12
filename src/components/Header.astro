@@ -1,5 +1,5 @@
 ---
-import { LINKS, SOCIALS } from "@consts";
+import { LINKS, SOCIALS, SITE } from "@consts";
 import { cn } from "@lib/utils";
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^/]+/g);
@@ -19,8 +19,8 @@ import Container from "@components/Container.astro";
             <use href="/brand.svg#brand"></use>
           </svg>
           <div class="font-bold">
-            <span class="hidden sm:inline">Antonio Janach</span>
-            <span class="inline sm:hidden">Antonio Janach</span>
+            <span class="hidden sm:inline">{SITE.NAME}</span>
+            <span class="inline sm:hidden">{SITE.NAME}</span>
           </div>
         </a>
       </div>
