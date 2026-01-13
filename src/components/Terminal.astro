@@ -242,9 +242,6 @@
         </style>
 
         <script>
-            // Terminal Logic - Memory-Safe Implementation
-            // FIX: Added activeTimeouts and abortController for proper cleanup
-
             let isBooted = false;
             let isAnimating = false;
             let isMaximized = false;
@@ -252,12 +249,9 @@
             let historyIndex = -1;
             let startTime = Date.now();
 
-            // FIX: Track all setTimeout IDs for cleanup on close
             let activeTimeouts: number[] = [];
-            // FIX: AbortController for cancelling async operations
             let abortController: AbortController | null = null;
 
-            // -- Content Definitions (From about.astro) --
             const EXPERIENCE_CONTENT = [
                 `<div class="grid gap-3 max-w-4xl mt-3">`,
                 ...[
@@ -489,17 +483,13 @@
 
                 if (!overlay || !windowEl || !input) return;
 
-                // FIX: Content click handler moved to named function at bottom for proper cleanup
-
                 // --- Core Actions ---
 
-                // FIX: Helper to track setTimeout IDs for cleanup
                 function trackedTimeout(
                     callback: () => void,
                     delay: number,
                 ): number {
                     const id = window.setTimeout(() => {
-                        // FIX: Check if terminal is still open before executing
                         if (overlay!.classList.contains("hidden")) return;
                         callback();
                     }, delay);
@@ -507,7 +497,6 @@
                     return id;
                 }
 
-                // FIX: Clear all tracked timeouts on close
                 function clearTimeouts() {
                     activeTimeouts.forEach((id) => window.clearTimeout(id));
                     activeTimeouts = [];
@@ -517,11 +506,9 @@
                     if (isAnimating) return;
                     isAnimating = true;
 
-                    // FIX: Initialize new AbortController for this session
                     abortController?.abort();
                     abortController = new AbortController();
 
-                    // FIX: Use CSS class instead of inline style mutation
                     document.body.classList.add("terminal-open");
                     overlay!.classList.remove("hidden");
                     overlay!.classList.add("flex");
@@ -530,7 +517,6 @@
                         overlay!.style.pointerEvents = "all";
                         overlay!.classList.remove("opacity-0");
 
-                        // Reset states for clean open
                         windowEl!.classList.remove(
                             "scale-95",
                             "opacity-0",
@@ -538,7 +524,6 @@
                         );
                         windowEl!.classList.add("opacity-100", "scale-100");
 
-                        // FIX: Use tracked timeout
                         trackedTimeout(() => {
                             isAnimating = false;
                             if (!isBooted) bootSequence();
@@ -551,11 +536,9 @@
                     if (isAnimating) return;
                     isAnimating = true;
 
-                    // FIX: Clear all pending timeouts and abort async operations
                     clearTimeouts();
                     abortController?.abort();
 
-                    // Fade out overlay
                     overlay!.classList.add("opacity-0");
                     overlay!.style.pointerEvents = "none";
 
@@ -565,13 +548,10 @@
 
                     input.blur();
 
-                    // FIX: This final timeout doesn't need tracking (runs after close)
                     window.setTimeout(() => {
                         overlay!.classList.add("hidden");
                         overlay!.classList.remove("flex");
                         if (isMaximized) toggleMaximize(true);
-
-                        // FIX: Only use CSS class, no inline style
                         document.body.classList.remove("terminal-open");
                         if (input) input.value = "";
                         isAnimating = false;
@@ -582,7 +562,6 @@
                     if (isAnimating) return;
                     isAnimating = true;
 
-                    // FIX: Clear all pending timeouts and abort async operations
                     clearTimeouts();
                     abortController?.abort();
 
@@ -598,7 +577,6 @@
                     window.setTimeout(() => {
                         overlay!.classList.add("hidden");
                         overlay!.classList.remove("flex");
-                        // FIX: Only use CSS class
                         document.body.classList.remove("terminal-open");
                         windowEl!.classList.remove("translate-y-10");
                         isMaximized = false;
@@ -688,7 +666,6 @@
                     ];
 
                     for (const line of lines) {
-                        // FIX: Check abort signal in addition to overlay state
                         if (
                             overlay!.classList.contains("hidden") ||
                             signal?.aborted
@@ -870,7 +847,6 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                             log(
                                 "<span class='text-blue-400 italic'>Analyzing skillset...</span>",
                             );
-                            // FIX: Use trackedTimeout for proper cleanup
                             trackedTimeout(() => {
                                 const categories = [
                                     {
@@ -913,7 +889,6 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                             log(
                                 "<span class='text-blue-400 italic'>Establishing secure connection...</span>",
                             );
-                            // FIX: Use trackedTimeout for proper cleanup
                             trackedTimeout(() => {
                                 log(`
 <div class="flex flex-wrap gap-3 mt-3 max-w-2xl">
@@ -1057,7 +1032,6 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                                 }
                             }
                             if (input.value === prefix) {
-                                // Already at prefix, show options
                                 log(
                                     `<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-white/80 opacity-80 mt-1 mb-2">${matches.map((m) => `<div>${m}</div>`).join("")}</div>`,
                                 );
