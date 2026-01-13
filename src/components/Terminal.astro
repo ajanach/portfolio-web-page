@@ -62,6 +62,51 @@
             </div>
         </div>
 
+        <!-- Universal Command Toolbar -->
+        <div
+            id="toolbar-container"
+            class="toolbar-container border-b border-white/10 shrink-0"
+        >
+            <button
+                id="toolbar-toggle"
+                class="toolbar-toggle w-full px-4 py-1.5 flex items-center justify-between bg-white/[0.02] hover:bg-white/[0.05] text-white/60 hover:text-white/80 text-xs transition-colors cursor-pointer border-none"
+                aria-expanded="true"
+                aria-controls="cmd-toolbar"
+            >
+                <span class="flex items-center gap-2">
+                    <span>💡</span>
+                    <span>Quick Commands</span>
+                </span>
+                <span class="toggle-icon transition-transform">▼</span>
+            </button>
+            <div
+                id="cmd-toolbar"
+                class="cmd-toolbar flex items-center gap-2 px-4 py-2 bg-white/5 overflow-x-auto no-scrollbar"
+            >
+                {
+                    [
+                        { cmd: "help", desc: "Show available commands" },
+                        { cmd: "about", desc: "Who is Antonio?" },
+                        { cmd: "experience", desc: "Work history" },
+                        { cmd: "education", desc: "Academic background" },
+                        { cmd: "certificates", desc: "Professional certs" },
+                        { cmd: "skills", desc: "Tech stack" },
+                        { cmd: "contact", desc: "Get in touch" },
+                        { cmd: "neofetch", desc: "System info" },
+                        { cmd: "clear", desc: "Clear terminal" },
+                    ].map((item) => (
+                        <button
+                            data-cmd={item.cmd}
+                            title={`Run '${item.cmd}' - ${item.desc}`}
+                            class="cmd-btn px-3 py-1.5 bg-white/10 hover:bg-white/20 border border-white/10 rounded text-xs text-white font-mono whitespace-nowrap active:scale-95 transition-all"
+                        >
+                            {item.cmd}
+                        </button>
+                    ))
+                }
+            </div>
+        </div>
+
         <!-- Terminal Content -->
         <div
             id="terminal-content"
@@ -82,119 +127,167 @@
                 />
             </div>
         </div>
-    </div>
 
-    <style>
-        /* Scrollbar Styling */
-        #terminal-content::-webkit-scrollbar {
-            width: 6px;
-        }
-        #terminal-content::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        #terminal-content::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-        }
-        #terminal-content::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+        <style>
+            /* Mobile Toolbar Scrollbar */
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .no-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
 
-        /* Scanline effect (optional, subtle) */
-        #terminal-window::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                rgba(18, 16, 16, 0) 50%,
-                rgba(0, 0, 0, 0.1) 50%
-            );
-            background-size: 100% 4px;
-            pointer-events: none;
-            opacity: 0.15;
-            z-index: 10;
-        }
-        .will-change-transform {
-            will-change: transform, opacity;
-        }
-        .backface-hidden {
-            backface-visibility: hidden;
-        }
+            /* Scrollbar Styling */
+            #terminal-content::-webkit-scrollbar {
+                width: 6px;
+            }
+            #terminal-content::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            #terminal-content::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 3px;
+            }
+            #terminal-content::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
 
-        #terminal-window {
-            transition:
-                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s ease,
-                width 0.3s ease,
-                height 0.3s ease;
-        }
+            /* Scanline effect (optional, subtle) */
+            #terminal-window::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    rgba(18, 16, 16, 0) 50%,
+                    rgba(0, 0, 0, 0.1) 50%
+                );
+                background-size: 100% 4px;
+                pointer-events: none;
+                opacity: 0.15;
+                z-index: 10;
+            }
+            .will-change-transform {
+                will-change: transform, opacity;
+            }
+            .backface-hidden {
+                backface-visibility: hidden;
+            }
 
-        .terminal-maximized {
-            width: 95vw !important;
-            height: 90vh !important;
-            max-width: none !important;
-            max-height: none !important;
-            transform: scale(1) !important;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
-            border-color: rgba(255, 255, 255, 0.2) !important;
-        }
-    </style>
+            #terminal-window {
+                transition:
+                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.3s ease,
+                    width 0.3s ease,
+                    height 0.3s ease;
+            }
 
-    <style is:global>
-        body.terminal-open * {
-            pointer-events: none !important;
-        }
-        body.terminal-open #terminal-overlay,
-        body.terminal-open #terminal-window,
-        body.terminal-open #terminal-window * {
-            pointer-events: auto !important;
-        }
-    </style>
+            .terminal-maximized {
+                width: 95vw !important;
+                height: 90vh !important;
+                max-width: none !important;
+                max-height: none !important;
+                transform: scale(1) !important;
+                box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
+                border-color: rgba(255, 255, 255, 0.2) !important;
+            }
 
-    <script>
-        // Terminal Logic - Final Polish (Controls, Branding, Content, Latency)
+            /* Universal Command Toolbar */
+            .toolbar-collapsed .cmd-toolbar {
+                max-height: 0;
+                opacity: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+                overflow: hidden;
+            }
+            .toolbar-collapsed .toggle-icon {
+                transform: rotate(-90deg);
+            }
+            .cmd-toolbar {
+                max-height: 48px;
+                opacity: 1;
+                transition:
+                    max-height 0.3s ease,
+                    opacity 0.2s ease,
+                    padding 0.2s ease;
+            }
+            @media (min-width: 768px) {
+                .cmd-btn {
+                    opacity: 0.7;
+                    padding: 0.25rem 0.75rem;
+                    font-size: 0.7rem;
+                }
+                .cmd-btn:hover {
+                    opacity: 1;
+                }
+            }
+        </style>
 
-        let isBooted = false;
-        let isAnimating = false;
-        let isMaximized = false;
-        let history: string[] = [];
-        let historyIndex = -1;
-        let startTime = Date.now();
+        <style is:global>
+            /* FIX: Use CSS class for body overflow instead of inline style mutation */
+            body.terminal-open {
+                overflow: hidden !important;
+            }
+            body.terminal-open * {
+                pointer-events: none !important;
+            }
+            body.terminal-open #terminal-overlay,
+            body.terminal-open #terminal-window,
+            body.terminal-open #terminal-window * {
+                pointer-events: auto !important;
+            }
+        </style>
 
-        // -- Content Definitions (From about.astro) --
-        const EXPERIENCE_CONTENT = [
-            `<div class="grid gap-3 max-w-4xl mt-3">`,
-            ...[
-                {
-                    date: "Mar 2024 — Present",
-                    role: "DevOps Engineer",
-                    company: "SICK MOBILISIS",
-                },
-                {
-                    date: "Jul 2023 — Feb 2024",
-                    role: "DevOps Intern",
-                    company: "SICK MOBILISIS",
-                },
-                {
-                    date: "Dec 2021 — Jun 2023",
-                    role: "Junior System Engineer",
-                    company: "Combis",
-                },
-                {
-                    date: "Oct 2018 — Present",
-                    role: "Web Administrator",
-                    company: "Freelance",
-                },
-                {
-                    date: "Sep 2017 — Sep 2019",
-                    role: "IT Instructor",
-                    company: "Enter Koprivnica",
-                },
-            ].map(
-                (e) => `
+        <script>
+            // Terminal Logic - Memory-Safe Implementation
+            // FIX: Added activeTimeouts and abortController for proper cleanup
+
+            let isBooted = false;
+            let isAnimating = false;
+            let isMaximized = false;
+            let history: string[] = [];
+            let historyIndex = -1;
+            let startTime = Date.now();
+
+            // FIX: Track all setTimeout IDs for cleanup on close
+            let activeTimeouts: number[] = [];
+            // FIX: AbortController for cancelling async operations
+            let abortController: AbortController | null = null;
+
+            // -- Content Definitions (From about.astro) --
+            const EXPERIENCE_CONTENT = [
+                `<div class="grid gap-3 max-w-4xl mt-3">`,
+                ...[
+                    {
+                        date: "Mar 2024 — Present",
+                        role: "DevOps Engineer",
+                        company: "SICK MOBILISIS",
+                    },
+                    {
+                        date: "Jul 2023 — Feb 2024",
+                        role: "DevOps Intern",
+                        company: "SICK MOBILISIS",
+                    },
+                    {
+                        date: "Dec 2021 — Jun 2023",
+                        role: "Junior System Engineer",
+                        company: "Combis",
+                    },
+                    {
+                        date: "Oct 2018 — Present",
+                        role: "Web Administrator",
+                        company: "Freelance",
+                    },
+                    {
+                        date: "Sep 2017 — Sep 2019",
+                        role: "IT Instructor",
+                        company: "Enter Koprivnica",
+                    },
+                ].map(
+                    (e) => `
                 <div class="flex flex-col gap-0.5 p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
                     <div class="flex items-center gap-2">
                          <span class="text-yellow-300 font-bold text-xs tracking-tight uppercase">${e.date}</span>
@@ -204,44 +297,44 @@
                     <div class="text-[12px] text-white/50 font-medium uppercase tracking-wider ml-0.5">@ ${e.company}</div>
                 </div>
             `,
-            ),
-            `</div>`,
-        ];
+                ),
+                `</div>`,
+            ];
 
-        const EDUCATION_CONTENT = [
-            `<div class="grid gap-3 max-w-4xl mt-3">`,
-            ...[
-                {
-                    year: "2022 — 2024",
-                    school: "Faculty of Informatics and Digital Technologies, University of Rijeka",
-                    points: [
-                        {
-                            label: "Master's Thesis",
-                            text: "Comparison of Orchestration Systems for Microservices",
-                            link: "https://janach.cloud/work/master/masters-thesis-comparison-of-orchestration-systems-for-microservices/",
-                        },
-                        {
-                            label: "Published Research (MIPRO 2025 / IEEE)",
-                            text: "A Decision-Making Framework for Evaluating Orchestration Systems",
-                            link: "https://janach.cloud/work/master/orchestration-decision-framework-mipro-2025/",
-                        },
-                    ],
-                    id: "Master's Degree",
-                },
-                {
-                    year: "2018 — 2021",
-                    school: "Algebra Bernays University",
-                    points: [
-                        {
-                            label: "Final Thesis",
-                            text: "Windows Computer Administration using MECM in Azure",
-                            link: "https://janach.cloud/work/bachelor/windows-computer-administration-using-mecm-in-azure-final-thesis/",
-                        },
-                    ],
-                    id: "Bachelor's Degree",
-                },
-            ].map(
-                (e) => `
+            const EDUCATION_CONTENT = [
+                `<div class="grid gap-3 max-w-4xl mt-3">`,
+                ...[
+                    {
+                        year: "2022 — 2024",
+                        school: "Faculty of Informatics and Digital Technologies, University of Rijeka",
+                        points: [
+                            {
+                                label: "Master's Thesis",
+                                text: "Comparison of Orchestration Systems for Microservices",
+                                link: "https://janach.cloud/work/master/masters-thesis-comparison-of-orchestration-systems-for-microservices/",
+                            },
+                            {
+                                label: "Published Research (MIPRO 2025 / IEEE)",
+                                text: "A Decision-Making Framework for Evaluating Orchestration Systems",
+                                link: "https://janach.cloud/work/master/orchestration-decision-framework-mipro-2025/",
+                            },
+                        ],
+                        id: "Master's Degree",
+                    },
+                    {
+                        year: "2018 — 2021",
+                        school: "Algebra Bernays University",
+                        points: [
+                            {
+                                label: "Final Thesis",
+                                text: "Windows Computer Administration using MECM in Azure",
+                                link: "https://janach.cloud/work/bachelor/windows-computer-administration-using-mecm-in-azure-final-thesis/",
+                            },
+                        ],
+                        id: "Bachelor's Degree",
+                    },
+                ].map(
+                    (e) => `
         <div class="flex flex-col gap-3 p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
             <div class="flex flex-col gap-1 text-left">
                 <div class="flex flex-col sm:flex-row sm:items-center gap-x-2">
@@ -273,50 +366,50 @@
             </div>
         </div>
     `,
-            ),
-            `</div>`,
-        ];
+                ),
+                `</div>`,
+            ];
 
-        const CERTS_CONTENT = [
-            `<div class="grid gap-3 max-w-4xl mt-3">`,
-            ...[
-                {
-                    id: "RHCE",
-                    name: "Red Hat Certified Engineer",
-                    link: "https://www.credly.com/badges/f51f0b15-782f-4302-955d-98b4b46a0d07/public_url",
-                    date: "April 2025",
-                    exp: "April 2028",
-                },
-                {
-                    id: "RHCSA",
-                    name: "Red Hat Certified System Administrator",
-                    link: "https://www.credly.com/badges/00733b40-0d36-48cc-94b0-363368f49a2d/public_url",
-                    date: "April 2022",
-                    exp: "April 2028",
-                },
-                {
-                    id: "AZ-900",
-                    name: "Microsoft Certified: Azure Fundamentals",
-                    link: "https://www.credly.com/badges/8982b5e9-72f2-4312-ad69-6b31375a60d6/public_url",
-                    date: "July 2022",
-                    exp: "No Expiration",
-                },
-                {
-                    id: "MTA",
-                    name: "MTA: Networking Fundamentals",
-                    link: "https://www.credly.com/badges/7ed2a90b-7d34-4164-9784-999563f60a62",
-                    date: "June 2019",
-                    exp: "No Expiration",
-                },
-                {
-                    id: "MTA",
-                    name: "MTA: Windows Operating System Fundamentals",
-                    link: "https://www.credly.com/badges/b69bd791-da70-44c6-821c-f62750d30a9b",
-                    date: "June 2019",
-                    exp: "No Expiration",
-                },
-            ].map(
-                (c) => `
+            const CERTS_CONTENT = [
+                `<div class="grid gap-3 max-w-4xl mt-3">`,
+                ...[
+                    {
+                        id: "RHCE",
+                        name: "Red Hat Certified Engineer",
+                        link: "https://www.credly.com/badges/f51f0b15-782f-4302-955d-98b4b46a0d07/public_url",
+                        date: "April 2025",
+                        exp: "April 2028",
+                    },
+                    {
+                        id: "RHCSA",
+                        name: "Red Hat Certified System Administrator",
+                        link: "https://www.credly.com/badges/00733b40-0d36-48cc-94b0-363368f49a2d/public_url",
+                        date: "April 2022",
+                        exp: "April 2028",
+                    },
+                    {
+                        id: "AZ-900",
+                        name: "Microsoft Certified: Azure Fundamentals",
+                        link: "https://www.credly.com/badges/8982b5e9-72f2-4312-ad69-6b31375a60d6/public_url",
+                        date: "July 2022",
+                        exp: "No Expiration",
+                    },
+                    {
+                        id: "MTA",
+                        name: "MTA: Networking Fundamentals",
+                        link: "https://www.credly.com/badges/7ed2a90b-7d34-4164-9784-999563f60a62",
+                        date: "June 2019",
+                        exp: "No Expiration",
+                    },
+                    {
+                        id: "MTA",
+                        name: "MTA: Windows Operating System Fundamentals",
+                        link: "https://www.credly.com/badges/b69bd791-da70-44c6-821c-f62750d30a9b",
+                        date: "June 2019",
+                        exp: "No Expiration",
+                    },
+                ].map(
+                    (c) => `
         <div class="flex items-center justify-between p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
             <div class="flex flex-col gap-0.5">
                 <div class="flex items-center gap-2">
@@ -333,307 +426,369 @@
             </a>
         </div>
     `,
-            ),
-            `</div>`,
-        ];
+                ),
+                `</div>`,
+            ];
 
-        const FILES: Record<string, string> = {
-            "about.txt": "content",
-            "contact.sh": "content",
-        };
+            const FILES: Record<string, string> = {
+                "about.txt": "content",
+                "contact.sh": "content",
+            };
 
-        const COMMANDS: Record<string, string> = {
-            help: "Show available commands",
-            about: "Who is Antonio?",
-            experience: "Work history",
-            education: "Academic background",
-            certificates: "Professional certs",
-            skills: "Tech stack",
-            contact: "Get in touch",
-            ls: "List files",
-            cat: "Read file",
-            whoami: "Current session info",
-            status: "System uptime",
-            neofetch: "System info",
-            clear: "Clear terminal",
-            exit: "Close terminal",
-            sudo: "Execute as root",
-        };
+            const COMMANDS: Record<string, string> = {
+                help: "Show available commands",
+                about: "Who is Antonio?",
+                experience: "Work history",
+                education: "Academic background",
+                certificates: "Professional certs",
+                skills: "Tech stack",
+                contact: "Get in touch",
+                ls: "List files",
+                cat: "Read file",
+                whoami: "Current session info",
+                status: "System uptime",
+                neofetch: "System info",
+                clear: "Clear terminal",
+                exit: "Close terminal",
+                sudo: "Execute as root",
+            };
 
-        function initTerminal() {
-            const overlay = document.getElementById("terminal-overlay");
-            const windowEl = document.getElementById("terminal-window");
-            const content = document.getElementById("terminal-content");
-            const output = document.getElementById("output");
-            const input = document.getElementById(
-                "terminal-input",
-            ) as HTMLInputElement;
+            function initTerminal() {
+                const overlay = document.getElementById("terminal-overlay");
+                const windowEl = document.getElementById("terminal-window");
+                const content = document.getElementById("terminal-content");
+                const output = document.getElementById("output");
+                const input = document.getElementById(
+                    "terminal-input",
+                ) as HTMLInputElement;
 
-            // Buttons
-            const closeBtn = document.getElementById("term-close-btn");
-            const minimizeBtn = document.getElementById("term-minimize-btn");
-            const maximizeBtn = document.getElementById("term-maximize-btn");
+                // Buttons
+                const closeBtn = document.getElementById("term-close-btn");
+                const minimizeBtn =
+                    document.getElementById("term-minimize-btn");
+                const maximizeBtn =
+                    document.getElementById("term-maximize-btn");
 
-            if (!overlay || !windowEl || !input) return;
+                // Toolbar
+                const toolbarToggle = document.getElementById("toolbar-toggle");
+                const toolbarContainer =
+                    document.getElementById("toolbar-container");
 
-            // Content click focus
-            content?.addEventListener("click", () => {
-                // Handle text selection check if needed, but simple focus is fine
-                if (window.getSelection()?.toString() === "") focusInput();
-            });
+                // Initialize Toggle State
+                const isCollapsed =
+                    localStorage.getItem("terminal_toolbar_visible") ===
+                    "false";
+                if (isCollapsed)
+                    toolbarContainer?.classList.add("toolbar-collapsed");
+                toolbarToggle?.setAttribute(
+                    "aria-expanded",
+                    String(!isCollapsed),
+                );
 
-            // --- Core Actions ---
+                if (!overlay || !windowEl || !input) return;
 
-            function openTerminal() {
-                if (isAnimating) return;
-                isAnimating = true;
+                if (!overlay || !windowEl || !input) return;
 
-                document.body.style.overflow = "hidden";
-                document.body.classList.add("terminal-open");
-                overlay!.classList.remove("hidden");
-                overlay!.classList.add("flex");
+                // FIX: Content click handler moved to named function at bottom for proper cleanup
 
-                requestAnimationFrame(() => {
-                    overlay!.style.pointerEvents = "all";
-                    overlay!.classList.remove("opacity-0");
+                // --- Core Actions ---
 
-                    // Reset states for clean open
-                    windowEl!.classList.remove(
-                        "scale-95",
-                        "opacity-0",
-                        "translate-y-10",
-                    );
-                    windowEl!.classList.add("opacity-100", "scale-100");
-
-                    setTimeout(() => {
-                        isAnimating = false;
-                        if (!isBooted) bootSequence();
-                        else focusInput();
-                    }, 300);
-                });
-            }
-
-            function closeTerminal() {
-                if (isAnimating) return;
-                isAnimating = true;
-
-                // Fade out overlay
-                overlay!.classList.add("opacity-0");
-                overlay!.style.pointerEvents = "none";
-
-                // Standard Close Animation
-                windowEl!.classList.remove("scale-100", "opacity-100");
-                windowEl!.classList.add("scale-95", "opacity-0");
-
-                input.blur();
-
-                setTimeout(() => {
-                    overlay!.classList.add("hidden");
-                    overlay!.classList.remove("flex");
-                    // Reset Maximize State on Close? Optional. Let's reset for clean slate.
-                    if (isMaximized) toggleMaximize(true); // create reset flag
-
-                    document.body.style.overflow = "";
-                    document.body.classList.remove("terminal-open");
-                    if (input) input.value = "";
-                    isAnimating = false;
-                }, 300);
-            }
-
-            function minimizeTerminal() {
-                if (isAnimating) return;
-                isAnimating = true;
-
-                overlay!.classList.add("opacity-0");
-                overlay!.style.pointerEvents = "none";
-
-                // Dodajemo ovo da se resetira maximize ako je bio aktivan
-                windowEl!.classList.remove("terminal-maximized");
-                windowEl!.classList.remove("scale-100", "opacity-100");
-                windowEl!.classList.add("translate-y-10", "opacity-0");
-
-                input.blur();
-
-                setTimeout(() => {
-                    overlay!.classList.add("hidden");
-                    overlay!.classList.remove("flex");
-                    document.body.style.overflow = "";
-                    document.body.classList.remove("terminal-open");
-                    windowEl!.classList.remove("translate-y-10");
-                    isMaximized = false;
-                    if (input) input.value = "";
-                    isAnimating = false;
-                }, 300);
-            }
-
-            function toggleMaximize(forceReset = false) {
-                if (forceReset) {
-                    windowEl!.classList.remove("terminal-maximized");
-                    isMaximized = false;
-                    return;
+                // FIX: Helper to track setTimeout IDs for cleanup
+                function trackedTimeout(
+                    callback: () => void,
+                    delay: number,
+                ): number {
+                    const id = window.setTimeout(() => {
+                        // FIX: Check if terminal is still open before executing
+                        if (overlay!.classList.contains("hidden")) return;
+                        callback();
+                    }, delay);
+                    activeTimeouts.push(id);
+                    return id;
                 }
 
-                isMaximized = !isMaximized;
-
-                if (isMaximized) {
-                    windowEl!.classList.add("terminal-maximized");
-                } else {
-                    windowEl!.classList.remove("terminal-maximized");
+                // FIX: Clear all tracked timeouts on close
+                function clearTimeouts() {
+                    activeTimeouts.forEach((id) => window.clearTimeout(id));
+                    activeTimeouts = [];
                 }
 
-                setTimeout(() => focusInput(), 50);
-            }
+                function openTerminal() {
+                    if (isAnimating) return;
+                    isAnimating = true;
 
-            function focusInput() {
-                if (
-                    document.activeElement !== input &&
-                    !overlay!.classList.contains("hidden")
-                ) {
-                    input.focus({ preventScroll: true });
-                }
-            }
+                    // FIX: Initialize new AbortController for this session
+                    abortController?.abort();
+                    abortController = new AbortController();
 
-            // --- Helpers ---
+                    // FIX: Use CSS class instead of inline style mutation
+                    document.body.classList.add("terminal-open");
+                    overlay!.classList.remove("hidden");
+                    overlay!.classList.add("flex");
 
-            function scrollToBottom() {
-                if (content) {
                     requestAnimationFrame(() => {
-                        content.scrollTop = content.scrollHeight;
+                        overlay!.style.pointerEvents = "all";
+                        overlay!.classList.remove("opacity-0");
+
+                        // Reset states for clean open
+                        windowEl!.classList.remove(
+                            "scale-95",
+                            "opacity-0",
+                            "translate-y-10",
+                        );
+                        windowEl!.classList.add("opacity-100", "scale-100");
+
+                        // FIX: Use tracked timeout
+                        trackedTimeout(() => {
+                            isAnimating = false;
+                            if (!isBooted) bootSequence();
+                            else focusInput();
+                        }, 300);
                     });
                 }
-            }
 
-            async function printLines(lines: string[], delayPerLine = 150) {
-                for (const line of lines) {
-                    // Check if terminal closed during print
-                    if (overlay!.classList.contains("hidden")) return;
-                    log(line);
-                    scrollToBottom();
-                    await new Promise((r) => setTimeout(r, delayPerLine));
-                }
-            }
+                function closeTerminal() {
+                    if (isAnimating) return;
+                    isAnimating = true;
 
-            // --- Boot Sequence ---
+                    // FIX: Clear all pending timeouts and abort async operations
+                    clearTimeouts();
+                    abortController?.abort();
 
-            async function bootSequence() {
-                if (isBooted || !input) return;
+                    // Fade out overlay
+                    overlay!.classList.add("opacity-0");
+                    overlay!.style.pointerEvents = "none";
 
-                input.disabled = true;
-                input.style.opacity = "0";
-                startTime = Date.now(); // Reset uptime
+                    // Standard Close Animation
+                    windowEl!.classList.remove("scale-100", "opacity-100");
+                    windowEl!.classList.add("scale-95", "opacity-0");
 
-                const lines = [
-                    {
-                        text: "[ <span class='text-green-400'>OK</span> ] Initializing Guest Session...",
-                        delay: 200,
-                    },
-                    {
-                        text: "[ <span class='text-green-400'>OK</span> ] Connecting to janach.cloud...",
-                        delay: 400,
-                    },
-                    {
-                        text: "[ <span class='text-green-400'>OK</span> ] Requesting read-only access...",
-                        delay: 300,
-                    },
-                    { text: "Access granted. Welcome, visitor.", delay: 200 },
-                    {
-                        text: "Type 'help' to see available commands.",
-                        delay: 0,
-                    },
-                ];
+                    input.blur();
 
-                for (const line of lines) {
-                    if (overlay!.classList.contains("hidden")) return;
-                    await new Promise((r) => setTimeout(r, line.delay));
-                    log(line.text);
+                    // FIX: This final timeout doesn't need tracking (runs after close)
+                    window.setTimeout(() => {
+                        overlay!.classList.add("hidden");
+                        overlay!.classList.remove("flex");
+                        if (isMaximized) toggleMaximize(true);
+
+                        // FIX: Only use CSS class, no inline style
+                        document.body.classList.remove("terminal-open");
+                        if (input) input.value = "";
+                        isAnimating = false;
+                    }, 300);
                 }
 
-                isBooted = true;
-                if (!overlay!.classList.contains("hidden")) {
-                    input.disabled = false;
-                    input.style.opacity = "1";
-                    focusInput();
+                function minimizeTerminal() {
+                    if (isAnimating) return;
+                    isAnimating = true;
+
+                    // FIX: Clear all pending timeouts and abort async operations
+                    clearTimeouts();
+                    abortController?.abort();
+
+                    overlay!.classList.add("opacity-0");
+                    overlay!.style.pointerEvents = "none";
+
+                    windowEl!.classList.remove("terminal-maximized");
+                    windowEl!.classList.remove("scale-100", "opacity-100");
+                    windowEl!.classList.add("translate-y-10", "opacity-0");
+
+                    input.blur();
+
+                    window.setTimeout(() => {
+                        overlay!.classList.add("hidden");
+                        overlay!.classList.remove("flex");
+                        // FIX: Only use CSS class
+                        document.body.classList.remove("terminal-open");
+                        windowEl!.classList.remove("translate-y-10");
+                        isMaximized = false;
+                        if (input) input.value = "";
+                        isAnimating = false;
+                    }, 300);
                 }
-            }
 
-            // --- Execution ---
+                function toggleMaximize(forceReset = false) {
+                    if (forceReset) {
+                        windowEl!.classList.remove("terminal-maximized");
+                        isMaximized = false;
+                        return;
+                    }
 
-            function execute(cmdLine: string) {
-                const parts = cmdLine.split(" ");
-                const cmd = parts[0].toLowerCase();
-                const args = parts.slice(1);
+                    isMaximized = !isMaximized;
 
-                switch (cmd) {
-                    // --- Core Shell Commands ---
-                    case "clear":
-                        if (output) output.innerHTML = "";
-                        break;
+                    if (isMaximized) {
+                        windowEl!.classList.add("terminal-maximized");
+                    } else {
+                        windowEl!.classList.remove("terminal-maximized");
+                    }
 
-                    case "exit":
-                        log("Terminating session...");
-                        setTimeout(() => closeTerminal(), 500);
-                        break;
+                    setTimeout(() => focusInput(), 50);
+                }
 
-                    case "sudo":
-                        log("Nice try, but no root for you.");
-                        break;
+                function focusInput() {
+                    if (
+                        document.activeElement !== input &&
+                        !overlay!.classList.contains("hidden")
+                    ) {
+                        input.focus({ preventScroll: true });
+                    }
+                }
 
-                    case "help":
-                        let helpHTML =
-                            "<div class='grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-x-4 gap-y-2 sm:gap-y-1 opacity-90'>";
-                        for (const [key, desc] of Object.entries(COMMANDS)) {
-                            helpHTML += `<div class='flex flex-row sm:contents'><div class='text-yellow-300 font-bold min-w-[100px]'>${key}</div><div class='text-white/80'>${desc}</div></div>`;
-                        }
-                        helpHTML += "</div>";
-                        log(helpHTML);
-                        break;
+                // --- Helpers ---
 
-                    case "ls":
-                        const fileNames = Object.keys(FILES).map((f) => {
-                            return FILES[f] === "dir"
-                                ? `<span class="text-blue-400 font-bold">${f}/</span>`
-                                : f;
+                function scrollToBottom() {
+                    if (content) {
+                        requestAnimationFrame(() => {
+                            content.scrollTop = content.scrollHeight;
                         });
-                        log(fileNames.join("&nbsp;&nbsp;"));
-                        break;
+                    }
+                }
 
-                    case "cat":
-                        const file = args[0];
-                        if (!file) {
-                            log("Usage: cat [filename]");
+                async function printLines(lines: string[], delayPerLine = 150) {
+                    for (const line of lines) {
+                        // Check if terminal closed during print
+                        if (overlay!.classList.contains("hidden")) return;
+                        log(line);
+                        scrollToBottom();
+                        await new Promise((r) => setTimeout(r, delayPerLine));
+                    }
+                }
+
+                // --- Boot Sequence ---
+
+                async function bootSequence() {
+                    if (isBooted || !input) return;
+
+                    const signal = abortController?.signal;
+                    input.disabled = true;
+                    input.style.opacity = "0";
+                    startTime = Date.now();
+
+                    const lines = [
+                        {
+                            text: "[ <span class='text-green-400'>OK</span> ] Initializing Guest Session...",
+                            delay: 200,
+                        },
+                        {
+                            text: "[ <span class='text-green-400'>OK</span> ] Connecting to janach.cloud...",
+                            delay: 400,
+                        },
+                        {
+                            text: "[ <span class='text-green-400'>OK</span> ] Requesting read-only access...",
+                            delay: 300,
+                        },
+                        {
+                            text: "Access granted. Welcome, visitor.",
+                            delay: 200,
+                        },
+                        {
+                            text: "Type 'help' to see available commands.",
+                            delay: 0,
+                        },
+                    ];
+
+                    for (const line of lines) {
+                        // FIX: Check abort signal in addition to overlay state
+                        if (
+                            overlay!.classList.contains("hidden") ||
+                            signal?.aborted
+                        )
+                            return;
+                        await new Promise((r) => setTimeout(r, line.delay));
+                        log(line.text);
+                    }
+
+                    isBooted = true;
+                    if (
+                        !overlay!.classList.contains("hidden") &&
+                        !signal?.aborted
+                    ) {
+                        input.disabled = false;
+                        input.style.opacity = "1";
+                        focusInput();
+                    }
+                }
+
+                // --- Execution ---
+
+                function execute(cmdLine: string) {
+                    const parts = cmdLine.split(" ");
+                    const cmd = parts[0].toLowerCase();
+                    const args = parts.slice(1);
+
+                    switch (cmd) {
+                        // --- Core Shell Commands ---
+                        case "clear":
+                            if (output) output.innerHTML = "";
                             break;
-                        }
 
-                        // Special handlers for rich content files
-                        if (file === "contact.sh") {
-                            execute("contact");
+                        case "exit":
+                            log("Terminating session...");
+                            setTimeout(() => closeTerminal(), 500);
                             break;
-                        }
-                        if (file === "about.txt") {
-                            execute("about");
+
+                        case "sudo":
+                            log("Nice try, but no root for you.");
                             break;
-                        }
 
-                        // Standard file handling
-                        if (FILES[file]) {
-                            if (FILES[file] === "dir")
-                                log(`cat: ${file}: Is a directory`);
-                            else log(FILES[file]);
-                        } else {
-                            log(`cat: ${file}: No such file or directory`);
-                        }
-                        break;
+                        case "help":
+                            let helpHTML =
+                                "<div class='grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-x-4 gap-y-2 sm:gap-y-1 opacity-90'>";
+                            for (const [key, desc] of Object.entries(
+                                COMMANDS,
+                            )) {
+                                helpHTML += `<div class='flex flex-row sm:contents'><div class='text-yellow-300 font-bold min-w-[100px]'>${key}</div><div class='text-white/80'>${desc}</div></div>`;
+                            }
+                            helpHTML += "</div>";
+                            log(helpHTML);
+                            break;
 
-                    // --- System Commands ---
-                    case "whoami":
-                        log("visitor");
-                        break;
+                        case "ls":
+                            const fileNames = Object.keys(FILES).map((f) => {
+                                return FILES[f] === "dir"
+                                    ? `<span class="text-blue-400 font-bold">${f}/</span>`
+                                    : f;
+                            });
+                            log(fileNames.join("&nbsp;&nbsp;"));
+                            break;
 
-                    case "status":
-                        const uptime = Math.floor(
-                            (Date.now() - startTime) / 1000,
-                        );
-                        log(`
+                        case "cat":
+                            const file = args[0];
+                            if (!file) {
+                                log("Usage: cat [filename]");
+                                break;
+                            }
+
+                            // Special handlers for rich content files
+                            if (file === "contact.sh") {
+                                execute("contact");
+                                break;
+                            }
+                            if (file === "about.txt") {
+                                execute("about");
+                                break;
+                            }
+
+                            // Standard file handling
+                            if (FILES[file]) {
+                                if (FILES[file] === "dir")
+                                    log(`cat: ${file}: Is a directory`);
+                                else log(FILES[file]);
+                            } else {
+                                log(`cat: ${file}: No such file or directory`);
+                            }
+                            break;
+
+                        // --- System Commands ---
+                        case "whoami":
+                            log("visitor");
+                            break;
+
+                        case "status":
+                            const uptime = Math.floor(
+                                (Date.now() - startTime) / 1000,
+                            );
+                            log(`
 <div class="border border-white/10 p-2 rounded bg-white/5 text-white/90">
   <div class="grid grid-cols-[100px_1fr] gap-1">
     <div class="font-bold text-green-400">System:</div><div>All systems normal</div>
@@ -642,10 +797,10 @@
     <div class="font-bold text-green-400">Time:</div><div>${new Date().toLocaleTimeString()}</div>
   </div>
 </div>`);
-                        break;
+                            break;
 
-                    case "neofetch":
-                        log(`
+                        case "neofetch":
+                            log(`
 <div class="flex gap-6 mt-2 mb-2">
   <div class="text-white/80 font-bold select-none hidden sm:block leading-[1.1] text-xs whitespace-pre">
 _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_        
@@ -668,11 +823,11 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
     <div>Theme: ant-dark</div>
   </div>
 </div>`);
-                        break;
+                            break;
 
-                    // --- Content Commands ---
-                    case "about":
-                        log(`
+                        // --- Content Commands ---
+                        case "about":
+                            log(`
 <div class="inline-flex items-center gap-4 mt-4 mb-4 p-4 border border-white/20 rounded-lg">
     <img src="/profile.png" alt="Antonio Janach" class="w-16 h-16 rounded-full object-cover">
     <div>
@@ -688,56 +843,57 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
     Location: Croatia 🇭🇷
 </div>
 `);
-                        break;
+                            break;
 
-                    case "experience":
-                        log(
-                            "<span class='text-blue-400 leading-relaxed'>Fetching employment history...</span>",
-                        );
-                        printLines(EXPERIENCE_CONTENT, 400);
-                        break;
+                        case "experience":
+                            log(
+                                "<span class='text-blue-400 leading-relaxed'>Fetching employment history...</span>",
+                            );
+                            printLines(EXPERIENCE_CONTENT, 400);
+                            break;
 
-                    case "education":
-                        log(
-                            "<span class='text-blue-400'>Retrieving academic records...</span>",
-                        );
-                        printLines(EDUCATION_CONTENT, 200);
-                        break;
+                        case "education":
+                            log(
+                                "<span class='text-blue-400'>Retrieving academic records...</span>",
+                            );
+                            printLines(EDUCATION_CONTENT, 200);
+                            break;
 
-                    case "certificates":
-                        log(
-                            "<span class='text-blue-400'>Validating credentials...</span>",
-                        );
-                        printLines(CERTS_CONTENT, 200);
-                        break;
+                        case "certificates":
+                            log(
+                                "<span class='text-blue-400'>Validating credentials...</span>",
+                            );
+                            printLines(CERTS_CONTENT, 200);
+                            break;
 
-                    case "skills":
-                        log(
-                            "<span class='text-blue-400 italic'>Analyzing skillset...</span>",
-                        );
-                        setTimeout(() => {
-                            const categories = [
-                                {
-                                    label: "Orchestration",
-                                    tech: "Kubernetes, Podman, Docker, ArgoCD",
-                                },
-                                {
-                                    label: "Automation",
-                                    tech: "Terraform, Ansible, GitLab CI, GitHub Actions",
-                                },
-                                {
-                                    label: "Infrastructure",
-                                    tech: "Azure, VMware, Hyper-V, Proxmox, Linux",
-                                },
-                                {
-                                    label: "Observability",
-                                    tech: "Prometheus, Grafana, Loki, Vault",
-                                },
-                            ];
+                        case "skills":
+                            log(
+                                "<span class='text-blue-400 italic'>Analyzing skillset...</span>",
+                            );
+                            // FIX: Use trackedTimeout for proper cleanup
+                            trackedTimeout(() => {
+                                const categories = [
+                                    {
+                                        label: "Orchestration",
+                                        tech: "Kubernetes, Podman, Docker, ArgoCD",
+                                    },
+                                    {
+                                        label: "Automation",
+                                        tech: "Terraform, Ansible, GitLab CI, GitHub Actions",
+                                    },
+                                    {
+                                        label: "Infrastructure",
+                                        tech: "Azure, VMware, Hyper-V, Proxmox, Linux",
+                                    },
+                                    {
+                                        label: "Observability",
+                                        tech: "Prometheus, Grafana, Loki, Vault",
+                                    },
+                                ];
 
-                            let skillsHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3 max-w-4xl">`;
-                            categories.forEach((cat) => {
-                                skillsHTML += `
+                                let skillsHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3 max-w-4xl">`;
+                                categories.forEach((cat) => {
+                                    skillsHTML += `
                 <div class="p-2 bg-white/[0.03] border-l border-yellow-400 rounded-r">
                     <div class="text-yellow-300 font-bold text-xs uppercase tracking-widest mb-1">
                         ${cat.label}
@@ -746,19 +902,20 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                         ${cat.tech}
                     </div>
                 </div>`;
-                            });
-                            skillsHTML += `</div>`;
-                            log(skillsHTML);
-                            scrollToBottom();
-                        }, 600);
-                        break;
+                                });
+                                skillsHTML += `</div>`;
+                                log(skillsHTML);
+                                scrollToBottom();
+                            }, 600);
+                            break;
 
-                    case "contact":
-                        log(
-                            "<span class='text-blue-400 italic'>Establishing secure connection...</span>",
-                        );
-                        setTimeout(() => {
-                            log(`
+                        case "contact":
+                            log(
+                                "<span class='text-blue-400 italic'>Establishing secure connection...</span>",
+                            );
+                            // FIX: Use trackedTimeout for proper cleanup
+                            trackedTimeout(() => {
+                                log(`
 <div class="flex flex-wrap gap-3 mt-3 max-w-2xl">
     <a href="mailto:antonio@janach.cloud" 
        class="flex items-center px-4 py-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 rounded text-white/80 no-underline transition-all active:scale-95">
@@ -773,122 +930,216 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
     * Connection established. Secure encrypted tunnel ready for messaging.
 </div>
 `);
-                            scrollToBottom();
-                        }, 500);
-                        break;
+                                scrollToBottom();
+                            }, 500);
+                            break;
 
-                    default:
-                        log(`zsh: command not found: ${cmd}`);
-                        break;
+                        default:
+                            log(`zsh: command not found: ${cmd}`);
+                            break;
+                    }
                 }
-            }
 
-            function log(html: string) {
-                if (!output) return;
-                const div = document.createElement("div");
-                div.innerHTML = html;
-                div.className = "mb-1 leading-relaxed";
-                output.appendChild(div);
-            }
+                function log(html: string) {
+                    if (!output) return;
+                    const div = document.createElement("div");
+                    div.innerHTML = html;
+                    div.className = "mb-1 leading-relaxed";
+                    output.appendChild(div);
+                }
 
-            // --- Handlers ---
+                // --- Handlers ---
 
-            const toggleHandler = () => {
-                if (overlay!.classList.contains("hidden")) openTerminal();
-                else closeTerminal();
-            };
-            const overlayClickHandler = (e: MouseEvent) => {
-                if (e.target === overlay) closeTerminal();
-            };
-            const windowClickHandler = (e: MouseEvent) => {
-                e.stopImmediatePropagation();
-            };
-            const closeBtnHandler = (e: MouseEvent) => {
-                e.stopPropagation();
-                closeTerminal();
-            };
-            const minimizeBtnHandler = (e: MouseEvent) => {
-                e.stopPropagation();
-                minimizeTerminal();
-            };
-            const maximizeBtnHandler = (e: MouseEvent) => {
-                e.stopPropagation();
-                toggleMaximize();
-            };
-            const keydownHandler = (e: KeyboardEvent) => {
-                if (
-                    e.key === "Escape" &&
-                    !overlay!.classList.contains("hidden")
-                ) {
+                const toolbarToggleHandler = () => {
+                    toolbarContainer?.classList.toggle("toolbar-collapsed");
+                    const expanded =
+                        !toolbarContainer?.classList.contains(
+                            "toolbar-collapsed",
+                        );
+                    localStorage.setItem(
+                        "terminal_toolbar_visible",
+                        String(expanded),
+                    );
+                    toolbarToggle?.setAttribute(
+                        "aria-expanded",
+                        String(expanded),
+                    );
+                };
+
+                const contentClickHandler = () => {
+                    if (window.getSelection()?.toString() === "") focusInput();
+                };
+
+                const toggleHandler = () => {
+                    if (overlay!.classList.contains("hidden")) openTerminal();
+                    else closeTerminal();
+                };
+                const overlayClickHandler = (e: MouseEvent) => {
+                    if (e.target === overlay) closeTerminal();
+                };
+                const windowClickHandler = (e: MouseEvent) => {
+                    e.stopImmediatePropagation();
+                };
+                const closeBtnHandler = (e: MouseEvent) => {
+                    e.stopPropagation();
                     closeTerminal();
-                }
-            };
-            const inputHandler = (e: KeyboardEvent) => {
-                if (e.key === "Enter") {
-                    const cmdLine = input.value.trim();
-                    input.value = "";
-                    if (!cmdLine) return;
+                };
+                const minimizeBtnHandler = (e: MouseEvent) => {
+                    e.stopPropagation();
+                    minimizeTerminal();
+                };
+                const maximizeBtnHandler = (e: MouseEvent) => {
+                    e.stopPropagation();
+                    toggleMaximize();
+                };
+                const keydownHandler = (e: KeyboardEvent) => {
+                    if (overlay!.classList.contains("hidden")) return;
 
-                    log(
-                        `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${cmdLine}`,
-                    );
-                    history.push(cmdLine);
-                    historyIndex = history.length;
-                    execute(cmdLine);
-                    scrollToBottom();
-                } else if (e.key === "ArrowUp") {
-                    e.preventDefault();
-                    if (historyIndex > 0) {
-                        historyIndex--;
-                        input.value = history[historyIndex];
+                    if (e.key === "Escape") {
+                        closeTerminal();
+                    } else if (
+                        e.key.toLowerCase() === "t" &&
+                        document.activeElement !== input &&
+                        !e.ctrlKey &&
+                        !e.altKey &&
+                        !e.metaKey
+                    ) {
+                        // Toggle toolbar with T if input not focused
+                        toolbarToggleHandler();
                     }
-                } else if (e.key === "ArrowDown") {
-                    e.preventDefault();
-                    if (historyIndex < history.length - 1) {
-                        historyIndex++;
-                        input.value = history[historyIndex];
-                    } else {
-                        historyIndex = history.length;
+                };
+                const inputHandler = (e: KeyboardEvent) => {
+                    if (e.key === "Enter") {
+                        const cmdLine = input.value.trim();
                         input.value = "";
+                        if (!cmdLine) return;
+
+                        log(
+                            `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${cmdLine}`,
+                        );
+                        history.push(cmdLine);
+                        historyIndex = history.length;
+                        execute(cmdLine);
+                        scrollToBottom();
+                    } else if (e.key === "ArrowUp") {
+                        e.preventDefault();
+                        if (historyIndex > 0) {
+                            historyIndex--;
+                            input.value = history[historyIndex];
+                        }
+                    } else if (e.key === "ArrowDown") {
+                        e.preventDefault();
+                        if (historyIndex < history.length - 1) {
+                            historyIndex++;
+                            input.value = history[historyIndex];
+                        } else {
+                            historyIndex = history.length;
+                            input.value = "";
+                        }
+                    } else if (e.key === "Tab") {
+                        e.preventDefault();
+                        const val = input.value.trim().toLowerCase();
+                        if (!val) return;
+                        const matches = Object.keys(COMMANDS).filter((c) =>
+                            c.startsWith(val),
+                        );
+                        if (matches.length === 1) {
+                            input.value = matches[0];
+                        } else if (matches.length > 1) {
+                            // Find common prefix
+                            let prefix = matches[0];
+                            for (let i = 1; i < matches.length; i++) {
+                                while (!matches[i].startsWith(prefix)) {
+                                    prefix = prefix.substring(
+                                        0,
+                                        prefix.length - 1,
+                                    );
+                                }
+                            }
+                            if (input.value === prefix) {
+                                // Already at prefix, show options
+                                log(
+                                    `<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-white/80 opacity-80 mt-1 mb-2">${matches.map((m) => `<div>${m}</div>`).join("")}</div>`,
+                                );
+                                log(
+                                    `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${input.value}`,
+                                );
+                                scrollToBottom();
+                            } else {
+                                input.value = prefix;
+                            }
+                        }
+                    } else if (e.ctrlKey && e.key.toLowerCase() === "c") {
+                        e.preventDefault();
+                        const cmdLine = input.value;
+                        log(
+                            `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${cmdLine}<span class="text-white">^C</span>`,
+                        );
+                        input.value = "";
+                        scrollToBottom();
                     }
-                } else if (e.ctrlKey && e.key.toLowerCase() === "c") {
-                    e.preventDefault();
-                    const cmdLine = input.value;
-                    log(
-                        `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${cmdLine}<span class="text-white">^C</span>`,
+                };
+
+                // Attach
+                document.removeEventListener("terminal:toggle", toggleHandler);
+                document.addEventListener("terminal:toggle", toggleHandler);
+
+                overlay!.removeEventListener("click", overlayClickHandler);
+                overlay!.addEventListener("click", overlayClickHandler);
+
+                windowEl!.removeEventListener("click", windowClickHandler);
+                windowEl!.addEventListener("click", windowClickHandler);
+
+                closeBtn?.removeEventListener("click", closeBtnHandler);
+                closeBtn?.addEventListener("click", closeBtnHandler);
+
+                minimizeBtn?.removeEventListener("click", minimizeBtnHandler);
+                minimizeBtn?.addEventListener("click", minimizeBtnHandler);
+
+                maximizeBtn?.removeEventListener("click", maximizeBtnHandler);
+                maximizeBtn?.addEventListener("click", maximizeBtnHandler);
+
+                document.removeEventListener("keydown", keydownHandler);
+                document.addEventListener("keydown", keydownHandler);
+
+                input.removeEventListener(
+                    "keydown",
+                    inputHandler as EventListener,
+                );
+                input.addEventListener(
+                    "keydown",
+                    inputHandler as EventListener,
+                );
+
+                content?.removeEventListener("click", contentClickHandler);
+                content?.addEventListener("click", contentClickHandler);
+
+                toolbarToggle?.removeEventListener(
+                    "click",
+                    toolbarToggleHandler,
+                );
+                toolbarToggle?.addEventListener("click", toolbarToggleHandler);
+
+                // Universal Command Toolbar Delegation
+                const cmdToolbar = document.getElementById("cmd-toolbar");
+                const cmdToolbarHandler = (e: Event) => {
+                    const target = (e.target as HTMLElement).closest(
+                        ".cmd-btn",
                     );
-                    input.value = "";
-                    scrollToBottom();
-                }
-            };
+                    if (target) {
+                        const cmd = target.getAttribute("data-cmd");
+                        if (cmd) {
+                            input.value = cmd;
+                            inputHandler({ key: "Enter" } as KeyboardEvent);
+                        }
+                    }
+                };
+                cmdToolbar?.removeEventListener("click", cmdToolbarHandler);
+                cmdToolbar?.addEventListener("click", cmdToolbarHandler);
+            }
 
-            // Attach
-            document.removeEventListener("terminal:toggle", toggleHandler);
-            document.addEventListener("terminal:toggle", toggleHandler);
-
-            overlay!.removeEventListener("click", overlayClickHandler);
-            overlay!.addEventListener("click", overlayClickHandler);
-
-            windowEl!.removeEventListener("click", windowClickHandler);
-            windowEl!.addEventListener("click", windowClickHandler);
-
-            closeBtn?.removeEventListener("click", closeBtnHandler);
-            closeBtn?.addEventListener("click", closeBtnHandler);
-
-            minimizeBtn?.removeEventListener("click", minimizeBtnHandler);
-            minimizeBtn?.addEventListener("click", minimizeBtnHandler);
-
-            maximizeBtn?.removeEventListener("click", maximizeBtnHandler);
-            maximizeBtn?.addEventListener("click", maximizeBtnHandler);
-
-            document.removeEventListener("keydown", keydownHandler);
-            document.addEventListener("keydown", keydownHandler);
-
-            input.removeEventListener("keydown", inputHandler as EventListener);
-            input.addEventListener("keydown", inputHandler as EventListener);
-        }
-
-        document.addEventListener("astro:page-load", initTerminal);
-        initTerminal();
-    </script>
+            document.addEventListener("astro:page-load", initTerminal);
+            initTerminal();
+        </script>
+    </div>
 </div>

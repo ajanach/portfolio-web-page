@@ -1,4 +1,6 @@
 ---
+import { SITE } from "@consts";
+
 interface Props {
   title: string;
   description: string;
@@ -54,6 +56,7 @@ const { title, description, image = "/og-image.webp" } = Astro.props;
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="author" content={SITE.AUTHOR} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
