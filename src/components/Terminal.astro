@@ -179,10 +179,11 @@
 
             #terminal-window {
                 transition:
-                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
                     opacity 0.3s ease,
                     width 0.3s ease,
                     height 0.3s ease;
+                will-change: transform, opacity;
             }
 
             .terminal-maximized {
@@ -190,9 +191,39 @@
                 height: 90vh !important;
                 max-width: none !important;
                 max-height: none !important;
-                transform: scale(1) !important;
-                box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7) !important;
+                transform: scale(1.2) translateY(-20px) !important;
+                transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8) !important;
                 border-color: rgba(255, 255, 255, 0.2) !important;
+                z-index: 50;
+            }
+
+            .terminal-normalizing {
+                transform: scale(1) translateY(0) !important;
+                transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            /* Pulse Animation for Close Button */
+            @keyframes term-btn-pulse {
+                0% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.4);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+
+            .btn-pulse {
+                animation: term-btn-pulse 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            /* Smooth Exit State */
+            .terminal-exiting {
+                transform: scale(1) translateY(0) !important;
+                opacity: 0 !important;
             }
 
             /* Universal Command Toolbar */
@@ -481,8 +512,6 @@
 
                 if (!overlay || !windowEl || !input) return;
 
-                if (!overlay || !windowEl || !input) return;
-
                 // --- Core Actions ---
 
                 function trackedTimeout(
@@ -539,23 +568,44 @@
                     clearTimeouts();
                     abortController?.abort();
 
-                    overlay!.classList.add("opacity-0");
-                    overlay!.style.pointerEvents = "none";
+                    // Pulse effect on close button
+                    const closeBtn = document.getElementById("term-close-btn");
+                    if (closeBtn) {
+                        closeBtn.classList.add("btn-pulse");
+                    }
 
-                    // Standard Close Animation
-                    windowEl!.classList.remove("scale-100", "opacity-100");
-                    windowEl!.classList.add("scale-95", "opacity-0");
+                    requestAnimationFrame(() => {
+                        overlay!.classList.add("opacity-0");
+                        overlay!.style.pointerEvents = "none";
 
-                    input.blur();
+                        if (isMaximized) {
+                            // Smooth scale 1.2 -> 1 exit
+                            windowEl!.classList.add("terminal-exiting");
+                        } else {
+                            // Standard Close Animation
+                            windowEl!.classList.remove(
+                                "scale-100",
+                                "opacity-100",
+                            );
+                            windowEl!.classList.add("scale-95", "opacity-0");
+                        }
 
-                    window.setTimeout(() => {
-                        overlay!.classList.add("hidden");
-                        overlay!.classList.remove("flex");
-                        if (isMaximized) toggleMaximize(true);
-                        document.body.classList.remove("terminal-open");
-                        if (input) input.value = "";
-                        isAnimating = false;
-                    }, 300);
+                        input.blur();
+
+                        window.setTimeout(() => {
+                            overlay!.classList.add("hidden");
+                            overlay!.classList.remove("flex");
+                            if (isMaximized) {
+                                toggleMaximize(true);
+                                windowEl!.classList.remove("terminal-exiting");
+                            }
+                            document.body.classList.remove("terminal-open");
+                            if (input) input.value = "";
+                            if (closeBtn)
+                                closeBtn.classList.remove("btn-pulse");
+                            isAnimating = false;
+                        }, 300);
+                    });
                 }
 
                 function minimizeTerminal() {
@@ -592,13 +642,18 @@
                         return;
                     }
 
-                    isMaximized = !isMaximized;
-
                     if (isMaximized) {
-                        windowEl!.classList.add("terminal-maximized");
+                        windowEl!.classList.add("terminal-normalizing");
+                        setTimeout(() => {
+                            windowEl!.classList.remove(
+                                "terminal-maximized",
+                                "terminal-normalizing",
+                            );
+                        }, 400);
                     } else {
-                        windowEl!.classList.remove("terminal-maximized");
+                        windowEl!.classList.add("terminal-maximized");
                     }
+                    isMaximized = !isMaximized;
 
                     setTimeout(() => focusInput(), 50);
                 }
@@ -1112,8 +1167,8 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                 cmdToolbar?.addEventListener("click", cmdToolbarHandler);
             }
 
-            document.addEventListener("astro:page-load", initTerminal);
             initTerminal();
+            document.addEventListener("astro:after-swap", initTerminal);
         </script>
     </div>
 </div>
