@@ -89,3 +89,5 @@ export const SOCIALS: Socials = [
     HREF: "mailto:antonio@janach.cloud",
   },
 ]
+
+export const CURRENT_YEAR = new Date().getFullYear();
