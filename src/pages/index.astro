@@ -186,36 +186,34 @@ const stack = {
     <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
       <!-- Tech Stack Section -->
       <section class="animate mt-12">
-        <section class="animate mt-12">
-          <div class="space-y-8">
-            <p
-              class="font-semibold text-black dark:text-white uppercase tracking-widest text-xl text-center"
-            >
-              Technical Stack
-            </p>
+        <div class="space-y-8">
+          <p
+            class="font-semibold text-black dark:text-white uppercase tracking-widest text-xl text-center"
+          >
+            Technical Stack
+          </p>
 
-            <div class="space-y-8">
-              {
-                Object.entries(stack).map(([category, items]) => (
-                  <div class="space-y-3">
-                    <p class="text-[10px] font-bold uppercase opacity-50 tracking-widest text-center">
-                      {category}
-                    </p>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 place-items-center">
-                      {items.map((item) => (
-                        <StackCard
-                          text={item.text}
-                          icon={item.icon}
-                          href={item.href}
-                        />
-                      ))}
-                    </div>
+          <div class="space-y-8">
+            {
+              Object.entries(stack).map(([category, items]) => (
+                <div class="space-y-3">
+                  <p class="text-[10px] font-bold uppercase opacity-50 tracking-widest text-center">
+                    {category}
+                  </p>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 place-items-center">
+                    {items.map((item) => (
+                      <StackCard
+                        text={item.text}
+                        icon={item.icon}
+                        href={item.href}
+                      />
+                    ))}
                   </div>
-                ))
-              }
-            </div>
+                </div>
+              ))
+            }
           </div>
-        </section>
+        </div>
       </section>
     </div>
   </div>

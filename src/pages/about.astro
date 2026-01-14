@@ -123,22 +123,32 @@ const certifications = [
         <div class="space-y-24 mt-32 pb-24">
             <!-- Intro Section -->
             <section class="animate space-y-8">
-                <h1 class="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+                <h1
+                    class="text-3xl font-bold text-neutral-900 dark:text-neutral-100"
+                >
                     About Me
                 </h1>
 
-                <div class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg">
+                <div
+                    class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg"
+                >
                     <p>
-                    DevOps &amp; Cloud Engineer specialized in high availability and hybrid cloud automation. 
-                    Focused on building reliable production platforms across Azure and on-prem virtualization, applying 
-                    Infrastructure as Code (IaC) principles to keep environments predictable, versioned, and auditable - from 
-                    core infrastructure to Kubernetes platform components.
+                        DevOps &amp; Cloud Engineer specialized in high
+                        availability and hybrid cloud automation. Focused on
+                        building reliable production platforms across Azure and
+                        on-prem virtualization, applying Infrastructure as Code
+                        (IaC) principles to keep environments predictable,
+                        versioned, and auditable - from core infrastructure to
+                        Kubernetes platform components.
                     </p>
 
                     <p>
-                    Kubernetes and GitOps with Argo CD are at the center of delivery, supported by CI/CD pipelines in GitLab and GitHub 
-                    to reduce lead time and ship changes safely. The standard stack includes Terraform and Ansible for automation, 
-                    Prometheus/Grafana for observability, and Vault-style secrets management for security.
+                        Kubernetes and GitOps with Argo CD are at the center of
+                        delivery, supported by CI/CD pipelines in GitLab and
+                        GitHub to reduce lead time and ship changes safely. The
+                        standard stack includes Terraform and Ansible for
+                        automation, Prometheus/Grafana for observability, and
+                        Vault-style secrets management for security.
                     </p>
                 </div>
             </section>
@@ -230,8 +240,16 @@ const certifications = [
                                 <div class="mt-auto pt-4 flex flex-col gap-1 text-sm text-neutral-500 font-medium">
                                     <p>Issued: {cert.issued}</p>
                                     {cert.expires && (
-                                        <p class="text-green-500 dark:text-green-400 flex items-center gap-1.5" 
-        : "text-red-500/80 dark:text-red-400/80">
+                                        <p
+                                            class={
+                                                cert.expires ===
+                                                    "No Expiration" ||
+                                                new Date(cert.expires) >
+                                                    new Date() // Future date = active
+                                                    ? "text-green-500 dark:text-green-400 flex items-center gap-1.5"
+                                                    : "text-red-500/80 dark:text-red-400/80 flex items-center gap-1.5"
+                                            }
+                                        >
                                             Expires: {cert.expires}
                                         </p>
                                     )}
