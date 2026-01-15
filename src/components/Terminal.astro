@@ -1,5 +1,11 @@
 ---
+import type { UptimeData } from "@lib/uptime";
 
+interface Props {
+    uptimeData: UptimeData;
+}
+
+const { uptimeData } = Astro.props;
 ---
 
 <div
@@ -279,16 +285,16 @@
             }
         </style>
 
-        <script>
+        <script define:vars={{ uptimeData }}>
             let isBooted = false;
             let isAnimating = false;
             let isMaximized = false;
-            let history: string[] = [];
+            let history = [];
             let historyIndex = -1;
             let startTime = Date.now();
 
-            let activeTimeouts: number[] = [];
-            let abortController: AbortController | null = null;
+            let activeTimeouts = [];
+            let abortController = null;
 
             const EXPERIENCE_CONTENT = [
                 `<div class="grid gap-3 max-w-4xl mt-3">`,
@@ -462,12 +468,12 @@
                 `</div>`,
             ];
 
-            const FILES: Record<string, string> = {
+            const FILES = {
                 "about.txt": "content",
                 "contact.sh": "content",
             };
 
-            const COMMANDS: Record<string, string> = {
+            const COMMANDS = {
                 help: "Show available commands",
                 about: "Who is Antonio?",
                 experience: "Work history",
@@ -490,9 +496,7 @@
                 const windowEl = document.getElementById("terminal-window");
                 const content = document.getElementById("terminal-content");
                 const output = document.getElementById("output");
-                const input = document.getElementById(
-                    "terminal-input",
-                ) as HTMLInputElement;
+                const input = document.getElementById("terminal-input");
 
                 // Buttons
                 const closeBtn = document.getElementById("term-close-btn");
@@ -521,12 +525,9 @@
 
                 // --- Core Actions ---
 
-                function trackedTimeout(
-                    callback: () => void,
-                    delay: number,
-                ): number {
+                function trackedTimeout(callback, delay) {
                     const id = window.setTimeout(() => {
-                        if (overlay!.classList.contains("hidden")) return;
+                        if (overlay.classList.contains("hidden")) return;
                         callback();
                     }, delay);
                     activeTimeouts.push(id);
@@ -546,19 +547,19 @@
                     abortController = new AbortController();
 
                     document.body.classList.add("terminal-open");
-                    overlay!.classList.remove("hidden");
-                    overlay!.classList.add("flex");
+                    overlay.classList.remove("hidden");
+                    overlay.classList.add("flex");
 
                     requestAnimationFrame(() => {
-                        overlay!.style.pointerEvents = "all";
-                        overlay!.classList.remove("opacity-0");
+                        overlay.style.pointerEvents = "all";
+                        overlay.classList.remove("opacity-0");
 
-                        windowEl!.classList.remove(
+                        windowEl.classList.remove(
                             "scale-95",
                             "opacity-0",
                             "translate-y-10",
                         );
-                        windowEl!.classList.add("opacity-100", "scale-100");
+                        windowEl.classList.add("opacity-100", "scale-100");
 
                         trackedTimeout(() => {
                             isAnimating = false;
@@ -582,29 +583,29 @@
                     }
 
                     requestAnimationFrame(() => {
-                        overlay!.classList.add("opacity-0");
-                        overlay!.style.pointerEvents = "none";
+                        overlay.classList.add("opacity-0");
+                        overlay.style.pointerEvents = "none";
 
                         if (isMaximized) {
                             // Smooth scale 1.2 -> 1 exit
-                            windowEl!.classList.add("terminal-exiting");
+                            windowEl.classList.add("terminal-exiting");
                         } else {
                             // Standard Close Animation
-                            windowEl!.classList.remove(
+                            windowEl.classList.remove(
                                 "scale-100",
                                 "opacity-100",
                             );
-                            windowEl!.classList.add("scale-95", "opacity-0");
+                            windowEl.classList.add("scale-95", "opacity-0");
                         }
 
                         input.blur();
 
                         window.setTimeout(() => {
-                            overlay!.classList.add("hidden");
-                            overlay!.classList.remove("flex");
+                            overlay.classList.add("hidden");
+                            overlay.classList.remove("flex");
                             if (isMaximized) {
                                 toggleMaximize(true);
-                                windowEl!.classList.remove("terminal-exiting");
+                                windowEl.classList.remove("terminal-exiting");
                             }
                             document.body.classList.remove("terminal-open");
                             if (input) input.value = "";
@@ -622,20 +623,20 @@
                     clearTimeouts();
                     abortController?.abort();
 
-                    overlay!.classList.add("opacity-0");
-                    overlay!.style.pointerEvents = "none";
+                    overlay.classList.add("opacity-0");
+                    overlay.style.pointerEvents = "none";
 
-                    windowEl!.classList.remove("terminal-maximized");
-                    windowEl!.classList.remove("scale-100", "opacity-100");
-                    windowEl!.classList.add("translate-y-10", "opacity-0");
+                    windowEl.classList.remove("terminal-maximized");
+                    windowEl.classList.remove("scale-100", "opacity-100");
+                    windowEl.classList.add("translate-y-10", "opacity-0");
 
                     input.blur();
 
                     window.setTimeout(() => {
-                        overlay!.classList.add("hidden");
-                        overlay!.classList.remove("flex");
+                        overlay.classList.add("hidden");
+                        overlay.classList.remove("flex");
                         document.body.classList.remove("terminal-open");
-                        windowEl!.classList.remove("translate-y-10");
+                        windowEl.classList.remove("translate-y-10");
                         isMaximized = false;
                         if (input) input.value = "";
                         isAnimating = false;
@@ -644,20 +645,20 @@
 
                 function toggleMaximize(forceReset = false) {
                     if (forceReset) {
-                        windowEl!.classList.remove("terminal-maximized");
+                        windowEl.classList.remove("terminal-maximized");
                         isMaximized = false;
                         return;
                     }
 
                     if (isMaximized) {
                         // CRITICAL: Remove maximized class IMMEDIATELY so the window can shrink
-                        windowEl!.classList.remove("terminal-maximized");
-                        windowEl!.classList.add("terminal-normalizing");
+                        windowEl.classList.remove("terminal-maximized");
+                        windowEl.classList.add("terminal-normalizing");
                         setTimeout(() => {
-                            windowEl!.classList.remove("terminal-normalizing");
+                            windowEl.classList.remove("terminal-normalizing");
                         }, 320);
                     } else {
-                        windowEl!.classList.add("terminal-maximized");
+                        windowEl.classList.add("terminal-maximized");
                     }
                     isMaximized = !isMaximized;
 
@@ -667,7 +668,7 @@
                 function focusInput() {
                     if (
                         document.activeElement !== input &&
-                        !overlay!.classList.contains("hidden")
+                        !overlay.classList.contains("hidden")
                     ) {
                         input.focus({ preventScroll: true });
                     }
@@ -683,10 +684,10 @@
                     }
                 }
 
-                async function printLines(lines: string[], delayPerLine = 150) {
+                async function printLines(lines, delayPerLine = 150) {
                     for (const line of lines) {
                         // Check if terminal closed during print
-                        if (overlay!.classList.contains("hidden")) return;
+                        if (overlay.classList.contains("hidden")) return;
                         log(line);
                         scrollToBottom();
                         await new Promise((r) => setTimeout(r, delayPerLine));
@@ -728,7 +729,7 @@
 
                     for (const line of lines) {
                         if (
-                            overlay!.classList.contains("hidden") ||
+                            overlay.classList.contains("hidden") ||
                             signal?.aborted
                         )
                             return;
@@ -738,7 +739,7 @@
 
                     isBooted = true;
                     if (
-                        !overlay!.classList.contains("hidden") &&
+                        !overlay.classList.contains("hidden") &&
                         !signal?.aborted
                     ) {
                         input.disabled = false;
@@ -749,7 +750,7 @@
 
                 // --- Execution ---
 
-                function execute(cmdLine: string) {
+                function execute(cmdLine) {
                     const parts = cmdLine.split(" ");
                     const cmd = parts[0].toLowerCase();
                     const args = parts.slice(1);
@@ -823,15 +824,12 @@
                             break;
 
                         case "status":
-                            const uptime = Math.floor(
-                                (Date.now() - startTime) / 1000,
-                            );
                             log(`
 <div class="border border-white/10 p-2 rounded bg-white/5 text-white/90">
   <div class="grid grid-cols-[100px_1fr] gap-1">
-    <div class="font-bold text-green-400">System:</div><div>All systems normal</div>
+    <div class="font-bold text-green-400">System:</div><div>${uptimeData.statusText}</div>
     <div class="font-bold text-green-400">SessionID:</div><div>${Math.random().toString(36).slice(2, 11)}</div>
-    <div class="font-bold text-green-400">Uptime:</div><div>${uptime}s</div>
+    <div class="font-bold text-green-400">Uptime:</div><div>${uptimeData.uptime}%</div>
     <div class="font-bold text-green-400">Time:</div><div>${new Date().toLocaleTimeString()}</div>
   </div>
 </div>`);
@@ -856,7 +854,7 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
     <div class="text-white/20 mb-2">-------------------</div>
     <div>OS: Red Hat Enterprise Linux 9.4</div>
     <div>Host: janach.cloud</div>
-    <div>Uptime: 99.999%</div>
+    <div>Uptime: ${uptimeData.uptime}%</div>
     <div>Shell: zsh 5.8</div>
     <div>Theme: ant-dark</div>
   </div>
@@ -976,7 +974,7 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                     }
                 }
 
-                function log(html: string) {
+                function log(html) {
                     if (!output) return;
                     const div = document.createElement("div");
                     div.innerHTML = html;
@@ -1007,29 +1005,29 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                 };
 
                 const toggleHandler = () => {
-                    if (overlay!.classList.contains("hidden")) openTerminal();
+                    if (overlay.classList.contains("hidden")) openTerminal();
                     else closeTerminal();
                 };
-                const overlayClickHandler = (e: MouseEvent) => {
+                const overlayClickHandler = (e) => {
                     if (e.target === overlay) closeTerminal();
                 };
-                const windowClickHandler = (e: MouseEvent) => {
+                const windowClickHandler = (e) => {
                     e.stopImmediatePropagation();
                 };
-                const closeBtnHandler = (e: MouseEvent) => {
+                const closeBtnHandler = (e) => {
                     e.stopPropagation();
                     closeTerminal();
                 };
-                const minimizeBtnHandler = (e: MouseEvent) => {
+                const minimizeBtnHandler = (e) => {
                     e.stopPropagation();
                     minimizeTerminal();
                 };
-                const maximizeBtnHandler = (e: MouseEvent) => {
+                const maximizeBtnHandler = (e) => {
                     e.stopPropagation();
                     toggleMaximize();
                 };
-                const keydownHandler = (e: KeyboardEvent) => {
-                    if (overlay!.classList.contains("hidden")) return;
+                const keydownHandler = (e) => {
+                    if (overlay.classList.contains("hidden")) return;
 
                     if (e.key === "Escape") {
                         closeTerminal();
@@ -1044,7 +1042,7 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                         toolbarToggleHandler();
                     }
                 };
-                const inputHandler = (e: KeyboardEvent) => {
+                const inputHandler = (e) => {
                     if (e.key === "Enter") {
                         const cmdLine = input.value.trim();
                         input.value = "";
@@ -1119,11 +1117,11 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                 document.removeEventListener("terminal:toggle", toggleHandler);
                 document.addEventListener("terminal:toggle", toggleHandler);
 
-                overlay!.removeEventListener("click", overlayClickHandler);
-                overlay!.addEventListener("click", overlayClickHandler);
+                overlay.removeEventListener("click", overlayClickHandler);
+                overlay.addEventListener("click", overlayClickHandler);
 
-                windowEl!.removeEventListener("click", windowClickHandler);
-                windowEl!.addEventListener("click", windowClickHandler);
+                windowEl.removeEventListener("click", windowClickHandler);
+                windowEl.addEventListener("click", windowClickHandler);
 
                 closeBtn?.removeEventListener("click", closeBtnHandler);
                 closeBtn?.addEventListener("click", closeBtnHandler);
@@ -1137,14 +1135,8 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                 document.removeEventListener("keydown", keydownHandler);
                 document.addEventListener("keydown", keydownHandler);
 
-                input.removeEventListener(
-                    "keydown",
-                    inputHandler as EventListener,
-                );
-                input.addEventListener(
-                    "keydown",
-                    inputHandler as EventListener,
-                );
+                input.removeEventListener("keydown", inputHandler);
+                input.addEventListener("keydown", inputHandler);
 
                 content?.removeEventListener("click", contentClickHandler);
                 content?.addEventListener("click", contentClickHandler);
@@ -1157,15 +1149,13 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
 
                 // Universal Command Toolbar Delegation
                 const cmdToolbar = document.getElementById("cmd-toolbar");
-                const cmdToolbarHandler = (e: Event) => {
-                    const target = (e.target as HTMLElement).closest(
-                        ".cmd-btn",
-                    );
+                const cmdToolbarHandler = (e) => {
+                    const target = e.target.closest(".cmd-btn");
                     if (target) {
                         const cmd = target.getAttribute("data-cmd");
                         if (cmd) {
                             input.value = cmd;
-                            inputHandler({ key: "Enter" } as KeyboardEvent);
+                            inputHandler({ key: "Enter" });
                         }
                     }
                 };

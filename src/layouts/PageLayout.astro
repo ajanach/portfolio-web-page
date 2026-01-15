@@ -6,8 +6,11 @@ import Footer from "@components/Footer.astro";
 import Drawer from "@components/Drawer.astro";
 import ScrollToTop from "@components/ScrollToTop.astro";
 import Terminal from "@components/Terminal.astro";
-const { title, description } = Astro.props;
 import { SITE } from "@consts";
+import { fetchUptime } from "@lib/uptime";
+
+const { title, description } = Astro.props;
+const uptimeData = await fetchUptime();
 ---
 
 <!doctype html>
@@ -21,10 +24,10 @@ import { SITE } from "@consts";
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer {...uptimeData} />
 
     <ScrollToTop />
-    <Terminal />
+    <Terminal uptimeData={uptimeData} />
     <!-- Added component -->
   </body>
 </html>
