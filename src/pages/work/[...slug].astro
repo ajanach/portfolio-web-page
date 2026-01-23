@@ -23,12 +23,12 @@ const { title, summary } = entry.data;
 
 <PageLayout title={title} description={summary}>
   <TopLayout>
-    <div class="animate">
+    <div class="animate-on-load">
       <ArticleTopLayout entry={entry} />
     </div>
   </TopLayout>
   <BottomLayout>
-    <div class="animate">
+    <div class="animate-on-load delay-100">
       <ArticleBottomLayout entry={entry} />
     </div>
   </BottomLayout>
