@@ -144,19 +144,47 @@ article img {
 
 
 
-.copy-cnt {
-  @apply absolute w-full;
-  top: var(--copy-btn-margin);
+/* Code Block Styling */
+.code-block-wrapper {
+  @apply relative my-6 rounded-lg overflow-hidden border border-black/10 dark:border-white/10;
+  background-color: #0d1117;
+  /* Default dark bg matching widely used code themes */
 }
 
+/* Header bar above the code */
+.code-header {
+  @apply flex justify-between items-center px-4 py-2;
+  @apply bg-black/5 dark:bg-white/5 border-b border-black/10 dark:border-white/10;
+  font-family: "Atkinson", sans-serif;
+}
+
+/* Language label */
+.code-lang {
+  @apply text-xs font-bold uppercase tracking-wider opacity-75;
+}
+
+/* Copy button in header */
 .copy-btn {
-  @apply w-[30px] fixed;
-  left: calc(100% - var(--copy-btn-margin));
-  transform: translateX(-100%);
+  @apply p-1.5 rounded transition-all duration-200;
+  @apply text-black/50 dark:text-white/50;
+  @apply hover:bg-black/10 hover:dark:bg-white/10 hover:text-black hover:dark:text-white;
 }
 
 .copy-svg {
-  @apply w-full aspect-square text-white opacity-70 hover:opacity-90;
+  @apply size-4;
+}
+
+/* Override Astro's default pre styling to fit in wrapper */
+.code-block-wrapper pre {
+  @apply !my-0 !rounded-none !bg-transparent;
+  @apply p-4 overflow-x-auto;
+}
+
+/* Ensure code font is distinct */
+.code-block-wrapper code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 /* 
