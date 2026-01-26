@@ -14,7 +14,7 @@ repoUrl: ""
 
 | Conference | Publication | Co-Author | Resources |
 |------------|-------------|-----------|-----------|
-| MIPRO 2025, Opatija | IEEE Xplore | Rok Piltaver | [IEEE Paper](https://ieeexplore.ieee.org/document/10569234) • [YouTube Presentation](https://youtu.be/DnZDIiyP8yw?si=NzeaXhhUma0pZlpG) • [Slides](https://www.slideshare.net/slideshow/a-decision-making-framework-for-evaluating-orchestration-systems-in-microservices-applications/283042960) |
+| MIPRO 2025, Opatija | IEEE Xplore | Rok Piltaver | [IEEE Paper](https://ieeexplore.ieee.org/document/11131981) • [YouTube Presentation](https://youtu.be/DnZDIiyP8yw?si=NzeaXhhUma0pZlpG) • [Slides](https://www.slideshare.net/slideshow/a-decision-making-framework-for-evaluating-orchestration-systems-in-microservices-applications/283042960) |
 
 ## Overview
 
