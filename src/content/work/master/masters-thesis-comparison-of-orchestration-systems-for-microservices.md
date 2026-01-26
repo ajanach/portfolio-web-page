@@ -1,6 +1,6 @@
 ---
 title: "Master's Thesis - Comparison of Orchestration Systems for Microservices Applications"
-summary: "Comprehensive performance and cost comparison of Azure Kubernetes Service (AKS) vs K3S for microservices orchestration using Google's Online Boutique demo application."
+summary: "Research-driven comparison of Kubernetes orchestration platforms (AKS vs K3S) analyzing performance, cost-effectiveness, and operational complexity for medium-scale microservices deployments."
 date: "2024-09-30"
 tags:
   - Master
@@ -8,15 +8,11 @@ tags:
 draft: false
 ---
 
-# Comparison of Orchestration Systems for Microservices Applications
-
-Research-driven comparison of Kubernetes orchestration platforms (AKS vs K3S) analyzing performance, cost-effectiveness, and operational complexity for medium-scale microservices deployments.
-
 ## Timeline & Info
 
 | Start date | End date | Associated with | Resources |
 |------------|----------|-----------------|-----------|
-| April 2024 | September 2024 | Faculty of Informatics and Digital Technologies, University of Rijeka | [Thesis PDF](/projects/MASTER/masters_thesis.pdf) · [GitHub](https://github.com/ajanach/comparison-of-orchestration-systems-for-microservices-applications.git) · [Defense Video](https://youtu.be/kA0KqmDsE-o) |
+| April 2024 | September 2024 | Faculty of Informatics and Digital Technologies, University of Rijeka | [Thesis PDF](https://zir.nsk.hr/en/object/infri:1316) · [GitHub](https://github.com/ajanach/comparison-of-orchestration-systems-for-microservices-applications.git) · [Defense Video](https://youtu.be/kA0KqmDsE-o) |
 
 ## Overview
 
