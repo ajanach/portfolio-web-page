@@ -1,11 +1,11 @@
 ---
 title: "Privacy Policy"
-date: "01/11/2026"
+date: "26/01/2026"
 ---
 
 # Privacy Policy
 
-**Effective Date:** January 11, 2026
+**Effective Date:** January 26, 2026
 
 **Antonio Janach** operates this portfolio website as a static site to showcase professional work. I prioritize data minimization and transparency. This policy details the limited technical data processed during your visit, ensuring compliance with the General Data Protection Regulation (GDPR).
 
@@ -50,7 +50,6 @@ For details, refer to the [GitHub Privacy Statement](https://docs.github.com/en/
 
 ## 6. External Resources (CDNs)
 To optimize performance, this site loads specific assets (JavaScript libraries, fonts) from Content Delivery Networks (CDNs).
-*   **tsParticles (via jsDelivr):** Used for background visual effects. jsDelivr may log your IP address to deliver content but does not use this data for tracking or profiling. [jsDelivr Privacy Policy](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net).
 *   **Cloudflare CDN:** Turnstile scripts are loaded from Cloudflare's global network.
 
 ## 7. Direct Communication
