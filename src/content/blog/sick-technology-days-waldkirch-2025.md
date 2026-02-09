@@ -9,7 +9,7 @@ draft: false
 
 ## Overview
 
-Last week, Siniša Husnjak and I attended SICK's internal Technology Days in Waldkirch, Germany, representing our Varaždin office. This multi-day technical event brought together engineers, developers, and project managers from across SICK's global network, including teams from Germany, the United States, and other European locations, to present innovations, share knowledge, and discuss the future of sensor-based automation and Industrial AI.
+Last week, [Siniša Husnjak](https://www.linkedin.com/in/sinisa-husnjak/) and I attended SICK's internal Technology Days in Waldkirch, Germany, representing our Varaždin office. This multi-day technical event brought together engineers, developers, and project managers from across SICK's global network, including teams from Germany, the United States, and other European locations, to present innovations, share knowledge, and discuss the future of sensor-based automation and Industrial AI.
 
 ![Antonio Janach and Siniša Husnjak attending SICK Technology Days 2025](/projects/career/antonio-janach-sinisa-husnjak-technology-days-2025.jpg)
 
