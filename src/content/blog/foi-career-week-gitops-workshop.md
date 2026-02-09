@@ -3,7 +3,7 @@ title: "FOI Career Week: Live Demo of Terraform to GitOps on AKS"
 summary: "Co-hosted hands-on workshop at FOI Career Week, demonstrating Infrastructure as Code with Terraform, Azure Kubernetes Service provisioning via GitLab CI/CD, and GitOps-based deployments with ArgoCD."
 date: "2025-10-23"
 tags: 
-  - career
+  - Career
 draft: false
 ---
 
