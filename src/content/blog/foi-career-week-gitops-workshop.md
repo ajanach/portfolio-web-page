@@ -11,7 +11,7 @@ draft: false
 
 ## Overview
 
-Delivered a hands-on DevOps workshop at the Faculty of Organization and Informatics Career Week, representing SICK Sensor Intelligence alongside Robi Hrnčić. Guided students through building a production-grade **Azure Kubernetes Service** cluster from scratch using **Terraform**, automating infrastructure deployment with **GitLab CI/CD**, and implementing **GitOps** with **ArgoCD** for continuous synchronization.
+Delivered a hands-on DevOps workshop at the Faculty of Organization and Informatics Career Week, representing SICK Sensor Intelligence alongside [Robi Hrnčić](https://www.linkedin.com/in/robi-hrn%C4%8Di%C4%87-927896227/). Guided students through building a production-grade **Azure Kubernetes Service** cluster from scratch using **Terraform**, automating infrastructure deployment with **GitLab CI/CD**, and implementing **GitOps** with **ArgoCD** for continuous synchronization.
 
 The workshop demonstrated how Infrastructure as Code and GitOps eliminate manual deployment steps and enable teams to achieve deployment cycles measured in minutes rather than days. By combining declarative infrastructure, automated pipelines, and pull-based synchronization, we showcased the same workflows used to manage production Kubernetes environments.
 

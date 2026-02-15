@@ -23,7 +23,9 @@ const { text, icon, href } = Astro.props;
     class="w-8 h-8 p-1.5 bg-white rounded-md flex items-center justify-center shadow-sm flex-shrink-0"
   >
     {
-      icon.startsWith("http") ? (
+      icon.startsWith("http") ||
+      icon.startsWith("/") ||
+      icon.startsWith("./") ? (
         <img src={icon} alt={text} class="w-full h-full object-contain" />
       ) : (
         <svg class="w-full h-full fill-current text-black">
