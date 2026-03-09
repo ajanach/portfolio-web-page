@@ -6,12 +6,21 @@
     "dev": "astro dev",
     "dev:network": "astro dev --host",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "tsx scripts/generate-cv-pdf.tsx && astro check && astro build",
+    "generate:cv": "tsx scripts/generate-cv-pdf.tsx",
     "preview": "astro preview",
     "preview:network": "astro dev --host",
     "astro": "astro",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@react-pdf/renderer": "^4.3.2",
+    "@types/react": "^19.2.14",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sharp": "^0.34.5",
+    "tsx": "^4.19.0"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -24,7 +33,6 @@
     "astro": "^5.16.9",
     "clsx": "^2.1.0",
     "fuse.js": "^7.1.0",
-    "sharp": "^0.34.5",
     "solid-js": "^1.9.10",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^3.4.19",

@@ -3,119 +3,8 @@ import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Timeline from "@components/Timeline.astro";
 import { SITE } from "@consts";
-
-const experience = [
-    {
-        date: "Mar 2024 — Present",
-        title: "DevOps Engineer",
-        company: "SICK MOBILISIS d.o.o.",
-        points: [
-            "Plan, develop, deploy, and maintain various software solutions, incorporating security best practices.",
-            "Monitor performance and manage infrastructure to meet specified requirements (Prometheus, Grafana, Loki).",
-            "Design and implement CI/CD pipelines based on project requirements.",
-            "Design and deploy highly available infrastructure using cloud services, primarily Azure.",
-            "Write Infrastructure as Code (IaC) using Terraform to streamline setup replication across multiple development environments.",
-            "Ensure solutions are designed with a focus on performance, scalability, and operability.",
-            "Collaborate on projects involving Kubernetes, Terraform, Ansible, Azure Cloud, ArgoCD, GitLab, Linux, Bash scripting, etc.",
-            "Create Terraform files for infrastructure provisioning and YAML manifest files for Kubernetes service deployment, maintaining Kubernetes in the desired state.",
-        ],
-    },
-    {
-        date: "Jul 2023 — Feb 2024",
-        title: "DevOps Engineer (Internship)",
-        company: "SICK MOBILISIS d.o.o.",
-        points: [
-            "Collaborated on projects involving Kubernetes, Terraform, Ansible, Azure Cloud, ArgoCD, GitLab, Linux, Bash scripting, and more.",
-            "Execute projects that are highly available and span technologies like Kubernetes, Terraform, Ansible, Azure Cloud, ArgoCD, GitLab, Linux, Bash scripting, etc.",
-        ],
-    },
-    {
-        date: "Dec 2021 — Jun 2023",
-        title: "Junior System Engineer",
-        company: "Combis d.o.o.",
-        points: [
-            "Checking application/service logs, resource usage, monitoring backup execution.",
-            "Remote diagnostics of problems and user support for problem resolution.",
-            "Monitoring, administration, and troubleshooting of IT systems.",
-            "System configuration, installing additional programs on equipment, and user education.",
-            "Analysis of user needs and solution planning.",
-            "Tech stack: Linux Administration (Bash, Security, Storage, Podman, SSH), Windows (ADDS, DNS, DHCP, Exchange), Hyper-V, vSphere, Veeam.",
-        ],
-    },
-    {
-        date: "Oct 2018 — Present",
-        title: "Web Administrator",
-        company: "Freelance",
-        points: [
-            "Design, develop, and administer cloud-based WordPress websites (using Apache/httpd) to enhance the online presence of local businesses.",
-            "Leveraging cloud infrastructure, I create scalable and customizable websites that optimize performance and user experience.",
-            "Tech stack: Wordpress, PHP, MariaDB, Apache/httpd, Google Analytics, SEO, E-mail service.",
-        ],
-    },
-    {
-        date: "Sep 2017 — Sep 2019",
-        title: "Information Technology Instructor",
-        company: "Enter Koprivnica d.o.o.",
-        points: [
-            "Organizing and conducting IT workshops aimed at educating both young and adult populations about the importance of IT education.",
-            "Tech stack: mBot, Micro:bit, Arduino, C++.",
-        ],
-    },
-];
-
-const education = [
-    {
-        date: "2022 — 2024",
-        title: "Master's Degree",
-        company:
-            "Faculty of Informatics and Digital Technologies, University of Rijeka",
-        points: [
-            "<strong class='font-bold'>Master's Thesis:</strong> Comparison of Orchestration Systems for Microservices Applications <a href='https://janach.cloud/work/master/masters-thesis-comparison-of-orchestration-systems-for-microservices/' target='_blank' rel='noopener noreferrer' class='inline-flex items-center gap-1 px-2 py-0.5 ml-2 text-[10px] font-black uppercase tracking-wider bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-black dark:hover:text-white transition-all no-underline active:scale-95'>View ↗</a>",
-            "<strong class='font-bold'>Published Research (MIPRO 2025 / IEEE):</strong> 'A Decision-Making Framework for Evaluating Orchestration Systems in Microservices Applications'. Co-authored with Rok Piltaver. <a href='https://janach.cloud/work/master/orchestration-decision-framework-mipro-2025/' target='_blank' rel='noopener noreferrer' class='inline-flex items-center gap-1 px-2 py-0.5 ml-2 text-[10px] font-black uppercase tracking-wider bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-black dark:hover:text-white transition-all no-underline active:scale-95'>View ↗</a>",
-        ],
-    },
-    {
-        date: "2018 — 2021",
-        title: "Bachelor's Degree",
-        company: "Algebra Bernays University",
-        points: [
-            "<strong class='font-bold'>Final Thesis:</strong> Windows Computer Administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure Cloud <a href='https://janach.cloud/work/bachelor/windows-computer-administration-using-mecm-in-azure-final-thesis/' target='_blank' rel='noopener noreferrer' class='inline-flex items-center gap-1 px-2 py-0.5 ml-2 text-[10px] font-black uppercase tracking-wider bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-black dark:hover:text-white transition-all no-underline active:scale-95'>View ↗</a>",
-        ],
-    },
-];
-
-const certifications = [
-    {
-        name: "Red Hat Certified Engineer (RHCE)",
-        issued: "April 2025",
-        expires: "April 2028",
-        link: "https://www.credly.com/badges/f51f0b15-782f-4302-955d-98b4b46a0d07/public_url",
-    },
-    {
-        name: "Red Hat Certified System Administrator (RHCSA)",
-        issued: "April 2022",
-        expires: "April 2028",
-        link: "https://www.credly.com/badges/00733b40-0d36-48cc-94b0-363368f49a2d/public_url",
-    },
-    {
-        name: "Microsoft Certified: Azure Fundamentals (AZ-900)",
-        issued: "July 2022",
-        expires: "No Expiration",
-        link: "https://www.credly.com/badges/8982b5e9-72f2-4312-ad69-6b31375a60d6/public_url",
-    },
-    {
-        name: "MTA: Networking Fundamentals",
-        issued: "June 2019",
-        expires: "No Expiration",
-        link: "https://www.credly.com/badges/7ed2a90b-7d34-4164-9784-999563f60a62",
-    },
-    {
-        name: "MTA: Windows Operating System Fundamentals",
-        issued: "June 2019",
-        expires: "No Expiration",
-        link: "https://www.credly.com/badges/b69bd791-da70-44c6-821c-f62750d30a9b",
-    },
-];
+import { experience, education, certifications } from "../lib/cv-data";
+import CVDownloadButton from "../components/CVDownloadButton.astro";
 ---
 
 <PageLayout title="About Me" description={SITE.DESCRIPTION}>
@@ -133,33 +22,31 @@ const certifications = [
                     class="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg"
                 >
                     <p>
-                        DevOps &amp; Cloud Engineer specialized in high
-                        availability and hybrid cloud automation. Focused on
-                        building reliable production platforms across Azure and
-                        on-prem virtualization, applying Infrastructure as Code
-                        (IaC) principles to keep environments predictable,
-                        versioned, and auditable - from core infrastructure to
-                        Kubernetes platform components.
+                        DevOps &amp; Cloud Engineer with 4+ years of infrastructure and
+                        platform engineering experience. Specialized in high availability
+                        and hybrid cloud automation - focused on building reliable
+                        production platforms across Azure and on-prem virtualization,
+                        applying Infrastructure as Code (IaC) principles to keep
+                        environments predictable, versioned, and auditable.
                     </p>
 
                     <p>
-                        Kubernetes and GitOps with Argo CD are at the center of
-                        delivery, supported by CI/CD pipelines in GitLab and
-                        GitHub to reduce lead time and ship changes safely. The
-                        standard stack includes Terraform and Ansible for
-                        automation, Prometheus/Grafana for observability, and
-                        Vault-style secrets management for security.
+                        Kubernetes and GitOps with Argo CD are at the center of delivery,
+                        supported by CI/CD pipelines in GitLab and GitHub, Terraform and
+                        Ansible for automation, and Prometheus and Grafana for
+                        observability. Published IEEE researcher (MIPRO 2025). RHCE certified.
                     </p>
                 </div>
             </section>
 
             <!-- Experience Section -->
             <section class="animate space-y-8">
-                <h2
-                    class="text-2xl font-semibold text-neutral-900 dark:text-neutral-200 border-b border-neutral-200 dark:border-neutral-800 pb-4"
-                >
-                    Experience
-                </h2>
+                <div class="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-4">
+                    <h2 class="text-2xl font-semibold text-neutral-900 dark:text-neutral-200">
+                        Experience
+                    </h2>
+                    <CVDownloadButton variant="text" />
+                </div>
                 <Timeline items={experience} />
             </section>
 
@@ -257,6 +144,10 @@ const certifications = [
                             </a>
                         ))
                     }
+                </div>
+                
+                <div class="pt-16 pb-4 flex justify-center">
+                    <CVDownloadButton variant="primary" />
                 </div>
             </section>
         </div>

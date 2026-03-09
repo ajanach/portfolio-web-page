@@ -44,6 +44,29 @@ A professional DevOps & Cloud Engineer portfolio built with **Astro 5** and **Ta
 
 This project is configured for **automated deployment** to GitHub Pages using GitHub Actions.
 
+### CV PDF Generation
+
+The downloadable PDF is **generated at build time** from `src/lib/cv-data.ts`.
+
+**How it works:**
+1. `tsx scripts/generate-cv-pdf.tsx` runs before Astro build
+2. Profile image optimized: `public/profile.png` → 400×400 JPEG @ quality 85 (mozjpeg, lanczos3) → base64
+3. `@react-pdf/renderer` renders `CVDocument.tsx` with optimized image
+4. Result: `public/Antonio_Janach_CV.pdf` (~48KB)
+5. Astro copies it to `dist/` during build
+
+**Local testing:**
+```bash
+npm run generate:cv      # Generate PDF only
+npm run build            # Full pipeline (generate → check → build)
+```
+
+**Editing CV content:**
+Edit `src/lib/cv-data.ts` — next build auto-regenerates the PDF.
+
+**CI verification:**
+GitHub Actions asserts the PDF exists in `dist/` and is under 500KB (safety margin well below the 2MB ATS ceiling).
+
 ### Manual Build (Windows Note)
 If building locally on Windows, you may encounter file locking issues with Rollup. It is recommended to rely on the CI/CD pipeline or build in a Linux environment (WSL).
 

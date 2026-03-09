@@ -31,3 +31,8 @@ Desktop.ini
 .vscode/
 .idea/
 *.iml
+# Generated build artifacts
+public/Antonio_Janach_CV.pdf
+build_output.log
+
+

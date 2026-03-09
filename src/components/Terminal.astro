@@ -1,11 +1,34 @@
 ---
 import type { UptimeData } from "@lib/uptime";
+import { experience, education, certifications, personalInfo, skills } from "@lib/cv-data";
 
 interface Props {
     uptimeData: UptimeData;
 }
 
 const { uptimeData } = Astro.props;
+
+// Prepare serializable data for the inline terminal script
+const terminalData = {
+    experience: experience.map(e => ({
+        date: e.date,
+        role: e.title,
+        company: e.company.replace(/ d\.o\.o\.$/, ''),
+    })),
+    education: education.map(e => ({
+        id: e.title,
+        year: e.date,
+        school: e.company,
+        points: (e as any).terminalPoints || [],
+    })),
+    certifications: certifications.map(c => {
+        const match = c.name.match(/\(([^)]+)\)$/);
+        const id = match ? match[1] : c.name.split(':')[0].trim();
+        return { id, name: c.name, link: c.link, date: c.issued, exp: c.expires };
+    }),
+    skills,
+    personalInfo,
+};
 ---
 
 <div
@@ -97,6 +120,7 @@ const { uptimeData } = Astro.props;
                         { cmd: "education", desc: "Academic background" },
                         { cmd: "certificates", desc: "Professional certs" },
                         { cmd: "skills", desc: "Tech stack" },
+                        { cmd: "cv", desc: "Download full CV" },
                         { cmd: "contact", desc: "Get in touch" },
                         { cmd: "neofetch", desc: "System info" },
                         { cmd: "clear", desc: "Clear terminal" },
@@ -285,7 +309,8 @@ const { uptimeData } = Astro.props;
             }
         </style>
 
-        <script define:vars={{ uptimeData }}>
+
+        <script define:vars={{ uptimeData, terminalData }}>
             let isBooted = false;
             let isAnimating = false;
             let isMaximized = false;
@@ -295,35 +320,10 @@ const { uptimeData } = Astro.props;
             let activeTimeouts = [];
             let abortController = null;
 
+            // Build terminal HTML content from injected cv-data
             const EXPERIENCE_CONTENT = [
                 `<div class="grid gap-3 max-w-4xl mt-3">`,
-                ...[
-                    {
-                        date: "Mar 2024 — Present",
-                        role: "DevOps Engineer",
-                        company: "SICK MOBILISIS",
-                    },
-                    {
-                        date: "Jul 2023 — Feb 2024",
-                        role: "DevOps Intern",
-                        company: "SICK MOBILISIS",
-                    },
-                    {
-                        date: "Dec 2021 — Jun 2023",
-                        role: "Junior System Engineer",
-                        company: "Combis",
-                    },
-                    {
-                        date: "Oct 2018 — Present",
-                        role: "Web Administrator",
-                        company: "Freelance",
-                    },
-                    {
-                        date: "Sep 2017 — Sep 2019",
-                        role: "IT Instructor",
-                        company: "Enter Koprivnica",
-                    },
-                ].map(
+                ...terminalData.experience.map(
                     (e) => `
                 <div class="flex flex-col gap-0.5 p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
                     <div class="flex items-center gap-2">
@@ -340,37 +340,7 @@ const { uptimeData } = Astro.props;
 
             const EDUCATION_CONTENT = [
                 `<div class="grid gap-3 max-w-4xl mt-3">`,
-                ...[
-                    {
-                        year: "2022 — 2024",
-                        school: "Faculty of Informatics and Digital Technologies, University of Rijeka",
-                        points: [
-                            {
-                                label: "Master's Thesis",
-                                text: "Comparison of Orchestration Systems for Microservices",
-                                link: "https://janach.cloud/work/master/masters-thesis-comparison-of-orchestration-systems-for-microservices/",
-                            },
-                            {
-                                label: "Published Research (MIPRO 2025 / IEEE)",
-                                text: "A Decision-Making Framework for Evaluating Orchestration Systems",
-                                link: "https://janach.cloud/work/master/orchestration-decision-framework-mipro-2025/",
-                            },
-                        ],
-                        id: "Master's Degree",
-                    },
-                    {
-                        year: "2018 — 2021",
-                        school: "Algebra Bernays University",
-                        points: [
-                            {
-                                label: "Final Thesis",
-                                text: "Windows Computer Administration using MECM in Azure",
-                                link: "https://janach.cloud/work/bachelor/windows-computer-administration-using-mecm-in-azure-final-thesis/",
-                            },
-                        ],
-                        id: "Bachelor's Degree",
-                    },
-                ].map(
+                ...terminalData.education.map(
                     (e) => `
         <div class="flex flex-col gap-3 p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
             <div class="flex flex-col gap-1 text-left">
@@ -409,43 +379,7 @@ const { uptimeData } = Astro.props;
 
             const CERTS_CONTENT = [
                 `<div class="grid gap-3 max-w-4xl mt-3">`,
-                ...[
-                    {
-                        id: "RHCE",
-                        name: "Red Hat Certified Engineer",
-                        link: "https://www.credly.com/badges/f51f0b15-782f-4302-955d-98b4b46a0d07/public_url",
-                        date: "April 2025",
-                        exp: "April 2028",
-                    },
-                    {
-                        id: "RHCSA",
-                        name: "Red Hat Certified System Administrator",
-                        link: "https://www.credly.com/badges/00733b40-0d36-48cc-94b0-363368f49a2d/public_url",
-                        date: "April 2022",
-                        exp: "April 2028",
-                    },
-                    {
-                        id: "AZ-900",
-                        name: "Microsoft Certified: Azure Fundamentals",
-                        link: "https://www.credly.com/badges/8982b5e9-72f2-4312-ad69-6b31375a60d6/public_url",
-                        date: "July 2022",
-                        exp: "No Expiration",
-                    },
-                    {
-                        id: "MTA",
-                        name: "MTA: Networking Fundamentals",
-                        link: "https://www.credly.com/badges/7ed2a90b-7d34-4164-9784-999563f60a62",
-                        date: "June 2019",
-                        exp: "No Expiration",
-                    },
-                    {
-                        id: "MTA",
-                        name: "MTA: Windows Operating System Fundamentals",
-                        link: "https://www.credly.com/badges/b69bd791-da70-44c6-821c-f62750d30a9b",
-                        date: "June 2019",
-                        exp: "No Expiration",
-                    },
-                ].map(
+                ...terminalData.certifications.map(
                     (c) => `
         <div class="flex items-center justify-between p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
             <div class="flex flex-col gap-0.5">
@@ -479,6 +413,7 @@ const { uptimeData } = Astro.props;
                 education: "Academic background",
                 certificates: "Professional certs",
                 skills: "Tech stack",
+                cv: "Download full CV",
                 contact: "Get in touch",
                 ls: "List files",
                 cat: "Read file",
@@ -864,10 +799,10 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                         case "about":
                             log(`
 <div class="inline-flex items-center gap-4 mt-4 mb-4 p-4 border border-white/20 rounded-lg">
-    <img src="/profile.png" alt="Antonio Janach" class="w-16 h-16 rounded-full object-cover">
+    <img src="/profile.png" alt="${terminalData.personalInfo.name}" class="w-16 h-16 rounded-full object-cover">
     <div>
-        <div class="text-white font-bold text-base">Antonio Janach</div>
-        <div class="text-gray-400">DevOps & Cloud Engineer</div>
+        <div class="text-white font-bold text-base">${terminalData.personalInfo.name}</div>
+        <div class="text-gray-400">${terminalData.personalInfo.role}</div>
     </div>
 </div>
 <div class="text-white leading-relaxed">
@@ -875,7 +810,7 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
     <br>
     Focused on building reliable production platforms using IaC, GitOps, and Kubernetes.
     <br><br>
-    Location: Croatia 🇭🇷
+    Location: ${terminalData.personalInfo.location}
 </div>
 `);
                             break;
@@ -906,27 +841,8 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                                 "<span class='text-blue-400 italic'>Analyzing skillset...</span>",
                             );
                             trackedTimeout(() => {
-                                const categories = [
-                                    {
-                                        label: "Orchestration",
-                                        tech: "Kubernetes, Podman, Docker, ArgoCD",
-                                    },
-                                    {
-                                        label: "Automation",
-                                        tech: "Terraform, Ansible, GitLab CI, GitHub Actions",
-                                    },
-                                    {
-                                        label: "Infrastructure",
-                                        tech: "Azure, VMware, Hyper-V, Proxmox, Linux",
-                                    },
-                                    {
-                                        label: "Observability",
-                                        tech: "Prometheus, Grafana, Loki, Vault",
-                                    },
-                                ];
-
                                 let skillsHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3 max-w-4xl">`;
-                                categories.forEach((cat) => {
+                                terminalData.skills.forEach((cat) => {
                                     skillsHTML += `
                 <div class="p-2 bg-white/[0.03] border-l border-yellow-400 rounded-r">
                     <div class="text-yellow-300 font-bold text-xs uppercase tracking-widest mb-1">
@@ -950,11 +866,11 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                             trackedTimeout(() => {
                                 log(`
 <div class="flex flex-wrap gap-3 mt-3 max-w-2xl">
-    <a href="mailto:antonio@janach.cloud" 
+    <a href="mailto:${terminalData.personalInfo.email}" 
        class="flex items-center px-4 py-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 rounded text-white/80 no-underline transition-all active:scale-95">
         <span class="text-sm font-bold tracking-wide">E-mail</span>
     </a>
-    <a href="https://linkedin.com/in/ajanach" target="_blank" rel="noopener noreferrer" 
+    <a href="https://${terminalData.personalInfo.linkedin}" target="_blank" rel="noopener noreferrer" 
        class="flex items-center px-4 py-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 rounded text-white/80 no-underline transition-all active:scale-95">
         <span class="text-sm font-bold tracking-wide">LinkedIn</span>
     </a>
@@ -965,6 +881,23 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
 `);
                                 scrollToBottom();
                             }, 500);
+                            break;
+
+                        case "cv":
+                            log("<span class='text-blue-400 italic'>Downloading CV...</span>");
+                            try {
+                                const a = document.createElement('a');
+                                a.href = '/Antonio_Janach_CV.pdf';
+                                a.download = 'Antonio_Janach_CV.pdf';
+                                a.rel = 'noopener noreferrer';
+                                document.body.appendChild(a);
+                                a.click();
+                                document.body.removeChild(a);
+                                log("<span class='text-green-400 font-bold'>[OK] Downloading Antonio_Janach_CV.pdf...</span>");
+                            } catch (err) {
+                                log("<span class='text-red-400 font-bold'>[ERROR] Failed to download CV document.</span>");
+                            }
+                            scrollToBottom();
                             break;
 
                         default:

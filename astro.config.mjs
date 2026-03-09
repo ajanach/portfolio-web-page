@@ -11,7 +11,14 @@ export default defineConfig({
   image: {
     service: passthroughImageService()
   },
-  integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
+  integrations: [
+    mdx(), 
+    sitemap(), 
+    solidJs({
+      exclude: ["**/CVDocument.tsx"]
+    }), 
+    tailwind({ applyBaseStyles: false })
+  ],
   vite: {
     resolve: {
       alias: {

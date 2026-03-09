@@ -34,6 +34,17 @@ jobs:
         run: |
            npm run build
 
+      - name: Verify CV PDF
+        run: |
+          test -f ./dist/Antonio_Janach_CV.pdf
+          SIZE=$(stat -c%s ./dist/Antonio_Janach_CV.pdf)
+          echo "PDF size: ${SIZE} bytes"
+          if [ "$SIZE" -gt 524288 ]; then
+            echo "ERROR: PDF exceeds 500KB limit (${SIZE} bytes)"
+            exit 1
+          fi
+          echo "PDF size OK: ${SIZE} bytes"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
