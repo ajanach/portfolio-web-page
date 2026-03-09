@@ -41,7 +41,7 @@ export const experience = [
     },
     {
         date: "Oct 2018 - Present",
-        title: "Web Administrator",
+        title: "Infrastructure & Web Engineer",
         company: "Freelance",
         terminalSummary: "WordPress, PHP, MariaDB, Apache, DNS, Google Analytics, SEO",
         points: [
