@@ -154,7 +154,7 @@ export const projects = [
         date: "Jan 2024 - Present",
         title: "Azure AKS GitOps Boilerplate with Terraform, ArgoCD and GitLab CI/CD",
         url: "https://janach.cloud/work/side-projects/azure-aks-gitops-boilerplate",
-        summary: "Production-ready AKS platform with Terraform, GitLab CI/CD and pull-based GitOps via ArgoCD - hub-spoke networking, WAF v2 ingress, zero secrets in Git, Keycloak SSO, and full observability stack.",
+        summary: "Production-ready AKS platform with Terraform, GitLab CI/CD and pull-based GitOps via ArgoCD - hub-spoke networking, WAF v2 ingress, zero secrets in Git, external SSO integration, and full observability stack.",
         pdfPoints: [
             "Production-ready AKS platform with hub-spoke networking, WAF v2 ingress, App of Apps GitOps bootstrapping, and zero secrets in Git via External Secrets Operator + Azure Key Vault.",
             "Keycloak / Entra ID SSO for Grafana and Rancher; full observability stack with Prometheus, Grafana, Alertmanager, Loki, and Promtail; 7 independent security layers.",
