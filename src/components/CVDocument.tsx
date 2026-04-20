@@ -1,7 +1,7 @@
 /** @jsxImportSource react */
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Font, Link, Image } from '@react-pdf/renderer';
-import { experience, education, certifications, personalInfo, skills } from '../lib/cv-data';
+import { experience, education, certifications, personalInfo, skills, projects } from '../lib/cv-data';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
@@ -367,7 +367,27 @@ export const CVDocument = ({ profileImage }: CVDocumentProps) => (
           </View>
         ))}
 
+        {/* Projects */}
+        <Text style={styles.sectionHeaderMain}>Projects</Text>
+        <View style={styles.dividerMain} />
+        {projects.map((proj, idx) => (
+          <View key={idx} wrap={false} style={styles.itemGroup}>
+            <View style={styles.itemHeader}>
+              <View style={{flex: 1, paddingRight: 8}}>
+                <Text style={styles.itemTitle}>{proj.title}</Text>
+              </View>
+              <Text style={{...styles.itemDate, flexShrink: 0}}>{proj.date}</Text>
+            </View>
+            <View style={styles.pubHighlight}>
+              <Link src={proj.url} style={{...styles.pubHighlightText, textDecoration: 'none'}}>
+                {proj.summary}
+              </Link>
+            </View>
+          </View>
+        ))}
+
         {/* Education */}
+        <View break>
         <Text style={styles.sectionHeaderMain}>Education</Text>
         <View style={styles.dividerMain} />
         {education.map((edu, idx) => (
@@ -400,6 +420,7 @@ export const CVDocument = ({ profileImage }: CVDocumentProps) => (
             })}
           </View>
         ))}
+        </View>
       </View>
     </Page>
   </Document>

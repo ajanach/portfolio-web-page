@@ -148,3 +148,26 @@ export const skills = [
     { label: "Infrastructure", tech: "Azure, VMware, Hyper-V, Proxmox, Linux" },
     { label: "Observability", tech: "Prometheus, Grafana, Loki, PRTG, Vault" },
 ];
+
+export const projects = [
+    {
+        date: "Jan 2024 - Present",
+        title: "Azure AKS GitOps Boilerplate with Terraform, ArgoCD and GitLab CI/CD",
+        url: "https://janach.cloud/work/side-projects/azure-aks-gitops-boilerplate",
+        summary: "Production-ready AKS platform with Terraform, GitLab CI/CD and pull-based GitOps via ArgoCD - hub-spoke networking, WAF v2 ingress, zero secrets in Git, Keycloak SSO, and full observability stack.",
+        pdfPoints: [
+            "Production-ready AKS platform with hub-spoke networking, WAF v2 ingress, App of Apps GitOps bootstrapping, and zero secrets in Git via External Secrets Operator + Azure Key Vault.",
+            "Keycloak / Entra ID SSO for Grafana and Rancher; full observability stack with Prometheus, Grafana, Alertmanager, Loki, and Promtail; 7 independent security layers.",
+        ],
+    },
+    {
+        date: "Sep 2025 - Present",
+        title: "Hybrid Cloud Homelab Automation with OCI, WireGuard and Rootless Podman",
+        url: "https://janach.cloud/work/side-projects/homelab-hybrid-cloud-automation",
+        summary: "Hybrid homelab connecting OCI Always Free ARM instances to an on-premise WSL2 server via WireGuard VPN - 22+ self-hosted services in rootless Podman, Terraform + Ansible pipelines, Cloudflare Zero Trust, all at zero cloud cost.",
+        pdfPoints: [
+            "Hybrid homelab connecting OCI Always Free ARM instances to an on-premise WSL2 Rocky Linux server via WireGuard site-to-site VPN - 22+ self-hosted services in rootless Podman behind Traefik.",
+            "Fully reproducible with Terraform + Ansible pipelines; Cloudflare Zero Trust for external access; NVIDIA GPU passthrough for hardware transcoding - all at zero cloud cost.",
+        ],
+    },
+];
