@@ -1,8 +1,8 @@
 import { defineConfig, passthroughImageService } from "astro/config"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
-import tailwind from "@astrojs/tailwind"
 import solidJs from "@astrojs/solid-js"
+import tailwindcss from "@tailwindcss/vite"
 import { fileURLToPath } from "url"
 
 // https://astro.build/config
@@ -16,14 +16,9 @@ export default defineConfig({
     sitemap(), 
     solidJs({
       exclude: ["**/CVDocument.tsx"]
-    }), 
-    tailwind({ applyBaseStyles: false })
+    }),
   ],
   vite: {
-    resolve: {
-      alias: {
-        "@": fileURLToPath(new URL("./src", import.meta.url)),
-      },
-    },
+    plugins: [tailwindcss()],
   },
 })

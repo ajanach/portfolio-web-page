@@ -23,8 +23,8 @@ export async function GET(context: Context) {
       description: item.data.summary,
       pubDate: item.data.date,
       link: item.collection === "blog"
-        ? `/blog/${item.slug}/`
-        : `/work/${item.slug}/`,
+        ? `/blog/${item.id}/`
+        : `/work/${item.id}/`,
     })),
   })
 }

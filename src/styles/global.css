@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
 
 :root {
   --copy-btn-margin: 10px;
@@ -64,13 +63,13 @@ header:not(.scrolled) {
 header.scrolled {
   @apply bg-white/75 dark:bg-black/50;
   @apply border-black/10 dark:border-white/25;
-  @apply backdrop-blur-sm saturate-200;
+  @apply backdrop-blur-xs saturate-200;
 }
 
 header:hover {
   @apply bg-white/75 dark:bg-black/50;
   @apply border-black/10 dark:border-white/25;
-  @apply backdrop-blur-sm saturate-200;
+  @apply backdrop-blur-xs saturate-200;
 }
 
 article {

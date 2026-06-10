@@ -10,7 +10,7 @@ import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro";
 export async function getStaticPaths() {
   const workEntries = await getCollection("work");
   return workEntries.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: entry,
   }));
 }
