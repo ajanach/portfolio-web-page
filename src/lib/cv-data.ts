@@ -138,7 +138,7 @@ export const personalInfo = {
     website: "janach.cloud",
     github: "github.com/ajanach",
     linkedin: "linkedin.com/in/ajanach",
-    summary: "DevOps & Cloud Engineer with 4+ years of infrastructure and platform engineering experience, including 2+ years in dedicated DevOps roles. Background spans hybrid cloud architecture on Azure, Kubernetes platform operations, GitOps automation, and enterprise infrastructure engineering across VMware, Hyper-V, and Linux environments. Published IEEE researcher (MIPRO 2025).",
+    summary: "DevOps & Cloud Engineer with 4+ years of infrastructure and platform engineering experience, including 3 years in dedicated DevOps roles. Background spans hybrid cloud architecture on Azure, Kubernetes platform operations, GitOps automation, and enterprise infrastructure engineering across VMware, Hyper-V, and Linux environments. Published IEEE researcher (MIPRO 2025).",
 };
 
 
