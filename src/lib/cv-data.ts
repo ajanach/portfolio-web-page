@@ -110,6 +110,12 @@ export const certifications = [
         link: "https://www.credly.com/badges/00733b40-0d36-48cc-94b0-363368f49a2d/public_url",
     },
     {
+        name: "Kubernetes and Cloud Native Associate (KCNA)",
+        issued: "July 2026",
+        expires: "July 2028",
+        link: "https://www.credly.com/badges/4ef30a38-7a8a-41cf-8aad-fac8a3ea53fb/public_url",
+    },
+    {
         name: "Microsoft Certified: Azure Fundamentals (AZ-900)",
         issued: "July 2022",
         expires: "No Expiration",
