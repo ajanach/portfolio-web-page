@@ -220,8 +220,8 @@ const terminalData = {
                 background: rgba(0, 0, 0, 0.42);
                 opacity: 0;
                 pointer-events: none;
-                backdrop-filter: blur(10px) saturate(125%);
                 -webkit-backdrop-filter: blur(10px) saturate(125%);
+                backdrop-filter: blur(10px) saturate(125%);
                 transition: opacity 240ms ease;
             }
 
@@ -255,8 +255,8 @@ const terminalData = {
                 transform: translate3d(0, 8px, 0) scale(0.975);
                 transform-origin: var(--terminal-origin-x)
                     var(--terminal-origin-y);
-                backdrop-filter: blur(34px) saturate(165%);
                 -webkit-backdrop-filter: blur(34px) saturate(165%);
+                backdrop-filter: blur(34px) saturate(165%);
                 font-family:
                     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
                     "Liberation Mono", monospace;
@@ -731,16 +731,22 @@ const terminalData = {
         </style>
 
         <style is:global>
-            /* FIX: Use CSS class for body overflow instead of inline style mutation */
-            body.terminal-open {
+            html.terminal-open {
                 overflow: hidden !important;
             }
-            body.terminal-open * {
+            body.terminal-scroll-locked {
+                position: fixed !important;
+                top: var(--terminal-page-offset) !important;
+                right: 0;
+                left: 0;
+                width: 100%;
+            }
+            html.terminal-open body * {
                 pointer-events: none !important;
             }
-            body.terminal-open #terminal-overlay,
-            body.terminal-open #terminal-window,
-            body.terminal-open #terminal-window * {
+            html.terminal-open #terminal-overlay,
+            html.terminal-open #terminal-window,
+            html.terminal-open #terminal-window * {
                 pointer-events: auto !important;
             }
         </style>
@@ -753,6 +759,7 @@ const terminalData = {
             let history = [];
             let historyIndex = -1;
             let lastTrigger = null;
+            let pageScrollY = 0;
 
             let activeTimeouts = [];
             let abortController = null;
@@ -971,7 +978,13 @@ const terminalData = {
                           ? activeElement
                           : fallbackTrigger || null;
 
-                    document.body.classList.add("terminal-open");
+                    pageScrollY = window.scrollY;
+                    document.body.style.setProperty(
+                        "--terminal-page-offset",
+                        `-${pageScrollY}px`,
+                    );
+                    document.documentElement.classList.add("terminal-open");
+                    document.body.classList.add("terminal-scroll-locked");
                     overlay.classList.remove("hidden");
                     overlay.classList.add("flex");
                     overlay.setAttribute("aria-hidden", "false");
@@ -1025,7 +1038,19 @@ const terminalData = {
                                 toggleMaximize(true);
                             }
                             windowEl.classList.remove("terminal-closing");
-                            document.body.classList.remove("terminal-open");
+                            document.documentElement.classList.remove(
+                                "terminal-open",
+                            );
+                            document.body.classList.remove(
+                                "terminal-scroll-locked",
+                            );
+                            document.body.style.removeProperty(
+                                "--terminal-page-offset",
+                            );
+                            window.scrollTo({
+                                top: pageScrollY,
+                                behavior: "instant",
+                            });
                             if (input) input.value = "";
                             closeBtn?.classList.remove("control-activated");
                             isAnimating = false;
@@ -1063,7 +1088,19 @@ const terminalData = {
                     window.setTimeout(() => {
                         overlay.classList.add("hidden");
                         overlay.classList.remove("flex");
-                        document.body.classList.remove("terminal-open");
+                        document.documentElement.classList.remove(
+                            "terminal-open",
+                        );
+                        document.body.classList.remove(
+                            "terminal-scroll-locked",
+                        );
+                        document.body.style.removeProperty(
+                            "--terminal-page-offset",
+                        );
+                        window.scrollTo({
+                            top: pageScrollY,
+                            behavior: "instant",
+                        });
                         windowEl.classList.remove("terminal-minimizing");
                         minimizeBtn?.classList.remove("control-activated");
                         isAnimating = false;
