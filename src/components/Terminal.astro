@@ -22,9 +22,22 @@ const terminalData = {
         points: (e as any).terminalPoints || [],
     })),
     certifications: certifications.map(c => {
-        const match = c.name.match(/\(([^)]+)\)$/);
-        const id = match ? match[1] : c.name.split(':')[0].trim();
-        return { id, name: c.name, link: c.link, date: c.issued, exp: c.expires };
+        const suffix = c.name.match(/\(([^)]+)\)$/);
+        const prefix = c.name.match(/^([^:]+):\s*(.+)$/);
+        const id = suffix?.[1] ?? prefix?.[1].trim() ?? "CERT";
+        const name = suffix
+            ? c.name.replace(/\s*\([^)]+\)$/, "")
+            : prefix?.[2] ?? c.name;
+        const doesNotExpire = c.expires === "No Expiration";
+
+        return {
+            id,
+            name,
+            link: c.link,
+            date: c.issued,
+            expiryLabel: doesNotExpire ? "Validity" : "Expires",
+            expiry: doesNotExpire ? "Does not expire" : c.expires,
+        };
     }),
     skills,
     personalInfo,
@@ -33,45 +46,69 @@ const terminalData = {
 
 <div
     id="terminal-overlay"
-    class="fixed inset-0 z-[9999] hidden bg-black/60 backdrop-blur-sm items-center justify-center p-4 opacity-0 transition-opacity duration-300 pointer-events-none"
+    class="fixed inset-0 z-[9999] hidden items-center justify-center"
     style="isolation: isolate;"
+    aria-hidden="true"
 >
     <div
         id="terminal-window"
-        class="bg-[#050505] rounded-lg shadow-2xl overflow-hidden border border-white/10 flex flex-col font-mono text-xs sm:text-sm md:text-base relative transition-all duration-300 transform will-change-transform backface-hidden scale-95 opacity-0"
-        style="width: 95%; max-width: 48rem; height: 80vh; max-height: 600px; transform: translateZ(0);"
+        class="terminal-window flex flex-col relative overflow-hidden"
         role="dialog"
         aria-modal="true"
         aria-label="Terminal Emulator"
     >
         <!-- Header -->
-        <div
-            class="h-8 bg-[#1a1a1a] flex items-center px-4 justify-between border-b border-white/5 shrink-0"
-        >
-            <div class="flex gap-2">
-                <div
-                    class="w-3 h-3 rounded-full bg-[#ff5f56] hover:bg-[#ff5f56]/80 cursor-pointer"
+        <div id="terminal-titlebar" class="terminal-titlebar shrink-0">
+            <div
+                class="terminal-controls"
+                role="group"
+                aria-label="Window controls"
+            >
+                <button
+                    type="button"
+                    aria-label="Close terminal"
+                    title="Close"
+                    class="terminal-control terminal-control-close"
                     id="term-close-btn"
                 >
-                </div>
-                <div
-                    class="w-3 h-3 rounded-full bg-[#ffbd2e] hover:bg-[#ffbd2e]/80 cursor-pointer"
+                    <span
+                        class="terminal-control-symbol terminal-control-symbol-close"
+                        aria-hidden="true"
+                    ></span>
+                </button>
+                <button
+                    type="button"
+                    aria-label="Minimize terminal"
+                    title="Minimize"
+                    class="terminal-control terminal-control-minimize"
                     id="term-minimize-btn"
                 >
-                </div>
-                <div
-                    class="w-3 h-3 rounded-full bg-green-400 hover:bg-green-400/80 cursor-pointer"
+                    <span
+                        class="terminal-control-symbol terminal-control-symbol-minimize"
+                        aria-hidden="true"
+                    ></span>
+                </button>
+                <button
+                    type="button"
+                    aria-label="Enter full screen"
+                    aria-pressed="false"
+                    title="Enter full screen"
+                    class="terminal-control terminal-control-maximize"
                     id="term-maximize-btn"
                 >
-                </div>
+                    <span
+                        class="terminal-control-symbol terminal-control-symbol-maximize"
+                        aria-hidden="true"
+                    ></span>
+                </button>
             </div>
             <div
-                class="flex items-center justify-center w-full px-4 select-none"
+                class="terminal-title flex items-center justify-center select-none"
             >
                 <div class="flex items-center gap-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="w-5 h-5 text-white/80"
+                        class="size-4 text-white/65"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -82,9 +119,7 @@ const terminalData = {
                         <polyline points="4 17 10 11 4 5"></polyline>
                         <line x1="12" y1="19" x2="20" y2="19"></line>
                     </svg>
-                    <span
-                        class="text-[14px] font-semibold text-white/100 tracking-tight"
-                    >
+                    <span class="font-semibold text-white/90">
                         janach.cloud
                     </span>
                 </div>
@@ -94,23 +129,37 @@ const terminalData = {
         <!-- Universal Command Toolbar -->
         <div
             id="toolbar-container"
-            class="toolbar-container border-b border-white/10 shrink-0"
+            class="toolbar-container shrink-0"
         >
             <button
+                type="button"
                 id="toolbar-toggle"
-                class="toolbar-toggle w-full px-4 py-1.5 flex items-center justify-between bg-white/[0.02] hover:bg-white/[0.05] text-white/60 hover:text-white/80 text-xs transition-colors cursor-pointer border-none"
+                class="toolbar-toggle"
                 aria-expanded="true"
                 aria-controls="cmd-toolbar"
             >
-                <span class="flex items-center gap-2">
-                    <span>💡</span>
+                <span class="toolbar-label">
+                    <span class="toolbar-command-mark" aria-hidden="true">
+                        <span class="toolbar-command-glyph">⌘</span>
+                    </span>
                     <span>Quick Commands</span>
                 </span>
-                <span class="toggle-icon transition-transform">▼</span>
+                <svg
+                    class="toggle-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="m6 9 6 6 6-6"></path>
+                </svg>
             </button>
             <div
                 id="cmd-toolbar"
-                class="cmd-toolbar flex items-center gap-2 px-4 py-2 bg-white/5 overflow-x-auto no-scrollbar"
+                class="cmd-toolbar no-scrollbar"
             >
                 {
                     [
@@ -122,13 +171,15 @@ const terminalData = {
                         { cmd: "skills", desc: "Tech stack" },
                         { cmd: "cv", desc: "Download full CV" },
                         { cmd: "contact", desc: "Get in touch" },
+                        { cmd: "status", desc: "Service availability" },
                         { cmd: "neofetch", desc: "System info" },
                         { cmd: "clear", desc: "Clear terminal" },
                     ].map((item) => (
                         <button
+                            type="button"
                             data-cmd={item.cmd}
                             title={`Run '${item.cmd}' - ${item.desc}`}
-                            class="cmd-btn px-3 py-1.5 bg-white/10 hover:bg-white/20 border border-white/10 rounded text-xs text-white font-mono whitespace-nowrap active:scale-95 transition-all"
+                            class="cmd-btn"
                         >
                             {item.cmd}
                         </button>
@@ -140,11 +191,10 @@ const terminalData = {
         <!-- Terminal Content -->
         <div
             id="terminal-content"
-            class="flex-1 p-4 overflow-y-auto text-white/90 selection:bg-white/20 cursor-text"
-            style="text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);"
+            class="flex-1 overflow-y-auto cursor-text"
         >
             <div id="output"></div>
-            <div class="flex flex-wrap items-center mt-2">
+            <div class="terminal-input-line flex flex-wrap items-center mt-2">
                 <span class="text-green-400 font-bold shrink-0 mr-2">➜</span>
                 <span class="text-blue-400 shrink-0 mr-2"
                     >~ visitor@janach.cloud $</span
@@ -154,144 +204,528 @@ const terminalData = {
                     id="terminal-input"
                     class="bg-transparent border-none outline-none flex-1 text-white placeholder-white/50 min-w-[10px]"
                     spellcheck="false"
+                    autocomplete="off"
+                    aria-label="Terminal command"
                 />
             </div>
         </div>
 
         <style>
-            /* Mobile Toolbar Scrollbar */
+            #terminal-overlay {
+                padding:
+                    max(1rem, env(safe-area-inset-top))
+                    max(1rem, env(safe-area-inset-right))
+                    max(1rem, env(safe-area-inset-bottom))
+                    max(1rem, env(safe-area-inset-left));
+                background: rgba(0, 0, 0, 0.42);
+                opacity: 0;
+                pointer-events: none;
+                backdrop-filter: blur(10px) saturate(125%);
+                -webkit-backdrop-filter: blur(10px) saturate(125%);
+                transition: opacity 240ms ease;
+            }
+
+            #terminal-overlay.terminal-overlay-visible {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            #terminal-window {
+                --terminal-origin-x: 50%;
+                --terminal-origin-y: 50%;
+                width: min(48rem, calc(100vw - 2rem));
+                height: min(37.5rem, calc(100vh - 2rem));
+                height: min(37.5rem, calc(100dvh - 2rem));
+                border: 1px solid rgba(255, 255, 255, 0.17);
+                border-radius: 0.875rem;
+                background:
+                    linear-gradient(
+                        180deg,
+                        rgba(255, 255, 255, 0.085),
+                        rgba(255, 255, 255, 0.018) 18%,
+                        rgba(5, 5, 7, 0.08) 48%
+                    ),
+                    rgba(7, 7, 9, 0.8);
+                box-shadow:
+                    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                    inset 0 -1px 0 rgba(255, 255, 255, 0.035),
+                    0 34px 90px rgba(0, 0, 0, 0.58),
+                    0 8px 28px rgba(0, 0, 0, 0.38);
+                opacity: 0;
+                transform: translate3d(0, 8px, 0) scale(0.975);
+                transform-origin: var(--terminal-origin-x)
+                    var(--terminal-origin-y);
+                backdrop-filter: blur(34px) saturate(165%);
+                -webkit-backdrop-filter: blur(34px) saturate(165%);
+                font-family:
+                    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                    "Liberation Mono", monospace;
+                font-size: 0.8125rem;
+                line-height: 1.55;
+                will-change: transform, opacity, width, height;
+                backface-visibility: hidden;
+                transition:
+                    transform 360ms cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 180ms ease,
+                    width 440ms cubic-bezier(0.2, 0.82, 0.2, 1),
+                    height 440ms cubic-bezier(0.2, 0.82, 0.2, 1),
+                    border-radius 440ms cubic-bezier(0.2, 0.82, 0.2, 1),
+                    box-shadow 300ms ease;
+            }
+
+            #terminal-window::before {
+                content: "";
+                position: absolute;
+                z-index: 20;
+                inset: 0 0 auto;
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    transparent 2%,
+                    rgba(255, 255, 255, 0.42) 26%,
+                    rgba(255, 255, 255, 0.16) 68%,
+                    transparent 98%
+                );
+                pointer-events: none;
+            }
+
+            #terminal-window.terminal-visible {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            #terminal-window.terminal-visible.terminal-settled {
+                transform: none;
+                will-change: auto;
+                transition-property:
+                    opacity, width, height, border-radius, box-shadow;
+            }
+
+            #terminal-window.terminal-closing {
+                opacity: 0;
+                transform: translate3d(0, 6px, 0) scale(0.975);
+                transition-duration: 220ms;
+            }
+
+            #terminal-window.terminal-minimizing {
+                animation: terminal-genie-out 460ms
+                    cubic-bezier(0.48, 0, 0.72, 0.28) both;
+            }
+
+            @keyframes terminal-genie-out {
+                0% {
+                    border-radius: 0.875rem;
+                    opacity: 1;
+                    transform: translate3d(0, 0, 0) scale(1, 1);
+                }
+                38% {
+                    border-radius: 1rem;
+                    opacity: 1;
+                    transform: translate3d(0, 0, 0) scale(0.94, 0.82);
+                }
+                72% {
+                    border-radius: 1.5rem;
+                    opacity: 0.94;
+                    transform: translate3d(0, 0, 0) scale(0.42, 0.16);
+                }
+                100% {
+                    border-radius: 2rem;
+                    opacity: 0;
+                    transform: translate3d(0, 0, 0) scale(0.08, 0.025);
+                }
+            }
+
+            #terminal-window.terminal-maximized {
+                width: calc(100vw - 2rem);
+                height: calc(100vh - 2rem);
+                height: calc(100dvh - 2rem);
+                border-radius: 0.75rem;
+                box-shadow:
+                    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+                    0 28px 100px rgba(0, 0, 0, 0.68);
+            }
+
+            .terminal-titlebar {
+                position: relative;
+                display: flex;
+                min-height: 2.75rem;
+                align-items: center;
+                padding: 0 0.875rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+                background: rgba(255, 255, 255, 0.055);
+                box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.16);
+            }
+
+            .terminal-controls {
+                position: relative;
+                z-index: 2;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .terminal-control {
+                position: relative;
+                width: 0.75rem;
+                height: 0.75rem;
+                flex: 0 0 0.75rem;
+                appearance: none;
+                padding: 0;
+                border: 0.5px solid rgba(0, 0, 0, 0.34);
+                border-radius: 50%;
+                box-shadow:
+                    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+                    0 0 0 0.5px rgba(255, 255, 255, 0.06);
+                cursor: default;
+                transition:
+                    box-shadow 140ms ease,
+                    opacity 140ms ease,
+                    transform 140ms ease;
+            }
+
+            .terminal-control-symbol {
+                position: absolute;
+                inset: 0;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 120ms ease;
+            }
+
+            .terminal-control-symbol-close::before,
+            .terminal-control-symbol-close::after,
+            .terminal-control-symbol-minimize::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0.375rem;
+                height: 1px;
+                border-radius: 1px;
+                background: rgba(0, 0, 0, 0.62);
+                transform-origin: center;
+            }
+
+            .terminal-control-symbol-close::before {
+                transform: translate(-50%, -50%) rotate(45deg);
+            }
+
+            .terminal-control-symbol-close::after {
+                transform: translate(-50%, -50%) rotate(-45deg);
+            }
+
+            .terminal-control-symbol-minimize::before {
+                transform: translate(-50%, -50%);
+            }
+
+            .terminal-titlebar:hover .terminal-control-symbol,
+            .terminal-control:focus-visible .terminal-control-symbol {
+                opacity: 1;
+            }
+
+            .terminal-control:hover {
+                box-shadow:
+                    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+                    0 0 0 0.5px rgba(255, 255, 255, 0.14);
+            }
+
+            .terminal-control:active,
+            .terminal-control.control-activated {
+                transform: scale(0.82);
+                opacity: 0.78;
+            }
+
+            .terminal-control:focus-visible,
+            .cmd-btn:focus-visible,
+            .toolbar-toggle:focus-visible {
+                outline: 2px solid rgba(10, 132, 255, 0.95);
+                outline-offset: 2px;
+            }
+
+            .terminal-control-close {
+                background: #ff5f57;
+            }
+
+            .terminal-control-minimize {
+                background: #febc2e;
+            }
+
+            .terminal-control-maximize {
+                background: #28c840;
+            }
+
+            .terminal-control-symbol-maximize {
+                width: 0.3125rem;
+                height: 0.3125rem;
+                margin: auto;
+                border: 1px solid rgba(0, 0, 0, 0.58);
+                border-radius: 1px;
+            }
+
+            .terminal-title {
+                position: absolute;
+                inset: 0;
+                padding: 0 5rem;
+                pointer-events: none;
+                color: rgba(255, 255, 255, 0.88);
+                font-family: "Atkinson", sans-serif;
+                font-size: 0.75rem;
+                letter-spacing: 0;
+            }
+
+            .toolbar-container {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                background: #0d0d0f;
+            }
+
+            .toolbar-toggle {
+                display: flex;
+                width: 100%;
+                min-height: 1.875rem;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 0.875rem;
+                border: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+                background: transparent;
+                color: rgba(255, 255, 255, 0.68);
+                font-family: "Atkinson", sans-serif;
+                font-size: 0.8125rem;
+                font-weight: 700;
+                letter-spacing: 0;
+                cursor: pointer;
+                transition:
+                    background-color 160ms ease,
+                    color 160ms ease;
+            }
+
+            .toolbar-toggle:hover {
+                background: rgba(255, 255, 255, 0.05);
+                color: rgba(255, 255, 255, 0.82);
+            }
+
+            .toolbar-label {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .toolbar-command-mark {
+                display: inline-flex;
+                width: 1rem;
+                height: 1rem;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: 0.25rem;
+                background: rgba(255, 255, 255, 0.055);
+                color: rgba(255, 255, 255, 0.72);
+                font-family: ui-sans-serif, system-ui, sans-serif;
+                font-size: 0.6875rem;
+                line-height: 1;
+            }
+
+            .toolbar-command-glyph {
+                display: block;
+            }
+
+            .toggle-icon {
+                width: 0.875rem;
+                height: 0.875rem;
+                transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+            }
+
+            .cmd-toolbar {
+                display: flex;
+                max-height: 3rem;
+                align-items: center;
+                gap: 0.375rem;
+                overflow-x: auto;
+                padding: 0.4375rem 0.625rem;
+                background: transparent;
+                transition:
+                    max-height 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                    padding 220ms ease;
+            }
+
+            .cmd-btn {
+                height: 1.75rem;
+                flex: 0 0 auto;
+                padding: 0 0.5625rem;
+                border: 1px solid rgba(255, 255, 255, 0.11);
+                border-radius: 0.375rem;
+                background: rgba(255, 255, 255, 0.055);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+                color: rgba(255, 255, 255, 0.86);
+                font: inherit;
+                font-size: 0.8125rem;
+                font-weight: 700;
+                line-height: 1;
+                white-space: nowrap;
+                cursor: pointer;
+                transition:
+                    background-color 140ms ease,
+                    border-color 140ms ease,
+                    color 140ms ease;
+            }
+
+            .cmd-btn:hover {
+                border-color: rgba(255, 255, 255, 0.2);
+                background: rgba(255, 255, 255, 0.11);
+                color: #fff;
+            }
+
+            .cmd-btn:active {
+                background: rgba(255, 255, 255, 0.075);
+            }
+
+            .toolbar-collapsed .cmd-toolbar {
+                max-height: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+                pointer-events: none;
+            }
+
+            .toolbar-collapsed .toggle-icon {
+                transform: rotate(-90deg);
+            }
+
+            #terminal-content {
+                padding: 1rem;
+                color: rgba(255, 255, 255, 0.88);
+                background: rgba(0, 0, 0, 0.28);
+                caret-color: #f5f5f7;
+                scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+                scrollbar-width: thin;
+            }
+
+            #terminal-content ::selection {
+                background: rgba(10, 132, 255, 0.42);
+                color: #fff;
+            }
+
+            #terminal-input {
+                padding: 0;
+                font: inherit;
+                line-height: inherit;
+                caret-color: #f5f5f7;
+            }
+
+            .terminal-input-line {
+                min-height: 1.5rem;
+            }
+
             .no-scrollbar::-webkit-scrollbar {
                 display: none;
             }
+
             .no-scrollbar {
                 -ms-overflow-style: none;
                 scrollbar-width: none;
             }
 
-            /* Scrollbar Styling */
             #terminal-content::-webkit-scrollbar {
                 width: 6px;
             }
+
             #terminal-content::-webkit-scrollbar-track {
                 background: transparent;
             }
+
             #terminal-content::-webkit-scrollbar-thumb {
                 background: rgba(255, 255, 255, 0.1);
                 border-radius: 3px;
             }
+
             #terminal-content::-webkit-scrollbar-thumb:hover {
                 background: rgba(255, 255, 255, 0.2);
             }
 
-            /* Scanline effect (optional, subtle) */
-            #terminal-window::after {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(
-                    rgba(18, 16, 16, 0) 50%,
-                    rgba(0, 0, 0, 0.1) 50%
-                );
-                background-size: 100% 4px;
-                pointer-events: none;
-                opacity: 0.15;
-                z-index: 10;
-            }
-            .will-change-transform {
-                will-change: transform, opacity;
-            }
-            .backface-hidden {
-                backface-visibility: hidden;
-            }
-
-            #terminal-window {
-                transition:
-                    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                    scale 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                    translate 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                    opacity 0.3s ease,
-                    width 0.3s ease,
-                    height 0.3s ease;
-                will-change: transform, scale, translate, opacity, width, height;
-                backface-visibility: hidden;
-            }
-
-            .terminal-maximized {
-                width: 95vw !important;
-                height: 90vh !important;
-                max-width: none !important;
-                max-height: none !important;
-                transform: scale(1) translateY(0) !important;
-                transition:
-                    transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
-                    width 0.3s cubic-bezier(0.23, 1, 0.32, 1),
-                    height 0.3s cubic-bezier(0.23, 1, 0.32, 1),
-                    box-shadow 0.3s ease !important;
-                box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8) !important;
-                border-color: rgba(255, 255, 255, 0.2) !important;
-                z-index: 50;
-            }
-
-            .terminal-normalizing {
-                transition:
-                    transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
-                    width 0.32s cubic-bezier(0.4, 0, 0.2, 1),
-                    height 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            }
-
-            /* Pulse Animation for Close Button */
-            @keyframes term-btn-pulse {
-                0% {
-                    transform: scale(1);
+            @media (max-width: 639px) {
+                #terminal-overlay {
+                    padding:
+                        max(0.5rem, env(safe-area-inset-top))
+                        max(0.5rem, env(safe-area-inset-right))
+                        max(0.5rem, env(safe-area-inset-bottom))
+                        max(0.5rem, env(safe-area-inset-left));
                 }
-                50% {
-                    transform: scale(1.4);
+
+                #terminal-window {
+                    width: calc(100vw - 1rem);
+                    height: min(37.5rem, calc(100vh - 1rem));
+                    height: min(37.5rem, calc(100dvh - 1rem));
+                    border-radius: 0.75rem;
+                    font-size: 0.8125rem;
+                    line-height: 1.6;
                 }
-                100% {
-                    transform: scale(1);
+
+                #terminal-window.terminal-maximized {
+                    width: calc(100vw - 1rem);
+                    height: calc(100vh - 1rem);
+                    height: calc(100dvh - 1rem);
+                    border-radius: 0.75rem;
+                }
+
+                .terminal-titlebar {
+                    min-height: 2.625rem;
+                    padding: 0 0.75rem;
+                }
+
+                .terminal-title {
+                    padding: 0 4.5rem;
+                }
+
+                #terminal-content {
+                    padding: 0.75rem;
+                }
+
+                :global(#output > div) {
+                    min-width: 0;
+                    margin-bottom: 0.375rem;
+                    overflow-wrap: anywhere;
+                }
+
+                .terminal-input-line {
+                    line-height: 1.5;
+                }
+
+                :global(.terminal-command-prompt) {
+                    white-space: nowrap;
+                }
+
+                @media (max-width: 380px) {
+                    :global(.terminal-command-echo) {
+                        display: grid;
+                        gap: 0.125rem;
+                    }
+
+                    :global(.terminal-command-value) {
+                        padding-left: 1.25rem;
+                        color: rgba(255, 255, 255, 0.9);
+                    }
+                }
+
+                .cmd-toolbar {
+                    padding-right: 0.5rem;
+                    padding-left: 0.5rem;
                 }
             }
 
-            .btn-pulse {
-                animation: term-btn-pulse 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-
-            /* Smooth Exit State */
-            .terminal-exiting {
-                transform: scale(0.95) translateY(10px) !important;
-                opacity: 0 !important;
-            }
-
-            /* Universal Command Toolbar */
-            .toolbar-collapsed .cmd-toolbar {
-                max-height: 0;
-                opacity: 0;
-                padding-top: 0;
-                padding-bottom: 0;
-                overflow: hidden;
-            }
-            .toolbar-collapsed .toggle-icon {
-                transform: rotate(-90deg);
-            }
-            .cmd-toolbar {
-                max-height: 48px;
-                opacity: 1;
-                transition:
-                    max-height 0.3s ease,
-                    opacity 0.2s ease,
-                    padding 0.2s ease;
-            }
-            @media (min-width: 768px) {
+            @media (prefers-reduced-motion: reduce) {
+                #terminal-overlay,
+                #terminal-window,
+                .terminal-control,
+                .toolbar-toggle,
+                .toggle-icon,
+                .cmd-toolbar,
                 .cmd-btn {
-                    opacity: 0.7;
-                    padding: 0.25rem 0.75rem;
-                    font-size: 0.7rem;
+                    transition-duration: 1ms !important;
+                    transition-delay: 0ms !important;
                 }
-                .cmd-btn:hover {
-                    opacity: 1;
+
+                #terminal-window.terminal-minimizing,
+                #terminal-window.terminal-closing {
+                    transform: scale(0.98);
+                    animation: none;
                 }
             }
         </style>
@@ -318,90 +752,86 @@ const terminalData = {
             let isMaximized = false;
             let history = [];
             let historyIndex = -1;
+            let lastTrigger = null;
 
             let activeTimeouts = [];
             let abortController = null;
 
             // Build terminal HTML content from injected cv-data
-            const EXPERIENCE_CONTENT = [
-                `<div class="grid gap-3 max-w-4xl mt-3">`,
-                ...terminalData.experience.map(
-                    (e) => `
-                <div class="flex flex-col gap-0.5 p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
-                    <div class="flex items-center gap-2">
-                         <span class="text-yellow-300 font-bold text-xs tracking-tight uppercase">${e.date}</span>
-                         <span class="text-white/30 text-xs">•</span>
-                         <span class="text-white font-bold text-sm tracking-tight">${e.role}</span>
+            const EXPERIENCE_CONTENT = terminalData.experience.map(
+                (e) => `
+                <div class="group mt-2 grid gap-2 rounded-lg border border-white/10 bg-white/[0.025] px-3 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-colors hover:bg-white/[0.045] sm:grid-cols-[9rem_minmax(0,1fr)] sm:items-center sm:gap-4 sm:px-4">
+                    <div class="flex items-center gap-2 text-[10px] font-bold uppercase text-yellow-300">
+                        <span class="size-1.5 shrink-0 rounded-full bg-white/45"></span>
+                        <span>${e.date}</span>
                     </div>
-                    <div class="text-[12px] text-white/50 font-medium uppercase tracking-wider ml-0.5">@ ${e.company}</div>
+                    <div class="min-w-0">
+                        <div class="text-white/90 font-semibold text-[13px] sm:text-sm leading-snug break-words">${e.role}</div>
+                        <div class="mt-0.5 text-[10px] sm:text-[11px] text-white/70 font-semibold uppercase break-words">${e.company}</div>
+                    </div>
                 </div>
             `,
-                ),
-                `</div>`,
-            ];
+            );
 
-            const EDUCATION_CONTENT = [
-                `<div class="grid gap-3 max-w-4xl mt-3">`,
-                ...terminalData.education.map(
-                    (e) => `
-        <div class="flex flex-col gap-3 p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
-            <div class="flex flex-col gap-1 text-left">
-                <div class="flex flex-col sm:flex-row sm:items-center gap-x-2">
-                    <span class="text-yellow-300 font-bold text-sm tracking-tight uppercase">${e.id}</span>
-                    <span class="hidden sm:inline text-white/30">•</span>
-                    <span class="text-white font-bold text-sm text-balance leading-tight">${e.school}</span>
+            const EDUCATION_CONTENT = terminalData.education.map(
+                (e) => `
+        <div class="mt-2 rounded-lg border border-white/10 bg-white/[0.025] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-colors hover:bg-white/[0.04] sm:p-4">
+            <div class="flex flex-col gap-2 border-b border-white/[0.07] pb-3 sm:flex-row sm:items-start sm:justify-between">
+                <div class="min-w-0">
+                    <div class="text-[10px] font-bold uppercase text-yellow-300">${e.id}</div>
+                    <div class="mt-1 text-white/90 font-semibold text-[13px] sm:text-sm text-balance leading-snug">${e.school}</div>
                 </div>
-                <div class="text-[11px] font-bold text-white uppercase tracking-[0.2em] mb-1">
+                <div class="shrink-0 text-[10px] font-semibold uppercase text-white/70 sm:text-right">
                     ${e.year}
                 </div>
-                <div class="flex flex-col gap-3 text-left">
+            </div>
+            <div class="mt-3 flex flex-col divide-y divide-white/[0.06] text-left">
                     ${e.points
                         .map(
                             (p) => `
-                        <div class="flex items-start gap-3 text-white/90 text-[13px] leading-relaxed group/point">
-                            <span class="text-yellow-300/80 text-[8px] mt-1.5 flex-shrink-0">◆</span>
-                            <div class="flex-1">
-                                <span class="font-bold text-white not-italic opacity-100">${p.label}:</span> 
-                                <span class="italic text-white/80">${p.text}</span>
+                        <div class="grid grid-cols-[auto_minmax(0,1fr)] sm:grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-2.5 gap-y-2 py-3 first:pt-0 last:pb-0 text-white/80 text-[12px] sm:text-[13px] leading-relaxed group/point">
+                            <span class="mt-1.5 size-1.5 shrink-0 rounded-full bg-white/35"></span>
+                            <div class="min-w-0">
+                                <span class="font-semibold text-white/90 not-italic">${p.label}:</span>
+                                <span class="text-white/75">${p.text}</span>
                             </div>
-                            <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-3 py-1.5 bg-green-400/10 hover:bg-green-400 border border-green-400/30 text-green-400 hover:text-black text-xs font-black rounded transition-all no-underline shrink-0 active:scale-95">
+                            <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="col-start-2 sm:col-start-auto inline-flex h-7 items-center justify-center rounded-md border border-white/12 bg-white/[0.05] px-2.5 text-[10px] font-bold text-green-400 no-underline shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-colors hover:border-white/20 hover:bg-white/[0.09] hover:text-white justify-self-start sm:justify-self-auto">
                                 VIEW ↗
                             </a>
                         </div>
                     `,
                         )
                         .join("")}
-                </div>
             </div>
         </div>
     `,
-                ),
-                `</div>`,
-            ];
+            );
 
-            const CERTS_CONTENT = [
-                `<div class="grid gap-3 max-w-4xl mt-3">`,
-                ...terminalData.certifications.map(
-                    (c) => `
-        <div class="flex items-center justify-between p-3 bg-white/[0.03] border-l-2 border-yellow-300/80 rounded-r transition-colors hover:bg-white/[0.06]">
-            <div class="flex flex-col gap-0.5">
-                <div class="flex items-center gap-2">
-                    <span class="text-yellow-300/90 font-bold text-xs tracking-tight">[${c.id}]</span>
-                    <span class="text-white/80 font-semibold text-sm">${c.name}</span>
+            const CERTS_CONTENT = terminalData.certifications.map(
+                (c) => `
+        <div class="mt-2 flex flex-col gap-3 rounded-lg border border-white/10 bg-white/[0.025] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-colors hover:bg-white/[0.045] sm:flex-row sm:items-center sm:justify-between sm:p-4">
+            <div class="flex min-w-0 flex-col gap-2 sm:gap-0.5">
+                <div class="flex flex-col items-start gap-1.5 sm:flex-row sm:gap-2">
+                    <span class="inline-flex min-h-5 shrink-0 items-center rounded border border-yellow-300/20 bg-yellow-300/[0.06] px-1.5 text-[9px] font-bold text-yellow-300 sm:min-h-0 sm:rounded-none sm:border-0 sm:bg-transparent sm:px-0 sm:text-[10px] sm:text-yellow-300/90">${c.id}</span>
+                    <span class="break-words text-[13px] font-semibold leading-snug text-white/90 sm:text-sm sm:text-white/85">${c.name}</span>
                 </div>
-                <div class="flex items-center gap-2 mt-0.5">
-                    <span class="text-white/100 uppercase text-xs tracking-wider font-medium">Issued: ${c.date}</span>
-                    <span class="text-green-400 uppercase text-xs tracking-widest font-bold">Expires: ${c.exp}</span>
+                <div class="grid grid-cols-2 gap-2 text-[10px] font-semibold uppercase sm:mt-1 sm:flex sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-1">
+                    <span class="min-w-0 rounded-md bg-white/[0.025] p-2 sm:rounded-none sm:bg-transparent sm:p-0">
+                        <span class="block text-[8px] text-white/45 sm:inline sm:text-[10px] sm:text-yellow-300">Issued</span>
+                        <span class="mt-0.5 block break-words leading-snug text-white/80 sm:mt-0 sm:inline sm:text-white/75">${c.date}</span>
+                    </span>
+                    <span class="min-w-0 rounded-md bg-white/[0.025] p-2 sm:rounded-none sm:bg-transparent sm:p-0">
+                        <span class="block text-[8px] text-white/45 sm:inline sm:text-[10px] sm:text-yellow-300">${c.expiryLabel}</span>
+                        <span class="mt-0.5 block break-words leading-snug text-green-400 sm:mt-0 sm:inline">${c.expiry}</span>
+                    </span>
                 </div>
             </div>
-            <a href="${c.link}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-3 py-1.5 bg-green-400/10 hover:bg-green-400 border border-green-400/30 text-green-400 hover:text-black text-xs font-black rounded transition-all no-underline shrink-0 active:scale-95">
+            <a href="${c.link}" target="_blank" rel="noopener noreferrer" aria-label="Verify ${c.name} certification" class="inline-flex h-8 w-full shrink-0 items-center justify-center rounded-md border border-white/12 bg-white/[0.05] px-2.5 text-[10px] font-bold text-green-400 no-underline shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-colors hover:border-white/20 hover:bg-white/[0.09] hover:text-white sm:h-7 sm:w-auto sm:self-auto">
                 VERIFY ↗
             </a>
         </div>
     `,
-                ),
-                `</div>`,
-            ];
+            );
 
             const FILES = {
                 "about.txt": "content",
@@ -419,12 +849,12 @@ const terminalData = {
                 contact: "Get in touch",
                 ls: "List files",
                 cat: "Read file",
-                whoami: "Current session info",
-                status: "System uptime",
+                whoami: "Show current user",
+                status: "Service availability",
                 neofetch: "System info",
                 clear: "Clear terminal",
                 exit: "Close terminal",
-                sudo: "Execute as root",
+                sudo: "Attempt root access",
             };
 
             function initTerminal() {
@@ -440,6 +870,7 @@ const terminalData = {
                     document.getElementById("term-minimize-btn");
                 const maximizeBtn =
                     document.getElementById("term-maximize-btn");
+                const titlebar = document.getElementById("terminal-titlebar");
 
                 // Toolbar
                 const toolbarToggle = document.getElementById("toolbar-toggle");
@@ -459,6 +890,20 @@ const terminalData = {
 
                 if (!overlay || !windowEl || !input) return;
 
+                const updateMaximizeControl = () => {
+                    const label = isMaximized
+                        ? "Restore terminal window"
+                        : "Enter full screen";
+                    maximizeBtn?.setAttribute("aria-label", label);
+                    maximizeBtn?.setAttribute("title", label);
+                    maximizeBtn?.setAttribute(
+                        "aria-pressed",
+                        String(isMaximized),
+                    );
+                };
+
+                updateMaximizeControl();
+
                 // --- Core Actions ---
 
                 function trackedTimeout(callback, delay) {
@@ -475,64 +920,101 @@ const terminalData = {
                     activeTimeouts = [];
                 }
 
-                function openTerminal() {
+                function setTerminalOrigin(origin) {
+                    const width = windowEl.offsetWidth;
+                    const height = windowEl.offsetHeight;
+                    const left = (window.innerWidth - width) / 2;
+                    const top = (window.innerHeight - height) / 2;
+                    const originX = Number.isFinite(origin?.x)
+                        ? origin.x - left
+                        : width / 2;
+                    const originY = Number.isFinite(origin?.y)
+                        ? origin.y - top
+                        : height / 2;
+
+                    windowEl.style.setProperty(
+                        "--terminal-origin-x",
+                        `${originX}px`,
+                    );
+                    windowEl.style.setProperty(
+                        "--terminal-origin-y",
+                        `${originY}px`,
+                    );
+                }
+
+                function openTerminal(origin) {
                     if (isAnimating) return;
                     isAnimating = true;
 
                     abortController?.abort();
                     abortController = new AbortController();
+                    const activeElement = document.activeElement;
+                    const isVisibleTrigger = (element) => {
+                        if (!(element instanceof HTMLElement)) return false;
+                        const style = window.getComputedStyle(element);
+                        return (
+                            element.getClientRects().length > 0 &&
+                            style.display !== "none" &&
+                            style.visibility !== "hidden"
+                        );
+                    };
+                    const fallbackTrigger = [
+                        document.getElementById("terminal-toggle"),
+                        document.getElementById("header-drawer-button"),
+                    ].find(isVisibleTrigger);
+                    const requestedTrigger = origin?.returnFocusId
+                        ? document.getElementById(origin.returnFocusId)
+                        : null;
+                    lastTrigger = isVisibleTrigger(requestedTrigger)
+                        ? requestedTrigger
+                        : isVisibleTrigger(activeElement)
+                          ? activeElement
+                          : fallbackTrigger || null;
 
                     document.body.classList.add("terminal-open");
                     overlay.classList.remove("hidden");
                     overlay.classList.add("flex");
+                    overlay.setAttribute("aria-hidden", "false");
+                    windowEl.classList.remove(
+                        "terminal-closing",
+                        "terminal-minimizing",
+                        "terminal-settled",
+                    );
+                    setTerminalOrigin(origin);
 
                     requestAnimationFrame(() => {
-                        overlay.style.pointerEvents = "all";
-                        overlay.classList.remove("opacity-0");
-
-                        windowEl.classList.remove(
-                            "scale-95",
-                            "opacity-0",
-                            "translate-y-10",
-                        );
-                        windowEl.classList.add("opacity-100", "scale-100");
+                        overlay.classList.add("terminal-overlay-visible");
+                        windowEl.classList.add("terminal-visible");
 
                         trackedTimeout(() => {
+                            windowEl.classList.add("terminal-settled");
                             isAnimating = false;
                             if (!isBooted) bootSequence();
                             else focusInput();
-                        }, 300);
+                        }, 380);
                     });
                 }
 
                 function closeTerminal() {
-                    if (isAnimating) return;
+                    if (
+                        overlay.classList.contains("hidden") ||
+                        windowEl.classList.contains("terminal-closing") ||
+                        windowEl.classList.contains("terminal-minimizing")
+                    )
+                        return;
                     isAnimating = true;
 
                     clearTimeouts();
                     abortController?.abort();
 
-                    // Pulse effect on close button
-                    const closeBtn = document.getElementById("term-close-btn");
-                    if (closeBtn) {
-                        closeBtn.classList.add("btn-pulse");
-                    }
+                    closeBtn?.classList.add("control-activated");
+                    windowEl.classList.remove("terminal-settled");
 
                     requestAnimationFrame(() => {
-                        overlay.classList.add("opacity-0");
-                        overlay.style.pointerEvents = "none";
-
-                        if (isMaximized) {
-                            // Smooth scale 1.2 -> 1 exit
-                            windowEl.classList.add("terminal-exiting");
-                        } else {
-                            // Standard Close Animation
-                            windowEl.classList.remove(
-                                "scale-100",
-                                "opacity-100",
-                            );
-                            windowEl.classList.add("scale-95", "opacity-0");
-                        }
+                        overlay.classList.remove("terminal-overlay-visible");
+                        overlay.setAttribute("aria-hidden", "true");
+                        windowEl.classList.remove("terminal-visible");
+                        windowEl.classList.add("terminal-closing");
 
                         input.blur();
 
@@ -541,30 +1023,40 @@ const terminalData = {
                             overlay.classList.remove("flex");
                             if (isMaximized) {
                                 toggleMaximize(true);
-                                windowEl.classList.remove("terminal-exiting");
                             }
+                            windowEl.classList.remove("terminal-closing");
                             document.body.classList.remove("terminal-open");
                             if (input) input.value = "";
-                            if (closeBtn)
-                                closeBtn.classList.remove("btn-pulse");
+                            closeBtn?.classList.remove("control-activated");
                             isAnimating = false;
-                        }, 300);
+                            lastTrigger?.focus?.({ preventScroll: true });
+                        }, 240);
                     });
                 }
 
                 function minimizeTerminal() {
-                    if (isAnimating) return;
+                    if (
+                        overlay.classList.contains("hidden") ||
+                        windowEl.classList.contains("terminal-closing") ||
+                        windowEl.classList.contains("terminal-minimizing")
+                    )
+                        return;
                     isAnimating = true;
 
                     clearTimeouts();
                     abortController?.abort();
 
-                    overlay.classList.add("opacity-0");
-                    overlay.style.pointerEvents = "none";
-
-                    windowEl.classList.remove("terminal-maximized");
-                    windowEl.classList.remove("scale-100", "opacity-100");
-                    windowEl.classList.add("translate-y-10", "opacity-0");
+                    minimizeBtn?.classList.add("control-activated");
+                    windowEl.classList.remove("terminal-settled");
+                    overlay.classList.remove("terminal-overlay-visible");
+                    overlay.setAttribute("aria-hidden", "true");
+                    windowEl.classList.remove(
+                        "terminal-visible",
+                        "terminal-maximized",
+                    );
+                    windowEl.classList.add("terminal-minimizing");
+                    isMaximized = false;
+                    updateMaximizeControl();
 
                     input.blur();
 
@@ -572,33 +1064,34 @@ const terminalData = {
                         overlay.classList.add("hidden");
                         overlay.classList.remove("flex");
                         document.body.classList.remove("terminal-open");
-                        windowEl.classList.remove("translate-y-10");
-                        isMaximized = false;
-                        if (input) input.value = "";
+                        windowEl.classList.remove("terminal-minimizing");
+                        minimizeBtn?.classList.remove("control-activated");
                         isAnimating = false;
-                    }, 300);
+                        lastTrigger?.focus?.({ preventScroll: true });
+                    }, 480);
                 }
 
                 function toggleMaximize(forceReset = false) {
                     if (forceReset) {
                         windowEl.classList.remove("terminal-maximized");
                         isMaximized = false;
+                        updateMaximizeControl();
                         return;
                     }
 
-                    if (isMaximized) {
-                        // CRITICAL: Remove maximized class IMMEDIATELY so the window can shrink
-                        windowEl.classList.remove("terminal-maximized");
-                        windowEl.classList.add("terminal-normalizing");
-                        setTimeout(() => {
-                            windowEl.classList.remove("terminal-normalizing");
-                        }, 320);
-                    } else {
-                        windowEl.classList.add("terminal-maximized");
-                    }
+                    windowEl.classList.remove("terminal-settled");
                     isMaximized = !isMaximized;
+                    windowEl.classList.toggle(
+                        "terminal-maximized",
+                        isMaximized,
+                    );
+                    updateMaximizeControl();
 
                     setTimeout(() => focusInput(), 50);
+                    trackedTimeout(
+                        () => windowEl.classList.add("terminal-settled"),
+                        460,
+                    );
                 }
 
                 function focusInput() {
@@ -703,7 +1196,7 @@ const terminalData = {
                             break;
 
                         case "sudo":
-                            log("Nice try, but no root for you.");
+                            log("Root access isn't available in this terminal.");
                             break;
 
                         case "help":
@@ -761,20 +1254,26 @@ const terminalData = {
 
                         case "status":
                             log(`
-<div class="border border-white/10 p-2 rounded bg-white/5 text-white/90">
-  <div class="grid grid-cols-[100px_1fr] gap-1">
-    <div class="font-bold text-green-400">System:</div><div>${uptimeData.statusText}</div>
-    <div class="font-bold text-green-400">SessionID:</div><div>${Math.random().toString(36).slice(2, 11)}</div>
-    <div class="font-bold text-green-400">Uptime:</div><div>${uptimeData.uptime}%</div>
-    <div class="font-bold text-green-400">Time:</div><div>${new Date().toLocaleTimeString()}</div>
+<div class="mt-3 max-w-lg overflow-hidden rounded-lg border border-white/10 bg-white/[0.025] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+    <div class="flex items-center justify-between gap-3 border-b border-white/[0.07] px-3 py-2.5 sm:px-4">
+        <span class="text-[10px] font-bold uppercase text-yellow-300">Service status</span>
+        <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase text-green-400">
+            <span class="size-1.5 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.65)]"></span>${uptimeData.statusText}
+        </span>
+    </div>
+    <div class="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-x-3 gap-y-2 p-3 text-[11px] sm:p-4 sm:text-xs">
+        <span class="text-yellow-300">Monitor</span><span class="text-white/80">janach.cloud</span>
+        <span class="text-yellow-300">Session ID</span><span class="text-white/70">${Math.random().toString(36).slice(2, 11)}</span>
+        <span class="text-yellow-300">Availability</span><span class="text-white/80">${uptimeData.uptime}% (30 days)</span>
+        <span class="text-yellow-300">Local time</span><span class="text-white/80">${new Date().toLocaleTimeString()}</span>
   </div>
 </div>`);
                             break;
 
                         case "neofetch":
                             log(`
-<div class="flex gap-6 mt-2 mb-2">
-  <div class="text-white/80 font-bold select-none hidden sm:block leading-[1.1] text-xs whitespace-pre">
+<div class="grid sm:grid-cols-[17rem_minmax(0,1fr)] gap-4 mt-3 mb-2 max-w-2xl">
+    <div class="hidden sm:flex items-center overflow-hidden rounded-lg border border-white/10 bg-white/[0.025] px-3 py-4 text-white/75 font-bold select-none leading-[1.08] text-[9px] whitespace-pre shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]" aria-hidden="true">
 _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_        
  ___/\\\\\\\\\\\\\\\\\\\\\\\\\\\______\\\\\\/////\\\\\\\\\///__       
   __/\\\\\\/////////\\\\\\_________\\\\\\/\\\\\\_____      
@@ -785,14 +1284,23 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
        _\\\\/\\\\\\_______\\\\/\\\\\\_\\\\//\\\\\\\\\\\\\\\\\\______ 
         _\\\\///________\\\\///___\\\\/////////_______  
   </div>
-  <div class="flex flex-col justify-center">
-    <div>visitor@janach.cloud</div>
-    <div class="text-white/20 mb-2">-------------------</div>
-    <div>OS: Red Hat Enterprise Linux 9.4</div>
-    <div>Host: janach.cloud</div>
-    <div>Uptime: ${uptimeData.uptime}%</div>
-    <div>Shell: zsh 5.8</div>
-    <div>Theme: ant-dark</div>
+    <div class="min-w-0 rounded-lg border border-white/10 bg-white/[0.025] p-3 sm:p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <div class="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-bold leading-none">
+            <span class="text-white/80">visitor</span><span class="text-white/35">@</span><span class="text-white">janach.cloud</span>
+            <span class="sm:ml-auto inline-flex items-center gap-1.5 rounded-full border border-green-400/20 bg-green-400/[0.06] px-2 py-1 text-[9px] font-bold uppercase text-green-400">
+                <span class="size-1.5 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.7)]"></span>online
+            </span>
+        </div>
+        <div class="my-3 h-px bg-gradient-to-r from-white/18 via-white/8 to-transparent"></div>
+        <div class="grid grid-cols-[5.25rem_minmax(0,1fr)] gap-x-3 gap-y-1.5 text-[11px] sm:text-xs leading-snug">
+            <span class="text-yellow-300">OS</span><span class="text-white/85">Red Hat Enterprise Linux 10.2</span>
+            <span class="text-yellow-300">Kernel</span><span class="text-white/85 break-all">6.12.0-211.7.1.el10_2</span>
+            <span class="text-yellow-300">Host</span><span class="text-white/85">janach.cloud</span>
+            <span class="text-yellow-300">Shell</span><span class="text-white/85">zsh 5.9.2</span>
+            <span class="text-yellow-300">Availability</span><span class="text-white/85">${uptimeData.uptime}% (30 days)</span>
+            <span class="text-yellow-300">Terminal</span><span class="text-white/85">janach.cloud WebTTY</span>
+            <span class="text-yellow-300">Theme</span><span class="text-white/85">Liquid Glass</span>
+        </div>
   </div>
 </div>`);
                             break;
@@ -800,57 +1308,64 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                         // --- Content Commands ---
                         case "about":
                             log(`
-<div class="inline-flex items-center gap-4 mt-4 mb-4 p-4 border border-white/20 rounded-lg">
-    <img src="/profile.png" alt="${terminalData.personalInfo.name}" class="w-16 h-16 rounded-full object-cover">
-    <div>
-        <div class="text-white font-bold text-base">${terminalData.personalInfo.name}</div>
-        <div class="text-gray-400">${terminalData.personalInfo.role}</div>
+<div class="mt-3 max-w-2xl overflow-hidden rounded-lg border border-white/10 bg-white/[0.025] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+    <div class="flex items-center gap-3 border-b border-white/[0.07] p-3 sm:gap-4 sm:p-4">
+        <img src="/profile.png" alt="${terminalData.personalInfo.name}" class="size-14 shrink-0 rounded-full border border-white/15 object-cover shadow-[0_8px_24px_rgba(0,0,0,0.28)] sm:size-16">
+        <div class="min-w-0">
+            <div class="text-white/95 font-semibold text-sm sm:text-base leading-tight">${terminalData.personalInfo.name}</div>
+            <div class="mt-1 text-[11px] sm:text-xs text-white/75">${terminalData.personalInfo.role}</div>
+        </div>
     </div>
-</div>
-<div class="text-white leading-relaxed">
-    Specialized in high availability and hybrid cloud automation.
-    <br>
-    Focused on building reliable production platforms using IaC, GitOps, and Kubernetes.
-    <br><br>
-    Location: ${terminalData.personalInfo.location}
+    <div class="p-3 sm:p-4">
+        <div class="text-[12px] sm:text-[13px] text-white/80 leading-relaxed">
+            I specialize in high availability and hybrid cloud automation.
+            <br>
+            I focus on building reliable production platforms using IaC, GitOps, and Kubernetes.
+        </div>
+        <div class="mt-3 flex items-center gap-3 border-t border-white/[0.06] pt-3 text-[10px] sm:text-[11px]">
+            <span class="font-semibold uppercase text-yellow-300">Location</span>
+            <span class="text-white/75">${terminalData.personalInfo.location}</span>
+        </div>
+    </div>
 </div>
 `);
                             break;
 
                         case "experience":
                             log(
-                                "<span class='text-blue-400 leading-relaxed'>Fetching employment history...</span>",
+                                "<span class='inline-flex items-center gap-2 text-blue-400'><span class='size-1.5 rounded-full bg-white/45 animate-pulse motion-reduce:animate-none'></span>Fetching employment history...</span>",
                             );
                             printLines(EXPERIENCE_CONTENT, 400);
                             break;
 
                         case "education":
                             log(
-                                "<span class='text-blue-400'>Retrieving academic records...</span>",
+                                "<span class='inline-flex items-center gap-2 text-blue-400'><span class='size-1.5 rounded-full bg-white/45 animate-pulse motion-reduce:animate-none'></span>Retrieving academic records...</span>",
                             );
                             printLines(EDUCATION_CONTENT, 200);
                             break;
 
                         case "certificates":
                             log(
-                                "<span class='text-blue-400'>Validating credentials...</span>",
+                                "<span class='inline-flex items-center gap-2 text-blue-400'><span class='size-1.5 rounded-full bg-white/45 animate-pulse motion-reduce:animate-none'></span>Loading certifications...</span>",
                             );
                             printLines(CERTS_CONTENT, 200);
                             break;
 
                         case "skills":
                             log(
-                                "<span class='text-blue-400 italic'>Analyzing skillset...</span>",
+                                "<span class='inline-flex items-center gap-2 text-blue-400'><span class='size-1.5 rounded-full bg-white/45 animate-pulse motion-reduce:animate-none'></span>Analyzing skillset...</span>",
                             );
                             trackedTimeout(() => {
-                                let skillsHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3 max-w-4xl">`;
+                                let skillsHTML = `<div class="mt-3 grid max-w-4xl grid-cols-1 gap-2 md:grid-cols-2">`;
                                 terminalData.skills.forEach((cat) => {
                                     skillsHTML += `
-                <div class="p-2 bg-white/[0.03] border-l border-yellow-400 rounded-r">
-                    <div class="text-yellow-300 font-bold text-xs uppercase tracking-widest mb-1">
-                        ${cat.label}
+                <div class="min-w-0 rounded-lg border border-white/10 bg-white/[0.025] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-colors hover:bg-white/[0.045] sm:p-4">
+                    <div class="flex items-center gap-2 text-[10px] font-bold uppercase text-yellow-300">
+                        <span class="size-1.5 shrink-0 rounded-full bg-white/40"></span>
+                        <span>${cat.label}</span>
                     </div>
-                    <div class="text-white/70 text-sm leading-relaxed">
+                    <div class="mt-2 text-[12px] text-white/75 leading-relaxed sm:text-[13px]">
                         ${cat.tech}
                     </div>
                 </div>`;
@@ -863,22 +1378,30 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
 
                         case "contact":
                             log(
-                                "<span class='text-blue-400 italic'>Establishing secure connection...</span>",
+                                "<span class='inline-flex items-center gap-2 text-blue-400'><span class='size-1.5 rounded-full bg-white/45 animate-pulse motion-reduce:animate-none'></span>Loading contact options...</span>",
                             );
                             trackedTimeout(() => {
                                 log(`
-<div class="flex flex-wrap gap-3 mt-3 max-w-2xl">
-    <a href="mailto:${terminalData.personalInfo.email}" 
-       class="flex items-center px-4 py-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 rounded text-white/80 no-underline transition-all active:scale-95">
-        <span class="text-sm font-bold tracking-wide">E-mail</span>
-    </a>
-    <a href="https://${terminalData.personalInfo.linkedin}" target="_blank" rel="noopener noreferrer" 
-       class="flex items-center px-4 py-2 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 rounded text-white/80 no-underline transition-all active:scale-95">
-        <span class="text-sm font-bold tracking-wide">LinkedIn</span>
-    </a>
-</div>
-<div class="mt-4 text-xs text-white italic tracking-tight">
-    * Connection established. Secure encrypted tunnel ready for messaging.
+<div class="mt-3 w-full max-w-[19rem] rounded-lg border border-white/10 bg-white/[0.025] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+    <div class="flex items-center justify-between gap-3">
+        <span class="text-[10px] font-bold uppercase text-yellow-300">Contact options</span>
+        <span class="inline-flex items-center gap-1.5 text-[9px] font-bold uppercase text-green-400"><span class="size-1.5 rounded-full bg-green-400"></span>available</span>
+    </div>
+    <div class="mt-3 grid grid-cols-2 gap-2">
+        <a href="mailto:${terminalData.personalInfo.email}"
+           class="group flex h-9 min-w-0 items-center justify-center gap-2 rounded-md border border-white/12 bg-white/[0.05] px-3 text-white/80 no-underline shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-colors hover:border-white/20 hover:bg-white/[0.09] hover:text-white">
+            <svg class="size-3.5 shrink-0 fill-current text-white/70 transition-colors group-hover:text-white" aria-hidden="true"><use href="/social.svg#email"></use></svg>
+            <span class="text-xs font-semibold leading-none">Email</span>
+        </a>
+        <a href="https://${terminalData.personalInfo.linkedin}" target="_blank" rel="noopener noreferrer"
+           class="group flex h-9 min-w-0 items-center justify-center gap-2 rounded-md border border-white/12 bg-white/[0.05] px-3 text-white/80 no-underline shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-colors hover:border-white/20 hover:bg-white/[0.09] hover:text-white">
+            <svg class="size-3.5 shrink-0 fill-current text-white/70 transition-colors group-hover:text-white" aria-hidden="true"><use href="/social.svg#linkedin"></use></svg>
+            <span class="text-xs font-semibold leading-none">LinkedIn</span>
+        </a>
+    </div>
+    <div class="mt-3 border-t border-white/[0.06] pt-3 text-[10px] leading-relaxed text-white/80">
+        Contact options ready.
+    </div>
 </div>
 `);
                                 scrollToBottom();
@@ -895,7 +1418,7 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                                 document.body.appendChild(a);
                                 a.click();
                                 document.body.removeChild(a);
-                                log("<span class='text-green-400 font-bold'>[OK] Downloading Antonio_Janach_CV.pdf...</span>");
+                                log("<span class='text-green-400 font-bold'>[OK]</span> <span class='text-white/80'>Downloading Antonio_Janach_CV.pdf...</span>");
                             } catch (err) {
                                 log("<span class='text-red-400 font-bold'>[ERROR] Failed to download CV document.</span>");
                             }
@@ -938,8 +1461,9 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                     if (window.getSelection()?.toString() === "") focusInput();
                 };
 
-                const toggleHandler = () => {
-                    if (overlay.classList.contains("hidden")) openTerminal();
+                const toggleHandler = (e) => {
+                    if (overlay.classList.contains("hidden"))
+                        openTerminal(e.detail);
                     else closeTerminal();
                 };
                 const overlayClickHandler = (e) => {
@@ -958,6 +1482,10 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                 };
                 const maximizeBtnHandler = (e) => {
                     e.stopPropagation();
+                    toggleMaximize();
+                };
+                const titlebarDoubleClickHandler = (e) => {
+                    if (e.target.closest(".terminal-controls")) return;
                     toggleMaximize();
                 };
                 const keydownHandler = (e) => {
@@ -983,7 +1511,7 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                         if (!cmdLine) return;
 
                         log(
-                            `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${cmdLine}`,
+                            `<span class="terminal-command-echo"><span class="terminal-command-prompt"><span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span></span> <span class="terminal-command-value">${cmdLine}</span></span>`,
                         );
                         history.push(cmdLine);
                         historyIndex = history.length;
@@ -1065,6 +1593,15 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
 
                 maximizeBtn?.removeEventListener("click", maximizeBtnHandler);
                 maximizeBtn?.addEventListener("click", maximizeBtnHandler);
+
+                titlebar?.removeEventListener(
+                    "dblclick",
+                    titlebarDoubleClickHandler,
+                );
+                titlebar?.addEventListener(
+                    "dblclick",
+                    titlebarDoubleClickHandler,
+                );
 
                 document.removeEventListener("keydown", keydownHandler);
                 document.addEventListener("keydown", keydownHandler);

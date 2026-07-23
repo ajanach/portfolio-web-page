@@ -81,7 +81,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             {filter().size > 0 && (
               <button
                 onClick={clearFilters}
-                class="absolute flex justify-center items-center h-full w-10 right-0 top-0 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300"
+                class="absolute flex cursor-pointer justify-center items-center h-full w-10 right-0 top-0 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300"
               >
                 <svg class="size-5">
                   <use href={`/ui.svg#x`} />
@@ -95,12 +95,12 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                   <button
                     onClick={() => toggleTag(tag)}
                     class={cn(
-                      "w-full px-2 py-1 rounded",
+                      "w-full min-h-9 px-2.5 py-1 rounded-lg cursor-pointer",
                       "flex gap-2 items-center",
-                      "bg-black/5 dark:bg-white/10",
-                      "hover:bg-black/10 hover:dark:bg-white/15",
-                      "transition-colors duration-300 ease-in-out",
-                      filter().has(tag) && "text-black dark:text-white"
+                      "border border-black/10 dark:border-white/10 bg-black/[0.035] dark:bg-white/[0.055]",
+                      "hover:bg-black/[0.07] hover:dark:bg-white/10 hover:border-black/15 hover:dark:border-white/15",
+                      "transition-colors duration-200 ease-out",
+                      filter().has(tag) && "text-black dark:text-white bg-black/10 dark:bg-white/15"
                     )}
                   >
                     <svg
@@ -139,7 +139,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             <div class="text-sm uppercase">
               SHOWING {collection().length} OF {data.length} {entry_name}
             </div>
-            <button onClick={toggleDescending} class='flex flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300'>
+            <button onClick={toggleDescending} class='flex cursor-pointer flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300'>
               <div class="text-sm uppercase">
                 {descending() ? "DESCENDING" : "ASCENDING"}
               </div>

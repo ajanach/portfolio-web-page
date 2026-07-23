@@ -1,7 +1,7 @@
 <button
     id="scroll-to-top"
     aria-label="Back to Top"
-    class="fixed bottom-8 right-8 z-50 hidden opacity-0 translate-y-6 transition-all duration-300 ease-in-out p-3 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-xs border border-black/10 dark:border-white/10 shadow-lg hover:shadow-xl hover:scale-110 group"
+    class="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 z-50 hidden size-10 cursor-pointer items-center justify-center opacity-0 translate-y-6 transition-[opacity,transform,background-color,border-color,box-shadow] duration-300 ease-out rounded-full bg-white/80 dark:bg-black/75 backdrop-blur-xl border border-black/10 dark:border-white/15 shadow-lg hover:bg-white dark:hover:bg-black/90 hover:border-black/20 dark:hover:border-white/25 hover:shadow-xl group"
 >
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +11,7 @@
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="size-5 stroke-black dark:stroke-white group-hover:stroke-black group-hover:dark:stroke-white"
+        class="size-4 stroke-black dark:stroke-white"
     >
         <path d="m18 15-6-6-6 6"></path>
     </svg>
@@ -19,20 +19,25 @@
 
 <script is:inline>
     function initScrollToTop() {
+        window.__scrollToTopController?.abort();
+        window.clearTimeout(window.__scrollToTopHideTimeout);
+        const eventController = new AbortController();
+        window.__scrollToTopController = eventController;
+        const listenerOptions = { signal: eventController.signal };
         const btn = document.getElementById("scroll-to-top");
 
         if (!btn) return;
 
         const toggleVisibility = () => {
             if (window.scrollY > 300) {
+                window.clearTimeout(window.__scrollToTopHideTimeout);
                 btn.classList.remove("hidden", "opacity-0", "translate-y-6");
                 btn.classList.add("flex", "opacity-100", "translate-y-0");
             } else {
+                btn.classList.remove("opacity-100", "translate-y-0");
                 btn.classList.add("opacity-0", "translate-y-6");
-                // Wait for transition before hiding completely
-                setTimeout(() => {
+                window.__scrollToTopHideTimeout = window.setTimeout(() => {
                     if (window.scrollY <= 300) {
-                        // Double check
                         btn.classList.remove("flex");
                         btn.classList.add("hidden");
                     }
@@ -42,16 +47,30 @@
         };
 
         let ticking = false;
-        window.addEventListener("scroll", () => {
-            if (!ticking) {
-                requestAnimationFrame(toggleVisibility);
-                ticking = true;
-            }
-        });
+        window.addEventListener(
+            "scroll",
+            () => {
+                if (!ticking) {
+                    requestAnimationFrame(toggleVisibility);
+                    ticking = true;
+                }
+            },
+            listenerOptions,
+        );
 
-        btn.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
+        btn.addEventListener(
+            "click",
+            () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            },
+            listenerOptions,
+        );
+
+        document.addEventListener(
+            "astro:after-swap",
+            initScrollToTop,
+            listenerOptions,
+        );
 
         // Initial check
         toggleVisibility();
@@ -59,5 +78,4 @@
 
     // Run on initial load and View Transitions navigation
     initScrollToTop();
-    document.addEventListener("astro:after-swap", initScrollToTop);
 </script>

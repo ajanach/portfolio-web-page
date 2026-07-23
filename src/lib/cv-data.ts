@@ -3,12 +3,12 @@ export const experience = [
         date: "Mar 2024 - Present",
         title: "DevOps Engineer",
         company: "SICK MOBILISIS d.o.o.",
-        terminalSummary: "Kubernetes (AKS), ArgoCD GitOps, Terraform IaC, Azure, Prometheus/Grafana/Loki/PRTG",
+        terminalSummary: "Kubernetes (AKS), ArgoCD GitOps, Terraform IaC, Azure, Prometheus/Grafana/Loki/Alloy/PRTG",
         points: [
             "Architected and maintained highly available Kubernetes infrastructure on Azure, supporting production microservices across 3+ environments (dev/staging/prod).",
             "Implemented GitOps workflows using ArgoCD, enabling declarative, auditable deployments with zero-downtime rollouts.",
             "Automated multi-environment infrastructure provisioning with Terraform (IaC), reducing environment setup time from hours to minutes and ensuring full reproducibility.",
-            "Designed and operated observability stack monitoring 10+ services with sub-minute alerting via Prometheus, Grafana, Loki, and PRTG for endpoint health monitoring.",
+            "Designed and operated an observability stack monitoring 10+ services with sub-minute alerting via Prometheus, Grafana, Loki, Grafana Alloy, and PRTG for endpoint health monitoring.",
             "Built and maintained CI/CD pipelines in GitLab CI, integrating security checks and automated testing stages - reducing manual release overhead.",
             "Acted as primary technical liaison between the DevOps team and project managers, translating business requirements into infrastructure delivery plans.",
             "Authored and maintained internal technical documentation including architecture diagrams, runbooks, and deployment procedures to ensure operational continuity.",
@@ -152,7 +152,7 @@ export const skills = [
     { label: "Orchestration", tech: "Kubernetes, Podman, Docker, ArgoCD" },
     { label: "Automation", tech: "Terraform, Ansible, GitLab CI, GH Actions" },
     { label: "Infrastructure", tech: "Azure, VMware, Hyper-V, Proxmox, Linux" },
-    { label: "Observability", tech: "Prometheus, Grafana, Loki, PRTG, Vault" },
+    { label: "Observability & Security", tech: "Prometheus, Grafana, Loki, Alloy, PRTG, Vault" },
 ];
 
 export const projects = [
@@ -163,7 +163,7 @@ export const projects = [
         summary: "Production-ready AKS platform with Terraform, GitLab CI/CD and pull-based GitOps via ArgoCD - hub-spoke networking, WAF v2 ingress, zero secrets in Git, external SSO integration, and full observability stack.",
         pdfPoints: [
             "Production-ready AKS platform with hub-spoke networking, WAF v2 ingress, App of Apps GitOps bootstrapping, and zero secrets in Git via External Secrets Operator + Azure Key Vault.",
-            "Keycloak / Entra ID SSO for Grafana and Rancher; full observability stack with Prometheus, Grafana, Alertmanager, Loki, and Promtail; 7 independent security layers.",
+            "Keycloak / Entra ID SSO for Grafana and Rancher; full observability stack with Prometheus, Grafana, Alertmanager, Loki, and Grafana Alloy; 7 independent security layers.",
         ],
     },
     {

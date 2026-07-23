@@ -8,6 +8,7 @@ import { fileURLToPath } from "url"
 // https://astro.build/config
 export default defineConfig({
   site: "https://janach.cloud",
+  compressHTML: true,
   image: {
     service: passthroughImageService()
   },

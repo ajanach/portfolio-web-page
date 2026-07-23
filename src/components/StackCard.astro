@@ -12,15 +12,10 @@ const { text, icon, href } = Astro.props;
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="reveal-card w-full flex items-center justify-start gap-3 px-4 py-3 border border-white/5 dark:border-white/10 rounded-lg transition-all duration-300 group bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.08] hover:border-white/20 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] min-h-[60px] relative overflow-hidden"
+  class="stack-card reveal-card w-full flex items-center justify-start gap-3 px-3 sm:px-4 py-3 border border-black/10 dark:border-white/10 rounded-lg transition-all duration-200 group bg-white/75 dark:bg-white/[0.045] backdrop-blur-xl hover:border-black/20 dark:hover:border-white/20 min-h-[60px] relative overflow-hidden active:scale-[0.98]"
 >
   <div
-    class="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-  >
-  </div>
-
-  <div
-    class="w-8 h-8 p-1.5 bg-white rounded-md flex items-center justify-center shadow-xs flex-shrink-0"
+    class="relative w-8 h-8 p-1.5 bg-white rounded-md flex items-center justify-center shadow-xs flex-shrink-0"
   >
     {
       icon.startsWith("http") ||
@@ -36,8 +31,39 @@ const { text, icon, href } = Astro.props;
   </div>
 
   <span
-    class="text-sm font-medium text-black dark:text-white leading-tight break-words"
+    class="relative text-sm font-medium text-black dark:text-white leading-tight break-words"
   >
     {text}
   </span>
 </a>
+
+<style>
+  .stack-card.reveal-card {
+    background: rgba(255, 255, 255, 0.045);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.07),
+      0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+
+  html:not(.dark) .stack-card.reveal-card {
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  .stack-card.reveal-card:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 10px 28px rgba(0, 0, 0, 0.2);
+  }
+
+  html:not(.dark) .stack-card.reveal-card:hover {
+    background: rgba(255, 255, 255, 0.94) !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stack-card {
+      transition: none;
+    }
+  }
+</style>

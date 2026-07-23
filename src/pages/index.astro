@@ -93,6 +93,11 @@ const stack = {
       href: "https://grafana.com",
     },
     {
+      text: "Grafana Alloy",
+      icon: "https://cdn.simpleicons.org/grafana/F46800",
+      href: "https://grafana.com/oss/alloy-opentelemetry-collector/",
+    },
+    {
       text: "Loki",
       icon: "https://grafana.com/static/img/logos/logo-loki.svg",
       href: "https://grafana.com/oss/loki/",
@@ -121,14 +126,14 @@ const stack = {
     }
   </style>
 
-  <section class="relative h-screen w-full z-10 pointer-events-none">
+  <section class="home-hero relative w-full z-10 pointer-events-none">
     <div
       class="animate absolute h-full w-full flex items-center justify-center"
     >
       <div class="relative w-full h-full flex items-center justify-center">
-        <div class="p-5 text-center pointer-events-auto">
+        <div class="hero-content w-full text-center pointer-events-auto">
           <div
-            class="animated relative w-64 h-64 mx-auto mb-6 rounded-full overflow-hidden border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+            class="profile-frame animated relative mx-auto rounded-full overflow-hidden border border-white/20"
           >
             <img
               src="/profile.png"
@@ -142,7 +147,7 @@ const stack = {
             Antonio Janach
           </p>
           <p
-            class="animated text-sm md:text-base lg:text-lg opacity-75 text-white"
+            class="animated mx-auto max-w-2xl text-sm md:text-base lg:text-lg opacity-75 text-white"
           >
             DevOps & Cloud Engineer specialized in high availability and hybrid
             cloud automation.
@@ -168,53 +173,51 @@ const stack = {
       </div>
     </div>
 
-    <!-- Elite Scroll Indicator -->
     <div
-      class="absolute bottom-8 sm:bottom-10
-         inset-x-0 mx-auto w-fit
-         flex flex-col items-center
-         gap-1 sm:gap-2
-         text-white/40 sm:text-white/60
-         animate-bounce pointer-events-none"
+      aria-hidden="true"
+      class="explore-cue absolute inset-x-0 mx-auto w-fit flex flex-col items-center gap-1.5 text-white/75 pointer-events-none select-none"
     >
       <span
-        class="text-[9px] sm:text-[11px]
-               font-bold uppercase
-               tracking-[0.2em] sm:tracking-[0.3em]"
+        class="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.22em]"
       >
         Explore
       </span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-60"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="m6 9 6 6 6-6"></path>
-      </svg>
+      <span class="explore-arrow flex size-5 items-center justify-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="size-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </span>
     </div>
   </section>
 
-  <div class="relative bg-white dark:bg-transparent z-10">
-    <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+  <div
+    id="technical-stack"
+    class="stack-section relative z-10 bg-transparent"
+  >
+    <div class="mx-auto max-w-screen-md px-5 py-16 sm:py-20">
       <!-- Tech Stack Section -->
-      <section class="animate mt-12">
-        <div class="space-y-8">
+      <section class="animate scroll-mt-20">
+        <div class="space-y-10">
           <p
-            class="font-semibold text-black dark:text-white uppercase tracking-widest text-xl text-center"
+            class="font-semibold text-black dark:text-white text-2xl sm:text-3xl text-center"
           >
             Technical Stack
           </p>
 
-          <div class="space-y-8">
+          <div class="space-y-10">
             {
               Object.entries(stack).map(([category, items]) => (
                 <div class="space-y-3">
-                  <p class="text-[10px] font-bold uppercase opacity-50 tracking-widest text-center">
+                  <p class="text-[11px] font-bold uppercase opacity-50 tracking-widest text-left">
                     {category}
                   </p>
                   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 place-items-center">
@@ -235,3 +238,74 @@ const stack = {
     </div>
   </div>
 </PageLayout>
+
+<style>
+  .home-hero {
+    height: 100vh;
+    height: 100svh;
+    min-height: 35.5rem;
+  }
+
+  @supports (height: 100dvh) {
+    .home-hero {
+      height: 100dvh;
+    }
+  }
+
+  .hero-content {
+    padding: 5rem 1.25rem 6.5rem;
+  }
+
+  .profile-frame {
+    width: clamp(11.5rem, 52vmin, 16rem);
+    aspect-ratio: 1;
+    margin-bottom: clamp(1rem, 3vh, 1.5rem);
+    box-shadow:
+      0 24px 70px rgba(0, 0, 0, 0.55),
+      0 0 0 6px rgba(255, 255, 255, 0.025),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  }
+
+  .explore-cue {
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+    animation: explore-cue 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    will-change: transform;
+  }
+
+  @keyframes explore-cue {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+
+  @media (max-height: 42rem) {
+    .home-hero {
+      min-height: 32rem;
+    }
+
+    .hero-content {
+      padding-top: 4.5rem;
+      padding-bottom: 5.5rem;
+    }
+
+    .profile-frame {
+      width: clamp(10.5rem, 31vh, 12.5rem);
+      margin-bottom: 0.875rem;
+    }
+
+    .explore-cue {
+      gap: 0.25rem;
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .explore-cue {
+      animation: none;
+    }
+  }
+</style>

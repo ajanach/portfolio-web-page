@@ -9,11 +9,11 @@ import Container from "@components/Container.astro";
 
 <header id="header" class="fixed top-0 w-full h-16 z-50">
   <Container size="md">
-    <div class="flex items-center justify-between h-full w-full">
+    <div class="header-bar flex items-center justify-between w-full px-3">
       <div class="flex-shrink-0 flex gap-1 font-semibold">
         <a
           href="/"
-          class="flex gap-1 text-current hover:text-black dark:hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.35)] hover:scale-105 transition-all duration-300 ease-in-out"
+          class="flex items-center gap-1 text-current hover:text-black dark:hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.35)] transition-all duration-200 ease-out"
         >
           <svg class="size-6 fill-current">
             <use href="/brand.svg#brand"></use>
@@ -25,8 +25,8 @@ import Container from "@components/Container.astro";
         </a>
       </div>
 
-      <div class="flex-1 flex justify-center px-4">
-        <nav class="hidden md:flex items-center justify-center text-sm gap-1">
+      <div class="flex-1 flex justify-center px-3 lg:px-4">
+        <nav class="desktop-nav hidden md:flex items-center justify-center text-sm gap-0.5 rounded-lg p-0.5">
           {
             LINKS.map((LINK) => (
               <a
@@ -34,7 +34,7 @@ import Container from "@components/Container.astro";
                 class={cn(
                   "h-8 rounded-full px-3 text-current",
                   "flex items-center justify-center",
-                  "transition-all duration-300 ease-in-out",
+                  "transition-colors duration-200 ease-out",
                   pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF
                     ? "bg-white text-black"
                     : "text-white hover:bg-white/15",
@@ -47,7 +47,7 @@ import Container from "@components/Container.astro";
         </nav>
       </div>
 
-      <div class="flex-shrink-0 flex gap-2 items-center">
+      <div class="flex-shrink-0 flex gap-1 items-center">
         {
           [
             // Search Button
@@ -93,11 +93,11 @@ import Container from "@components/Container.astro";
                 aria-label={btn.ariaLabel}
                 class={cn(
                   "hidden md:flex",
-                  "size-10 rounded-full p-2 items-center justify-center", // Refactored to size-10
+                  "header-control size-8 rounded-full p-1.5 items-center justify-center",
                   "stroke-current",
                   "border border-transparent",
-                  "hover:bg-black/5 dark:hover:bg-white/15 hover:scale-110",
-                  "transition-all duration-300 ease-in-out",
+                  "hover:bg-black/5 dark:hover:bg-white/12",
+                  "transition-colors duration-200 ease-out",
                   btn.extraClass,
                 )}
               >
@@ -113,11 +113,11 @@ import Container from "@components/Container.astro";
                 aria-label={btn.ariaLabel}
                 class={cn(
                   "hidden md:flex",
-                  "size-10 rounded-full p-2 items-center justify-center", // Refactored to size-10
+                  "header-control size-8 rounded-full p-1.5 items-center justify-center",
                   "stroke-current",
                   "border border-transparent",
-                  "hover:bg-black/5 dark:hover:bg-white/15 hover:scale-110",
-                  "transition-all duration-300 ease-in-out",
+                  "hover:bg-black/5 dark:hover:bg-white/12",
+                  "transition-colors duration-200 ease-out",
                 )}
               >
                 <svg class="size-full fill-current">
@@ -130,14 +130,16 @@ import Container from "@components/Container.astro";
 
         <button
           id="header-drawer-button"
-          aria-label={`Toggle drawer`}
+          aria-label="Open navigation menu"
+          aria-controls="drawer"
+          aria-expanded="false"
           class={cn(
             "flex md:hidden",
-            "size-10 rounded-full p-2 items-center justify-center", // Refactored to size-10
+            "header-control size-8 rounded-full p-1.5 items-center justify-center",
             "stroke-current",
             "border border-transparent",
-            "hover:bg-black/5 dark:hover:bg-white/15 hover:scale-110",
-            "transition-all duration-300 ease-in-out",
+            "hover:bg-black/5 dark:hover:bg-white/12",
+            "transition-colors duration-200 ease-out",
           )}
         >
           <svg id="drawer-open" class="size-full">
@@ -168,28 +170,61 @@ import Container from "@components/Container.astro";
   </style>
 
   <script is:inline>
-    function toggleDrawer() {
+    function setDrawerOpen(open) {
       const drawer = document.getElementById("drawer");
       const drawerButton = document.getElementById("header-drawer-button");
-      drawer?.classList.toggle("open");
-      drawerButton?.classList.toggle("open");
+      drawer?.classList.toggle("open", open);
+      drawer?.setAttribute("aria-hidden", String(!open));
+      drawerButton?.classList.toggle("open", open);
+      drawerButton?.setAttribute("aria-expanded", String(open));
+      drawerButton?.setAttribute(
+        "aria-label",
+        open ? "Close navigation menu" : "Open navigation menu",
+      );
+      document.body.classList.toggle("drawer-open", open);
     }
 
-    function initializeDrawerButton() {
+    function initializeHeaderInteractions() {
+      window.__headerEventController?.abort();
+      const eventController = new AbortController();
+      window.__headerEventController = eventController;
+      const listenerOptions = { signal: eventController.signal };
+
       const drawerButton = document.getElementById("header-drawer-button");
-      drawerButton?.addEventListener("click", toggleDrawer);
-    }
-
-    function initializeTerminalButton() {
       const terminalButton = document.getElementById("terminal-toggle");
-      terminalButton?.addEventListener("click", () => {
-        document.dispatchEvent(new Event("terminal:toggle"));
-      });
+
+      drawerButton?.addEventListener(
+        "click",
+        () => {
+          setDrawerOpen(!drawerButton.classList.contains("open"));
+        },
+        listenerOptions,
+      );
+
+      terminalButton?.addEventListener(
+        "click",
+        () => {
+          const rect = terminalButton.getBoundingClientRect();
+          document.dispatchEvent(
+            new CustomEvent("terminal:toggle", {
+              detail: {
+                x: rect.left + rect.width / 2,
+                y: rect.top + rect.height / 2,
+                returnFocusId: "terminal-toggle",
+              },
+            }),
+          );
+        },
+        listenerOptions,
+      );
+
+      document.addEventListener(
+        "astro:after-swap",
+        initializeHeaderInteractions,
+        listenerOptions,
+      );
     }
 
-    document.addEventListener("astro:after-swap", initializeDrawerButton);
-    document.addEventListener("astro:after-swap", initializeTerminalButton);
-    initializeDrawerButton();
-    initializeTerminalButton();
+    initializeHeaderInteractions();
   </script>
 </header>

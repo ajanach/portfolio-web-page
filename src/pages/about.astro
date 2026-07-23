@@ -59,7 +59,7 @@ import CVDownloadButton from "../components/CVDownloadButton.astro";
                     {projects.map((proj) => (
                         <a
                             href={proj.url}
-                            class="group flex items-start justify-between gap-4 px-5 py-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-md transition-all duration-300"
+                            class="mac-surface group flex items-start justify-between gap-4 px-5 py-4 rounded-lg transition-[background-color,border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5"
                         >
                             <div class="min-w-0 space-y-1">
                                 <h3 class="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-black dark:group-hover:text-white transition-colors leading-snug">
@@ -104,10 +104,10 @@ import CVDownloadButton from "../components/CVDownloadButton.astro";
                                 href={cert.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="group relative flex flex-col p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-lg overflow-hidden"
+                                class="mac-surface group relative flex flex-col p-6 rounded-lg transition-[background-color,border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 overflow-hidden"
                             >
                                 <div class="flex items-start justify-between mb-4">
-                                    <div class="p-2.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white group-hover:scale-110 transition-transform duration-300">
+                                    <div class="p-2.5 rounded-lg bg-neutral-100 dark:bg-white/10 text-neutral-900 dark:text-white transition-colors duration-200">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="22"

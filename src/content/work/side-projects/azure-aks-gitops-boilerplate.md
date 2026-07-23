@@ -230,7 +230,7 @@ cert-manager handles automated TLS lifecycle for both paths using ClusterIssuers
 | Identity / SSO | Keycloak / Entra ID (OIDC for Grafana, Rancher) |
 | Data services | Azure SQL, PostgreSQL Flexible Server, Azure Redis |
 | Messaging | EMQX (via Kubernetes Operator) |
-| Observability | Prometheus, Grafana, Alertmanager, Loki, Promtail |
+| Observability | Prometheus, Grafana, Alertmanager, Loki, Grafana Alloy |
 | Cluster management | Rancher (multi-cluster RBAC) |
 
 
@@ -280,7 +280,7 @@ Implemented seven independent defense layers with centralized identity:
 | Secrets | External Secrets Operator, Azure Key Vault |
 | Identity | Keycloak, Microsoft Entra ID, Azure Managed Identities |
 | Messaging | EMQX (Kubernetes Operator) |
-| Observability | Prometheus, Grafana, Alertmanager, Loki, Promtail |
+| Observability | Prometheus, Grafana, Alertmanager, Loki, Grafana Alloy |
 
 
 ## Skills Demonstrated

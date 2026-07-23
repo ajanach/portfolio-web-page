@@ -1,10 +1,10 @@
 # Janach Cloud Portfolio
 
 ![License](https://img.shields.io/github/license/ajanach/portfolio-web-page?color=yellow)
-![Astro](https://img.shields.io/badge/Astro-v5.16-orange.svg)
-![Tailwind](https://img.shields.io/badge/Tailwind-v3.4.19-38bdf8.svg)
+![Astro](https://img.shields.io/badge/Astro-v7.1.3-orange.svg)
+![Tailwind](https://img.shields.io/badge/Tailwind-v4.3.3-38bdf8.svg)
 
-A professional DevOps & Cloud Engineer portfolio built with **Astro 5** and **Tailwind CSS**. Features a unique interactive terminal interface, content collections for work and blog posts, and a high-performance minimalist design.
+A professional DevOps & Cloud Engineer portfolio built with **Astro 7** and **Tailwind CSS**. Features a unique interactive terminal interface, content collections for work and blog posts, and a high-performance minimalist design.
 
 ## Features
 
@@ -16,8 +16,8 @@ A professional DevOps & Cloud Engineer portfolio built with **Astro 5** and **Ta
 
 ## Tech Stack
 
-- **Framework**: [Astro 5](https://astro.build/)
-- **Styling**: [Tailwind CSS 3.4](https://tailwindcss.com/)
+- **Framework**: [Astro 7](https://astro.build/)
+- **Styling**: [Tailwind CSS 4.3](https://tailwindcss.com/)
 - **Integrations**: MDX, Sitemap, SolidJS
 - **Deployment**: GitHub Actions -> GitHub Pages
 

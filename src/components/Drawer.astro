@@ -7,136 +7,198 @@ const subpath = pathname.match(/[^/]+/g);
 
 <div
   id="drawer"
-  class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center md:hidden bg-neutral-100 dark:bg-neutral-900 transition-[height] duration-300 ease-in-out"
+  class="fixed inset-0 z-40 md:hidden"
+  aria-hidden="true"
 >
-  <nav class="flex flex-col items-center space-y-2">
-    {
-      LINKS.map((LINK) => (
-        <a
-          href={LINK.HREF}
-          class={cn(
-            "flex items-center justify-center px-3 py-1 rounded-full",
-            "text-current hover:text-black dark:hover:text-white",
-            "hover:bg-black/5 dark:hover:bg-white/15",
-            "transition-colors duration-300 ease-in-out",
-            pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF
-              ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black"
-              : "",
-          )}
-        >
-          {LINK.TEXT}
-        </a>
-      ))
-    }
-  </nav>
+  <button
+    id="drawer-backdrop"
+    class="absolute inset-0 h-full w-full"
+    aria-label="Close navigation menu"
+  ></button>
 
-  <div class="flex gap-1 mt-5">
-    {
-      [
-        // Search Button
+  <div class="drawer-sheet absolute inset-x-5 top-[4.5rem] mx-auto max-w-screen-sm">
+    <div class="drawer-navigation px-2 pt-2 pb-1">
+      <p class="px-3 pb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">
+        Navigation
+      </p>
+      <nav class="flex flex-col gap-1" aria-label="Mobile navigation">
         {
-          href: "/search",
-          ariaLabel: "Search",
-          icon: "search",
-          isLink: true,
-          target: undefined,
-          id: undefined,
-          extraClass:
-            pathname === "/search" || "/" + subpath?.[0] === "search"
-              ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black"
-              : "",
-        },
-        // Socials
-        ...SOCIALS.filter(
-          (s) => s.NAME === "LinkedIn" || s.NAME === "Credly",
-        ).map((s) => ({
-          href: s.HREF,
-          ariaLabel: s.NAME,
-          icon: s.ICON,
-          isLink: true,
-          target: "_blank",
-          id: undefined,
-          extraClass: undefined,
-        })),
-        // Terminal Toggle
-        {
-          href: undefined,
-          ariaLabel: "Open Terminal",
-          icon: "terminal",
-          isLink: false,
-          target: undefined,
-          id: "drawer-terminal-toggle",
-          extraClass: undefined,
-        },
-      ].map((btn) =>
-        btn.isLink ? (
-          <a
-            href={btn.href}
-            target={btn.target}
-            aria-label={btn.ariaLabel}
-            class={cn(
-              "size-10 rounded-full p-2 items-center justify-center",
-              "stroke-current",
-              "border border-transparent",
-              "hover:bg-black/5 dark:hover:bg-white/15 hover:scale-110",
-              "transition-all duration-300 ease-in-out",
-              btn.extraClass,
-            )}
-          >
-            <svg class="size-full fill-current">
-              <use
-                href={`/${btn.icon === "search" ? "ui" : "social"}.svg#${btn.icon}`}
-              />
-            </svg>
-          </a>
-        ) : (
-          <button
-            id={btn.id}
-            aria-label={btn.ariaLabel}
-            class={cn(
-              "size-10 rounded-full p-2 items-center justify-center",
-              "stroke-current",
-              "border border-transparent",
-              "hover:bg-black/5 dark:hover:bg-white/15 hover:scale-110",
-              "transition-all duration-300 ease-in-out",
-              btn.extraClass,
-            )}
-          >
-            <svg class="size-full fill-current">
-              <use href={`/social.svg#${btn.icon}`} />
-            </svg>
-          </button>
-        ),
-      )
-    }
+          LINKS.map((LINK) => {
+            const isActive =
+              pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF;
+
+            return (
+              <a
+                href={LINK.HREF}
+                aria-current={isActive ? "page" : undefined}
+                class={cn(
+                  "drawer-nav-link flex min-h-11 items-center justify-between rounded-lg px-3 text-[15px] font-medium",
+                  "transition-colors duration-150 ease-out",
+                  isActive
+                    ? "pointer-events-none bg-white text-black"
+                    : "text-white/80 hover:bg-white/10 hover:text-white",
+                )}
+              >
+                <span>{LINK.TEXT}</span>
+                <span
+                  class={cn(
+                    "size-1.5 rounded-full",
+                    isActive ? "bg-black/60" : "bg-white/20",
+                  )}
+                  aria-hidden="true"
+                />
+              </a>
+            );
+          })
+        }
+      </nav>
+    </div>
+
+    <div class="mx-3 border-t border-white/10"></div>
+
+    <div class="grid grid-cols-4 gap-1 p-2">
+      {
+        [
+          {
+            href: "/search",
+            label: "Search",
+            icon: "search",
+            isLink: true,
+            target: undefined,
+            id: undefined,
+          },
+          ...SOCIALS.filter(
+            (social) =>
+              social.NAME === "LinkedIn" || social.NAME === "Credly",
+          ).map((social) => ({
+            href: social.HREF,
+            label: social.NAME,
+            icon: social.ICON,
+            isLink: true,
+            target: "_blank",
+            id: undefined,
+          })),
+          {
+            href: undefined,
+            label: "Terminal",
+            icon: "terminal",
+            isLink: false,
+            target: undefined,
+            id: "drawer-terminal-toggle",
+          },
+        ].map((control) =>
+          control.isLink ? (
+            <a
+              href={control.href}
+              target={control.target}
+              rel={control.target ? "noopener noreferrer" : undefined}
+              aria-label={control.label}
+              class="drawer-utility flex min-w-0 flex-col items-center gap-1.5 rounded-lg px-1 py-2 text-white/65 transition-colors duration-150 hover:bg-white/10 hover:text-white"
+            >
+              <span class="flex size-8 items-center justify-center rounded-lg bg-white/10 p-1.5 shadow-inner">
+                <svg
+                  class={cn(
+                    "size-full fill-current",
+                    control.icon === "search" && "stroke-current",
+                  )}
+                >
+                  <use
+                    href={`/${control.icon === "search" ? "ui" : "social"}.svg#${control.icon}`}
+                  />
+                </svg>
+              </span>
+              <span class="w-full truncate text-center text-[10px] font-medium">
+                {control.label}
+              </span>
+            </a>
+          ) : (
+            <button
+              id={control.id}
+              aria-label={control.label}
+              class="drawer-utility flex min-w-0 flex-col items-center gap-1.5 rounded-lg px-1 py-2 text-white/65 transition-colors duration-150 hover:bg-white/10 hover:text-white"
+            >
+              <span class="flex size-8 items-center justify-center rounded-lg bg-white/10 p-1.5 shadow-inner">
+                <svg class="size-full fill-current">
+                  <use href={`/social.svg#${control.icon}`} />
+                </svg>
+              </span>
+              <span class="w-full truncate text-center text-[10px] font-medium">
+                {control.label}
+              </span>
+            </button>
+          ),
+        )
+      }
+    </div>
   </div>
 </div>
 
 <script is:inline>
-  function initializeDrawerTerminalButton() {
+  function closeNavigationDrawer() {
+    const drawer = document.getElementById("drawer");
+    const drawerButton = document.getElementById("header-drawer-button");
+    drawer?.classList.remove("open");
+    drawer?.setAttribute("aria-hidden", "true");
+    drawerButton?.classList.remove("open");
+    drawerButton?.setAttribute("aria-expanded", "false");
+    drawerButton?.setAttribute("aria-label", "Open navigation menu");
+    document.body.classList.remove("drawer-open");
+  }
+
+  function initializeDrawerInteractions() {
+    window.__drawerEventController?.abort();
+    const eventController = new AbortController();
+    window.__drawerEventController = eventController;
+    const listenerOptions = { signal: eventController.signal };
+
     const drawerTerminalButton = document.getElementById(
       "drawer-terminal-toggle",
     );
-    drawerTerminalButton?.addEventListener("click", () => {
-      // Close drawer first
-      const drawer = document.getElementById("drawer");
-      const drawerButton = document.getElementById("header-drawer-button");
-      drawer?.classList.remove("open");
-      drawerButton?.classList.remove("open");
+    const drawerBackdrop = document.getElementById("drawer-backdrop");
 
-      // Then toggle terminal
-      setTimeout(() => {
-        document.dispatchEvent(new Event("terminal:toggle"));
-      }, 100);
-    });
+    drawerBackdrop?.addEventListener(
+      "click",
+      closeNavigationDrawer,
+      listenerOptions,
+    );
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape") {
+          closeNavigationDrawer();
+        }
+      },
+      listenerOptions,
+    );
+
+    drawerTerminalButton?.addEventListener(
+      "click",
+      () => {
+        const rect = drawerTerminalButton.getBoundingClientRect();
+        const origin = {
+          x: rect.left + rect.width / 2,
+          y: rect.top + rect.height / 2,
+          returnFocusId: "header-drawer-button",
+        };
+
+        closeNavigationDrawer();
+
+        setTimeout(() => {
+          document.dispatchEvent(
+            new CustomEvent("terminal:toggle", { detail: origin }),
+          );
+        }, 180);
+      },
+      listenerOptions,
+    );
+
+    document.addEventListener(
+      "astro:after-swap",
+      initializeDrawerInteractions,
+      listenerOptions,
+    );
   }
 
-  document.addEventListener("astro:after-swap", initializeDrawerTerminalButton);
-  initializeDrawerTerminalButton();
+  initializeDrawerInteractions();
 </script>
-
-<style>
-  #drawer.open {
-    @apply h-full;
-  }
-</style>
