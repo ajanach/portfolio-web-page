@@ -155,6 +155,21 @@ const subpath = pathname.match(/[^/]+/g);
       "drawer-terminal-toggle",
     );
     const drawerBackdrop = document.getElementById("drawer-backdrop");
+    const pressedControls = document.querySelectorAll(
+      "#drawer .drawer-nav-link:not([aria-current='page']), #drawer .drawer-utility",
+    );
+
+    pressedControls.forEach((control) => {
+      const clearPressed = () => control.classList.remove("is-pressed");
+      control.addEventListener(
+        "pointerdown",
+        () => control.classList.add("is-pressed"),
+        listenerOptions,
+      );
+      control.addEventListener("pointerup", clearPressed, listenerOptions);
+      control.addEventListener("pointercancel", clearPressed, listenerOptions);
+      control.addEventListener("pointerleave", clearPressed, listenerOptions);
+    });
 
     drawerBackdrop?.addEventListener(
       "click",

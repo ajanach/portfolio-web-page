@@ -193,6 +193,25 @@ import Container from "@components/Container.astro";
       const drawerButton = document.getElementById("header-drawer-button");
       const terminalButton = document.getElementById("terminal-toggle");
 
+      const clearDrawerButtonPressed = () =>
+        drawerButton?.classList.remove("is-pressed");
+
+      drawerButton?.addEventListener(
+        "pointerdown",
+        () => drawerButton.classList.add("is-pressed"),
+        listenerOptions,
+      );
+      drawerButton?.addEventListener(
+        "pointerup",
+        clearDrawerButtonPressed,
+        listenerOptions,
+      );
+      drawerButton?.addEventListener(
+        "pointercancel",
+        clearDrawerButtonPressed,
+        listenerOptions,
+      );
+
       drawerButton?.addEventListener(
         "click",
         () => {
