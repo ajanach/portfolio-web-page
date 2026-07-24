@@ -12,6 +12,7 @@ import Container from "@components/Container.astro";
     <div class="header-bar flex items-center justify-between w-full px-3">
       <div class="flex-shrink-0 flex gap-1 font-semibold">
         <a
+          id="header-brand-link"
           href="/"
           class="flex items-center gap-1 text-current hover:text-black dark:hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.35)] transition-all duration-200 ease-out"
         >
@@ -155,6 +156,30 @@ import Container from "@components/Container.astro";
   <!-- Terminal moved to PageLayout for global stacking context -->
 
   <style>
+    #header-brand-link {
+      touch-action: manipulation;
+    }
+
+    @media (max-width: 47.999rem) {
+      #header-brand-link {
+        border-radius: 0.375rem;
+        transition:
+          transform 100ms ease,
+          background-color 120ms ease,
+          color 120ms ease,
+          box-shadow 120ms ease;
+      }
+
+      #header-brand-link:active,
+      #header-brand-link.is-pressed {
+        background-color: rgba(255, 255, 255, 0.18) !important;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12) !important;
+        color: #fff !important;
+        transform: scale(0.96) !important;
+        transition: none !important;
+      }
+    }
+
     #header-drawer-button > #drawer-open {
       @apply block;
     }
@@ -190,11 +215,35 @@ import Container from "@components/Container.astro";
       window.__headerEventController = eventController;
       const listenerOptions = { signal: eventController.signal };
 
+      const brandLink = document.getElementById("header-brand-link");
       const drawerButton = document.getElementById("header-drawer-button");
       const terminalButton = document.getElementById("terminal-toggle");
 
+      const clearBrandLinkPressed = () =>
+        brandLink?.classList.remove("is-pressed");
       const clearDrawerButtonPressed = () =>
         drawerButton?.classList.remove("is-pressed");
+
+      brandLink?.addEventListener(
+        "pointerdown",
+        () => brandLink.classList.add("is-pressed"),
+        listenerOptions,
+      );
+      brandLink?.addEventListener(
+        "pointerup",
+        clearBrandLinkPressed,
+        listenerOptions,
+      );
+      brandLink?.addEventListener(
+        "pointercancel",
+        clearBrandLinkPressed,
+        listenerOptions,
+      );
+      brandLink?.addEventListener(
+        "pointerleave",
+        clearBrandLinkPressed,
+        listenerOptions,
+      );
 
       drawerButton?.addEventListener(
         "pointerdown",
