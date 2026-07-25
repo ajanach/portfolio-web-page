@@ -70,6 +70,20 @@ export const education = [
             "<strong class='font-bold'>Master's Thesis:</strong> Comparison of Orchestration Systems for Microservices Applications <a href='https://janach.cloud/work/master/masters-thesis-comparison-of-orchestration-systems-for-microservices/' data-pressable='true' target='_blank' rel='noopener noreferrer' class='inline-flex items-center gap-1 px-2 py-0.5 ml-2 text-[10px] font-black uppercase tracking-wider bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-black dark:hover:text-white transition-all no-underline active:scale-95'>View ↗</a>",
             "<strong class='font-bold'>Published Research (MIPRO 2025 / IEEE):</strong> 'A Decision-Making Framework for Evaluating Orchestration Systems in Microservices Applications'. Co-authored with Rok Piltaver. <a href='https://janach.cloud/work/master/orchestration-decision-framework-mipro-2025/' data-pressable='true' target='_blank' rel='noopener noreferrer' class='inline-flex items-center gap-1 px-2 py-0.5 ml-2 text-[10px] font-black uppercase tracking-wider bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-black dark:hover:text-white transition-all no-underline active:scale-95'>View ↗</a>",
         ],
+        timelineDetails: [
+            {
+                label: "Master's Thesis",
+                text: "Comparison of Orchestration Systems for Microservices Applications",
+                link: "/work/master/masters-thesis-comparison-of-orchestration-systems-for-microservices/",
+            },
+            {
+                label: "Published Research",
+                meta: "MIPRO 2025 / IEEE",
+                text: "A Decision-Making Framework for Evaluating Orchestration Systems in Microservices Applications",
+                note: "Co-authored with Rok Piltaver",
+                link: "/work/master/orchestration-decision-framework-mipro-2025/",
+            },
+        ],
         pdfPoints: [
             { text: "Master's Thesis: Comparison of Orchestration Systems for Microservices Applications", link: "https://janach.cloud/work/master/masters-thesis-comparison-of-orchestration-systems-for-microservices/" },
             { text: "Published Research (MIPRO 2025 / IEEE): 'A Decision-Making Framework for Evaluating Orchestration Systems in Microservices Applications'. Co-authored with Rok Piltaver.", link: "https://janach.cloud/work/master/orchestration-decision-framework-mipro-2025/" },
@@ -85,6 +99,13 @@ export const education = [
         company: "Algebra Bernays University",
         points: [
             "<strong class='font-bold'>Final Thesis:</strong> Windows Computer Administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure Cloud <a href='https://janach.cloud/work/bachelor/windows-computer-administration-using-mecm-in-azure-final-thesis/' data-pressable='true' target='_blank' rel='noopener noreferrer' class='inline-flex items-center gap-1 px-2 py-0.5 ml-2 text-[10px] font-black uppercase tracking-wider bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-black dark:hover:text-white transition-all no-underline active:scale-95'>View ↗</a>",
+        ],
+        timelineDetails: [
+            {
+                label: "Final Thesis",
+                text: "Windows Computer Administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure Cloud",
+                link: "/work/bachelor/windows-computer-administration-using-mecm-in-azure-final-thesis/",
+            },
         ],
         pdfPoints: [
             { text: "Final Thesis: Windows Computer Administration using Microsoft Endpoint Configuration Manager in the Microsoft Azure Cloud", link: "https://janach.cloud/work/bachelor/windows-computer-administration-using-mecm-in-azure-final-thesis/" },

@@ -6,10 +6,18 @@ interface Props {
     company: string;
     points?: string[];
     link?: string;
+        timelineDetails?: {
+            label: string;
+            meta?: string;
+            text: string;
+            note?: string;
+            link: string;
+        }[];
   }[];
+    variant?: "default" | "education";
 }
 
-const { items } = Astro.props;
+const { items, variant = "default" } = Astro.props;
 ---
 
 <div class="flex flex-col space-y-0">
@@ -53,7 +61,50 @@ const { items } = Astro.props;
                     </h4>
                 </div>
                 
-                {item.points && item.points.length > 0 && (
+                {variant === "education" && item.timelineDetails && (
+                    <div class="mt-3 grid w-full gap-3">
+                        {item.timelineDetails.map(detail => (
+                            <div class="education-detail grid gap-3 rounded-lg border border-neutral-200/80 bg-neutral-50/70 p-4 dark:border-neutral-800 dark:bg-white/[0.035] sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+                                <div class="min-w-0 space-y-1.5">
+                                    <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+                                        <p class="text-xs font-bold uppercase text-neutral-700 dark:text-neutral-300">
+                                            {detail.label}
+                                        </p>
+                                        {detail.meta && (
+                                            <span class="rounded bg-neutral-200/70 px-1.5 py-0.5 text-[10px] font-bold uppercase text-neutral-600 dark:bg-white/10 dark:text-neutral-400">
+                                                {detail.meta}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <p class="text-sm font-medium leading-relaxed text-neutral-700 dark:text-neutral-300">
+                                        {detail.text}
+                                    </p>
+                                    {detail.note && (
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-500">
+                                            {detail.note}
+                                        </p>
+                                    )}
+                                </div>
+                                <a
+                                    href={detail.link}
+                                    data-pressable="true"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`View ${detail.label}`}
+                                    class="education-view-button inline-flex h-9 w-fit items-center justify-center gap-1.5 rounded-md border border-neutral-300 bg-white px-3 text-xs font-bold text-neutral-700 no-underline shadow-sm transition-[background-color,border-color,color,box-shadow,transform] hover:border-neutral-400 hover:text-black dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:text-white"
+                                >
+                                    <span>View</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M7 17 17 7" />
+                                        <path d="M7 7h10v10" />
+                                    </svg>
+                                </a>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {variant === "default" && item.points && item.points.length > 0 && (
                     <ul class="list-disc list-outside ml-4 space-y-1 mt-2 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed marker:text-neutral-300 dark:marker:text-neutral-600">
                         {item.points.map(point => (
                             <li set:html={point} />
