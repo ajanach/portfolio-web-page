@@ -17,6 +17,20 @@
     </svg>
 </button>
 
+<style>
+    #scroll-to-top:active,
+    #scroll-to-top.is-pressed {
+        border-color: rgba(255, 255, 255, 0.35) !important;
+        background-color: rgba(255, 255, 255, 0.18) !important;
+        box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.4),
+            0 2px 8px rgba(0, 0, 0, 0.3) !important;
+        filter: brightness(1.28) !important;
+        scale: 0.88 !important;
+        transition: none !important;
+    }
+</style>
+
 <script is:inline>
     function initScrollToTop() {
         window.__scrollToTopController?.abort();

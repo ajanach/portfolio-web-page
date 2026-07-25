@@ -17,6 +17,7 @@ const repoUrl = collection === "work" ? data.repoUrl : null;
 <div>
   <a
     href={`/${collection}`}
+    data-pressable="true"
     class="mac-surface group w-fit p-1.5 gap-1.5 text-sm flex items-center rounded-lg transition-[background-color,border-color,box-shadow] duration-200 ease-out"
   >
     <svg
@@ -74,6 +75,7 @@ const repoUrl = collection === "work" ? data.repoUrl : null;
         {demoUrl && (
           <a
             href={demoUrl}
+            data-pressable="true"
             target="_blank"
             rel="noopener noreferrer"
             class="mac-surface group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-xs md:text-sm lg:text-base transition-[background-color,border-color,box-shadow] duration-200"
@@ -92,6 +94,7 @@ const repoUrl = collection === "work" ? data.repoUrl : null;
         {repoUrl && (
           <a
             href={repoUrl}
+            data-pressable="true"
             target="_blank"
             rel="noopener noreferrer"
             class="mac-surface group flex gap-2 items-center px-3 py-1.5 truncate rounded-lg text-xs md:text-sm lg:text-base transition-[background-color,border-color,box-shadow] duration-200"

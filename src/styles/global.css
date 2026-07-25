@@ -47,6 +47,27 @@ body {
   @apply relative flex flex-col;
 }
 
+:where(button:not(:disabled), a[href]:not([aria-disabled="true"])) {
+  touch-action: manipulation;
+}
+
+:where(button:not(:disabled), a[href]:not([aria-disabled="true"])):active,
+:where(button:not(:disabled), a[href]:not([aria-disabled="true"])).is-pressed {
+  filter: brightness(1.16) !important;
+  transition: none !important;
+}
+
+:where(button:not(:disabled):not(#header-drawer-button):not(.terminal-control), a[data-pressable="true"]):active,
+:where(button:not(:disabled):not(#header-drawer-button):not(.terminal-control), a[data-pressable="true"]).is-pressed {
+  scale: 0.96 !important;
+  transition: none !important;
+}
+
+:where(a[href]:not([data-pressable="true"])):active,
+:where(a[href]:not([data-pressable="true"])).is-pressed {
+  opacity: 0.65 !important;
+}
+
 main {
   @apply flex flex-col flex-1 bg-white dark:bg-black;
 }
@@ -105,19 +126,34 @@ header:hover {
 
 #header-drawer-button {
   touch-action: manipulation;
+}
+
+#header-drawer-button .header-drawer-visual {
   transition:
     transform 120ms ease,
     background-color 150ms ease,
     border-color 150ms ease;
 }
 
-#header-drawer-button.open {
+#header-drawer-button:hover .header-drawer-visual {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+#header-drawer-button.open .header-drawer-visual {
   border-color: rgba(255, 255, 255, 0.14) !important;
   background-color: rgba(255, 255, 255, 0.12) !important;
 }
 
 #header-drawer-button:active,
 #header-drawer-button.is-pressed {
+  background-color: transparent !important;
+  filter: none !important;
+  scale: 1 !important;
+  transform: none !important;
+}
+
+#header-drawer-button:active .header-drawer-visual,
+#header-drawer-button.is-pressed .header-drawer-visual {
   background-color: rgba(255, 255, 255, 0.2) !important;
   transform: scale(0.9) !important;
 }

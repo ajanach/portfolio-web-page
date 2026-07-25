@@ -27,7 +27,8 @@ const { uptime, statusText, statusClass } = Astro.props;
           <div class="flex flex-col items-center sm:items-start">
             <a
               href="/"
-              class="flex gap-1 w-fit font-semibold text-current hover:text-black dark:hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.25)] transition-[color,filter] duration-200 ease-out"
+              data-pressable="true"
+              class="footer-brand-link flex gap-1 w-fit font-semibold text-current hover:text-black dark:hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.25)] transition-[color,filter] duration-200 ease-out"
             >
               <svg class="size-6 fill-current">
                 <use href="/brand.svg#brand"></use>
@@ -39,6 +40,7 @@ const { uptime, statusText, statusClass } = Astro.props;
           <!-- Uptime Status with Real Data -->
           <a
             href="https://stats.uptimerobot.com/K4iCg2UIEi"
+            data-pressable="true"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="View detailed uptime status"
@@ -97,13 +99,15 @@ const { uptime, statusText, statusClass } = Astro.props;
             <div class="legal">
               <a
                 href="/legal/terms"
-                class="text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
+                data-pressable="true"
+                class="footer-legal-link inline-block rounded px-1 -mx-1 text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
               >
                 Terms
               </a> |
               <a
                 href="/legal/privacy"
-                class="text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
+                data-pressable="true"
+                class="footer-legal-link inline-block rounded px-1 -mx-1 text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
               >
                 Privacy
               </a>
@@ -119,10 +123,11 @@ const { uptime, statusText, statusClass } = Astro.props;
                 SOCIALS.map((SOCIAL) => (
                   <a
                     href={SOCIAL.HREF}
+                    data-pressable="true"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
-                    class="group size-9 rounded-full p-2 items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-200"
+                    class="footer-social-link group flex size-9 rounded-full p-2 items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-200"
                   >
                     <svg class="size-full fill-current group-hover:fill-black group-hover:dark:fill-white blend">
                       <use href={`/social.svg#${SOCIAL.ICON}`} />
@@ -137,3 +142,25 @@ const { uptime, statusText, statusClass } = Astro.props;
     </section>
   </div>
 </footer>
+
+<style>
+  .footer-legal-link:active,
+  .footer-legal-link.is-pressed {
+    background-color: rgba(255, 255, 255, 0.16) !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+    filter: brightness(1.35) !important;
+    scale: 0.9 !important;
+    transition: none !important;
+  }
+
+  .footer-social-link:active,
+  .footer-social-link.is-pressed {
+    background-color: rgba(255, 255, 255, 0.22) !important;
+    box-shadow:
+      inset 0 1px 3px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(255, 255, 255, 0.14) !important;
+    filter: brightness(1.4) !important;
+    scale: 0.84 !important;
+    transition: none !important;
+  }
+</style>

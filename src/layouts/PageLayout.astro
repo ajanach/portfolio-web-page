@@ -28,6 +28,54 @@ const uptimeData = await fetchUptime();
 
     <ScrollToTop />
     <Terminal uptimeData={uptimeData} />
-    <!-- Added component -->
+    <script is:inline>
+      function initializePressFeedback() {
+        window.__pressFeedbackController?.abort();
+        const eventController = new AbortController();
+        window.__pressFeedbackController = eventController;
+        const listenerOptions = { signal: eventController.signal };
+        const pressableSelector =
+          'button:not(:disabled), a[href]:not([aria-disabled="true"])';
+        let pressedControl = null;
+
+        const clearPressedControl = () => {
+          pressedControl?.classList.remove("is-pressed");
+          pressedControl = null;
+        };
+
+        document.addEventListener(
+          "pointerdown",
+          (event) => {
+            if (!event.isPrimary || event.button !== 0) return;
+            const control = event.target.closest(pressableSelector);
+            if (!control) return;
+
+            clearPressedControl();
+            pressedControl = control;
+            control.classList.add("is-pressed");
+          },
+          listenerOptions,
+        );
+        document.addEventListener("pointerup", clearPressedControl, listenerOptions);
+        document.addEventListener(
+          "pointercancel",
+          clearPressedControl,
+          listenerOptions,
+        );
+        window.addEventListener("blur", clearPressedControl, listenerOptions);
+        document.addEventListener(
+          "astro:before-swap",
+          clearPressedControl,
+          listenerOptions,
+        );
+        document.addEventListener(
+          "astro:after-swap",
+          initializePressFeedback,
+          listenerOptions,
+        );
+      }
+
+      initializePressFeedback();
+    </script>
   </body>
 </html>

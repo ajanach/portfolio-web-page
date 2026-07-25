@@ -26,6 +26,7 @@ const next = items[(index + 1) % items.length];
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <a
       href={`/${prev.collection}/${prev.id}`}
+      data-pressable="true"
       class="mac-surface group p-4 gap-3 flex items-center rounded-lg transition-[background-color,border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5"
     >
       <div
@@ -64,6 +65,7 @@ const next = items[(index + 1) % items.length];
     </a>
     <a
       href={`/${next.collection}/${next.id}`}
+      data-pressable="true"
       class="mac-surface group p-4 gap-3 flex items-center rounded-lg transition-[background-color,border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5"
     >
       <div
