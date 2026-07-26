@@ -22,10 +22,23 @@ const { text, icon, href } = Astro.props;
       icon.startsWith("http") ||
       icon.startsWith("/") ||
       icon.startsWith("./") ? (
-        <img src={icon} alt={text} class="w-full h-full object-contain" />
+        <img
+          src={icon}
+          alt={text}
+          width="20"
+          height="20"
+          loading="eager"
+          decoding="async"
+          class="w-full h-full object-contain"
+        />
       ) : (
-        <svg class="w-full h-full fill-current text-black">
-          <use xlink:href={`/stack.svg#${icon}`} />
+        <svg
+          width="20"
+          height="20"
+          class="w-full h-full fill-current text-black"
+          aria-hidden="true"
+        >
+          <use href={`/stack.svg#${icon}`} />
         </svg>
       )
     }
