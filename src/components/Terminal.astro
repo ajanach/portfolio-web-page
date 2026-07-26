@@ -90,9 +90,9 @@ const terminalData = {
                 </button>
                 <button
                     type="button"
-                    aria-label="Enter full screen"
+                    aria-label="Maximize terminal window"
                     aria-pressed="false"
-                    title="Enter full screen"
+                    title="Maximize terminal window"
                     class="terminal-control terminal-control-maximize"
                     id="term-maximize-btn"
                 >
@@ -900,7 +900,7 @@ const terminalData = {
                 const updateMaximizeControl = () => {
                     const label = isMaximized
                         ? "Restore terminal window"
-                        : "Enter full screen";
+                        : "Maximize terminal window";
                     maximizeBtn?.setAttribute("aria-label", label);
                     maximizeBtn?.setAttribute("title", label);
                     maximizeBtn?.setAttribute(
