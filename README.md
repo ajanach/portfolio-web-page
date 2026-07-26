@@ -50,7 +50,7 @@ The downloadable PDF is **generated at build time** from `src/lib/cv-data.ts`.
 
 **How it works:**
 1. `tsx scripts/generate-cv-pdf.tsx` runs before Astro build
-2. Profile image optimized: `public/profile.png` → 400×400 JPEG @ quality 85 (mozjpeg, lanczos3) → base64
+2. Profile image optimized: `public/profile.webp` → 400×400 JPEG @ quality 85 (mozjpeg, lanczos3) → base64
 3. `@react-pdf/renderer` renders `CVDocument.tsx` with optimized image
 4. Result: `public/Antonio_Janach_CV.pdf` (~48KB)
 5. Astro copies it to `dist/` during build

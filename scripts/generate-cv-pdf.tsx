@@ -14,7 +14,7 @@ const generatePdf = async () => {
     console.log('🔄 Optimizing profile image...');
     
     // 1. Optimize profile image with sharp (400×400 = 2× density for 72pt PDF render, sharp at print/zoom)
-    const optimizedBase64 = await sharp(path.join(projectRoot, 'public/profile.png'))
+    const optimizedBase64 = await sharp(path.join(projectRoot, 'public/profile.webp'))
       .resize(400, 400, {
         fit: 'cover',
         position: 'centre',
