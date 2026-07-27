@@ -10,7 +10,7 @@ demoUrl: ""
 repoUrl: ""
 ---
 
-# Publication Details
+## Publication Details
 
 | Conference | Publication | Co-Author | Resources |
 |------------|-------------|-----------|-----------|

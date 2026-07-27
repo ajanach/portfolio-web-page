@@ -10,9 +10,10 @@ export default function SearchBar({ onSearchInput, query, setQuery, placeholderT
         <svg class="absolute size-6 left-2 top-[0.45rem] stroke-neutral-400 dark:stroke-neutral-500 pointer-events-none">
             <use href={`/ui.svg#search`} />
         </svg>
-        <input name="search" type="text" value={query()} onInput={onSearchInput} autocomplete="off" spellcheck={false} placeholder={placeholderText} class="mac-input h-10 w-full rounded-lg px-10 outline-none placeholder-neutral-400 dark:placeholder-neutral-500 text-black dark:text-white" />
+        <input aria-label={placeholderText} name="search" type="text" value={query()} onInput={onSearchInput} autocomplete="off" spellcheck={false} placeholder={placeholderText} class="mac-input h-10 w-full rounded-lg px-10 outline-none placeholder-neutral-400 dark:placeholder-neutral-500 text-black dark:text-white" />
         {query().length > 0 && (
             <button
+                aria-label="Clear search"
                 onClick={() => setQuery("")}
                 class="absolute flex cursor-pointer justify-center items-center h-full w-10 right-0 top-0 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300"
             >

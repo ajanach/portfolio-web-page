@@ -2,12 +2,12 @@
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Timeline from "@components/Timeline.astro";
-import { SITE } from "@consts";
+import { ABOUT } from "@consts";
 import { experience, education, certifications, projects } from "../lib/cv-data";
 import CVDownloadButton from "../components/CVDownloadButton.astro";
 ---
 
-<PageLayout title="About Me" description={SITE.DESCRIPTION}>
+<PageLayout title="About Me" description={ABOUT.DESCRIPTION}>
     <Container size="md">
         <div class="space-y-24 mt-32 pb-24">
             <!-- Intro Section -->

@@ -9,7 +9,7 @@ demoUrl: ""
 repoUrl: ""
 ---
 
-# Timeline and Details
+## Timeline and Details
 
 ## Azure Implementation
 | Start date  | End date    | Associated with              | Project URL                                                              |

@@ -10,7 +10,7 @@ demoUrl: ""
 repoUrl: ""
 ---
 
-# Timeline and Details
+## Timeline and Details
 
 | Start date    | End date       | Associated with              | Project PDF                                           |
 | ------------- | -------------- | ---------------------------- | ----------------------------------------------------- |

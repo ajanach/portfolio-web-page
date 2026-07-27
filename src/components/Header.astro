@@ -94,6 +94,7 @@ import Container from "@components/Container.astro";
                 href={btn.href}
                 data-pressable="true"
                 target={btn.target}
+                rel={btn.target === "_blank" ? "noopener noreferrer" : undefined}
                 aria-label={btn.ariaLabel}
                 class={cn(
                   "hidden md:flex",

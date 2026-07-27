@@ -7,7 +7,7 @@ tags:
 draft: false
 ---
 
-# Timeline and Details
+## Timeline and Details
 
 | Start date | End date | Associated with | Resources |
 |------------|----------|-----------------|-----------|
