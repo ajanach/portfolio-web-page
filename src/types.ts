@@ -19,3 +19,14 @@ export type Socials = {
   TEXT: string
   HREF: string
 }[]
+
+export type SearchEntry = {
+  collection: "blog" | "work"
+  id: string
+  data: {
+    title: string
+    summary: string
+    date: Date
+    tags: string[]
+  }
+}

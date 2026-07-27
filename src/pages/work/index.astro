@@ -5,10 +5,22 @@ import TopLayout from "@layouts/TopLayout.astro";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import SearchCollection from "@components/SearchCollection";
 import { WORK } from "@consts";
+import type { SearchEntry } from "../../types";
 
 const workEntries = (await getCollection("work"))
   .filter((entry) => !entry.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const searchEntries: SearchEntry[] = workEntries.map((entry) => ({
+  collection: entry.collection,
+  id: entry.id,
+  data: {
+    title: entry.data.title,
+    summary: entry.data.summary,
+    date: entry.data.date,
+    tags: entry.data.tags,
+  },
+}));
 
 // Define custom tag order
 const TAG_ORDER = [
@@ -64,7 +76,7 @@ const estimated_initial_size =
         client:load
         entry_name={"work"}
         tags={tags}
-        data={workEntries}
+        data={searchEntries}
       />
     </div>
   </BottomLayout>

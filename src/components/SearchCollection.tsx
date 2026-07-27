@@ -1,25 +1,23 @@
-import type { CollectionEntry } from "astro:content"
 import { createEffect, createSignal, For, onMount } from "solid-js"
 import Fuse from "fuse.js"
 import ArrowCard from "@components/ArrowCard"
 import { cn } from "@lib/utils"
 import SearchBar from "@components/SearchBar"
+import type { SearchEntry } from "../types"
 
 type Props = {
   entry_name: string
   tags: string[]
-  data: CollectionEntry<"blog">[] | CollectionEntry<'work'>[]
+  data: SearchEntry[]
 }
 
 export default function SearchCollection({ entry_name, data, tags }: Props) {
-  const coerced = data.map((entry) => entry as CollectionEntry<'blog'>);
-
   const [query, setQuery] = createSignal("");
   const [filter, setFilter] = createSignal(new Set<string>())
-  const [collection, setCollection] = createSignal<CollectionEntry<'blog'>[]>([])
+  const [collection, setCollection] = createSignal<SearchEntry[]>([])
   const [descending, setDescending] = createSignal(false);
 
-  const fuse = new Fuse(coerced, {
+  const fuse = new Fuse(data, {
     keys: ["id", "data.title", "data.summary", "data.tags"],
     includeMatches: true,
     minMatchCharLength: 2,
@@ -28,7 +26,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
 
   createEffect(() => {
     const filtered = (query().length < 2
-      ? coerced
+      ? data
       : fuse.search(query()).map((result) => result.item)
     ).filter((entry) =>
       Array.from(filter()).every((value) =>
@@ -81,6 +79,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
             {filter().size > 0 && (
               <button
                 onClick={clearFilters}
+                aria-label="Clear tag filters"
                 class="absolute flex cursor-pointer justify-center items-center h-full w-10 right-0 top-0 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300"
               >
                 <svg class="size-5">

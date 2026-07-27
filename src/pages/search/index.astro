@@ -1,10 +1,11 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import Search from "@components/Search";
 import { SEARCH } from "@consts";
+import type { SearchEntry } from "../../types";
 
 const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
 
@@ -12,7 +13,16 @@ const projects = (await getCollection("work")).filter(
   (post) => !post.data.draft,
 );
 
-const data = [...posts, ...projects] as CollectionEntry<"blog">[];
+const data: SearchEntry[] = [...posts, ...projects].map((entry) => ({
+  collection: entry.collection,
+  id: entry.id,
+  data: {
+    title: entry.data.title,
+    summary: entry.data.summary,
+    date: entry.data.date,
+    tags: entry.data.tags,
+  },
+}));
 ---
 
 <PageLayout title={SEARCH.TITLE} description={SEARCH.DESCRIPTION}>

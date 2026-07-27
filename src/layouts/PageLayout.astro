@@ -9,7 +9,7 @@ import Terminal from "@components/Terminal.astro";
 import { SITE } from "@consts";
 import { fetchUptime } from "@lib/uptime";
 
-const { title, description } = Astro.props;
+const { title, description, mermaid = false } = Astro.props;
 const uptimeData = await fetchUptime();
 ---
 
@@ -17,6 +17,7 @@ const uptimeData = await fetchUptime();
 <html lang="en" class="dark">
   <head>
     <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} />
+    {mermaid && <script defer is:inline src="/js/mermaid-init.js"></script>}
   </head>
   <body>
     <Header />
