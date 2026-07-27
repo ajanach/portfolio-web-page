@@ -6,6 +6,11 @@ tags:
   - Side Projects
   - Home Lab
 draft: false
+featured:
+    order: 2
+    category: "Hybrid Infrastructure"
+    title: "Hybrid Cloud Homelab"
+    summary: "Reproducible OCI and on-prem platform running 22+ rootless services at zero cloud cost."
 ---
 
 ## Timeline & Info

@@ -1,10 +1,15 @@
 ---
-title: "Azure AKS GitOps Boilerplate with Terraform, ArgoCD and GitLab CI/CD"
-summary: "Engineered a production-ready Azure Kubernetes Service platform with Terraform, GitLab CI/CD, and ArgoCD GitOps, delivering a multi-cluster boilerplate with WAF ingress, zero-secrets-in-Git via External Secrets Operator, SSO through Keycloak/Entra ID, IoT MQTT messaging, and a full observability stack on a hub-spoke network architecture."
+title: "Azure AKS GitOps Boilerplate with Terraform, Argo CD and GitLab CI/CD"
+summary: "Engineered a production-ready Azure Kubernetes Service platform with Terraform, GitLab CI/CD, and Argo CD GitOps, delivering a multi-cluster boilerplate with WAF ingress, zero-secrets-in-Git via External Secrets Operator, SSO through Keycloak/Entra ID, IoT MQTT messaging, and a full observability stack on a hub-spoke network architecture."
 date: "2026-04-20"
 tags:
   - Side Projects
 draft: false
+featured:
+    order: 1
+    category: "Platform Engineering"
+    title: "Azure AKS GitOps Platform"
+    summary: "Production-ready AKS platform with GitOps delivery, layered security, and complete observability."
 ---
 
 
@@ -19,7 +24,7 @@ draft: false
 ## Overview
 
 
-Engineered a production-ready **Azure Kubernetes Service** boilerplate that combines Terraform-provisioned hub-spoke networking with pull-based GitOps via **ArgoCD**, delivering a fully reproducible platform deployable from a single `git push`.
+Engineered a production-ready **Azure Kubernetes Service** boilerplate that combines Terraform-provisioned hub-spoke networking with pull-based GitOps via **Argo CD**, delivering a fully reproducible platform deployable from a single `git push`.
 Designed the architecture around seven independent security layers - from WAF OWASP 3.2 at the perimeter to Calico network policies and zero secrets in Git - while integrating managed data services (**Azure SQL**, **PostgreSQL**, **Redis**) through private endpoints.
 Implemented centralized multi-cluster management with **Rancher**, external SSO via **Keycloak / Entra ID**, IoT MQTT messaging through an EMQX operator, and a complete observability stack with Prometheus, Grafana, and Loki backed by Azure Blob Storage.
 
@@ -34,7 +39,7 @@ The platform is organized across two provisioning domains and a management layer
   - Azure Firewall with DNAT rules and FQDN-based egress filtering
   - Hub to Spoke VNet peering
 - **Spoke VNet - AKS cluster (Azure CNI + Calico, multi-zone)**
-  - System node pool: ArgoCD, Traefik, cert-manager, External Secrets Operator, EMQX Operator, Prometheus + Grafana + Loki
+    - System node pool: Argo CD, Traefik, cert-manager, External Secrets Operator, EMQX Operator, Prometheus + Grafana + Loki
   - Workload node pool: EMQX Cluster, application deployments
   - Data services: Azure SQL, PostgreSQL Flexible Server, Azure Redis - all via private endpoints
 - **Management Cluster**
@@ -79,7 +84,7 @@ graph LR
                 direction LR
                 subgraph SYSPOOL["SYSTEM NODE POOL"]
                     direction TB
-                    ARGO["ArgoCD"]
+                    ARGO["Argo CD"]
                     TFK["Traefik<br/>Internal LB - L4"]
                     CERTM["cert-manager"]
                     ESO["External Secrets"]
@@ -187,11 +192,11 @@ Implemented a **GitLab CI/CD** pipeline with five ordered stages: `secret-detect
 Integrated **Gitleaks** as the first pipeline stage to block secrets from reaching the Terraform plan, ensuring the repo remains safe to share and audit at any point in the lifecycle.
 
 
-### GitOps with ArgoCD
+### GitOps with Argo CD
 
 
-Deployed the **App of Apps pattern** where a single root ArgoCD application bootstraps all 10 platform applications from the `system/argocd/applications/` directory.
-This approach means every platform service - Traefik, cert-manager, External Secrets, monitoring, Loki, EMQX Operator - is self-managed through Git, with ArgoCD continuously reconciling live cluster state against the repository.
+Deployed the **App of Apps pattern** where a single root Argo CD application bootstraps all 10 platform applications from the `system/argocd/applications/` directory.
+This approach means every platform service - Traefik, cert-manager, External Secrets, monitoring, Loki, EMQX Operator - is self-managed through Git, with Argo CD continuously reconciling live cluster state against the repository.
 
 
 ### Secrets Management
@@ -223,7 +228,7 @@ cert-manager handles automated TLS lifecycle for both paths using ClusterIssuers
 | IaC | Terraform (hub-infrastructure/, infrastructure/) |
 | CI/CD | GitLab CI/CD, Gitleaks secret scanning |
 | Kubernetes | AKS (multi-zone, auto-upgrade, Azure CNI, Calico) |
-| GitOps | ArgoCD (App of Apps), self-managed via Git |
+| GitOps | Argo CD (App of Apps), self-managed via Git |
 | Ingress | AGIC (L7 HTTPS) + Traefik (L4 MQTTS) |
 | TLS | cert-manager + Let's Encrypt |
 | Secrets | External Secrets Operator + Azure Key Vault |
@@ -246,7 +251,7 @@ Implemented seven independent defense layers with centralized identity:
 | Network perimeter | Azure Firewall egress FQDN whitelisting + DNAT for IoT |
 | WAF | OWASP 3.2 in Prevention mode + 10 security response headers |
 | Network segmentation | NSG per subnet, VNet isolation, private endpoints for all databases |
-| Pod networking | Calico network policies, ArgoCD default-deny ingress |
+| Pod networking | Calico network policies, Argo CD default-deny ingress |
 | Secrets | Zero secrets in Git - ESO pulls from Key Vault at pod runtime |
 | Identity | External Keycloak / Entra ID SSO, Rancher RBAC, Azure managed identities |
 
@@ -256,10 +261,10 @@ Implemented seven independent defense layers with centralized identity:
 
 | Metric | Result |
 |---|---|
-| **Platform services** | 10 ArgoCD-managed applications, all Synced / Healthy from Day 1 |
+| **Platform services** | 10 Argo CD-managed applications, all Synced / Healthy from Day 1 |
 | **Security layers** | 7 independent defense layers from perimeter to pod |
 | **Secrets posture** | Zero secrets stored in Git - all runtime-injected via ESO + Key Vault |
-| **Rebuild time** | Full platform reproducible from `git push` through Terraform + ArgoCD bootstrap |
+| **Rebuild time** | Full platform reproducible from `git push` through Terraform + Argo CD bootstrap |
 | **Ingress coverage** | Dual-path ingress: L7 HTTPS WAF + L4 MQTTS for IoT workloads |
 | **Observability** | Full metrics, alerting, and log aggregation stack deployed via GitOps |
 | **IaC coverage** | 100% of infrastructure declared in Terraform - no manual portal configuration |
@@ -274,7 +279,7 @@ Implemented seven independent defense layers with centralized identity:
 | Cloud | Azure (AKS, VNet, Application Gateway, Firewall, Key Vault, Storage, SQL, Redis, PostgreSQL) |
 | CI/CD | GitLab CI/CD, Gitleaks |
 | Kubernetes | AKS (multi-zone, auto-upgrade, Azure CNI, Calico network policies) |
-| GitOps | ArgoCD (App of Apps pattern) |
+| GitOps | Argo CD (App of Apps pattern) |
 | Cluster management | Rancher |
 | Ingress & TLS | Application Gateway (AGIC), Traefik, cert-manager, Let's Encrypt |
 | Secrets | External Secrets Operator, Azure Key Vault |

@@ -1,4 +1,5 @@
 ---
+import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 
 import StackCard from "@components/StackCard.astro";
@@ -22,7 +23,7 @@ const stack = {
       href: "https://www.docker.com",
     },
     {
-      text: "ArgoCD",
+      text: "Argo CD",
       icon: "/stack-icons/argocd.svg",
       href: "https://argoproj.github.io/cd/",
     },
@@ -110,22 +111,9 @@ const stack = {
   ],
 };
 
-const selectedWork = [
-  {
-    category: "Platform Engineering",
-    title: "Azure AKS GitOps Platform",
-    summary:
-      "Production-ready AKS platform with GitOps delivery, layered security, and complete observability.",
-    href: "/work/side-projects/azure-aks-gitops-boilerplate/",
-  },
-  {
-    category: "Hybrid Infrastructure",
-    title: "Hybrid Cloud Homelab",
-    summary:
-      "Reproducible OCI and on-prem platform running 22+ rootless services at zero cloud cost.",
-    href: "/work/side-projects/homelab-hybrid-cloud-automation/",
-  },
-];
+const selectedWork = (await getCollection("work"))
+  .filter((entry) => entry.data.featured)
+  .sort((a, b) => a.data.featured!.order - b.data.featured!.order);
 ---
 
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
@@ -282,13 +270,13 @@ const selectedWork = [
           {
             selectedWork.map((project) => (
               <a
-                href={project.href}
+                href={`/work/${project.id}/`}
                 data-pressable="true"
                 class="mac-surface group flex min-h-52 flex-col rounded-lg p-5 transition-[background-color,border-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5"
               >
                 <div class="flex items-start justify-between gap-4">
                   <p class="text-[11px] font-bold uppercase tracking-widest text-neutral-600 dark:text-neutral-400">
-                    {project.category}
+                    {project.data.featured!.category}
                   </p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -308,10 +296,10 @@ const selectedWork = [
                   </svg>
                 </div>
                 <h3 class="mt-auto pt-10 text-lg font-semibold leading-snug text-black dark:text-white">
-                  {project.title}
+                  {project.data.featured!.title}
                 </h3>
                 <p class="mt-2 text-sm leading-relaxed text-black/60 dark:text-white/60">
-                  {project.summary}
+                  {project.data.featured!.summary}
                 </p>
               </a>
             ))

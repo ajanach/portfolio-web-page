@@ -3,10 +3,10 @@ export const experience = [
         date: "Mar 2024 - Present",
         title: "DevOps Engineer",
         company: "SICK MOBILISIS d.o.o.",
-        terminalSummary: "Kubernetes (AKS), ArgoCD GitOps, Terraform IaC, Azure, Prometheus/Grafana/Loki/Alloy/PRTG",
+        terminalSummary: "Kubernetes (AKS), Argo CD GitOps, Terraform IaC, Azure, Prometheus/Grafana/Loki/Alloy/PRTG",
         points: [
             "Architected and maintained highly available Kubernetes infrastructure on Azure, supporting production microservices across 3+ environments (dev/staging/prod).",
-            "Implemented GitOps workflows using ArgoCD, enabling declarative, auditable deployments with zero-downtime rollouts.",
+            "Implemented GitOps workflows using Argo CD, enabling declarative, auditable deployments with zero-downtime rollouts.",
             "Automated multi-environment infrastructure provisioning with Terraform (IaC), reducing environment setup time from hours to minutes and ensuring full reproducibility.",
             "Designed and operated an observability stack monitoring 10+ services with sub-minute alerting via Prometheus, Grafana, Loki, Grafana Alloy, and PRTG for endpoint health monitoring.",
             "Built and maintained CI/CD pipelines in GitLab CI, integrating security checks and automated testing stages - reducing manual release overhead.",
@@ -18,10 +18,10 @@ export const experience = [
         date: "Jul 2023 - Feb 2024",
         title: "DevOps Engineer (Internship)",
         company: "SICK MOBILISIS d.o.o.",
-        terminalSummary: "Production Kubernetes & Azure onboarding, Terraform modules, ArgoCD",
+        terminalSummary: "Production Kubernetes & Azure onboarding, Terraform modules, Argo CD",
         points: [
             "Joined as structured onboarding to production DevOps team, contributing to Kubernetes and Azure Cloud projects from day one.",
-            "Developed Terraform modules and configured ArgoCD for internal platform services, applying IaC principles to replace manual provisioning.",
+            "Developed Terraform modules and configured Argo CD for internal platform services, applying IaC principles to replace manual provisioning.",
         ],
     },
     {
@@ -170,7 +170,7 @@ export const personalInfo = {
 
 
 export const skills = [
-    { label: "Orchestration", tech: "Kubernetes, Podman, Docker, ArgoCD" },
+    { label: "Orchestration", tech: "Kubernetes, Podman, Docker, Argo CD" },
     { label: "Automation", tech: "Terraform, Ansible, GitLab CI, GH Actions" },
     { label: "Infrastructure", tech: "Azure, VMware, Hyper-V, Proxmox, Linux" },
     { label: "Observability & Security", tech: "Prometheus, Grafana, Loki, Alloy, PRTG, Vault" },
@@ -179,9 +179,9 @@ export const skills = [
 export const projects = [
     {
         date: "Jan 2024 - Present",
-        title: "Azure AKS GitOps Boilerplate with Terraform, ArgoCD and GitLab CI/CD",
+        title: "Azure AKS GitOps Boilerplate with Terraform, Argo CD and GitLab CI/CD",
         url: "https://janach.cloud/work/side-projects/azure-aks-gitops-boilerplate",
-        summary: "Production-ready AKS platform with Terraform, GitLab CI/CD and pull-based GitOps via ArgoCD - hub-spoke networking, WAF v2 ingress, zero secrets in Git, external SSO integration, and full observability stack.",
+        summary: "Production-ready AKS platform with Terraform, GitLab CI/CD and pull-based GitOps via Argo CD - hub-spoke networking, WAF v2 ingress, zero secrets in Git, external SSO integration, and full observability stack.",
         pdfPoints: [
             "Production-ready AKS platform with hub-spoke networking, WAF v2 ingress, App of Apps GitOps bootstrapping, and zero secrets in Git via External Secrets Operator + Azure Key Vault.",
             "Keycloak / Entra ID SSO for Grafana and Rancher; full observability stack with Prometheus, Grafana, Alertmanager, Loki, and Grafana Alloy; 7 independent security layers.",

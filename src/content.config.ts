@@ -29,6 +29,12 @@ const work = defineCollection({
     draft: z.boolean().optional(),
     demoUrl: z.string().optional(),
     repoUrl: z.string().optional(),
+    featured: z.object({
+      order: z.number(),
+      category: z.string(),
+      title: z.string(),
+      summary: z.string(),
+    }).optional(),
   }),
 })
 
