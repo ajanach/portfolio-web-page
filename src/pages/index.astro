@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 
 import StackCard from "@components/StackCard.astro";
+import { isPublished } from "@lib/content";
 const { SITE } = await import("@consts");
 
 const stack = {
@@ -112,7 +113,7 @@ const stack = {
 };
 
 const selectedWork = (await getCollection("work"))
-  .filter((entry) => entry.data.featured)
+  .filter((entry) => isPublished(entry) && entry.data.featured)
   .sort((a, b) => a.data.featured!.order - b.data.featured!.order);
 ---
 

@@ -1,14 +1,15 @@
 import rss from "@astrojs/rss"
 import { getCollection } from "astro:content"
 import { SITE } from "@consts"
+import { isPublished } from "@lib/content"
 
 type Context = {
   site: string
 }
 
 export async function GET(context: Context) {
-  const posts = await getCollection("blog")
-  const work = await getCollection("work")
+  const posts = (await getCollection("blog")).filter(isPublished)
+  const work = (await getCollection("work")).filter(isPublished)
 
   const items = [...posts, ...work]
 

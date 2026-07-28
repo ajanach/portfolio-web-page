@@ -5,22 +5,13 @@ import TopLayout from "@layouts/TopLayout.astro";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import SearchCollection from "@components/SearchCollection";
 import { BLOG } from "@consts";
-import type { SearchEntry } from "../../types";
+import { isPublished, toSearchEntry } from "@lib/content";
 
 const posts = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
+  .filter(isPublished)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-const searchEntries: SearchEntry[] = posts.map((entry) => ({
-  collection: entry.collection,
-  id: entry.id,
-  data: {
-    title: entry.data.title,
-    summary: entry.data.summary,
-    date: entry.data.date,
-    tags: entry.data.tags,
-  },
-}));
+const searchEntries = posts.map(toSearchEntry);
 
 const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
   (a, b) => a.localeCompare(b),

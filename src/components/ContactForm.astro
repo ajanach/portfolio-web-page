@@ -266,33 +266,32 @@
                 } else {
                     return response
                         .json()
+                        .catch(() => null)
                         .then((errorData) => {
                             console.error(
                                 "[Contact Form] Error details:",
                                 errorData,
                             );
-                            let errorMessage = "Oops! Something went wrong.";
+                            let errorMessage =
+                                "Server error (status " +
+                                response.status +
+                                ")";
 
-                            if (errorData.errors) {
+                            if (errorData?.errors) {
                                 errorMessage = errorData.errors
                                     .map((e) => e.message)
                                     .join(", ");
-                            } else if (errorData.error) {
+                            } else if (errorData?.error) {
                                 errorMessage = errorData.error;
                             }
 
                             throw new Error(errorMessage);
-                        })
-                        .catch(() => {
-                            throw new Error(
-                                "Server error (status " + response.status + ")",
-                            );
                         });
                 }
             })
             .catch((error) => {
                 console.error("[Contact Form] ✗ Error:", error);
-                errorMsg.innerHTML =
+                errorMsg.textContent =
                     error.message || "Network error. Please try again.";
                 errorMsg.classList.remove("hidden");
                 // Reset Turnstile on error

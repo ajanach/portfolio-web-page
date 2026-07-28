@@ -19,7 +19,7 @@ const terminalData = {
         id: e.title,
         year: e.date,
         school: e.company,
-        points: (e as any).terminalPoints || [],
+        points: e.terminalPoints || [],
     })),
     certifications: certifications.map(c => {
         const suffix = c.name.match(/\(([^)]+)\)$/);
@@ -752,7 +752,7 @@ const terminalData = {
         </style>
 
 
-        <script define:vars={{ uptimeData, terminalData }}>
+        <script is:inline define:vars={{ uptimeData, terminalData }}>
             let isBooted = false;
             let isAnimating = false;
             let isMaximized = false;

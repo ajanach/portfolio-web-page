@@ -5,24 +5,13 @@ import TopLayout from "@layouts/TopLayout.astro";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import Search from "@components/Search";
 import { SEARCH } from "@consts";
-import type { SearchEntry } from "../../types";
+import { isPublished, toSearchEntry } from "@lib/content";
 
-const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
+const posts = (await getCollection("blog")).filter(isPublished);
 
-const projects = (await getCollection("work")).filter(
-  (post) => !post.data.draft,
-);
+const projects = (await getCollection("work")).filter(isPublished);
 
-const data: SearchEntry[] = [...posts, ...projects].map((entry) => ({
-  collection: entry.collection,
-  id: entry.id,
-  data: {
-    title: entry.data.title,
-    summary: entry.data.summary,
-    date: entry.data.date,
-    tags: entry.data.tags,
-  },
-}));
+const data = [...posts, ...projects].map(toSearchEntry);
 ---
 
 <PageLayout title={SEARCH.TITLE} description={SEARCH.DESCRIPTION}>

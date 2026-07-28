@@ -4,7 +4,9 @@ export interface UptimeData {
     statusClass: string;
 }
 
-export async function fetchUptime(): Promise<UptimeData> {
+let uptimePromise: Promise<UptimeData> | undefined;
+
+async function loadUptime(): Promise<UptimeData> {
     let uptime = "100.0"; // Fallback
     let statusText = "All systems normal";
     let statusClass = "success"; // success, warning, danger
@@ -51,4 +53,9 @@ export async function fetchUptime(): Promise<UptimeData> {
     }
 
     return { uptime, statusText, statusClass };
+}
+
+export function fetchUptime(): Promise<UptimeData> {
+    uptimePromise ??= loadUptime();
+    return uptimePromise;
 }

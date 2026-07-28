@@ -13,9 +13,7 @@
     "generate:cv": "tsx scripts/generate-cv-pdf.tsx",
     "preview": "astro preview",
     "preview:network": "astro dev --host",
-    "astro": "astro",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "astro": "astro"
   },
   "devDependencies": {
     "@react-pdf/renderer": "^4.5.1",

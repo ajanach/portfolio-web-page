@@ -5,6 +5,8 @@ import { experience, education, certifications, personalInfo, skills, projects }
 import { fileURLToPath } from 'url';
 import path from 'path';
 
+void React;
+
 const fontsDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../public/fonts');
 
 // Register Inter — premium, modern engineering font

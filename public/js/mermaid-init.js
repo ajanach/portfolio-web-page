@@ -16,17 +16,17 @@
     var bar = document.createElement("div");
     bar.className = "mermaid-controls";
     bar.innerHTML =
-      '<button class="mermaid-btn" data-action="zoom-in" title="Zoom in">' +
-        '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' +
+      '<button type="button" class="mermaid-btn" data-action="zoom-in" title="Zoom in" aria-label="Zoom in">' +
+        '<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' +
       '</button>' +
-      '<button class="mermaid-btn" data-action="zoom-out" title="Zoom out">' +
-        '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>' +
+      '<button type="button" class="mermaid-btn" data-action="zoom-out" title="Zoom out" aria-label="Zoom out">' +
+        '<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>' +
       '</button>' +
-      '<button class="mermaid-btn" data-action="reset" title="Reset view">' +
-        '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>' +
+      '<button type="button" class="mermaid-btn" data-action="reset" title="Reset view" aria-label="Reset view">' +
+        '<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>' +
       '</button>' +
-      '<button class="mermaid-btn" data-action="fullscreen" title="Toggle fullscreen">' +
-        '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>' +
+      '<button type="button" class="mermaid-btn" data-action="fullscreen" title="Toggle fullscreen" aria-label="Toggle fullscreen">' +
+        '<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>' +
       '</button>';
     wrapper.appendChild(bar);
   }
