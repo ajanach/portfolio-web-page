@@ -627,9 +627,17 @@ html:not(.dark) .mermaid-stage {
   position: fixed;
   inset: 0;
   z-index: 10000;
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
 }
 
 html.mermaid-overlay-open {
+  overflow: hidden;
+}
+
+html.mermaid-overlay-open body {
   overflow: hidden;
 }
 

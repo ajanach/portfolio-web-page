@@ -2,6 +2,13 @@ const MIN_SCALE = 0.3;
 const MAX_SCALE = 8;
 const ZOOM_FACTOR = 0.08;
 const interactionControllers = new WeakMap<HTMLElement, AbortController>();
+const fullscreenPlaceholders = new WeakMap<HTMLElement, Comment>();
+const fallbackScrollStates = new WeakMap<HTMLElement, {
+  scrollY: number;
+  bodyPosition: string;
+  bodyTop: string;
+  bodyWidth: string;
+}>();
 let mermaidPromise: Promise<(typeof import("mermaid"))["default"]> | undefined;
 
 type ViewBox = { x: number; y: number; width: number; height: number };
@@ -68,13 +75,53 @@ function isExpanded(wrapper: HTMLElement) {
   return document.fullscreenElement === wrapper || wrapper.classList.contains("mermaid-expanded");
 }
 
+function useFullscreenFallback() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent)
+    || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+}
+
+function expandDiagram(wrapper: HTMLElement) {
+  const scrollY = window.scrollY;
+  const placeholder = document.createComment("mermaid-fullscreen-placeholder");
+  wrapper.before(placeholder);
+  fullscreenPlaceholders.set(wrapper, placeholder);
+  fallbackScrollStates.set(wrapper, {
+    scrollY,
+    bodyPosition: document.body.style.position,
+    bodyTop: document.body.style.top,
+    bodyWidth: document.body.style.width,
+  });
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = "100%";
+  document.body.append(wrapper);
+  wrapper.classList.add("mermaid-expanded");
+  document.documentElement.classList.add("mermaid-overlay-open");
+  setFullscreenState(wrapper, true);
+}
+
+function collapseDiagram(wrapper: HTMLElement) {
+  wrapper.classList.remove("mermaid-expanded");
+  document.documentElement.classList.remove("mermaid-overlay-open");
+  const placeholder = fullscreenPlaceholders.get(wrapper);
+  if (placeholder?.parentNode) placeholder.replaceWith(wrapper);
+  fullscreenPlaceholders.delete(wrapper);
+  const scrollState = fallbackScrollStates.get(wrapper);
+  if (scrollState) {
+    document.body.style.position = scrollState.bodyPosition;
+    document.body.style.top = scrollState.bodyTop;
+    document.body.style.width = scrollState.bodyWidth;
+    window.scrollTo(0, scrollState.scrollY);
+  }
+  fallbackScrollStates.delete(wrapper);
+  setFullscreenState(wrapper, false);
+}
+
 async function restoreDiagram(wrapper: HTMLElement) {
   if (document.fullscreenElement === wrapper) {
     await document.exitFullscreen();
   } else if (wrapper.classList.contains("mermaid-expanded")) {
-    wrapper.classList.remove("mermaid-expanded");
-    document.documentElement.classList.remove("mermaid-overlay-open");
-    setFullscreenState(wrapper, false);
+    collapseDiagram(wrapper);
   }
 }
 
@@ -84,14 +131,17 @@ async function toggleFullscreen(wrapper: HTMLElement) {
     return;
   }
 
+  if (useFullscreenFallback()) {
+    expandDiagram(wrapper);
+    return;
+  }
+
   try {
     await wrapper.requestFullscreen();
     if (document.fullscreenElement !== wrapper) throw new Error("Fullscreen was not activated");
     setFullscreenState(wrapper, true);
   } catch {
-    wrapper.classList.add("mermaid-expanded");
-    document.documentElement.classList.add("mermaid-overlay-open");
-    setFullscreenState(wrapper, true);
+    expandDiagram(wrapper);
   }
 }
 

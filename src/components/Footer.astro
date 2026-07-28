@@ -3,7 +3,7 @@ import { SITE, SOCIALS, CURRENT_YEAR } from "@consts";
 import Container from "@components/Container.astro";
 
 interface Props {
-  uptime: string;
+  uptime: string | null;
   statusText: string;
   statusClass: string;
 }
@@ -75,7 +75,7 @@ const { uptime, statusText, statusClass } = Astro.props;
                 <span
                   class="font-mono font-bold text-green-500 dark:text-green-400"
                 >
-                  {uptime}%
+                  {uptime === null ? "Unavailable" : `${uptime}%`}
                 </span>
               </span>
             </span>

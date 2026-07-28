@@ -1,15 +1,15 @@
 export interface UptimeData {
-    uptime: string;
+    uptime: string | null;
     statusText: string;
-    statusClass: string;
+    statusClass: "success" | "warning" | "danger";
 }
 
 let uptimePromise: Promise<UptimeData> | undefined;
 
 async function loadUptime(): Promise<UptimeData> {
-    let uptime = "100.0"; // Fallback
-    let statusText = "All systems normal";
-    let statusClass = "success"; // success, warning, danger
+    let uptime: string | null = null;
+    let statusText = "Status unavailable";
+    let statusClass: UptimeData["statusClass"] = "warning";
 
     try {
         const response = await fetch(
@@ -18,6 +18,7 @@ async function loadUptime(): Promise<UptimeData> {
                 headers: {
                     Accept: "application/json",
                 },
+                signal: AbortSignal.timeout(5000),
             }
         );
 
@@ -26,23 +27,20 @@ async function loadUptime(): Promise<UptimeData> {
 
             // Extract uptime from the correct path (30d ratio preferred for stability)
             const monitor = json.data?.[0];
-            if (monitor?.ratio?.ratio) {
-                uptime = parseFloat(monitor.ratio.ratio).toFixed(1);
-            } else if (json.psp?.monitors?.[0]?.ratio?.ratio) {
-                uptime = parseFloat(json.psp.monitors[0].ratio.ratio).toFixed(1);
+            const ratio = Number(
+                monitor?.ratio?.ratio ?? json.psp?.monitors?.[0]?.ratio?.ratio
+            );
+            if (Number.isFinite(ratio) && ratio >= 0 && ratio <= 100) {
+                uptime = ratio.toFixed(1);
             }
 
-            // Extract status
-            if (json.statistics?.count_result) {
-                statusText =
-                    json.statistics.count_result === "All Clear"
-                        ? "All systems normal"
-                        : json.statistics.count_result;
-            }
-
-            // Check monitor status class
-            if (monitor?.statusClass) {
-                statusClass = monitor.statusClass; // success, warning, danger
+            if (["success", "warning", "danger"].includes(monitor?.statusClass)) {
+                statusClass = monitor.statusClass;
+                statusText = {
+                    success: "All systems normal",
+                    warning: "Service warning",
+                    danger: "Service disruption",
+                }[statusClass];
             }
         }
     } catch (error) {

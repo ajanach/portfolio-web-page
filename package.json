@@ -12,7 +12,7 @@
     "build": "tsx scripts/generate-cv-pdf.tsx && astro check && astro build",
     "generate:cv": "tsx scripts/generate-cv-pdf.tsx",
     "preview": "astro preview",
-    "preview:network": "astro dev --host",
+    "preview:network": "astro preview --host",
     "astro": "astro"
   },
   "devDependencies": {
