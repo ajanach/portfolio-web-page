@@ -2,6 +2,8 @@ function initCopyCode() {
   const codeBlocks = document.querySelectorAll('pre');
 
   codeBlocks.forEach((pre) => {
+    if (pre.getAttribute('data-language') === 'mermaid') return;
+
     // Avoid double-wrapping
     if (pre.parentElement.classList.contains('code-block-wrapper')) return;
 

@@ -204,7 +204,8 @@
         The connection is established. I'll be in touch soon.
     </p>
     <button
-        onclick="window.location.reload()"
+        id="send-another-message"
+        type="button"
         class="relative mt-8 px-6 py-3 rounded-md bg-black dark:bg-white text-white dark:text-black font-medium tracking-wide overflow-hidden group hover:scale-[1.01] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] transition-all duration-300 ease-out shadow-md ring-1 ring-white/10 will-change-transform"
         style="backface-visibility: hidden; -webkit-backface-visibility: hidden;"
     >
@@ -227,6 +228,9 @@
     const form = document.getElementById("contact-form");
     const successMsg = document.getElementById("success-message");
     const errorMsg = document.getElementById("form-error");
+    const sendAnotherBtn = document.getElementById("send-another-message");
+
+    sendAnotherBtn.addEventListener("click", () => window.location.reload());
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();

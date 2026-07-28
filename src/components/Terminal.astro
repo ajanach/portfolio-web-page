@@ -1162,6 +1162,12 @@ const terminalData = {
                     }
                 }
 
+                function escapeHTML(value) {
+                    const text = document.createElement("span");
+                    text.textContent = value;
+                    return text.innerHTML;
+                }
+
                 // --- Boot Sequence ---
 
                 async function bootSequence() {
@@ -1468,7 +1474,7 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                             break;
 
                         default:
-                            log(`zsh: command not found: ${cmd}`);
+                            log(`zsh: command not found: ${escapeHTML(cmd)}`);
                             break;
                     }
                 }
@@ -1560,7 +1566,7 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                         if (!cmdLine) return;
 
                         log(
-                            `<span class="terminal-command-echo"><span class="terminal-command-prompt"><span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span></span> <span class="terminal-command-value">${cmdLine}</span></span>`,
+                            `<span class="terminal-command-echo"><span class="terminal-command-prompt"><span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span></span> <span class="terminal-command-value">${escapeHTML(cmdLine)}</span></span>`,
                         );
                         history.push(cmdLine);
                         historyIndex = history.length;
@@ -1606,7 +1612,7 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                                     `<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-white/80 opacity-80 mt-1 mb-2">${matches.map((m) => `<div>${m}</div>`).join("")}</div>`,
                                 );
                                 log(
-                                    `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${input.value}`,
+                                    `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${escapeHTML(input.value)}`,
                                 );
                                 scrollToBottom();
                             } else {
@@ -1617,7 +1623,7 @@ _____/\\\\\\\\\\\\\\\\\\_________/\\\\\\\\\\\\\\\\\\\\\\\\_
                         e.preventDefault();
                         const cmdLine = input.value;
                         log(
-                            `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${cmdLine}<span class="text-white">^C</span>`,
+                            `<span class="text-green-400 font-bold">➜</span> <span class="text-blue-400">~ visitor@janach.cloud $</span> ${escapeHTML(cmdLine)}<span class="text-white">^C</span>`,
                         );
                         input.value = "";
                         scrollToBottom();

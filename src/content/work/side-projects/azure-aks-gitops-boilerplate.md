@@ -84,7 +84,7 @@ graph LR
                 direction LR
                 subgraph SYSPOOL["SYSTEM NODE POOL"]
                     direction TB
-                    ARGO["Argo CD"]
+                    ARGO["ArgoCD"]
                     TFK["Traefik<br/>Internal LB - L4"]
                     CERTM["cert-manager"]
                     ESO["External Secrets"]

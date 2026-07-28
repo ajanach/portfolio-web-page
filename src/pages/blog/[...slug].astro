@@ -20,9 +20,10 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 const post = Astro.props;
 const { title, summary } = post.data;
+const hasMermaid = post.body?.includes("```mermaid") ?? false;
 ---
 
-<PageLayout title={title} description={summary} mermaid>
+<PageLayout title={title} description={summary} mermaid={hasMermaid}>
   <TopLayout>
     <div class="animate-on-load">
       <ArticleTopLayout entry={post} />

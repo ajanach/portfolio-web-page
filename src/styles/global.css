@@ -471,100 +471,283 @@ article img {
 
 .mermaid-wrapper {
   position: relative;
+  display: grid;
+  grid-template-rows: 2.75rem minmax(18rem, 1fr);
   width: 100%;
   overflow: hidden;
-  margin: 1.5rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: clamp(22rem, 52vw, 38rem);
+  margin: 1.75rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.02);
-  cursor: grab;
-  touch-action: none;
+  background: #0d1117;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   user-select: none;
 }
 
-.mermaid-wrapper.mermaid-grabbing {
+.mermaid-chrome {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-width: 0;
+  padding: 0 0.625rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(31, 35, 42, 0.9);
+  backdrop-filter: blur(18px) saturate(1.35);
+}
+
+.mermaid-window-controls {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.mermaid-window-control {
+  display: grid;
+  width: 0.75rem;
+  height: 0.75rem;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(0, 0, 0, 0.68);
+  cursor: default;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.25);
+  font-family: ui-sans-serif, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.mermaid-window-control span {
+  visibility: hidden;
+  transform: translateY(-0.02rem);
+}
+
+.mermaid-window-controls:hover .mermaid-window-control span,
+.mermaid-window-control:focus-visible span {
+  visibility: visible;
+}
+
+.mermaid-window-control:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.72);
+  outline-offset: 2px;
+}
+
+.mermaid-window-control:disabled {
+  cursor: default;
+}
+
+.mermaid-window-close { background: #ff5f57; }
+.mermaid-window-minimize { background: #febc2e; }
+.mermaid-window-maximize { background: #28c840; cursor: pointer; }
+
+.mermaid-wrapper:fullscreen .mermaid-window-close,
+.mermaid-wrapper:fullscreen .mermaid-window-minimize,
+.mermaid-wrapper.mermaid-expanded .mermaid-window-close,
+.mermaid-wrapper.mermaid-expanded .mermaid-window-minimize {
+  cursor: pointer;
+}
+
+.mermaid-title {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.mermaid-title svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mermaid-stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.075) 0.75px, transparent 0.75px);
+  background-size: 18px 18px;
+}
+
+.mermaid-wrapper.mermaid-grabbing .mermaid-stage {
   cursor: grabbing;
 }
 
 html:not(.dark) .mermaid-wrapper {
-  border-color: rgba(0, 0, 0, 0.1);
-  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.14);
+  background: #f7f7f9;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-.mermaid-wrapper svg {
+html:not(.dark) .mermaid-chrome {
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+  background: rgba(235, 235, 238, 0.9);
+}
+
+html:not(.dark) .mermaid-title {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+html:not(.dark) .mermaid-stage {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 0.75px, transparent 0.75px);
+}
+
+.mermaid-stage > svg {
   display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Fullscreen via native :fullscreen pseudo-class */
-.mermaid-wrapper:fullscreen {
-  background: #0d1117;
-  border: none;
-  border-radius: 0;
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-html:not(.dark) .mermaid-wrapper:fullscreen {
-  background: #f6f8fa;
-}
-
-.mermaid-wrapper:fullscreen svg {
   width: 100%;
   height: 100%;
 }
 
-/* Controls bar */
-.mermaid-controls {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  display: flex;
-  gap: 0.25rem;
-  z-index: 10;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+.mermaid-wrapper:fullscreen,
+.mermaid-wrapper.mermaid-expanded {
+  grid-template-rows: 3rem minmax(0, 1fr);
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  background: #0d1117;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
-.mermaid-wrapper:hover .mermaid-controls,
-.mermaid-wrapper:fullscreen .mermaid-controls {
-  opacity: 1;
+.mermaid-wrapper.mermaid-expanded {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+}
+
+html.mermaid-overlay-open {
+  overflow: hidden;
+}
+
+html:not(.dark) .mermaid-wrapper:fullscreen,
+html:not(.dark) .mermaid-wrapper.mermaid-expanded {
+  background: #f7f7f9;
+}
+
+.mermaid-controls {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.mermaid-scale {
+  min-width: 2.8rem;
+  margin-right: 0.2rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.65rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.mermaid-control-divider {
+  width: 1px;
+  height: 1rem;
+  margin: 0 0.2rem;
+  background: rgba(255, 255, 255, 0.13);
 }
 
 .mermaid-btn {
-  width: 2rem;
-  height: 2rem;
+  width: 1.85rem;
+  height: 1.85rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid transparent;
   border-radius: 0.375rem;
-  background: rgba(0, 0, 0, 0.6);
-  color: rgba(255, 255, 255, 0.85);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.68);
   cursor: pointer;
-  backdrop-filter: blur(4px);
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
   padding: 0;
   line-height: 1;
 }
 
-.mermaid-btn:hover {
-  background: rgba(0, 0, 0, 0.85);
+.mermaid-btn svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mermaid-btn:hover,
+.mermaid-btn:focus-visible {
+  border-color: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
+  outline: none;
+}
+
+.mermaid-btn:active {
+  transform: scale(0.92);
+}
+
+.mermaid-copy-success {
+  border-color: rgba(40, 200, 64, 0.32);
+  background: rgba(40, 200, 64, 0.14);
+  color: #63e67a;
+}
+
+.mermaid-exit-icon,
+.mermaid-btn[aria-pressed="true"] .mermaid-enter-icon {
+  display: none;
+}
+
+.mermaid-btn[aria-pressed="true"] .mermaid-exit-icon {
+  display: block;
+}
+
+html:not(.dark) .mermaid-scale {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+html:not(.dark) .mermaid-control-divider {
+  background: rgba(0, 0, 0, 0.13);
 }
 
 html:not(.dark) .mermaid-btn {
-  border-color: rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.85);
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.62);
 }
 
-html:not(.dark) .mermaid-btn:hover {
-  background: rgba(255, 255, 255, 0.95);
+html:not(.dark) .mermaid-btn:hover,
+html:not(.dark) .mermaid-btn:focus-visible {
+  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.07);
   color: #000;
+}
+
+@media (max-width: 480px) {
+  .mermaid-wrapper {
+    grid-template-rows: 2.75rem minmax(16rem, 1fr);
+    height: 21rem;
+  }
+
+  .mermaid-title,
+  .mermaid-scale {
+    display: none;
+  }
+
+  .mermaid-chrome {
+    grid-template-columns: 1fr auto;
+  }
 }
 
 /* Mermaid interaction hint - fades out on interaction */

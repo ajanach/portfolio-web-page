@@ -6,6 +6,7 @@ import Footer from "@components/Footer.astro";
 import Drawer from "@components/Drawer.astro";
 import ScrollToTop from "@components/ScrollToTop.astro";
 import Terminal from "@components/Terminal.astro";
+import MermaidDiagrams from "@components/MermaidDiagrams.astro";
 import { SITE } from "@consts";
 import { fetchUptime } from "@lib/uptime";
 
@@ -17,7 +18,7 @@ const uptimeData = await fetchUptime();
 <html lang="en" class="dark">
   <head>
     <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} />
-    {mermaid && <script defer is:inline src="/js/mermaid-init.js"></script>}
+    {mermaid && <MermaidDiagrams />}
   </head>
   <body>
     <Header />
