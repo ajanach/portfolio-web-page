@@ -9,11 +9,13 @@ const subpath = pathname.match(/[^/]+/g);
   id="drawer"
   class="fixed inset-0 z-40 md:hidden"
   aria-hidden="true"
+  inert
 >
   <button
     id="drawer-backdrop"
     class="absolute inset-0 h-full w-full"
     aria-label="Close navigation menu"
+    tabindex="-1"
   ></button>
 
   <div class="drawer-sheet absolute inset-x-5 top-[4.5rem] mx-auto max-w-screen-sm">
@@ -139,10 +141,12 @@ const subpath = pathname.match(/[^/]+/g);
     const drawerButton = document.getElementById("header-drawer-button");
     drawer?.classList.remove("open");
     drawer?.setAttribute("aria-hidden", "true");
+    if (drawer) drawer.inert = true;
     drawerButton?.classList.remove("open");
     drawerButton?.setAttribute("aria-expanded", "false");
     drawerButton?.setAttribute("aria-label", "Open navigation menu");
     document.body.classList.remove("drawer-open");
+    drawerButton?.focus({ preventScroll: true });
   }
 
   function initializeDrawerInteractions() {

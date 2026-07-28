@@ -191,6 +191,7 @@ import Container from "@components/Container.astro";
       const drawerButton = document.getElementById("header-drawer-button");
       drawer?.classList.toggle("open", open);
       drawer?.setAttribute("aria-hidden", String(!open));
+      if (drawer) drawer.inert = !open;
       drawerButton?.classList.toggle("open", open);
       drawerButton?.setAttribute("aria-expanded", String(open));
       drawerButton?.setAttribute(
@@ -198,6 +199,17 @@ import Container from "@components/Container.astro";
         open ? "Close navigation menu" : "Open navigation menu",
       );
       document.body.classList.toggle("drawer-open", open);
+      if (open) {
+        requestAnimationFrame(() => {
+          drawer
+            ?.querySelector(
+              ".drawer-sheet a:not([aria-current='page']), .drawer-sheet button",
+            )
+            ?.focus({ preventScroll: true });
+        });
+      } else if (drawer?.contains(document.activeElement)) {
+        drawerButton?.focus({ preventScroll: true });
+      }
     }
 
     function initializeHeaderInteractions() {
@@ -208,6 +220,29 @@ import Container from "@components/Container.astro";
 
       const drawerButton = document.getElementById("header-drawer-button");
       const terminalButton = document.getElementById("terminal-toggle");
+
+      document.addEventListener(
+        "keydown",
+        (event) => {
+          const drawer = document.getElementById("drawer");
+          if (!drawer?.classList.contains("open") || event.key !== "Tab") return;
+          const focusable = [
+            ...drawer.querySelectorAll(
+              '.drawer-sheet a:not([aria-current="page"]), .drawer-sheet button:not([disabled])',
+            ),
+          ].filter((element) => element.getClientRects().length > 0);
+          const first = focusable[0];
+          const last = focusable.at(-1);
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
+          }
+        },
+        listenerOptions,
+      );
 
       const clearDrawerButtonPressed = () =>
         drawerButton?.classList.remove("is-pressed");

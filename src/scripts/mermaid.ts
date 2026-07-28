@@ -5,6 +5,7 @@ const interactionControllers = new WeakMap<HTMLElement, AbortController>();
 const fullscreenPlaceholders = new WeakMap<HTMLElement, Comment>();
 const fallbackScrollStates = new WeakMap<HTMLElement, {
   scrollY: number;
+  bodyHadStyle: boolean;
   bodyPosition: string;
   bodyTop: string;
   bodyWidth: string;
@@ -87,6 +88,7 @@ function expandDiagram(wrapper: HTMLElement) {
   fullscreenPlaceholders.set(wrapper, placeholder);
   fallbackScrollStates.set(wrapper, {
     scrollY,
+    bodyHadStyle: document.body.hasAttribute("style"),
     bodyPosition: document.body.style.position,
     bodyTop: document.body.style.top,
     bodyWidth: document.body.style.width,
@@ -111,6 +113,9 @@ function collapseDiagram(wrapper: HTMLElement) {
     document.body.style.position = scrollState.bodyPosition;
     document.body.style.top = scrollState.bodyTop;
     document.body.style.width = scrollState.bodyWidth;
+    if (!scrollState.bodyHadStyle && !document.body.getAttribute("style")) {
+      document.body.removeAttribute("style");
+    }
     window.scrollTo(0, scrollState.scrollY);
   }
   fallbackScrollStates.delete(wrapper);

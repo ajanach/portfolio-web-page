@@ -93,6 +93,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                 <li class="sm:w-full">
                   <button
                     onClick={() => toggleTag(tag)}
+                    aria-pressed={filter().has(tag)}
                     class={cn(
                       "w-full min-h-9 px-2.5 py-1 rounded-lg cursor-pointer",
                       "flex gap-2 items-center",
@@ -135,10 +136,10 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
         <div class="flex flex-col">
           {/* Info Bar */}
           <div class='flex justify-between flex-row mb-2'>
-            <div class="text-sm uppercase">
+            <div class="text-sm uppercase" aria-live="polite" aria-atomic="true">
               SHOWING {collection().length} OF {data.length} {entry_name}
             </div>
-            <button onClick={toggleDescending} class='flex cursor-pointer flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300'>
+            <button onClick={toggleDescending} aria-pressed={descending()} class='flex cursor-pointer flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300'>
               <div class="text-sm uppercase">
                 {descending() ? "DESCENDING" : "ASCENDING"}
               </div>
