@@ -1,6 +1,6 @@
 export const experience = [
     {
-        date: "Mar 2024 - Present",
+        date: "Mar 2024 - Aug 2026",
         title: "DevOps Engineer",
         company: "SICK MOBILISIS d.o.o.",
         terminalSummary: "Kubernetes (AKS), Argo CD GitOps, Terraform IaC, Azure, Prometheus/Grafana/Loki/Alloy/PRTG",
